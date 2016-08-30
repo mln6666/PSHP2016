@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebApplication1.Models.TipoPS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreTipoPS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescripcionTipoPS)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreTipoPS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescripcionTipoPS)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdTipoPS }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdTipoPS }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdTipoPS })
+        </td>
+    </tr>
+}
+
+</table>

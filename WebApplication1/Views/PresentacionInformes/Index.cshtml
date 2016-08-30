@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebApplication1.Models.PresentacionInforme>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PS.Tutor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaPresentacionInforme)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaEvaluacionInforme)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoEvaluacionInforme)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ObservacionesInforme)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PS.Tutor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaPresentacionInforme)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaEvaluacionInforme)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstadoEvaluacionInforme)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ObservacionesInforme)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdPresentacionInforme }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdPresentacionInforme }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdPresentacionInforme })
+        </td>
+    </tr>
+}
+
+</table>

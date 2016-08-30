@@ -1,0 +1,58 @@
+﻿@model WebApplication1.Models.PresentacionInforme
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PresentacionInforme</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PS.Tutor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PS.Tutor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaPresentacionInforme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaPresentacionInforme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaEvaluacionInforme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaEvaluacionInforme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoEvaluacionInforme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoEvaluacionInforme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ObservacionesInforme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObservacionesInforme)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdPresentacionInforme }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

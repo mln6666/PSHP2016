@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebApplication1.Models.PresentacionPlan>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PS.Tutor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaPresentacionPlan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaEvaluacionPlan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoEvaluacionPlan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ObservacionesPlan)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PS.Tutor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaPresentacionPlan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaEvaluacionPlan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstadoEvaluacionPlan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ObservacionesPlan)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdPresentacionPlan }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdPresentacionPlan }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdPresentacionPlan })
+        </td>
+    </tr>
+}
+
+</table>
