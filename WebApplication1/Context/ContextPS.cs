@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNet.Identity.EntityFramework;
+using WebApplication1.Models;
 
 namespace WebApplication1.Context
 {
-    public class ContextPS: DbContext
+    public class ContextPS: IdentityDbContext<ApplicationUser>
     {
         public System.Data.Entity.DbSet<WebApplication1.Models.PS> PSs { get; set; }
 
