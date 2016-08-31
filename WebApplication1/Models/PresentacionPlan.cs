@@ -21,6 +21,8 @@ namespace WebApplication1.Models
 
         public string EstadoEvaluacionPlan { get; set; }
 
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Observaciones")]
         public string ObservacionesPlan { get; set; }
 
         public int IdPS { get; set; }

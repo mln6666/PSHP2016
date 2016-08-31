@@ -11,12 +11,16 @@ namespace WebApplication1.Models
         [Key]
         public int IdPS { get; set; }
 
+        
+        [Display(Name = "Disposición")]
         public int NroDisposicion { get; set; }
 
         public string Tutor { get; set; }
 
+        [Display(Name = "Título Proyecto")]
         public string TituloProyecto { get; set; }
 
+        [Display(Name = "Ciclo Lectivo")]
         public int CicloLectivo { get; set; }
 
         public int IdOrganizacion { get; set; }

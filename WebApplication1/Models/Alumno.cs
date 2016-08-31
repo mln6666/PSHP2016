@@ -13,10 +13,13 @@ namespace WebApplication1.Models
 
         public int Legajo { get; set; }
 
+        [Display(Name ="Nombre")]
         public string NombreAlu { get; set; }
 
+        [Display(Name = "Apellido")]
         public string ApellidoAlu { get; set; }
 
+        [Display(Name = "E-Mail")]
         [DataType(DataType.EmailAddress)]
         public string CorreoAlu { get; set; }
 

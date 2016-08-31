@@ -18,9 +18,11 @@ namespace WebApplication1.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
         public DateTime FechaEvaluacionInforme { get; set; }
-
+                
         public string EstadoEvaluacionInforme { get; set; }
 
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Observaciones")]
         public string ObservacionesInforme { get; set; }
 
         public int IdPS { get; set; }

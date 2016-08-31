@@ -7,24 +7,24 @@ namespace WebApplication1.Models
 {
     public enum Estado
     {
-        PlanEntregado,
+        PlanEntregado=1,
 
-        PlanRechazado,
+        PlanRechazado=2,
 
-        PlanRechazadoDefinitivamente,
+        PlanRechazadoDefinitivamente=3,
 
-        PlanAprobado,
+        PlanAprobado=4,
 
-        InformeEntregado,
+        InformeEntregado=5,
 
-        InformeRechazado,
+        InformeRechazado=6,
 
-        PSVencida,
+        PSVencida=7,
 
-        InformeAprobado,
+        InformeAprobado=8,
 
-        PSAprobada,
+        PSAprobada=9,
 
-        PSCancelada
+        PSCancelada=10
     }
 }

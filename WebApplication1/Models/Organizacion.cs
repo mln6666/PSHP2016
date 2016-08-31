@@ -11,12 +11,18 @@ namespace WebApplication1.Models
         [Key]
         public int IdOrganizacion { get; set; }
 
+        [Display(Name = "Organización")]
         public string DenominacionOrg { get; set; }
 
+        [Display(Name = "Dirección")]
         public string DireccionOrg { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Teléfono")]
         public int TelefonoOrg { get; set; }
 
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Descripción")]
         public string DescripcionOrg { get; set; }
 
         public virtual ICollection<PS> PSs { get; set; }

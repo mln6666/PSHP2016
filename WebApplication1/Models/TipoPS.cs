@@ -11,8 +11,10 @@ namespace WebApplication1.Models
         [Key]
         public int IdTipoPS { get; set; }
 
+        [Display(Name = "Tipo PS")]
         public string NombreTipoPS { get; set; }
 
+        [Display(Name = "Descripción")]
         public string DescripcionTipoPS { get; set; }
 
         public virtual ICollection<PS> PSs { get; set; }
