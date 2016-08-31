@@ -11,8 +11,12 @@ namespace WebApplication1.Models
         [Key]
         public int IdPresentacionPlan { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
         public DateTime FechaPresentacionPlan { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
         public DateTime FechaEvaluacionPlan { get; set; }
 
         public string EstadoEvaluacionPlan { get; set; }

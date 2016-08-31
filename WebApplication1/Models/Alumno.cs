@@ -17,6 +17,7 @@ namespace WebApplication1.Models
 
         public string ApellidoAlu { get; set; }
 
+        [DataType(DataType.EmailAddress)]
         public string CorreoAlu { get; set; }
 
         public virtual ICollection<PS> PSs { get; set; }
