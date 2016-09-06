@@ -1,79 +1,93 @@
 ﻿@model IEnumerable<WebApplication1.Models.PS>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "PSs";
 }
 
-<h2>Index</h2>
+<h2>PSs:</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nueva PS", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
+<table class="table table-striped table-bordered ">
+    <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+
+        <th class="text-left" style="border-radius: 3px">
+            @Html.DisplayNameFor(model => model.Alumno.Legajo)
+        </th>
+        <th class="text-left" style="border-radius: 3px">
             @Html.DisplayNameFor(model => model.Alumno.NombreAlu)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Area.NombreArea)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
-        </th>
-        <th>
+        <th class="text-left" style="border-radius: 3px">
             @Html.DisplayNameFor(model => model.NroDisposicion)
         </th>
-        <th>
+        <th class="text-left" style="border-radius: 3px">
+            @Html.DisplayNameFor(model => model.Area.NombreArea)
+        </th>
+        @*<th class="text-left" style="border-radius: 3px">
+            @Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
+        </th>*@
+        @*<th class="text-left" style="border-radius: 3px">
             @Html.DisplayNameFor(model => model.Tutor)
-        </th>
-        <th>
+        </th>*@
+        @*<th class="text-left" style="border-radius: 3px">
             @Html.DisplayNameFor(model => model.TituloProyecto)
-        </th>
-        <th>
+        </th>*@
+        <th class="text-left" style="border-radius: 3px">
             @Html.DisplayNameFor(model => model.CicloLectivo)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdTipo)
+        <th class="text-left" style="border-radius: 3px">
+            @Html.DisplayNameFor(model => model.Cuatrimestre)
         </th>
-        <th>
+        <th class="text-left" style="border-radius: 3px">
+            @Html.DisplayNameFor(model => model.IdTipoPS)
+        </th>
+        <th class="text-left" style="border-radius: 3px">
             @Html.DisplayNameFor(model => model.Estado)
         </th>
-        <th></th>
+
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td class="text-left">
+            @Html.DisplayFor(modelItem => item.Alumno.Legajo)
+        </td>
+        <td class="text-left">
             @Html.DisplayFor(modelItem => item.Alumno.NombreAlu)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Area.NombreArea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Organizacion.DenominacionOrg)
-        </td>
-        <td>
+        <td class="text-left">
             @Html.DisplayFor(modelItem => item.NroDisposicion)
         </td>
-        <td>
+        <td class="text-left">
+            @Html.DisplayFor(modelItem => item.Area.NombreArea)
+        </td>
+        @*<td class="text-left">
+            @Html.DisplayFor(modelItem => item.Organizacion.DenominacionOrg)
+        </td>*@
+        
+        @*<td class="text-left">
             @Html.DisplayFor(modelItem => item.Tutor)
-        </td>
-        <td>
+        </td>*@
+        @*<td class="text-left">
             @Html.DisplayFor(modelItem => item.TituloProyecto)
-        </td>
-        <td>
+        </td>*@
+        <td class="text-left">
             @Html.DisplayFor(modelItem => item.CicloLectivo)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdTipo)
+        <td class="text-left">
+            @Html.DisplayFor(modelItem => item.Cuatrimestre)
         </td>
-        <td>
+        <td class="text-left">
+            @Html.DisplayFor(modelItem => item.IdTipoPS)
+        </td>
+        <td class="text-left">
             @Html.DisplayFor(modelItem => item.Estado)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdPS }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdPS }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdPS })
+        <td class="text-left">
+            @Html.ActionLink("Editar", "Edit", new {id = item.IdPS}) |
+            @Html.ActionLink("Detalles", "Details", new {id = item.IdPS}) |
+            @Html.ActionLink("Eliminar", "Delete", new {id = item.IdPS})
         </td>
     </tr>
 }

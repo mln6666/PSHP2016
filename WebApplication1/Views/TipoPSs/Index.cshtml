@@ -1,38 +1,37 @@
 ﻿@model IEnumerable<WebApplication1.Models.TipoPS>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tipos de PS:";
 }
 
-<h2>Index</h2>
+<h2>Tipos de PS:</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
+</p>*@
+<table class="table table-striped table-bordered ">
+    <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+        <th class="text-left" style="border-radius: 5px">
             @Html.DisplayNameFor(model => model.NombreTipoPS)
         </th>
-        <th>
+        <th class="text-left" style="border-radius: 5px">
             @Html.DisplayNameFor(model => model.DescripcionTipoPS)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td style="font-weight: bold" >
             @Html.DisplayFor(modelItem => item.NombreTipoPS)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DescripcionTipoPS)
         </td>
-        <td>
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.IdTipoPS }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdTipoPS }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdTipoPS })|
             @Html.ActionLink("Delete", "Delete", new { id=item.IdTipoPS })
-        </td>
+        </td>*@
     </tr>
 }
 
