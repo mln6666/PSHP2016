@@ -18,6 +18,7 @@ namespace WebApplication1.Controllers
         // GET: PS
         public ActionResult Index()
         {
+            
             var pSs = db.PSs.Include(p => p.Alumno).Include(p => p.Area).Include(p => p.Organizacion).Include(p => p.TipoPS);
             return View(pSs.ToList());
         }
@@ -135,19 +136,19 @@ namespace WebApplication1.Controllers
         }
 
 
-        public ActionResult BusquedaLegajo()
+        public ActionResult BusquedaPS()
         {
             ViewBag.alumnos = db.Alumnos.ToList();
-            return PartialView();
+            return View();
         }
 
         [HttpPost]
-        public ActionResult BusquedaLegajo([Bind(Include = "Legajo")] Alumno alumno)
+        public ActionResult BusquedaPS([Bind(Include = "Alumno")] string alumno)
         {
-
+            int legajo = Int32.Parse(alumno); ;
             ContextPS db = new ContextPS();
             IEnumerable<int> query = (from c in db.PSs
-                                      where c.Alumno.Legajo == alumno.Legajo
+                                      where c.Alumno.Legajo == legajo
                                       select c.IdPS);
 
             if (query.Count() == 0)

@@ -1,4 +1,5 @@
-﻿
+﻿@using System.Collections.Specialized
+
 @{
     ViewBag.Title = "Bienvenido";
 }
@@ -7,37 +8,37 @@
 
 <h4>Para comenzar, puede seleccionar una de las sieguientes opciones:</h4>
 
-<br />
-<br />
-<br />
-<br />
+<br /><br /><br /><br />
 
-    <div class="text-center">
-        <a class="btn btn-primary text-center btn-lg btn-warning" style="width: 300px; height: 50px;padding-top: 10px " href="@Url.Action("Index","Alumnos")">
-            Ver listado de alumnos
-        </a>
-    </div>
-<br />
-<br />
-<br />
+<div class="text-center">
+    <a class="btn btn-primary text-center btn-lg btn-warning" style="width: 300px; height: 50px;padding-top: 10px " href="@Url.Action("Index","Alumnos")">
+        Ver listado de alumnos
+    </a>
+</div>
+<br /><br /><br />
 <div class="text-center">
     <a class="btn btn-primary text-center btn-lg btn-warning" style="width: 300px; height: 50px; padding-top: 10px" href="@Url.Action("Index", "PS")">
         Ver listado de PS
     </a>
 </div>
-
+<br /><br /><br />
 
 <div class="text-center">
-    @Ajax.ActionLink("Buscar Por Legajo", "BusquedaLegajo", "PS", new AjaxOptions
+    @Ajax.ActionLink("Buscar PS", "BusquedaPS", "PS", new AjaxOptions
 {
     InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "buslegajo",
+    UpdateTargetId = "busps",
 
-}, new { @class = "btn btn-primary text-center btn-lg btn-warning", @Href = "PS/BusquedaLegajo" }
+}, new { @class = "btn btn-primary text-center btn-lg btn-warning",@style= "width: 300px;height: 50px; padding-top: 10px ", @Href = "PS/BusquedaPS" }
    )
 </div>
-<div id="buslegajo"></div>
+<div id="busps"></div>
+<br /><br /><br /><br /><br /><br />
 
-<br />
-<br />
-<br />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+}
+
+
