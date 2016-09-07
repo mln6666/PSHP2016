@@ -37,7 +37,7 @@
             <td class="text-left">
                 @Html.DisplayFor(model => model.Alumno.NombreAlu)
             </td>
-            <td class="text-left" style="font-weight: bold;font-style: italic">
+            <td class="text-left" style="font-weight: bold; font-style: italic">
                 @Html.DisplayFor(model => model.Estado)
             </td>
 
@@ -65,7 +65,7 @@
                 @Html.DisplayNameFor(model => model.Cuatrimestre)
             </th>
             <th class="text-left" style="border-radius: 3px">
-                @Html.DisplayNameFor(model => model.IdTipoPS)
+                @Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
             </th>
 
 
@@ -87,16 +87,18 @@
                 @Html.DisplayFor(model => model.Cuatrimestre)
             </td>
             <td class="text-left">
-                @Html.DisplayFor(model => model.IdTipoPS)
+                @Html.DisplayFor(model => model.TipoPS.NombreTipoPS)
             </td>
 
 
         </tr>
     </table>
-    @Html.Action("Details","PresentacionPlanes",new { id = Model.IdPS })
-
-    @Html.Action("Details", "PresentacionInformes", new { id = Model.IdPS })
-
+    <div>
+        @Html.Action("Details2", "PresentacionPlanes", new {idps = Model.IdPS })
+    </div>
+    <div>
+        @Html.Action("Details2", "PresentacionInformes", new { idps = Model.IdPS })
+    </div>
 
 
 

@@ -40,21 +40,21 @@ namespace WebApplication1
 
             var user = userManager.FindByName("admin@utnfrre.com");
 
-            if (!userManager.IsInRole(user.Id, "View"))
+            if (!userManager.IsInRole(user.Id, "Ver"))
             {
-                userManager.AddToRole(user.Id, "View");
+                userManager.AddToRole(user.Id, "Ver");
             }
-            if (!userManager.IsInRole(user.Id, "Create"))
+            if (!userManager.IsInRole(user.Id, "Crear"))
             {
-                userManager.AddToRole(user.Id, "Create");
+                userManager.AddToRole(user.Id, "Crear");
             }
-            if (!userManager.IsInRole(user.Id, "Edit"))
+            if (!userManager.IsInRole(user.Id, "Editar"))
             {
-                userManager.AddToRole(user.Id, "Edit");
+                userManager.AddToRole(user.Id, "Editar");
             }
-            if (!userManager.IsInRole(user.Id, "Delete"))
+            if (!userManager.IsInRole(user.Id, "Eliminar"))
             {
-                userManager.AddToRole(user.Id, "Delete");
+                userManager.AddToRole(user.Id, "Eliminar");
             }
 
 
@@ -82,24 +82,24 @@ namespace WebApplication1
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
 
-            if (!roleManager.RoleExists("View"))
+            if (!roleManager.RoleExists("Ver"))
             {
-                roleManager.Create(new IdentityRole("View"));
+                roleManager.Create(new IdentityRole("Ver"));
             }
 
-            if (!roleManager.RoleExists("Edit"))
+            if (!roleManager.RoleExists("Editar"))
             {
-                roleManager.Create(new IdentityRole("Edit"));
+                roleManager.Create(new IdentityRole("Editar"));
             }
 
-            if (!roleManager.RoleExists("Create"))
+            if (!roleManager.RoleExists("Crear"))
             {
-                roleManager.Create(new IdentityRole("Create"));
+                roleManager.Create(new IdentityRole("Crear"));
             }
 
-            if (!roleManager.RoleExists("Delete"))
+            if (!roleManager.RoleExists("Eliminar"))
             {
-                roleManager.Create(new IdentityRole("Delete"));
+                roleManager.Create(new IdentityRole("Eliminar"));
             }
 
         }

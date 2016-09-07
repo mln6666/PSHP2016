@@ -1,12 +1,64 @@
 ﻿@model WebApplication1.Models.PresentacionInforme
 
 @{
-    ViewBag.Title = "Details";
+    Layout = null;
 }
 
-<h2>Details</h2>
+<h2>Detalles Informe</h2>
+<table class="table table-striped table-bordered ">
+    <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+        @*<th class="text-left" style="border-radius: 3px">
+            @Html.DisplayNameFor(model => model.PS.Tutor)
+        </th>*@
+        <th class="text-left" style="border-radius: 3px">
+            @Html.DisplayNameFor(model => model.FechaPresentacionInforme)
+        </th>
+        <th class="text-left" style="border-radius: 3px">
+            @Html.DisplayNameFor(model => model.FechaEvaluacionInforme)
+        </th>
+        <th class="text-left" style="border-radius: 3px">
+            @Html.DisplayNameFor(model => model.EstadoEvaluacionInforme)
+        </th>
+        <th class="text-left" style="border-radius: 3px">
+            @Html.DisplayNameFor(model => model.ObservacionesInforme)
+        </th>
+    </tr>
+    <tr>
+        @*<td class="text-left">
+            @Html.DisplayFor(model => model.PS.Tutor)
+        </td>*@
+        <td class="text-left">
+            @Html.DisplayFor(model => model.FechaPresentacionInforme)
+        </td>
+        <td class="text-left">
+            @Html.DisplayFor(model => model.FechaEvaluacionInforme)
+        </td>
+        <td class="text-left" style="font-weight: bold; font-style: italic">
+            @Html.DisplayFor(model => model.EstadoEvaluacionInforme)
+        </td>
+        <td class="text-left">
+            @Html.DisplayFor(model => model.ObservacionesInforme)
+        </td>
+        @*<td class="text-left">
+                @Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })
+        </td>*@
+    </tr>
+</table>
 
-<div>
+
+
+
+
+
+
+
+
+
+
+
+@*<div>
     <h4>PresentacionInforme</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -55,4 +107,4 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.IdPresentacionInforme }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@
