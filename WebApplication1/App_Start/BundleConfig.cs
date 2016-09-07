@@ -10,7 +10,8 @@ namespace WebApplication1
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-1.12.4.js",
-                        "~/Scripts/jquery-1.12.4.min.js"));
+                        "~/Scripts/jquery-1.12.4.min.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

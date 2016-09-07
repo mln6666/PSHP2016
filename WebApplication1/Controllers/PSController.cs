@@ -134,6 +134,33 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public ActionResult BusquedaLegajo()
+        {
+            ViewBag.alumnos = db.Alumnos.ToList();
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult BusquedaLegajo([Bind(Include = "Legajo")] Alumno alumno)
+        {
+
+            ContextPS db = new ContextPS();
+            IEnumerable<int> query = (from c in db.PSs
+                                      where c.Alumno.Legajo == alumno.Legajo
+                                      select c.IdPS);
+
+            if (query.Count() == 0)
+            {
+                return HttpNotFound();
+            }
+            int id = query.ElementAt(0);
+            PS datosps = db.PSs.Find(id);
+
+            return RedirectToAction("Details", "PS", new { id = id });
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

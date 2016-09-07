@@ -21,7 +21,23 @@
 <br />
 <br />
 <div class="text-center">
-    <a class="btn btn-primary text-center btn-lg btn-warning" style="width: 300px; height: 50px;padding-top: 10px" href="@Url.Action("Index","PS")">
+    <a class="btn btn-primary text-center btn-lg btn-warning" style="width: 300px; height: 50px; padding-top: 10px" href="@Url.Action("Index", "PS")">
         Ver listado de PS
     </a>
 </div>
+
+
+<div class="text-center">
+    @Ajax.ActionLink("Buscar Por Legajo", "BusquedaLegajo", "PS", new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "buslegajo",
+
+}, new { @class = "btn btn-primary text-center btn-lg btn-warning", @Href = "PS/BusquedaLegajo" }
+   )
+</div>
+<div id="buslegajo"></div>
+
+<br />
+<br />
+<br />
