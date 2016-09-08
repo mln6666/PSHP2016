@@ -4,12 +4,12 @@
     ViewBag.Title = "Roles";
 }
 
-<h2>Roles for user: @Model.Name</h2>
+<h2>Permisos del usuario: @Model.Name</h2>
 
 
 <p>
-    @Html.ActionLink("Add Role", "AddRole", new { userID = Model.UserID }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Back to list", "Index", new { }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Agregar permiso", "AddRole", new { userID = Model.UserID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Volver", "Index", new { }, new { @class = "btn btn-info" })
 </p>
 <table class="table">
     @for (int i = 0; i < Model.Roles.Count; i++)
@@ -20,7 +20,7 @@
             </td>
 
             <td>
-                @Html.ActionLink("Delete", "Delete", new { user = Model, Model.Roles[i].RoleID })
+                @Html.ActionLink("Eliminar", "Delete", new { user = Model, Model.Roles[i].RoleID })
             </td>
         </tr>
     }

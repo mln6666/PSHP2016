@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+<head>
+    <script>
+        /////////////////Start:Select searchable////////////////
+        $(document).ready(function () {$(".js-example-basic-single").select2();});
+        ////////////////End:Select searchable///////////////////
+    </script>
+</head>
+
+@using (Html.BeginForm(null, null, new { Alumno = "Alumno" }, FormMethod.Post))
+{
+    <div class="text-center" style="padding-top: 5px">
+        <select class="js-example-basic-single form-control" id="Alumno" name="Alumno" style="font: small-caption; width: 250px; height: 25px; background-color: beige;padding-top: 30px">
+            <option value="">Buscar...</option>
+            @foreach (var item in ViewBag.alumnos)
+            {
+                <option value="@item.Legajo">@item.Legajo - @item.NombreAlu, @item.ApellidoAlu</option>
+            }
+        </select>
+
+        <br/>
+
+        <input type="submit" value="Buscar" class="btn btn-info" style="position: absolute; left: 9%; transform: translate(0, -30%)"/>
+    </div>
+}
+
+
+
+

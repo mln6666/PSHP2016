@@ -18,8 +18,9 @@ namespace WebApplication1.Controllers
         // GET: PS
         public ActionResult Index()
         {
-            var pS = db.PSs.Include(p => p.Alumno).Include(p => p.Area).Include(p => p.Organizacion);
-            return View(pS.ToList());
+            
+            var pSs = db.PSs.Include(p => p.Alumno).Include(p => p.Area).Include(p => p.Organizacion).Include(p => p.TipoPS);
+            return View(pSs.ToList());
         }
 
         // GET: PS/Details/5
@@ -43,6 +44,7 @@ namespace WebApplication1.Controllers
             ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu");
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea");
             ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg");
+            ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");
             return View();
         }
 
@@ -51,7 +53,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,IdOrganizacion,IdArea,IdTipo,IdAlumno,Estado")] PS pS)
+        public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado")] PS pS)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +65,8 @@ namespace WebApplication1.Controllers
             ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
             ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
+            ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
+
             return View(pS);
         }
 
@@ -81,6 +85,7 @@ namespace WebApplication1.Controllers
             ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
             ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
+            ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
             return View(pS);
         }
 
@@ -89,7 +94,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,IdOrganizacion,IdArea,IdTipo,IdAlumno,Estado")] PS pS)
+        public ActionResult Edit([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado")] PS pS)
         {
             if (ModelState.IsValid)
             {
@@ -100,6 +105,7 @@ namespace WebApplication1.Controllers
             ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
             ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
+            ViewBag.IdOrganizacion = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
             return View(pS);
         }
 
@@ -128,6 +134,33 @@ namespace WebApplication1.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+        public ActionResult BusquedaPS()
+        {
+            ViewBag.alumnos = db.Alumnos.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BusquedaPS([Bind(Include = "Alumno")] string alumno)
+        {
+            int legajo = Int32.Parse(alumno); ;
+            ContextPS db = new ContextPS();
+            IEnumerable<int> query = (from c in db.PSs
+                                      where c.Alumno.Legajo == legajo
+                                      select c.IdPS);
+
+            if (query.Count() == 0)
+            {
+                return HttpNotFound();
+            }
+            int id = query.ElementAt(0);
+            PS datosps = db.PSs.Find(id);
+
+            return RedirectToAction("Details", "PS", new { id = id });
+        }
+
 
         protected override void Dispose(bool disposing)
         {

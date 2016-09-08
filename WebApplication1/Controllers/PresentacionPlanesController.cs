@@ -36,6 +36,24 @@ namespace WebApplication1.Controllers
             }
             return View(presentacionPlan);
         }
+        // GET: PresentacionPlanes/Details/5
+        public ActionResult Details2(int? idps)
+        {
+            ContextPS db = new ContextPS();
+            IEnumerable<int> query = (from c in db.PresentacionPlanes
+                                      where c.IdPS == idps
+                                      select c.IdPresentacionPlan);
+
+            if (query.Count() == 0)
+            {
+                return HttpNotFound();
+            }
+            int id = query.ElementAt(0);
+            PresentacionPlan datosplan = db.PresentacionPlanes.Find(id);
+
+            return View("Details",datosplan);
+        }
+
 
         // GET: PresentacionPlanes/Create
         public ActionResult Create()

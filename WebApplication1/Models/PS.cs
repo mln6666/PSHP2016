@@ -23,11 +23,13 @@ namespace WebApplication1.Models
         [Display(Name = "Ciclo Lectivo")]
         public int CicloLectivo { get; set; }
 
+        public int Cuatrimestre { get; set; }
+
         public int IdOrganizacion { get; set; }
 
         public int IdArea { get; set; }
 
-        public int IdTipo { get; set; }
+        public int IdTipoPS { get; set; }
 
         public int IdAlumno { get; set; }
 
