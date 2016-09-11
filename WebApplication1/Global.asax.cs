@@ -19,7 +19,7 @@ namespace WebApplication1
     {
         protected void Application_Start()
         {
-            ContextPS db = new ContextPS();
+            ApplicationDbContext db = new ApplicationDbContext();
             CreateRoles(db);
             CreateSuperuser(db);
             AddPermisionsToSuperuser(db);
@@ -32,7 +32,7 @@ namespace WebApplication1
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        private void AddPermisionsToSuperuser(ContextPS db)
+        private void AddPermisionsToSuperuser(ApplicationDbContext db)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
@@ -61,7 +61,7 @@ namespace WebApplication1
 
         }
 
-        private void CreateSuperuser(ContextPS db)
+        private void CreateSuperuser(ApplicationDbContext db)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
             var user = userManager.FindByName("admin@utnfrre.com");
@@ -78,7 +78,7 @@ namespace WebApplication1
 
         }
 
-        private void CreateRoles(ContextPS db)
+        private void CreateRoles(ApplicationDbContext db)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
 

@@ -14,8 +14,9 @@ namespace WebApplication1.Controllers
     public class UsersController : Controller
     {
         
-        private ContextPS db = new ContextPS();
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Users
+        [Authorize(Roles = "Ver")]
         public ActionResult Index()
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
@@ -146,6 +147,7 @@ namespace WebApplication1.Controllers
             if (!userManager.IsInRole(userID, role.Name))
             {
                 userManager.AddToRole(userID, role.Name);
+                db.SaveChanges();
             }
 
             var rolesView = new List<RoleView>();
@@ -189,6 +191,7 @@ namespace WebApplication1.Controllers
             if (userManager.IsInRole(user.Id, role.Name))
             {
                 userManager.RemoveFromRole(user.Id, role.Name);
+                db.SaveChanges();
             }
 
             //Prepara la vista de vuelta

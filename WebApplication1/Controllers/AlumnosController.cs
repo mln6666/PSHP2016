@@ -37,6 +37,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Alumnos/Create
+        [Authorize(Roles = "Crear")]
         public ActionResult Create()
         {
             return View();
