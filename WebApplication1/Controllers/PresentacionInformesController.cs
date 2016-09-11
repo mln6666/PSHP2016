@@ -22,6 +22,12 @@ namespace WebApplication1.Controllers
             return View(presentacionInformes.ToList());
         }
 
+        public ActionResult HistorialInformes(int id)
+        {
+            var historial = db.PSs.Include(m => m.PresentacionesInforme).SingleOrDefault(m => m.IdPS == id);
+            return View(historial);
+        }
+
         // GET: PresentacionInformes/Details/5
         public ActionResult Details(int? id)
         {

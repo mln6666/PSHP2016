@@ -23,26 +23,35 @@
             @Html.DisplayNameFor(model => model.ObservacionesPlan)
         </th>
     </tr>
-        <tr>
-            @*<td class="text-left">
+    <tr>
+        @*<td class="text-left">
                 @Html.DisplayFor(model => model.PS.Tutor)
             </td>*@
-            <td class="text-left">
-                @Html.DisplayFor(model => model.FechaPresentacionPlan)
-            </td>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.FechaEvaluacionPlan)
-            </td>
-            <td class="text-left" style="font-weight: bold; font-style: italic">
-                @Html.DisplayFor(model => model.EstadoEvaluacionPlan)
-            </td>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.ObservacionesPlan)
-            </td>
-            @*<td class="text-left">
-                @Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
+        <td class="text-left">
+            @Html.DisplayFor(model => model.FechaPresentacionPlan)
+        </td>
+        <td class="text-left">
+            @Html.DisplayFor(model => model.FechaEvaluacionPlan)
+        </td>
+        <td class="text-left" style="font-weight: bold; font-style: italic">
+            @Html.DisplayFor(model => model.EstadoEvaluacionPlan)
+        </td>
+        <td class="text-left">
+            @Html.DisplayFor(model => model.ObservacionesPlan)
+        </td>
+        <td class="text-left">
+            @*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
                 @Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })
-            </td>*@
-        </tr>
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
+            @*@Html.ActionLink("Ver Historial Planes...", "HistorialPlanes", new { id = Model.IdPS })*@
+                @Ajax.ActionLink("Ver Historial Planes", "HistorialPlanes", new { id = Model.IdPS }, new AjaxOptions
+           {
+               InsertionMode = InsertionMode.Replace,
+               UpdateTargetId = "histoplan",
+
+           }
+                    )
+        </td>
+    </tr>
 </table>
+<div id="histoplan"></div>
