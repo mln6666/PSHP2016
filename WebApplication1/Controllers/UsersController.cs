@@ -106,7 +106,7 @@ namespace WebApplication1.Controllers
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var list = roleManager.Roles.ToList();
-            list.Add(new IdentityRole { Id = "", Name = "[Seleccione un Rol...]" });
+            list.Add(new IdentityRole { Id = "", Name = "[Seleccione un permiso...]" });
             list = list.OrderBy(r => r.Name).ToList();
             ViewBag.RoleID = new SelectList(list, "Id", "Name");
 
@@ -131,10 +131,10 @@ namespace WebApplication1.Controllers
 
             if (string.IsNullOrEmpty(roleID))
             {
-                ViewBag.Error = "Debe Seleccionar un Rol";
+                ViewBag.Error = "Debe Seleccionar un permiso";
 
                 var list = roleManager.Roles.ToList();
-                list.Add(new IdentityRole { Id = "", Name = "[Seleccione un Permiso...]" });
+                list.Add(new IdentityRole { Id = "", Name = "[Seleccione un permiso...]" });
                 list = list.OrderBy(r => r.Name).ToList();
                 ViewBag.RoleID = new SelectList(list, "Id", "Name");
 
