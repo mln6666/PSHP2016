@@ -4,21 +4,21 @@
     ViewBag.Title = "Bienvenido";
 }
 
-<h2>Bienvenido al sistema gestión de PS</h2>
+<h2 class="text-center">Bienvenido a SiGePS</h2>
 
-<h4>Para comenzar, puede seleccionar una de las sieguientes opciones:</h4>
+<h4 class="text-center">Para comenzar, puede seleccionar una de las siguientes opciones:</h4>
 
 <br /><br /><br /><br />
 
 <div class="text-center">
-    <a class="btn btn-primary text-center btn-lg btn-warning" style="width: 300px; height: 50px;padding-top: 10px " href="@Url.Action("Index","Alumnos")">
-        Ver listado de alumnos
+    <a class="btn btn-primary text-center btn-lg btn-default" style="width: 300px; height: 50px;padding-top: 10px " href="@Url.Action("Index","Alumnos")">
+        Listado de alumnos
     </a>
 </div>
 <br /><br /><br />
 <div class="text-center">
-    <a class="btn btn-primary text-center btn-lg btn-warning" style="width: 300px; height: 50px; padding-top: 10px" href="@Url.Action("Index", "PS")">
-        Ver listado de PS
+    <a class="btn btn-primary text-center btn-lg btn-primary" style="width: 300px; height: 50px; padding-top: 10px" href="@Url.Action("Index", "PS")">
+        Listado de PS
     </a>
 </div>
 <br /><br /><br />
@@ -29,7 +29,7 @@
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = "busps",
 
-}, new { @class = "btn btn-primary text-center btn-lg btn-warning",@style= "width: 300px;height: 50px; padding-top: 10px ", @Href = "PS/BusquedaPS" }
+}, new { @class = "btn btn-primary text-center btn-lg btn-primary", @style= "width: 300px;height: 50px; padding-top: 10px ", @Href = "PS/BusquedaPS" }
    )
 </div>
 <div id="busps"></div>
