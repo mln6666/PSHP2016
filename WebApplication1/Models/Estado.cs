@@ -6,7 +6,10 @@ using System.Web;
 namespace WebApplication1.Models
 {
     public enum Estado
+
     {
+        PlanPendiente=0,
+
         PlanEntregado=1,
 
         PlanRechazado=2,

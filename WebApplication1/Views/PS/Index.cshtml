@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebApplication1.Models.PS>
+﻿@using WebApplication1.Models
+@model IEnumerable<WebApplication1.Models.PS>
 
 @{
     ViewBag.Title = "PSs";
@@ -64,7 +65,14 @@
             @Html.DisplayFor(modelItem => item.Estado)
         </td>
         <td class="text-left">
-            @Html.ActionLink("Editar", "Edit", new {id = item.IdPS}) |
+            @*@Html.ActionLink("Editar", "Edit", new {id = item.IdPS}) |*@
+
+            @if(item.Estado == Estado.PlanPendiente || item.Estado == Estado.PlanRechazado)
+            {@Html.ActionLink("Agregar Plan", "Create","PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}else
+            {@Html.ActionLink("Agregar Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+            @if(item.Estado==Estado.PlanAprobado || item.Estado == Estado.InformeRechazado) {
+             @Html.ActionLink("Agregar Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+            else{@Html.ActionLink("Agregar Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
             @Html.ActionLink("Detalles", "Details", new {id = item.IdPS}) |
             @Html.ActionLink("Eliminar", "Delete", new {id = item.IdPS})
         </td>

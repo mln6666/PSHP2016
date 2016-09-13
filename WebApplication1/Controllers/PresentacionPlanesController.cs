@@ -66,10 +66,12 @@ namespace WebApplication1.Controllers
 
 
         // GET: PresentacionPlanes/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor");
-            return View();
+            PresentacionPlan presentacionplan= new PresentacionPlan();
+            presentacionplan.IdPS = id;
+            //ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor");
+            return View(presentacionplan);
         }
 
         // POST: PresentacionPlanes/Create
@@ -83,11 +85,12 @@ namespace WebApplication1.Controllers
             {
                 db.PresentacionPlanes.Add(presentacionPlan);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "PS", new { id = presentacionPlan.IdPS });
             }
-
-            ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor", presentacionPlan.IdPS);
-            return View(presentacionPlan);
+            int id = presentacionPlan.IdPS;
+            PresentacionPlan presentacionplan = new PresentacionPlan();
+            presentacionplan.IdPS = id;
+            return View(presentacionplan);
         }
 
         // GET: PresentacionPlanes/Edit/5
