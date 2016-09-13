@@ -20,12 +20,42 @@
             </td>
 
             <td>
-                @Html.ActionLink("Eliminar", "Delete", new { userID = Model.UserID, roleID = Model.Roles[i].RoleID })
+                <button userID = @Model.UserID roleID = @Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn-link js-delete">Delete</button>
+               @*@Html.ActionLink("Eliminar", "Delete", new {userID = Model.UserID, roleID = Model.Roles[i].RoleID})*@
             </td>
         </tr>
     }
 
 </table>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $(".js-delete").on("click", function() {
+            var button = $(this);
+
+            bootbox.confirm("¿ Está seguro que desea quitar el permiso: "+button.attr("nombrepermiso")+ " ?", function(result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/Users/Delete/",
+                            type: 'post',
+                            data: {
+                                userID: button.attr("userID"),
+                                RoleID: button.attr("roleID")
+                            },
+                            success: function() {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
+            });
+    });
+    </script>
+}
+
 
 
 

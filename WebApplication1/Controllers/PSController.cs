@@ -41,9 +41,9 @@ namespace WebApplication1.Controllers
         // GET: PS/Create
         public ActionResult Create()
         {
-            ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu");
+            ViewBag.IdAlumno = new SelectList(db.Alumnos.OrderBy(x => x.NombreAlu), "IdAlumno", "NombreAlu");
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea");
-            ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg");
+            ViewBag.IdOrganizacion = new SelectList(db.Organizaciones.OrderBy(x => x.DenominacionOrg), "IdOrganizacion", "DenominacionOrg");
             ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");
             return View();
         }
