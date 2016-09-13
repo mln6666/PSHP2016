@@ -10,7 +10,8 @@
 <p>
     @Html.ActionLink("Nueva PS", "Create")
 </p>
-<table class="table table-striped table-bordered ">
+<table id="mitabla" class="table table-striped table-bordered">
+    <thead>
     <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
 
         <th class="text-left" style="border-radius: 3px">
@@ -28,55 +29,78 @@
         <th class="text-left" style="border-radius: 3px">
             @Html.DisplayNameFor(model => model.Area.NombreArea)
         </th>
-        
+
         <th class="text-left" style="border-radius: 3px">
             @Html.DisplayNameFor(model => model.CicloLectivo)
         </th>
-       
+
         <th class="text-left" style="border-radius: 3px">
             @Html.DisplayNameFor(model => model.Estado)
         </th>
-
+        <th class="text-center" style="border-radius: 3px">Acciones</th>
     </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => item.Alumno.Legajo)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => item.Alumno.ApellidoAlu)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => item.Alumno.NombreAlu)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => item.NroDisposicion)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => item.Area.NombreArea)
+                </td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td class="text-left">
-            @Html.DisplayFor(modelItem => item.Alumno.Legajo)
-        </td>
-        <td class="text-left">
-            @Html.DisplayFor(modelItem => item.Alumno.ApellidoAlu)
-        </td>
-        <td class="text-left">
-            @Html.DisplayFor(modelItem => item.Alumno.NombreAlu)
-        </td>
-        <td class="text-left">
-            @Html.DisplayFor(modelItem => item.NroDisposicion)
-        </td>
-        <td class="text-left">
-            @Html.DisplayFor(modelItem => item.Area.NombreArea)
-        </td>
-       
-        <td class="text-left">
-            @Html.DisplayFor(modelItem => item.CicloLectivo)
-        </td>
-       
-        <td class="text-left" style="font-weight: bold; font-style: italic;">
-            @Html.DisplayFor(modelItem => item.Estado)
-        </td>
-        <td class="text-left">
-            @*@Html.ActionLink("Editar", "Edit", new {id = item.IdPS}) |*@
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => item.CicloLectivo)
+                </td>
 
-            @if(item.Estado == Estado.PlanPendiente || item.Estado == Estado.PlanRechazado)
-            {@Html.ActionLink("Agregar Plan", "Create","PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}else
-            {@Html.ActionLink("Agregar Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
-            @if(item.Estado==Estado.PlanAprobado || item.Estado == Estado.InformeRechazado) {
-             @Html.ActionLink("Agregar Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
-            else{@Html.ActionLink("Agregar Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
-            @Html.ActionLink("Detalles", "Details", new {id = item.IdPS}) |
-            @Html.ActionLink("Eliminar", "Delete", new {id = item.IdPS})
-        </td>
-    </tr>
+                <td class="text-left" style="font-weight: bold; font-style: italic;">
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td class="text-left">
+                    @*@Html.ActionLink("Editar", "Edit", new {id = item.IdPS}) |*@
+
+                    @if (item.Estado == Estado.PlanPendiente || item.Estado == Estado.PlanRechazado)
+                {@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-xs", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                    }
+                    else
+                    {@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-xs disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                    }
+                    @if (item.Estado == Estado.PlanAprobado || item.Estado == Estado.InformeRechazado)
+                {
+                        @Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-xs", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                    }
+                    else
+                    {@Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-warning btn-xs disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                    }
+                    @Html.ActionLink("Detalles", "Details", new { id = item.IdPS }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*<link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap.css">*@
+@section scripts
+{
+    @*<script src="~/Scripts/datatables/jquery.datatables.js"></script>
+<script src="~/Scripts/datatables/datatables.bootstrap.js"></script>*@
+    <script>
+        $(document).ready(function () {
+            $("#mitabla").DataTable();
+    });
+    </script>
 }
 
-</table>
+
