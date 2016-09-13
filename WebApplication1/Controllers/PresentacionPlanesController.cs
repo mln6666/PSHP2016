@@ -26,8 +26,8 @@ namespace WebApplication1.Controllers
         public ActionResult HistorialPlanes(int id)
         {
             var historial = db.PSs.Include(m => m.PresentacionesPlanes).SingleOrDefault(m => m.IdPS == id);
-            //IEnumerable<PresentacionPlan> prueba = historial.PresentacionesPlanes.OrderByDescending(c => c.IdPresentacionPlan);
-            //historial.PresentacionesPlanes = prueba.ToList();
+            IEnumerable<PresentacionPlan> prueba = historial.PresentacionesPlanes.OrderByDescending(c => c.IdPresentacionPlan);
+            historial.PresentacionesPlanes = prueba.ToList();
             return View(historial);
         }
 
@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
-            int id = query.ElementAt(0);
+            int id = query.ElementAt(query.Count()-1);
             PresentacionPlan datosplan = db.PresentacionPlanes.Find(id);
 
             return View("Details",datosplan);

@@ -1,155 +1,195 @@
 ﻿@model WebApplication1.Models.PS
 
 @{
-    ViewBag.Title = "Detalles PS";
+    ViewBag.Title = "Details";
 }
 
-<h2>Detalles PS</h2>
+<h2>Detalles Generales</h2>
 
 <div>
+
+    <table class="table table-striped table-bordered ">
+        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Alumno.Legajo)
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Alumno.NombreAlu)
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.NroDisposicion)
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Area.NombreArea)
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
+            </th>
+        </tr>
+        <tr>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.Alumno.Legajo)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.Alumno.NombreAlu)
+            </td>
+            <td class="text-left" style="font-weight: bold; font-style: italic">
+                @Html.DisplayFor(model => model.Estado)
+            </td>
+
+            <td class="text-left">
+                @Html.DisplayFor(model => model.NroDisposicion)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.Area.NombreArea)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
+            </td>
+        </tr>
+        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Tutor)
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.TituloProyecto)
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.CicloLectivo)
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Cuatrimestre)
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
+            </th>
+
+
+        </tr>
+
+
+
+        <tr>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.Tutor)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.TituloProyecto)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.CicloLectivo)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.Cuatrimestre)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.TipoPS.NombreTipoPS)
+            </td>
+
+
+        </tr>
+    </table>
     <div>
-        <table class="table table-striped table-bordered ">
-
-            <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
-
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Alumno.Legajo)
-                </th>
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Alumno.ApellidoAlu)
-                </th>
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Alumno.NombreAlu)
-                </th>
-                
-            </tr>
-            <tr>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.Alumno.Legajo)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.Alumno.ApellidoAlu)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.Alumno.NombreAlu)
-                </td>
-                
-
-            </tr>
-        </table>
+        @Html.Action("Details2", "PresentacionPlanes", new { idps = Model.IdPS })
     </div>
-
-
-
-
     <div>
-        <table class="table table-striped table-bordered ">
-
-            <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
-
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.TituloProyecto)
-                </th>
-                
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Estado)
-                </th>
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.NroDisposicion)
-                </th>
-            </tr>
-            <tr>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.TituloProyecto)
-                </td>
-                <td class="text-left" style="font-weight: bold; font-style: italic">
-                    @Html.DisplayFor(model => model.Estado)
-                </td>
-
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.NroDisposicion)
-                </td>
-
-
-
-            </tr>
-        </table>
+        @Html.Action("Details2", "PresentacionInformes", new { idps = Model.IdPS })
     </div>
 
-    <div>
-        <table class="table table-striped table-bordered ">
-
-            <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
-                </th>
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Area.NombreArea)
-                </th>
-
-
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
-                </th>
-            </tr>
-            <tr>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.TipoPS.NombreTipoPS)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.Area.NombreArea)
-                </td>
-
-
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
-                </td>
-
-            </tr>
-        </table>
-    </div>
-
-    <div>
-        <table class="table table-striped table-bordered ">
-
-            <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Tutor)
-                </th>
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Cuatrimestre)
-                </th>
-                <th class="col-lg-4" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.CicloLectivo)
-                </th>
-            </tr>
-            <tr>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.Tutor)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.Cuatrimestre)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.CicloLectivo)
-                </td>
-        </table>
-    </div>
-
-    
-
-        <div>
-            @Html.Action("Details2", "PresentacionPlanes", new { idps = Model.IdPS })
-        </div>
-        <div>
-            @Html.Action("Details2", "PresentacionInformes", new { idps = Model.IdPS })
-        </div>
 
 
 
 
-    </div>
-    <p>
-        @Html.ActionLink("Editar", "Edit", new { id = Model.IdPS }) |
-        @Html.ActionLink("Volver", "Index")
-    </p>
+
+
+    @*<dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Alumno.NombreAlu)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Alumno.NombreAlu)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Area.NombreArea)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Area.NombreArea)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NroDisposicion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NroDisposicion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Tutor)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Tutor)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TituloProyecto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TituloProyecto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CicloLectivo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CicloLectivo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Cuatrimestre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cuatrimestre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IdTipoPS)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IdTipoPS)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Estado)
+            </dd>
+
+        </dl>*@
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdPS }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

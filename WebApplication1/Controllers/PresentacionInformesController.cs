@@ -25,6 +25,8 @@ namespace WebApplication1.Controllers
         public ActionResult HistorialInformes(int id)
         {
             var historial = db.PSs.Include(m => m.PresentacionesInforme).SingleOrDefault(m => m.IdPS == id);
+            IEnumerable<PresentacionInforme> prueba = historial.PresentacionesInforme.OrderByDescending(c => c.IdPresentacionInforme);
+            historial.PresentacionesInforme = prueba.ToList();
             return View(historial);
         }
 
@@ -55,7 +57,7 @@ namespace WebApplication1.Controllers
             }
 
 
-            int id = query.ElementAt(0);
+            int id = query.ElementAt(query.Count() - 1);
             PresentacionInforme datosinforme = db.PresentacionInformes.Find(id);
 
             return View("Details", datosinforme);
