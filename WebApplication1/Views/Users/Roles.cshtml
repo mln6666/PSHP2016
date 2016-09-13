@@ -20,7 +20,7 @@
             </td>
 
             <td>
-                <button userID = @Model.UserID roleID = @Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn-link js-delete">Delete</button>
+                <button userID = @Model.UserID roleID = @Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn-link js-delete">Quitar Permiso</button>
                @*@Html.ActionLink("Eliminar", "Delete", new {userID = Model.UserID, roleID = Model.Roles[i].RoleID})*@
             </td>
         </tr>
@@ -36,7 +36,7 @@
             $(".js-delete").on("click", function() {
             var button = $(this);
 
-            bootbox.confirm("¿ Está seguro que desea quitar el permiso: "+button.attr("nombrepermiso")+ " ?", function(result) {
+            bootbox.confirm("¿Está seguro que desea quitar el permiso: "+button.attr("nombrepermiso")+ "?", function(result) {
                     if (result) {
                         $.ajax({
                             url: "/Users/Delete/",
