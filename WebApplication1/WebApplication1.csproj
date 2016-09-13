@@ -392,6 +392,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\Images\configuracion.png" />
     <Content Include="Content\Images\logogodesa.png" />
     <Content Include="Content\Images\logoUTN.png" />
     <Content Include="Content\themes\base\accordion.css" />
