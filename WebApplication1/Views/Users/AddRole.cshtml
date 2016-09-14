@@ -31,6 +31,7 @@
         $('#agregarpermiso').submit(function (e) {
             var permiso = this;
             e.preventDefault();
+            //var x=document.getElementById("RoleID").innerText;
             bootbox.confirm("¿ Está seguro que desea agregar el permiso ?", function (result) {
                 if (result) {
                     permiso.submit();

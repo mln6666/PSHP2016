@@ -31,6 +31,7 @@ namespace WebApplication1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PS pS = db.PSs.Find(id);
+            
             if (pS == null)
             {
                 return HttpNotFound();

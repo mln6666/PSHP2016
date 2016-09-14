@@ -9,47 +9,55 @@
 <p>
     @Html.ActionLink("Agregar alumno", "Create")
 </p>
-<table id="tablaalumnos" class="table table-striped table-bordered ">
-    <tr class="text-left" style="color: #2c3e50; background-color: lightblue ">
-        <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.Legajo)
-        </th>
-        <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.NombreAlu)
-        </th>
-        <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.ApellidoAlu)
-        </th>
-        <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.CorreoAlu)
-        </th>
-        <th class="text-left" style="border-radius: 3px">
-            Acciones
-        </th>
-        @*<th style="background-color: whitesmoke"></th>*@
-    </tr>
+<table id="mitabla" class="table table-striped table-bordered ">
+    <thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td class="text-left">
-            @Html.DisplayFor(modelItem => item.Legajo)
-        </td>
-        <td class="text-left">
-            @Html.DisplayFor(modelItem => item.NombreAlu)
-        </td>
-        <td class="text-left">
-            @Html.DisplayFor(modelItem => item.ApellidoAlu)
-        </td>
-        <td class="text-left">
-            @Html.DisplayFor(modelItem => item.CorreoAlu)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.IdAlumno }) |
-            @*@Html.ActionLink("Details", "Details", new { id=item.IdAlumno })*@ 
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.IdAlumno })
-        </td>
-    </tr>
-}
+        <tr class="text-left" style="color: #2c3e50; background-color: lightblue">
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Legajo)
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                Apellido y Nombre
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.CorreoAlu)
+            </th>
+            <th class="text-center" style="border-radius: 3px">
+                Acciones
+            </th>
+            @*<th style="background-color: whitesmoke"></th>*@
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => item.Legajo)
+                </td>
+                <td class="text-left">
+                    @item.ApellidoAlu, @item.NombreAlu
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => item.CorreoAlu)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdAlumno }) |
+                    @*@Html.ActionLink("Details", "Details", new { id=item.IdAlumno })*@
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdAlumno })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
 
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#mitabla").DataTable();
+    });
+    </script>
+}

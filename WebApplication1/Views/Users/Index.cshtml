@@ -8,34 +8,48 @@
 
 <h2>Gestión de permisos</h2>
 
-<table class="table table-striped table-bordered ">
-    <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
-        <th class="text-left" style="border-radius: 3px">
-            @*@Html.DisplayNameFor(model => model.Name)*@Usuario
-        </th>
-        <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
+<table id="mitabla" class="table table-striped table-bordered ">
+    <thead>
+
+        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+            <th class="text-left" style="border-radius: 3px">
+                @*@Html.DisplayNameFor(model => model.Name)*@Usuario
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                Acciones
+            </th>
 
 
-
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-
-            <td>
-                @Html.ActionLink("Permisos", "Roles", new { userID = item.UserID }) |
-            </td>
         </tr>
-    }
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Permisos", "Roles", new { userID = item.UserID }) |
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
 
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#mitabla").DataTable();
+    });
+    </script>
+}

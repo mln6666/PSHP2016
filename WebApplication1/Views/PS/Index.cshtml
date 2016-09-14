@@ -22,12 +22,9 @@
             @Html.DisplayNameFor(model => model.Alumno.Legajo)
         </th>
         <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.Alumno.ApellidoAlu)
+           Apellido y Nombre
         </th>
-        <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.Alumno.NombreAlu)
-        </th>
-        <th class="text-left" style="border-radius: 3px">
+       <th class="text-left" style="border-radius: 3px">
             @Html.DisplayNameFor(model => model.NroDisposicion)
         </th>
         <th class="text-left" style="border-radius: 3px">
@@ -52,10 +49,7 @@
                     @Html.DisplayFor(modelItem => item.Alumno.Legajo)
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.Alumno.ApellidoAlu)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.Alumno.NombreAlu)
+                   @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
                 </td>
                 <td class="text-left">
                     @Html.DisplayFor(modelItem => item.NroDisposicion)
