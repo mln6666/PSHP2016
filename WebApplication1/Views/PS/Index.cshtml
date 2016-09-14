@@ -66,21 +66,55 @@
                     @Html.DisplayFor(modelItem => item.Estado)
                 </td>
                 <td class="text-left">
-                   
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary btn-sm">+Plan</a>
+                        <a href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                        <ul class="dropdown-menu" onclick="event.stopPropagation()">
+                            <li>
+                                @if (item.Estado == Estado.PlanPendiente || item.Estado == Estado.PlanRechazado)
+                                {@Html.ActionLink("Nuevo Plan", "Create", "PresentacionPlanes", new {id = item.IdPS}, null)
+                                }else{<a href="#" style="color: grey">Nuevo Plan</a>}
+                            </li>
+                            <li class="divider"></li>
+                                <li>@Html.ActionLink("Editar", "Edit", "PresentacionPlanes", new { id = item.IdPS }, null)</li>
+                                <li><a href="#">Mugre 2</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Mugre 3</a></li>
+                           
+                        </ul>
+</div>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary btn-sm">+Informe</a>
+                        <a href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @if (item.Estado == Estado.PlanAprobado || item.Estado == Estado.InformeRechazado)
+                                {@Html.ActionLink("Nuevo Informe", "Create", "PresentacionInformes", new {id = item.IdPS},null)
+                                }else{<a href="#" style="color: grey">Nuevo Informe</a>}
+                            </li>
+                            <li class="divider"></li>
+                        <li>@Html.ActionLink("Editar", "EditUltimoInf", "PresentacionInformes", new { id = item.IdPS }, null)</li>
+                        <li><a href="#">Mugre 2</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Mugre 3</a></li>
+                    </ul>
+                </div>
 
-                    @if (item.Estado == Estado.PlanPendiente || item.Estado == Estado.PlanRechazado)
-                {@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                    }
+
+
+                    @*@if (item.Estado == Estado.PlanPendiente || item.Estado == Estado.PlanRechazado)
+            {@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+                else{@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                    }*@
+
+                    @*@if (item.Estado == Estado.PlanAprobado || item.Estado == Estado.InformeRechazado)
+                {@Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
                     else
-                    {@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                    }
-                    @if (item.Estado == Estado.PlanAprobado || item.Estado == Estado.InformeRechazado)
-                {
-                        @Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                    }
-                    else
-                    {@Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                    }
+                    {@Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}*@
+
+
+
+
                     |@Html.ActionLink("Detalles", "Details", new { id = item.IdPS }) |
                     @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS })
                 </td>

@@ -1,16 +1,15 @@
-﻿@model WebApplication1.Models.PresentacionInforme
+﻿
+@model WebApplication1.Models.PresentacionInforme
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar Informe";
 }
 
-<h2>Edit</h2>
-
-
+<h2>Editar Informe</h2>
 @using (Html.BeginForm())
-{ 
+{@Html.HiddenFor(model => model.IdPS)
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>PresentacionInforme</h4>
         <hr />
@@ -40,12 +39,12 @@
             </div>
         </div>
         @*<div class="form-group">
-            @Html.LabelFor(model => model.EstadoEvaluacionInforme, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EstadoEvaluacionInforme, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EstadoEvaluacionInforme, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.EstadoEvaluacionInforme, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EstadoEvaluacionInforme, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EstadoEvaluacionInforme, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.ObservacionesInforme, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -55,13 +54,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.IdPS, "IdPS", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("IdPS", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.IdPS, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

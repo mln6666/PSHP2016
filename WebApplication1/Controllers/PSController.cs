@@ -19,7 +19,8 @@ namespace WebApplication1.Controllers
         public ActionResult Index()
         {
             
-            var pSs = db.PSs.Include(p => p.Alumno).Include(p => p.Area).Include(p => p.Organizacion).Include(p => p.TipoPS);
+            var pSs = db.PSs.Include(p => p.Alumno).Include(p => p.Area).Include(p => p.Organizacion).Include(p => p.TipoPS).Include(p => p.PresentacionesPlanes).Include(p => p.PresentacionesInforme);
+
             return View(pSs.ToList());
         }
 

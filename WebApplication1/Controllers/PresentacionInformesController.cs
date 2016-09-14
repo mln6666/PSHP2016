@@ -106,6 +106,50 @@ namespace WebApplication1.Controllers
             return View(presentacioninforme);
         }
 
+        // GET:
+        public ActionResult EditUltimoInf(int? id)
+        {
+            IEnumerable<int> query = (from c in db.PresentacionInformes
+                                      where c.IdPS == id
+                                      select c.IdPresentacionInforme);
+
+            int idinf = query.ElementAt(query.Count() - 1);
+            PresentacionInforme presentacionInforme = db.PresentacionInformes.Find(idinf);
+
+            return View(presentacionInforme);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUltimoInf([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")] PresentacionInforme presentacionInforme)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(presentacionInforme).State = EntityState.Modified;
+                db.SaveChanges();
+
+                PS pS = db.PSs.Find(presentacionInforme.IdPS);
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Pendiente)
+                    pS.Estado = Estado.InformeEntregado;
+
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Aprobado)
+                    pS.Estado = Estado.InformeAprobado;
+
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
+                    pS.Estado = Estado.InformeRechazado;
+
+                db.Entry(pS).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Details", "PS", new { id = presentacionInforme.IdPS });
+            }
+            return View(presentacionInforme);
+        }
+
+
+
+
+
         // GET: PresentacionInformes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -121,6 +165,8 @@ namespace WebApplication1.Controllers
             ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor", presentacionInforme.IdPS);
             return View(presentacionInforme);
         }
+
+
 
         // POST: PresentacionInformes/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
