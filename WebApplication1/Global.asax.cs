@@ -56,7 +56,10 @@ namespace WebApplication1
             {
                 userManager.AddToRole(user.Id, "Eliminar");
             }
-
+            if (!userManager.IsInRole(user.Id, "Administrador"))
+            {
+                userManager.AddToRole(user.Id, "Administrador");
+            }
 
 
         }
@@ -81,6 +84,11 @@ namespace WebApplication1
         private void CreateRoles(ApplicationDbContext db)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+
+            if (!roleManager.RoleExists("Administrador"))
+            {
+                roleManager.Create(new IdentityRole("Administrador"));
+            }
 
             if (!roleManager.RoleExists("Ver"))
             {

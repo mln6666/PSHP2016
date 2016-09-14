@@ -16,7 +16,7 @@ namespace WebApplication1.Controllers
         
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Users
-        [Authorize(Roles = "Ver")]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
@@ -36,6 +36,7 @@ namespace WebApplication1.Controllers
             return View(usersView);
         }
 
+        [Authorize(Roles = "Administrador")]
         public ActionResult Roles(string userID)
         {
             if (string.IsNullOrEmpty(userID))
@@ -82,6 +83,7 @@ namespace WebApplication1.Controllers
         }
 
         //get
+        [Authorize(Roles = "Administrador")]
         public ActionResult AddRole(string userID)
         {
             if (string.IsNullOrEmpty(userID))
@@ -113,7 +115,7 @@ namespace WebApplication1.Controllers
 
             return View(userView);
         }
-
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public ActionResult AddRole(string userID, FormCollection form)
         {
@@ -174,6 +176,7 @@ namespace WebApplication1.Controllers
             return View("Roles", userView);
         }
 
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(string userID, string roleID)
         {
             if (string.IsNullOrEmpty(userID) || string.IsNullOrEmpty(roleID))
