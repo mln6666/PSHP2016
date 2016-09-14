@@ -85,6 +85,19 @@ namespace WebApplication1.Controllers
             {
                 db.PresentacionInformes.Add(presentacionInforme);
                 db.SaveChanges();
+                PS pS = db.PSs.Find(presentacionInforme.IdPS);
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Pendiente)
+                    pS.Estado = Estado.InformeEntregado;
+
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Aprobado)
+                    pS.Estado = Estado.InformeAprobado;
+
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
+                    pS.Estado = Estado.InformeRechazado;
+
+                db.Entry(pS).State = EntityState.Modified;
+                db.SaveChanges();
+
                 return RedirectToAction("Details", "PS", new { id = presentacionInforme.IdPS });
             }
             int id = presentacionInforme.IdPS;
@@ -120,6 +133,20 @@ namespace WebApplication1.Controllers
             {
                 db.Entry(presentacionInforme).State = EntityState.Modified;
                 db.SaveChanges();
+
+                PS pS = db.PSs.Find(presentacionInforme.IdPS);
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Pendiente)
+                pS.Estado = Estado.InformeEntregado;
+
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Aprobado)
+                pS.Estado = Estado.InformeAprobado;
+
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
+                pS.Estado = Estado.InformeRechazado;
+
+                db.Entry(pS).State = EntityState.Modified;
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor", presentacionInforme.IdPS);

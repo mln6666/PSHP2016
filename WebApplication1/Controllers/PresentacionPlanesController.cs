@@ -85,6 +85,20 @@ namespace WebApplication1.Controllers
             {
                 db.PresentacionPlanes.Add(presentacionPlan);
                 db.SaveChanges();
+
+                PS pS = db.PSs.Find(presentacionPlan.IdPS);
+                if (presentacionPlan.EstadoEvaluacionPlan==Evaluacion.Pendiente)
+                    pS.Estado=Estado.PlanEntregado;
+                
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                    pS.Estado = Estado.PlanAprobado;
+                
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
+                    pS.Estado = Estado.PlanRechazado;
+                
+                db.Entry(pS).State = EntityState.Modified;
+                db.SaveChanges();
+
                 return RedirectToAction("Details", "PS", new { id = presentacionPlan.IdPS });
             }
             int id = presentacionPlan.IdPS;
@@ -120,6 +134,20 @@ namespace WebApplication1.Controllers
             {
                 db.Entry(presentacionPlan).State = EntityState.Modified;
                 db.SaveChanges();
+
+                PS pS = db.PSs.Find(presentacionPlan.IdPS);
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
+                    pS.Estado = Estado.PlanEntregado;
+
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                    pS.Estado = Estado.PlanAprobado;
+
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
+                    pS.Estado = Estado.PlanRechazado;
+
+                db.Entry(pS).State = EntityState.Modified;
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor", presentacionPlan.IdPS);

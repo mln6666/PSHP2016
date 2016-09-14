@@ -19,7 +19,7 @@ namespace WebApplication1.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
         public DateTime FechaEvaluacionInforme { get; set; }
                 
-        public string EstadoEvaluacionInforme { get; set; }
+        public virtual Evaluacion EstadoEvaluacionInforme { get; set; }
 
         [DataType(DataType.MultilineText)]
         [Display(Name = "Observaciones")]
