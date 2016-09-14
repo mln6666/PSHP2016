@@ -7,12 +7,12 @@
 <h2>Agregar permiso al usuario: @Model.Name</h2>
 <h3>@ViewBag.Error</h3>
 
-@using (Html.BeginForm("AddRole", "Users", new { userID = Model.UserID }, FormMethod.Post))
+@using (Html.BeginForm("AddRole", "Users", new { userID = Model.UserID }, FormMethod.Post, new { id = "agregarpermiso" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <div class="form-group">
+    <div class="form-horizontal" >
+        <div class="form-group" >
             @*@Html.LabelFor(model => model.Role.RoleID, "RoleID", htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @*<label>Permiso</label>*@
@@ -23,4 +23,19 @@
         @Html.ActionLink("Volver", "Roles", new { userID = Model.UserID }, new { @class = "btn btn-info" })
         <input type="submit" value="Agregar permiso" class="btn btn-success" />
     </div>
+}
+
+@section scripts
+{
+    <script>
+        $('#agregarpermiso').submit(function (e) {
+            var permiso = this;
+            e.preventDefault();
+            bootbox.confirm("¿ Está seguro que desea agregar el permiso ?", function (result) {
+                if (result) {
+                    permiso.submit();
+                }
+            });
+        });
+    </script>
 }

@@ -9,15 +9,23 @@
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-
-   
-
+    <style>
+        .full {
+            background:  no-repeat center center fixed;
+            background-image: url("../Content/Images/BACKGROUND-TOP.jpg");
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+            height:100%;
+        }
+    </style>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 
 </head>
-<body>
+<body class="full">
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">

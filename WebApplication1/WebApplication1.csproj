@@ -392,9 +392,12 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\Images\BACKGROUND-TOP.jpg" />
+    <Content Include="Content\Images\background222.jpg" />
     <Content Include="Content\Images\configuracion.png" />
     <Content Include="Content\Images\logogodesa.png" />
     <Content Include="Content\Images\logoUTN.png" />
+    <Content Include="Content\Images\w2background.jpg" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />

@@ -3,42 +3,52 @@
 @{
     ViewBag.Title = "Bienvenido";
 }
+<head>
+    @*<style>.full {
+    background: url('http://placehold.it/1920x1080') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    /*height:100%;*/
+}</style>*@
+</head>
+<div class="container-fluid">
+    <h2 class="text-center">Bienvenido a SiGePS</h2>
 
-<h2 class="text-center">Bienvenido a SiGePS</h2>
+    <h4 class="text-center">Para comenzar, puede seleccionar una de las siguientes opciones:</h4>
 
-<h4 class="text-center">Para comenzar, puede seleccionar una de las siguientes opciones:</h4>
+    <br /><br /><br /><br />
 
-<br /><br /><br /><br />
+    <div class="text-center">
+        <a class="btn btn-default text-center btn-lg btn-default" style="width: 300px; height: 50px;padding-top: 10px " href="@Url.Action("Index","Alumnos")">
+            Listado de alumnos
+        </a>
+    </div>
+    <br /><br /><br />
+    <div class="text-center">
+        <a class="btn btn-default text-center btn-lg btn-default" style="width: 300px; height: 50px; padding-top: 10px" href="@Url.Action("Index", "PS")">
+            Listado de PS
+        </a>
+    </div>
+    <br /><br /><br />
 
-<div class="text-center">
-    <a class="btn btn-default text-center btn-lg btn-default" style="width: 300px; height: 50px;padding-top: 10px " href="@Url.Action("Index","Alumnos")">
-        Listado de alumnos
-    </a>
-</div>
-<br /><br /><br />
-<div class="text-center">
-    <a class="btn btn-default text-center btn-lg btn-default" style="width: 300px; height: 50px; padding-top: 10px" href="@Url.Action("Index", "PS")">
-        Listado de PS
-    </a>
-</div>
-<br /><br /><br />
+    <div class="text-center">
+        @Ajax.ActionLink("Buscar PS", "BusquedaPS", "PS", new AjaxOptions
+   {
+       InsertionMode = InsertionMode.Replace,
+       UpdateTargetId = "busps",
 
-<div class="text-center">
-    @Ajax.ActionLink("Buscar PS", "BusquedaPS", "PS", new AjaxOptions
-{
-    InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "busps",
-
-}, new { @class = "btn btn-default text-center btn-lg btn-default", @style= "width: 300px;height: 50px; padding-top: 10px ", @Href = "PS/BusquedaPS" }
+   }, new { @class = "btn btn-default text-center btn-lg btn-default", @style = "width: 300px;height: 50px; padding-top: 10px ", @Href = "PS/BusquedaPS" }
    )
+    </div>
+    <div id="busps"></div>
+    <br /><br /><br /><br /><br /><br />
 </div>
-<div id="busps"></div>
-<br /><br /><br /><br /><br /><br />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    @section Scripts{
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-@section Scripts{
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-
-}
+    }
 
 
