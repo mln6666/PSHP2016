@@ -225,6 +225,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlumnosController.cs" />
     <Compile Include="Controllers\AreasController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrganizacionesController.cs" />
@@ -641,6 +642,7 @@
     <Content Include="Views\PresentacionPlanes\EvaluarPlan.cshtml" />
     <Content Include="Views\PresentacionInformes\EvaluarInforme.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Error\_ErrorPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,59 @@
+﻿
+@{
+    Layout = null;
+}
+<head>
+
+    <style>
+        .error-wrap {
+            padding-bottom: 30px;
+            text-align: center;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+        }
+
+        .error-wrap .error-title {
+            color: #034967;
+            font-size: 180px;
+            line-height: 200px;
+            padding-bottom: 20px;
+        }
+
+        .error-wrap span {
+            color: #555;
+            display: block;
+            font-size: 35px;
+            font-weight: 200;
+        }
+
+        .error-wrap p {
+            color: #555;
+            font-size: 16px;
+        }
+
+        a {
+            padding: 6px 9px;
+            background-color: #ccc;
+            color: #333;
+            border: none;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<br/>
+<br/>
+<br />
+<div class="error-wrap">
+    <span class="error-title">Ooops!!</span>
+    <span>@ViewBag.Title !!</span>
+    <p>@ViewBag.Description</p>
+    <a class="btn btn-primary" style="align-items:center">@Html.ActionLink("Volver","Index","Home")</a>
+</div>
+
+@*///////////////////////////****************************///////////////////////////*@
+@*<h2 class="page-header">@ViewBag.Title</h2>
+<p>@ViewBag.Description</p>*@
+
+
