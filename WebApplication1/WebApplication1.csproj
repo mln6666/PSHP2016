@@ -628,6 +628,7 @@
     <Content Include="Views\PresentacionInformes\HistorialInformes.cshtml" />
     <Content Include="Views\Home\Vacio.cshtml" />
     <Content Include="Views\PresentacionInformes\EditUltimoInf.cshtml" />
+    <Content Include="Views\PresentacionPlanes\EvaluarPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

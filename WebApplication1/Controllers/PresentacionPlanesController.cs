@@ -22,22 +22,7 @@ namespace WebApplication1.Controllers
             return View(presentacionPlans.ToList());
         }
 
-        //GET: Evaluar Plan
-        public ActionResult Evaluar(int idPS)
-        {
-            PS ps = new PS();
-            ps = db.PSs.Find(p => p.IdPS == idPS );
-            return View(ps);
-        }
-
-        public ActionResult Evaluar(Evaluacion e, PresentacionPlan plan)
-        {
-
-            PS ps = new PS();
-            ps = db.PSs.Find(p => p.IdPS == plan.IdPS);
-            
-            return View("Details", ps);
-        }
+        
 
 
         public ActionResult HistorialPlanes(int id)
@@ -170,6 +155,51 @@ namespace WebApplication1.Controllers
             ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor", presentacionPlan.IdPS);
             return View(presentacionPlan);
         }
+
+        // GET: PresentacionPlanes/Edit/5
+        public ActionResult EvaluarPlan(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            
+            PresentacionPlan presentacionPlan = db.PresentacionPlanes.Find(id);
+            if (presentacionPlan == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(presentacionPlan);
+        }
+
+        // POST: PresentacionPlanes/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EvaluarPlan([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")] PresentacionPlan presentacionPlan)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(presentacionPlan).State = EntityState.Modified;
+                db.SaveChanges();
+
+                PS pS = db.PSs.Find(presentacionPlan.IdPS);
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
+                    pS.Estado = Estado.PlanEntregado;
+
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                    pS.Estado = Estado.PlanAprobado;
+
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
+                    pS.Estado = Estado.PlanRechazado;
+
+                db.Entry(pS).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Details", "PS", new { id = presentacionPlan.IdPS });
+            }
+            return PartialView(presentacionPlan);
+        }
+
 
         // GET: PresentacionPlanes/Delete/5
         public ActionResult Delete(int? id)

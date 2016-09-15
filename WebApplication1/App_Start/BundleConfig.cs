@@ -11,6 +11,8 @@ namespace WebApplication1
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/jquery-1.12.4.js",
                         "~/Scripts/jquery-1.12.4.min.js",
+                         "~/Scripts/jquery-ui-1.12.0.js",
+                        "~/Scripts/jquery-ui-1.12.0.min.js",
                         "~/Scripts/jquery.unobtrusive-ajax.js", "~/Scripts/bootstrap.js",
                         "~/Scripts/datatables/jquery.datatables.js",
                       "~/Scripts/datatables/datatables.bootstrap.js",
