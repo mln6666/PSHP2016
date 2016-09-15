@@ -150,7 +150,7 @@ namespace WebApplication1.Controllers
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "PS", new { id = presentacionPlan.IdPS });
             }
             ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor", presentacionPlan.IdPS);
             return View(presentacionPlan);

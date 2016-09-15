@@ -52,7 +52,7 @@
 				)
 		</td>
 		<td class="text-left">@Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-warning btn-sm" })</td>
-		<td class="text-left">@Html.ActionLink("Editar", "Edit", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-warning btn-sm" })</td>
+		<td class="text-left">@Html.ActionLink("Editar Plan", "Edit", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-warning btn-sm" })</td>
 </tr>
 
 </table>
@@ -69,10 +69,10 @@
 			<div class="modal-body">
 				<div class="te">Espere...</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			@*<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
 				@*<button type="submit" class="btn btn-primary">Save changes</button>*@
-			</div>
+			@*</div>*@
 		</div>
 		<!-- /.modal-content -->
 	</div>
@@ -86,7 +86,7 @@
 			e.preventDefault();
 
 			var $link = $(this); // Reference to <a/> link
-		    var title = "Editar Plan"; //$link.text();// this is title to fetch in htnl
+		    var title = $link.text(); this is title to fetch in htnl
 			$('#myModal .modal-title').html(title);
 
 			var url = $(this).attr('href');
