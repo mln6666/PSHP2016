@@ -167,6 +167,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
+
             return PartialView(presentacionPlan);
         }
 
@@ -197,6 +198,7 @@ namespace WebApplication1.Controllers
 
                 return RedirectToAction("Details", "PS", new { id = presentacionPlan.IdPS });
             }
+
             return PartialView(presentacionPlan);
         }
 

@@ -146,6 +146,51 @@ namespace WebApplication1.Controllers
             return View(presentacionInforme);
         }
 
+        public ActionResult EvaluarInforme(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            PresentacionInforme presentacionInforme = db.PresentacionInformes.Find(id);
+            if (presentacionInforme == null)
+            {
+                return HttpNotFound();
+            }
+
+            return PartialView(presentacionInforme);
+        }
+
+        // POST: PresentacionPlanes/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EvaluarInforme([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")] PresentacionInforme presentacionInforme)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(presentacionInforme).State = EntityState.Modified;
+                db.SaveChanges();
+
+                PS pS = db.PSs.Find(presentacionInforme.IdPS);
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Pendiente)
+                    pS.Estado = Estado.InformeEntregado;
+
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Aprobado)
+                    pS.Estado = Estado.InformeAprobado;
+
+                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
+                    pS.Estado = Estado.InformeRechazado;
+
+                db.Entry(pS).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Details", "PS", new { id = presentacionInforme.IdPS });
+            }
+
+            
+            return PartialView(presentacionInforme);
+        }
 
 
 

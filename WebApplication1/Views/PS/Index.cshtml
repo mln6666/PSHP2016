@@ -76,7 +76,6 @@
                                 }else{<a href="#" style="color: grey">Nuevo Plan</a>}
                             </li>
                             <li class="divider"></li>
-                                <li>@Html.ActionLink("Editar", "Edit", "PresentacionPlanes", new { id = item.IdPS }, null)</li>
                                 <li><a href="#">Mugre 2</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Mugre 3</a></li>
@@ -93,7 +92,6 @@
                                 }else{<a href="#" style="color: grey">Nuevo Informe</a>}
                             </li>
                             <li class="divider"></li>
-                        <li>@Html.ActionLink("Editar", "EditUltimoInf", "PresentacionInformes", new { id = item.IdPS }, null)</li>
                         <li><a href="#">Mugre 2</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Mugre 3</a></li>
@@ -129,9 +127,16 @@
     @*<script src="~/Scripts/datatables/jquery.datatables.js"></script>
 <script src="~/Scripts/datatables/datatables.bootstrap.js"></script>*@
     <script>
-        $(document).ready(function () {
-            $("#mitabla").DataTable();
-    });
+        $(document).ready(function() {
+
+            $("#mitabla").DataTable({
+                "language": {
+                    "url": "/Scripts/DataTables/spanish.json"
+                }
+            });
+
+
+        });
     </script>
 }
 

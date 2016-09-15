@@ -57,7 +57,11 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            $("#mitabla").DataTable();
+            $("#mitabla").DataTable({
+                "language": {
+                    "url": "/Scripts/DataTables/spanish.json"
+                }
+            });
     });
     </script>
 }

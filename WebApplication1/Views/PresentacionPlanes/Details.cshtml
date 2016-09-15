@@ -51,14 +51,13 @@
 			}
 				)
 		</td>
-		<td class="text-left">@Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window"})</td>
-
-	</tr>
+		<td class="text-left">@Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-warning btn-sm" })</td>
+		<td class="text-left">@Html.ActionLink("Editar", "Edit", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-warning btn-sm" })</td>
+</tr>
 
 </table>
 @*@Html.Action("EvaluarPlan", new { id = Model.IdPresentacionPlan })*@
 <div id="histoplan"></div>
-
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 	 aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -80,14 +79,14 @@
 	<!-- /.modal-dialog -->
 </div>
 
+
 <script>
 	$(document).ready(function () {
 		$("body").on("click", "a.dialog-window", null, function (e){
 			e.preventDefault();
 
-
 			var $link = $(this); // Reference to <a/> link
-			var title = $link.text();// this is title to fetch in htnl
+		    var title = "Editar Plan"; //$link.text();// this is title to fetch in htnl
 			$('#myModal .modal-title').html(title);
 
 			var url = $(this).attr('href');
@@ -96,17 +95,13 @@
 			}
 			else
 			{
-
 				$.get(url, function (data) {
 					$('#myModal .te').html(data);
 					$('#myModal').modal();
 				}).success(function () { $('input:text:visible:first').focus(); });
-
 			}
-
 		});
 	});
-
 </script>
 
 
