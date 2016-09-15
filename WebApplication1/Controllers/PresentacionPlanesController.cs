@@ -22,6 +22,23 @@ namespace WebApplication1.Controllers
             return View(presentacionPlans.ToList());
         }
 
+        //GET: Evaluar Plan
+        public ActionResult Evaluar(int idPS)
+        {
+            PS ps = new PS();
+            ps = db.PSs.Find(p => p.IdPS == idPS );
+            return View(ps);
+        }
+
+        public ActionResult Evaluar(Evaluacion e, PresentacionPlan plan)
+        {
+
+            PS ps = new PS();
+            ps = db.PSs.Find(p => p.IdPS == plan.IdPS);
+            
+            return View("Details", ps);
+        }
+
 
         public ActionResult HistorialPlanes(int id)
         {
