@@ -1,109 +1,107 @@
 ﻿@model WebApplication1.Models.PS
 
 @{
-    ViewBag.Title = "Details";
+	ViewBag.Title = "Details";
 }
 
 <h2>Detalles Generales</h2>
 
 <div>
 
-    <table class="table table-striped table-bordered ">
-        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+	<table class="table table-striped table-bordered ">
+		<tr class="text-center" style="color: #2c3e50; background-color: lightblue">
 
-            <th class="text-left" style="border-radius: 3px">
-                @Html.DisplayNameFor(model => model.Alumno.Legajo)
-            </th>
-            <th class="text-left" style="border-radius: 3px">
-                @*@Html.DisplayNameFor(model => model.Alumno.NombreAlu)*@
-                Apellido y Nombre
-            </th>
-            <th class="text-left" style="border-radius: 3px">
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th class="text-left" style="border-radius: 3px">
-                @Html.DisplayNameFor(model => model.NroDisposicion)
-            </th>
-            <th class="text-left" style="border-radius: 3px">
-                @Html.DisplayNameFor(model => model.Area.NombreArea)
-            </th>
-            <th class="text-left" style="border-radius: 3px">
-                @Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
-            </th>
-        </tr>
-        <tr>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.Alumno.Legajo)
-            </td>
-            <td class="text-left">
-                @*@Html.DisplayFor(model => model.Alumno.NombreAlu)*@
-               @Model.Alumno.ApellidoAlu, @Model.Alumno.NombreAlu
-            </td>
-            <td class="text-left" style="font-weight: bold; font-style: italic">
-                @Html.DisplayFor(model => model.Estado)
-            </td>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.Alumno.Legajo)
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@*@Html.DisplayNameFor(model => model.Alumno.NombreAlu)*@
+				Apellido y Nombre
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.Estado)
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.NroDisposicion)
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.Area.NombreArea)
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
+			</th>
+		</tr>
+		<tr>
+			<td class="text-left">
+				@Html.DisplayFor(model => model.Alumno.Legajo)
+			</td>
+			<td class="text-left">
+				@*@Html.DisplayFor(model => model.Alumno.NombreAlu)*@
+			   @Model.Alumno.ApellidoAlu, @Model.Alumno.NombreAlu
+			</td>
+			<td class="text-left" style="font-weight: bold; font-style: italic">
+				@Html.DisplayFor(model => model.Estado)
+			</td>
 
-            <td class="text-left">
-                @Html.DisplayFor(model => model.NroDisposicion)
-            </td>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.Area.NombreArea)
-            </td>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
-            </td>
-        </tr>
-        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
-            <th class="text-left" style="border-radius: 3px">
-                @Html.DisplayNameFor(model => model.Tutor)
-            </th>
-            <th class="text-left" style="border-radius: 3px">
-                @Html.DisplayNameFor(model => model.TituloProyecto)
-            </th>
-            <th class="text-left" style="border-radius: 3px">
-                @Html.DisplayNameFor(model => model.CicloLectivo)
-            </th>
-            <th class="text-left" style="border-radius: 3px">
-                @Html.DisplayNameFor(model => model.Cuatrimestre)
-            </th>
-            <th class="text-left" style="border-radius: 3px">
-                @Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
-            </th>
-
-
-        </tr>
+			<td class="text-left">
+				@Html.DisplayFor(model => model.NroDisposicion)
+			</td>
+			<td class="text-left">
+				@Html.DisplayFor(model => model.Area.NombreArea)
+			</td>
+			<td class="text-left">
+				@Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
+			</td>
+		</tr>
+		<tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.Tutor)
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.TituloProyecto)
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.CicloLectivo)
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.Cuatrimestre)
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
+			</th>
 
 
-
-        <tr>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.Tutor)
-            </td>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.TituloProyecto)
-            </td>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.CicloLectivo)
-            </td>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.Cuatrimestre)
-            </td>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.TipoPS.NombreTipoPS)
-            </td>
-            <td class="text-left">
-                @Html.ActionLink("Editar PS", "Edit", new { id = Model.IdPS },new {@class="btn btn-warning btn-sm"})
-            </td>
+		</tr>
 
 
-        </tr>
-    </table>
-    <div>
-        @Html.Action("Details2", "PresentacionPlanes", new { idps = Model.IdPS })
-    </div>
-    <div>
-        @Html.Action("Details2", "PresentacionInformes", new { idps = Model.IdPS })
-    </div>
+
+		<tr>
+			<td class="text-left">
+				@Html.DisplayFor(model => model.Tutor)
+			</td>
+			<td class="text-left">
+				@Html.DisplayFor(model => model.TituloProyecto)
+			</td>
+			<td class="text-left">
+				@Html.DisplayFor(model => model.CicloLectivo)
+			</td>
+			<td class="text-left">
+				@Html.DisplayFor(model => model.Cuatrimestre)
+			</td>
+			<td class="text-left">
+				@Html.DisplayFor(model => model.TipoPS.NombreTipoPS)
+			</td>
+			<td class="text-left">
+				@Html.ActionLink("Editar PS", "Edit", new {id = Model.IdPS}, new { @class = "dialog-window1 btn btn-warning btn-sm" })
+			</td>
+		</tr>
+	</table>
+	<div>
+		@Html.Action("Details2", "PresentacionPlanes", new { idps = Model.IdPS })
+	</div>
+	<div>
+		@Html.Action("Details2", "PresentacionInformes", new { idps = Model.IdPS })
+	</div>
 
 
 
@@ -111,89 +109,134 @@
 
 
 
-    @*<dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Alumno.NombreAlu)
-            </dt>
+	@*<dl class="dl-horizontal">
+			<dt>
+				@Html.DisplayNameFor(model => model.Alumno.NombreAlu)
+			</dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Alumno.NombreAlu)
-            </dd>
+			<dd>
+				@Html.DisplayFor(model => model.Alumno.NombreAlu)
+			</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Area.NombreArea)
-            </dt>
+			<dt>
+				@Html.DisplayNameFor(model => model.Area.NombreArea)
+			</dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Area.NombreArea)
-            </dd>
+			<dd>
+				@Html.DisplayFor(model => model.Area.NombreArea)
+			</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
-            </dt>
+			<dt>
+				@Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
+			</dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
-            </dd>
+			<dd>
+				@Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
+			</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.NroDisposicion)
-            </dt>
+			<dt>
+				@Html.DisplayNameFor(model => model.NroDisposicion)
+			</dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.NroDisposicion)
-            </dd>
+			<dd>
+				@Html.DisplayFor(model => model.NroDisposicion)
+			</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Tutor)
-            </dt>
+			<dt>
+				@Html.DisplayNameFor(model => model.Tutor)
+			</dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Tutor)
-            </dd>
+			<dd>
+				@Html.DisplayFor(model => model.Tutor)
+			</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.TituloProyecto)
-            </dt>
+			<dt>
+				@Html.DisplayNameFor(model => model.TituloProyecto)
+			</dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.TituloProyecto)
-            </dd>
+			<dd>
+				@Html.DisplayFor(model => model.TituloProyecto)
+			</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.CicloLectivo)
-            </dt>
+			<dt>
+				@Html.DisplayNameFor(model => model.CicloLectivo)
+			</dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.CicloLectivo)
-            </dd>
+			<dd>
+				@Html.DisplayFor(model => model.CicloLectivo)
+			</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Cuatrimestre)
-            </dt>
+			<dt>
+				@Html.DisplayNameFor(model => model.Cuatrimestre)
+			</dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Cuatrimestre)
-            </dd>
+			<dd>
+				@Html.DisplayFor(model => model.Cuatrimestre)
+			</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.IdTipoPS)
-            </dt>
+			<dt>
+				@Html.DisplayNameFor(model => model.IdTipoPS)
+			</dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.IdTipoPS)
-            </dd>
+			<dd>
+				@Html.DisplayFor(model => model.IdTipoPS)
+			</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Estado)
-            </dt>
+			<dt>
+				@Html.DisplayNameFor(model => model.Estado)
+			</dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Estado)
-            </dd>
+			<dd>
+				@Html.DisplayFor(model => model.Estado)
+			</dd>
 
-        </dl>*@
+		</dl>*@
 </div>
 <p>
-    @Html.ActionLink("Volver", "Index",null,new {@class="btn btn-default btn-sm"})
+	@Html.ActionLink("Volver", "Index",null,new {@class="btn btn-default btn-sm"})
 </p>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-body">
+				<div class="te">Espere...</div>
+			</div>
+			@*<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+			@*<button type="submit" class="btn btn-primary">Save changes</button>*@
+			@*</div>*@
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+
+
+<script>
+	$(document).ready(function () {
+		$("body").on("click", "a.dialog-window1", null, function (e){
+			e.preventDefault();
+
+			var $link = $(this); // Reference to <a/> link
+			var title = $link.text(); //this is title to fetch in htnl
+			$('#myModal1 .modal-title').html(title);
+
+			var url = $(this).attr('href');
+			if (url.indexOf('#') == 0) {
+				$('#myModal1').modal('show');
+			}
+			else
+			{
+				$.get(url, function (data) {
+					$('#myModal1 .te').html(data);
+					$('#myModal1').modal();
+				}).success(function () { $('input:text:visible:first').focus(); });
+			}
+		});
+	});
+</script>

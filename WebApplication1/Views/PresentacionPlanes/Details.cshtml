@@ -43,13 +43,15 @@
 				@Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
 				@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
 			@*@Html.ActionLink("Ver Historial Planes...", "HistorialPlanes", new { id = Model.IdPS })*@
-			@Ajax.ActionLink("Ver Historial Planes", "HistorialPlanes", new {id = Model.IdPS}, new AjaxOptions
+			@Html.ActionLink("Historial Planes", "HistorialPlanes", new { id = Model.IdPS }, new { @class = "dialog-window2 btn btn-warning btn-sm" })
+
+			@*@Ajax.ActionLink("Ver Historial Planes", "HistorialPlanes", new {id = Model.IdPS}, new AjaxOptions
 			{
 				InsertionMode = InsertionMode.Replace,
 				UpdateTargetId = "histoplan",
 
 			}
-				)
+				)*@
 		</td>
 		<td class="text-left">@Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-warning btn-sm" })</td>
 		<td class="text-left">@Html.ActionLink("Editar Plan", "Edit", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-warning btn-sm" })</td>
@@ -59,24 +61,44 @@
 @*@Html.Action("EvaluarPlan", new { id = Model.IdPresentacionPlan })*@
 <div id="histoplan"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-	 aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title"></h4>
-			</div>
-			<div class="modal-body">
-				<div class="te">Espere...</div>
-			</div>
-			@*<div class="modal-footer">
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+            @*<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
-				@*<button type="submit" class="btn btn-primary">Save changes</button>*@
-			@*</div>*@
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
+            @*<button type="submit" class="btn btn-primary">Save changes</button>*@
+            @*</div>*@
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-left: -30%;margin-right: -30%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+            @*<button type="submit" class="btn btn-primary">Save changes</button>*@
+            @*</div>*@
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 
 
@@ -86,7 +108,7 @@
 			e.preventDefault();
 
 			var $link = $(this); // Reference to <a/> link
-		    var title = $link.text(); //this is title to fetch in htnl
+			var title = $link.text(); //this is title to fetch in htnl
 			$('#myModal .modal-title').html(title);
 
 			var url = $(this).attr('href');
@@ -101,11 +123,28 @@
 				}).success(function () { $('input:text:visible:first').focus(); });
 			}
 		});
+
+
+		$("body").on("click", "a.dialog-window2", null, function (e) {
+		    e.preventDefault();
+
+		    var $link = $(this); // Reference to <a/> link
+		    var title = $link.text(); //this is title to fetch in htnl
+		    $('#myModal2 .modal-title').html(title);
+
+		    var url = $(this).attr('href');
+		    if (url.indexOf('#') == 0) {
+		        $('#myModal2').modal('show');
+		    }
+		    else {
+		        $.get(url, function (data) {
+		            $('#myModal2 .te').html(data);
+		            $('#myModal2').modal();
+		        }).success(function () { $('input:text:visible:first').focus(); });
+		    }
+		});
 	});
 </script>
-
-
-
 
 
 
