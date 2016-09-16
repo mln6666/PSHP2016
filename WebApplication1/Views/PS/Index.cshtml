@@ -71,7 +71,7 @@
                         <a href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                         <ul class="dropdown-menu" onclick="event.stopPropagation()">
                             <li>
-                                @if (item.Estado == Estado.PlanPendiente || item.Estado == Estado.PlanRechazado)
+                                @if (item.Estado == Estado.Plan_Pendiente || item.Estado == Estado.Plan_Desaprobado)
                                 {@Html.ActionLink("Nuevo Plan", "Create", "PresentacionPlanes", new {id = item.IdPS}, null)
                                 }else{<a href="#" style="color: grey">Nuevo Plan</a>}
                             </li>
@@ -87,7 +87,7 @@
                         <a href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                @if (item.Estado == Estado.PlanAprobado || item.Estado == Estado.InformeRechazado)
+                                @if (item.Estado == Estado.Plan_Aprobado || item.Estado == Estado.Informe_Desaprobado)
                                 {@Html.ActionLink("Nuevo Informe", "Create", "PresentacionInformes", new {id = item.IdPS},null)
                                 }else{<a href="#" style="color: grey">Nuevo Informe</a>}
                             </li>
@@ -121,11 +121,9 @@
     </tbody>
 </table>
 
-@*<link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap.css">*@
 @section scripts
 {
-    @*<script src="~/Scripts/datatables/jquery.datatables.js"></script>
-<script src="~/Scripts/datatables/datatables.bootstrap.js"></script>*@
+
     <script>
         $(document).ready(function() {
 
@@ -135,9 +133,15 @@
                 }
             });
 
+          
+
 
         });
     </script>
+
+  
+
+
 }
 
 

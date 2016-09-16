@@ -8,26 +8,25 @@
     ViewBag.Title = "HistorialInformes";
 }*@
 <div id="cerrar1">
-    <h4>HistorialInformes</h4>
 
     <table class="table table-striped table-bordered table-condensed">
         <tr class="text-center" style="color: #2c3e50; background-color: darkkhaki">
 
             <th class="text-left" style="border-radius: 3px">
                 @*@Html.DisplayNameFor(model => model.PresentacionesPlanes.FechaPresentacionPlan)*@
-                FechaPresentacionInforme
+                Fecha Presentación
             </th>
             <th class="text-left" style="border-radius: 3px">
                 @*@Html.DisplayNameFor(model => model.FechaEvaluacionPlan)*@
-                FechaEvaluacionInforme
+                Fecha Evaluación
             </th>
             <th class="text-left" style="border-radius: 3px">
                 @*@Html.DisplayNameFor(model => model.EstadoEvaluacionPlan)*@
-                EstadoEvaluacionInforme
+                Evaluación
             </th>
-            <th class="text-left" style="border-radius: 3px">
+            <th class="text-left" style="border-radius: 3px;width: 500px">
                 @*@Html.DisplayNameFor(model => model.ObservacionesPlan)*@
-                ObservacionesInforme
+                Observaciones
             </th>
 
         </tr>
@@ -56,11 +55,11 @@
         }
 
     </table>
-    @Ajax.ActionLink("Cerrar historial informes...", "Vacio", "Home", new AjaxOptions
+    @*@Ajax.ActionLink("Cerrar historial informes...", "Vacio", "Home", new AjaxOptions
 {
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = "cerrar1",
 
 }
-                    )
+                    )*@
 </div>

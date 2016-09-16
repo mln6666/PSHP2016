@@ -11,23 +11,23 @@
 				@Html.DisplayNameFor(model => model.PS.Tutor)
 			</th>*@
 		<th class="text-left" style="border-radius: 3px">
-			@Html.DisplayNameFor(model => model.FechaPresentacionInforme)
+			@*@Html.DisplayNameFor(model => model.FechaPresentacionInforme)*@Fecha Presentación
 		</th>
 		<th class="text-left" style="border-radius: 3px">
-			@Html.DisplayNameFor(model => model.FechaEvaluacionInforme)
+			@*@Html.DisplayNameFor(model => model.FechaEvaluacionInforme)*@Fecha Evaluación
 		</th>
-		<th class="text-left" style="border-radius: 3px">
-			@Html.DisplayNameFor(model => model.EstadoEvaluacionInforme)
+		<th class="text-left " style="border-radius: 3px">
+			@*@Html.DisplayNameFor(model => model.EstadoEvaluacionInforme)*@Evaluación
 		</th>
-		<th class="text-left" style="border-radius: 3px">
-			@Html.DisplayNameFor(model => model.ObservacionesInforme)
+		<th class="text-left" style="border-radius: 3px;width: 350px">
+			@*@Html.DisplayNameFor(model => model.ObservacionesInforme)*@Observaciones
 		</th>
 	</tr>
 	<tr>
 		@*<td class="text-left">
 				@Html.DisplayFor(model => model.PS.Tutor)
 			</td>*@
-		<td class="text-left">
+		<td class="text-left" >
 			@Html.DisplayFor(model => model.FechaPresentacionInforme)
 		</td>
 		<td class="text-left">
@@ -37,20 +37,23 @@
 			@Html.DisplayFor(model => model.EstadoEvaluacionInforme)
 		</td>
 		<td class="text-left">
-			@Html.DisplayFor(model => model.ObservacionesInforme)
+			@Html.DisplayTextFor(model => model.ObservacionesInforme)
 		</td>
 		<td class="text-left">
 			@*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
 				@Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
 				@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
 			@*@Html.ActionLink("Ver Historial Informes...", "HistorialInformes", new { id = Model.IdPS })*@
-			@Ajax.ActionLink("Ver Historial Informes", "HistorialInformes", new {id = Model.IdPS}, new AjaxOptions
+		    @*@Ajax.ActionLink("Ver Historial Informes", "HistorialInformes", new {id = Model.IdPS}, new AjaxOptions
 			{
 				InsertionMode = InsertionMode.Replace,
 				UpdateTargetId = "histoinf",
 
 			}
-				)
+				)*@
+            @Html.ActionLink("Historial Informes", "HistorialInformes", new { id = Model.IdPS }, new { @class = "dialog-window3 btn btn-warning btn-sm" })
+
+
 		</td>
 		<td class="text-left">@Html.ActionLink("Evaluar Informe", "EvaluarInforme", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-warning btn-sm" })</td>
 		<td class="text-left">@Html.ActionLink("Editar Informe", "Edit", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-warning btn-sm" })</td>
@@ -58,24 +61,44 @@
 </table>
 <div id="histoinf"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-	 aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" >
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title"></h4>
-			</div>
-			<div class="modal-body" >
-				<div class="te">Espere...</div>
-			</div>
-			@*<div class="modal-footer">
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+            @*<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
-				@*<button type="submit" class="btn btn-primary">Save changes</button>*@
-			@*</div>*@
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
+            @*<button type="submit" class="btn btn-primary">Save changes</button>*@
+            @*</div>*@
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-left: -30%;margin-right: -30%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+            @*<button type="submit" class="btn btn-primary">Save changes</button>*@
+            @*</div>*@
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 <script>
 	$(document).ready(function () {
@@ -98,6 +121,26 @@
 					$('#myModal').modal();
 				}).success(function () { $('input:text:visible:first').focus(); });
 			}
+		});
+
+		$("body").on("click", "a.dialog-window3", null, function (e) {
+		    e.preventDefault();
+
+		    var $link = $(this); // Reference to <a/> link
+		    var title = $link.text();// this is title to fetch in htnl
+		    $('#myModal3 .modal-title').html(title);
+
+
+		    var url = $(this).attr('href');
+		    if (url.indexOf('#') == 0) {
+		        $('#myModal3').modal('show');
+		    }
+		    else {
+		        $.get(url, function (data) {
+		            $('#myModal3 .te').html(data);
+		            $('#myModal3').modal();
+		        }).success(function () { $('input:text:visible:first').focus(); });
+		    }
 		});
 	});
 </script>

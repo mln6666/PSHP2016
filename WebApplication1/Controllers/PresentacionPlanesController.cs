@@ -90,13 +90,13 @@ namespace WebApplication1.Controllers
 
                 PS pS = db.PSs.Find(presentacionPlan.IdPS);
                 if (presentacionPlan.EstadoEvaluacionPlan==Evaluacion.Pendiente)
-                    pS.Estado=Estado.PlanEntregado;
+                    pS.Estado=Estado.Plan_Entregado;
                 
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
-                    pS.Estado = Estado.PlanAprobado;
+                    pS.Estado = Estado.Plan_Aprobado;
                 
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
-                    pS.Estado = Estado.PlanRechazado;
+                    pS.Estado = Estado.Plan_Desaprobado;
                 
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();
@@ -139,13 +139,13 @@ namespace WebApplication1.Controllers
 
                 PS pS = db.PSs.Find(presentacionPlan.IdPS);
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
-                    pS.Estado = Estado.PlanEntregado;
+                    pS.Estado = Estado.Plan_Entregado;
 
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
-                    pS.Estado = Estado.PlanAprobado;
+                    pS.Estado = Estado.Plan_Aprobado;
 
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
-                    pS.Estado = Estado.PlanRechazado;
+                    pS.Estado = Estado.Plan_Desaprobado;
 
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();
@@ -185,13 +185,13 @@ namespace WebApplication1.Controllers
 
                 PS pS = db.PSs.Find(presentacionPlan.IdPS);
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
-                    pS.Estado = Estado.PlanEntregado;
+                    pS.Estado = Estado.Plan_Entregado;
 
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
-                    pS.Estado = Estado.PlanAprobado;
+                    pS.Estado = Estado.Plan_Aprobado;
 
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
-                    pS.Estado = Estado.PlanRechazado;
+                    pS.Estado = Estado.Plan_Desaprobado;
 
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();

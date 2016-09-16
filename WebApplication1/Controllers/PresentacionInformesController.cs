@@ -87,13 +87,13 @@ namespace WebApplication1.Controllers
                 db.SaveChanges();
                 PS pS = db.PSs.Find(presentacionInforme.IdPS);
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Pendiente)
-                    pS.Estado = Estado.InformeEntregado;
+                    pS.Estado = Estado.Informe_Entregado;
 
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Aprobado)
-                    pS.Estado = Estado.InformeAprobado;
+                    pS.Estado = Estado.Informe_Aprobado;
 
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
-                    pS.Estado = Estado.InformeRechazado;
+                    pS.Estado = Estado.Informe_Desaprobado;
 
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();
@@ -130,13 +130,13 @@ namespace WebApplication1.Controllers
 
                 PS pS = db.PSs.Find(presentacionInforme.IdPS);
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Pendiente)
-                    pS.Estado = Estado.InformeEntregado;
+                    pS.Estado = Estado.Informe_Entregado;
 
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Aprobado)
-                    pS.Estado = Estado.InformeAprobado;
+                    pS.Estado = Estado.Informe_Aprobado;
 
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
-                    pS.Estado = Estado.InformeRechazado;
+                    pS.Estado = Estado.Informe_Desaprobado;
 
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();
@@ -174,13 +174,13 @@ namespace WebApplication1.Controllers
 
                 PS pS = db.PSs.Find(presentacionInforme.IdPS);
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Pendiente)
-                    pS.Estado = Estado.InformeEntregado;
+                    pS.Estado = Estado.Informe_Entregado;
 
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Aprobado)
-                    pS.Estado = Estado.InformeAprobado;
+                    pS.Estado = Estado.Informe_Aprobado;
 
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
-                    pS.Estado = Estado.InformeRechazado;
+                    pS.Estado = Estado.Informe_Desaprobado;
 
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();
@@ -227,13 +227,13 @@ namespace WebApplication1.Controllers
 
                 PS pS = db.PSs.Find(presentacionInforme.IdPS);
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Pendiente)
-                pS.Estado = Estado.InformeEntregado;
+                pS.Estado = Estado.Informe_Entregado;
 
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Aprobado)
-                pS.Estado = Estado.InformeAprobado;
+                pS.Estado = Estado.Informe_Aprobado;
 
                 if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
-                pS.Estado = Estado.InformeRechazado;
+                pS.Estado = Estado.Informe_Desaprobado;
 
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();

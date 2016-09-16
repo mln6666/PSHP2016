@@ -43,9 +43,9 @@ namespace WebApplication1.Controllers
         // GET: PS/Create
         public ActionResult Create()
         {
-            ViewBag.IdAlumno = new SelectList(db.Alumnos.OrderBy(x => x.NombreAlu), "IdAlumno", "NombreAlu");
-            ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea");
-            ViewBag.IdOrganizacion = new SelectList(db.Organizaciones.OrderBy(x => x.DenominacionOrg), "IdOrganizacion", "DenominacionOrg");
+            ViewBag.alumnos = db.Alumnos.ToList();
+            ViewBag.areas = db.Areas.ToList();
+            ViewBag.organizaciones = db.Organizaciones.ToList();
             ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");
             return View();
         }
@@ -55,10 +55,11 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado")] PS pS)
+        public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno")] PS pS)
         {
             if (ModelState.IsValid)
             {
+                pS.Estado=Estado.Plan_Pendiente;
                 db.PSs.Add(pS);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -84,6 +85,9 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.alumnos = db.Alumnos.ToList();
+            ViewBag.areas = db.Areas.ToList();
+            ViewBag.organizaciones = db.Organizaciones.ToList();
             ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
             ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);

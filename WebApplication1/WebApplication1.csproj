@@ -96,6 +96,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -237,6 +238,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609141223025_InitialCreate.cs" />
+    <Compile Include="Migrations\201609141223025_InitialCreate.Designer.cs">
+      <DependentUpon>201609141223025_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609161453483_asdasd.cs" />
+    <Compile Include="Migrations\201609161453483_asdasd.Designer.cs">
+      <DependentUpon>201609161453483_asdasd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609161520036_asdasdasd.cs" />
+    <Compile Include="Migrations\201609161520036_asdasdasd.Designer.cs">
+      <DependentUpon>201609161520036_asdasdasd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Alumno.cs" />
     <Compile Include="Models\Area.cs" />
@@ -408,6 +422,8 @@
     <Content Include="Content\Images\logogodesa.png" />
     <Content Include="Content\Images\logoUTN.png" />
     <Content Include="Content\Images\w2background.jpg" />
+    <Content Include="Content\Select2\select2.min.css" />
+    <Content Include="Content\Select2\select2.min.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -654,6 +670,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609141223025_InitialCreate.resx">
+      <DependentUpon>201609141223025_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609161453483_asdasd.resx">
+      <DependentUpon>201609161453483_asdasd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609161520036_asdasdasd.resx">
+      <DependentUpon>201609161520036_asdasdasd.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

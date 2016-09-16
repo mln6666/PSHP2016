@@ -1,4 +1,5 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="../content/select2/select2.min.js" />
 /// <reference path="ai.0.22.9-build00167.min.js" />
 /// <reference path="bootbox.min.js" />
 /// <reference path="bootstrap.js" />
