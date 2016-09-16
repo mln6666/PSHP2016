@@ -66,7 +66,10 @@
                     @Html.DisplayFor(modelItem => item.Estado)
                 </td>
                 <td class="text-left">
-                    <div class="btn-group">
+
+
+
+                    @*<div class="btn-group">
                         <a href="#" class="btn btn-primary btn-sm">+Plan</a>
                         <a href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                         <ul class="dropdown-menu" onclick="event.stopPropagation()">
@@ -81,8 +84,8 @@
                                 <li><a href="#">Mugre 3</a></li>
                            
                         </ul>
-</div>
-                    <div class="btn-group">
+</div>*@
+                    @*<div class="btn-group">
                         <a href="#" class="btn btn-primary btn-sm">+Informe</a>
                         <a href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -96,25 +99,24 @@
                         <li class="divider"></li>
                         <li><a href="#">Mugre 3</a></li>
                     </ul>
-                </div>
+                </div>*@
 
 
+                    @if (item.Estado == Estado.Plan_Pendiente || item.Estado == Estado.Plan_Desaprobado)
+            {@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+                else{@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                    }
 
-                    @*@if (item.Estado == Estado.PlanPendiente || item.Estado == Estado.PlanRechazado)
-            {@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
-                else{@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                    }*@
-
-                    @*@if (item.Estado == Estado.PlanAprobado || item.Estado == Estado.InformeRechazado)
-                {@Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+                    @if (item.Estado == Estado.Plan_Aprobado || item.Estado == Estado.Informe_Desaprobado)
+                {@Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
                     else
-                    {@Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-success btn-xs disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}*@
+                    {@Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
 
 
 
 
-                    |@Html.ActionLink("Detalles", "Details", new { id = item.IdPS }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS })
+                    @Html.ActionLink("Detalles", "Details", new {id = item.IdPS}, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" }) 
+                    @Html.ActionLink("Eliminar", "Delete", new {id = item.IdPS}, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
                 </td>
             </tr>
         }

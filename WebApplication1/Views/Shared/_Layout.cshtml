@@ -54,8 +54,8 @@
                         <li>@Html.ActionLink("Usuarios", "Index", "Users")</li>
                     </ul>
                 </li>
-                
-                
+
+
 
             </ul>
 
@@ -63,14 +63,15 @@
         </div>
     </div>
 </div>
+    
 
     <div class="container body-content">
         @RenderBody()
 
-        <footer class="text-center" id="footer-zone">
+        @*<footer class="text-center" id="footer-zone">
 
             <p> - SiGePS &copy; @DateTime.Now.Year - Godesa Solutions ®  <a style="color:black ">@Html.ActionLink("Contacto", "Contact", "Home")</></a> - </p>
-        </footer>
+        </footer>*@
     </div>
 
     @*@Scripts.Render("~/bundles/jquery")*@
@@ -78,6 +79,11 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
+    <div class="navbar-xs navbar-inverse navbar-fixed-bottom" style="background: none; border: none;padding-bottom: 0px">
+        <div class="container text-center" style="height: 20px">
+            <p> - SiGePS &copy; @DateTime.Now.Year - Godesa Solutions ®  <a style="color:black ">@Html.ActionLink("Contacto", "Contact", "Home")</></a> - </p>
+        </div>
+    </div>
 </body>
 
 </html>
