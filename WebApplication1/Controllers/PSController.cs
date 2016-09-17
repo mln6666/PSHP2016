@@ -62,7 +62,7 @@ namespace WebApplication1.Controllers
                 pS.Estado=Estado.Plan_Pendiente;
                 db.PSs.Add(pS);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "PS", new { id = pS.IdPS });
             }
 
             ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
