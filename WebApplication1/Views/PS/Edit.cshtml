@@ -84,7 +84,7 @@
             <div class="col-md-2"></div>
 
             <div class="col-md-4">
-                @Html.LabelFor(model => model.Cuatrimestre, htmlAttributes: new {@class = "control-label ", @Style = "text-align: justify"})
+                @Html.LabelFor(model => model.Cuatrimestre, htmlAttributes: new {@class = "control-label ", @Style = "text-align: left"})
             </div>
             <div class="col-md-4">
                 @Html.EditorFor(model => model.Cuatrimestre, new {htmlAttributes = new {@class = "form-control input-sm", @Style = "width: 200px" } })
@@ -97,7 +97,7 @@
         <div class="form-group">
             <div class="col-md-2"></div>
             <div class="col-md-4">
-                @Html.LabelFor(model => model.IdOrganizacion, "Organización", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.IdOrganizacion, "Organización", htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
             </div>
             <div class="col-md-4">
                 <select class="js-example-basic-single form-control input-sm" id="IdOrganizacion" name="IdOrganizacion" style="font: small-caption; width: 200px; background-color: beige; padding-top: 30px">
@@ -116,7 +116,7 @@
         <div class="form-group">
             <div class="col-md-2"></div>
             <div class="col-md-4">
-                @Html.LabelFor(model => model.IdArea, "Área", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.IdArea, "Área", htmlAttributes: new { @class = "control-label" })
             </div>
             <div class="col-md-4">
                 <select class="js-example-basic-single form-control input-sm" id="IdArea" name="IdArea" style="font: small-caption; width: 200px; background-color: beige; padding-top: 30px">
@@ -136,7 +136,7 @@
             <div class="col-md-2"></div>
 
             <div class="col-md-4">
-                @Html.LabelFor(model => model.IdTipoPS, "Tipo de PS", htmlAttributes: new {@class = "control-label  ", @Style = "text-align: left"})
+                @Html.LabelFor(model => model.IdTipoPS, "Tipo de PS", htmlAttributes: new {@class = "control-label", @Style = "text-align: left"})
             </div>
             <div class="col-md-4">
                 @Html.DropDownList("IdTipoPS", null, "Seleccione un Tipo de PS...", htmlAttributes: new {@class = "form-control input-sm", @Style = "width: 200px" })
@@ -148,7 +148,7 @@
         <div class="form-group">
             <div class="col-md-2"></div>
             <div class="col-md-4">
-                @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new {@class = "control-label"})
             </div>
             <div class="col-md-4">
                 <select class="js-example-basic-single form-control input-sm" id="IdAlumno" name="IdAlumno" style="font: small-caption; width: 200px; background-color: beige; padding-top: 30px">
@@ -167,7 +167,7 @@
             <div class="col-md-2"></div>
 
             <div class="col-md-4">
-                @Html.LabelFor(model => model.Estado, htmlAttributes: new {@class = "control-label ", @Style = "text-align: left"})
+                @Html.LabelFor(model => model.Estado, htmlAttributes: new {@class = "control-label", @Style = "text-align: left"})
             </div>
             <div class="col-md-4">
                 @Html.EnumDropDownListFor(model => model.Estado, htmlAttributes: new {@class = "form-control input-sm", @Style = "width: 200px" })
@@ -179,7 +179,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-5 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-default"/>
+                <input type="submit" value="Guardar cambios" class="btn btn-success"/>
             </div>
         </div>
     </div>

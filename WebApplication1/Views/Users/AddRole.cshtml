@@ -20,7 +20,7 @@
                 @Html.ValidationMessageFor(model => model.Role.RoleID, "", new {@class = "text-danger"})
             </div>
         </div>
-        @Html.ActionLink("Volver", "Roles", new { userID = Model.UserID }, new { @class = "btn btn-info" })
+        @Html.ActionLink("Volver", "Roles", new { userID = Model.UserID }, new { @class = "btn btn-default" })
         <input type="submit" value="Agregar permiso" class="btn btn-success" />
     </div>
 }

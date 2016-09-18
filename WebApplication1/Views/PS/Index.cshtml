@@ -4,12 +4,14 @@
 @{
     ViewBag.Title = "PSs";
 }
-
-<h2 class="text-center ">Lista de PS's</h2>
-
+<div class="panel panel-primary">
+    <h2 class="text-center ">Lista de Prácticas</h2>
+</div>
+<br/>
+<br/>
 <p>
     <div class="text-left">
-        <a class="btn btn-success text-center btn-sm"   href="@Url.Action("Create", "PS")">
+        <a class="btn btn-success text-center"   href="@Url.Action("Create", "PS")">
             Nueva PS
         </a>
     </div>
@@ -69,59 +71,49 @@
 
 
 
-                    @*<div class="btn-group">
-                        <a href="#" class="btn btn-primary btn-sm">+Plan</a>
-                        <a href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                        <ul class="dropdown-menu" onclick="event.stopPropagation()">
-                            <li>
-                                @if (item.Estado == Estado.Plan_Pendiente || item.Estado == Estado.Plan_Desaprobado)
-                                {@Html.ActionLink("Nuevo Plan", "Create", "PresentacionPlanes", new {id = item.IdPS}, null)
-                                }else{<a href="#" style="color: grey">Nuevo Plan</a>}
-                            </li>
-                            <li class="divider"></li>
-                                <li><a href="#">Mugre 2</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Mugre 3</a></li>
-                           
-                        </ul>
-</div>*@
-                    @*<div class="btn-group">
-                        <a href="#" class="btn btn-primary btn-sm">+Informe</a>
-                        <a href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                @if (item.Estado == Estado.Plan_Aprobado || item.Estado == Estado.Informe_Desaprobado)
-                                {@Html.ActionLink("Nuevo Informe", "Create", "PresentacionInformes", new {id = item.IdPS},null)
-                                }else{<a href="#" style="color: grey">Nuevo Informe</a>}
-                            </li>
-                            <li class="divider"></li>
-                        <li><a href="#">Mugre 2</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Mugre 3</a></li>
-                    </ul>
-                </div>*@
+                  
 
 
                     @if (item.Estado == Estado.Plan_Pendiente || item.Estado == Estado.Plan_Desaprobado)
-            {@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
-                else{@Html.ActionLink("+Plan", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                    {@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+                    else
+                    {@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
                     }
 
                     @if (item.Estado == Estado.Plan_Aprobado || item.Estado == Estado.Informe_Desaprobado)
-                {@Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+                {@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
                     else
-                    {@Html.ActionLink("+Informe", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+                    {@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
 
-
-
-
+                        
+                                    
                     @Html.ActionLink("Detalles", "Details", new {id = item.IdPS}, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" }) 
-                    @Html.ActionLink("Eliminar", "Delete", new {id = item.IdPS}, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                    @Html.ActionLink("Eliminar", "Delete", new {id = item.IdPS}, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<div class="modal fade" id="myModal1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 
 @section scripts
 {
@@ -139,9 +131,30 @@
 
 
         });
+
+
+        $(document).ready(function () {
+            $("body").on("click", "a.dialog-window1", null, function (e) {
+                e.preventDefault();
+
+                var $link = $(this); // Reference to <a/> link
+                var title = $link.text(); //this is title to fetch in htnl
+                $('#myModal1.modal-title').html(title);
+
+                var url = $(this).attr('href');
+                if (url.indexOf('#') == 0) {
+                    $('#myModal1').modal('show');
+                }
+                else {
+                    $.get(url, function (data) {
+                        $('#myModal1 .te').html(data);
+                        $('#myModal1').modal();
+                    }).success(function () { $('input:text:visible:first').focus(); });
+                }
+            });
+        });
     </script>
 
-  
 
 
 }

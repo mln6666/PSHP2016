@@ -100,7 +100,8 @@
 }
 
 <div>
-    @Html.ActionLink("Volver", "Index")
+    <a href="@Url.Action("Index", "Alumnos")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    @*@Html.ActionLink("Volver", "Index")*@
 </div>
 
 @section Scripts {

@@ -64,14 +64,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Guardar" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Details", "PS")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    @*@Html.ActionLink("Back to List", "Index")*@
 </div>
 
 @section Scripts {

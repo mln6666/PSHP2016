@@ -92,7 +92,7 @@
 				@Html.DisplayFor(model => model.TipoPS.NombreTipoPS)
 			</td>
 			<td class="text-left">
-				@Html.ActionLink("Editar PS", "Edit", new {id = Model.IdPS}, new { @class = "dialog-window1 btn btn-warning btn-sm" })
+				@Html.ActionLink("Editar", "Edit", new {id = Model.IdPS}, new { @class = "dialog-window1 btn btn-warning btn-sm" })
 			</td>
 		</tr>
 	</table>
@@ -102,98 +102,12 @@
 	<div>
 		@Html.Action("Details2", "PresentacionInformes", new { idps = Model.IdPS })
 	</div>
-
-
-
-
-
-
-
-	@*<dl class="dl-horizontal">
-			<dt>
-				@Html.DisplayNameFor(model => model.Alumno.NombreAlu)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => model.Alumno.NombreAlu)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => model.Area.NombreArea)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => model.Area.NombreArea)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => model.NroDisposicion)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => model.NroDisposicion)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => model.Tutor)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => model.Tutor)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => model.TituloProyecto)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => model.TituloProyecto)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => model.CicloLectivo)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => model.CicloLectivo)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => model.Cuatrimestre)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => model.Cuatrimestre)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => model.IdTipoPS)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => model.IdTipoPS)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => model.Estado)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => model.Estado)
-			</dd>
-
-		</dl>*@
+    
+	
 </div>
 <p>
-	@Html.ActionLink("Volver", "Index",null,new {@class="btn btn-default btn-sm"})
+    <a href="@Url.Action("Index", "PS")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+	@*@Html.ActionLink("Volver", "Index",null,new {@class="btn btn-default btn-sm"})*@
 </p>
 <div class="modal fade" id="myModal1" role="dialog"
 	 aria-labelledby="myModalLabel" aria-hidden="true">
@@ -206,14 +120,11 @@
 			<div class="modal-body">
 				<div class="te">Espere...</div>
 			</div>
-			@*<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
-			@*<button type="submit" class="btn btn-primary">Save changes</button>*@
-			@*</div>*@
+			
 		</div>
-		<!-- /.modal-content -->
+		
 	</div>
-	<!-- /.modal-dialog -->
+	
 </div>
 
 

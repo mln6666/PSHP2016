@@ -106,7 +106,7 @@ namespace WebApplication1.Controllers
             {
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "PS", new { id = pS.IdPS });
             }
             ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);

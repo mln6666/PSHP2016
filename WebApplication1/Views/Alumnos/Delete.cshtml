@@ -7,10 +7,10 @@
 <h1>Eliminar alumno</h1>
 
 <h3>¿Está seguro que desea eliminar el siguiente alumno?</h3>
-<div>
-    <hr/>
-    <table class="table table-striped table-bordered ">
-        <tr class="text-center" style="color: #2c3e50; background-color: lightblue ">
+<div id="cerrar">
+    
+    <table class="table table-striped table-bordered table-condensed ">
+        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
             <th class="text-left" style="border-radius: 5px">
                 @Html.DisplayNameFor(model => model.Legajo)
             </th>
@@ -25,23 +25,23 @@
             </th>
             @*<th style="background-color: whitesmoke"></th>*@
         </tr>
-        
-            <tr>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.Legajo)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.NombreAlu)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.ApellidoAlu)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(model => model.CorreoAlu)
-                </td>
-                
-            </tr>
-        
+
+        <tr>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.Legajo)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.NombreAlu)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.ApellidoAlu)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.CorreoAlu)
+            </td>
+
+        </tr>
+
 
     </table>
 
@@ -50,49 +50,12 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" /> |
-            @Html.ActionLink("Volver", "Index")
+            <a href="@Url.Action("Index", "Alumnos")" class="btn btn-default">Cancelar</a>
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            
         </div>
     }
 
 
 
-
-
-    @*<dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Legajo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Legajo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NombreAlu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NombreAlu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ApellidoAlu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ApellidoAlu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CorreoAlu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CorreoAlu)
-        </dd>
-
-    </dl>*@
-
-   
 </div>
