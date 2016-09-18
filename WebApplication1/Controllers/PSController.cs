@@ -18,10 +18,24 @@ namespace WebApplication1.Controllers
         // GET: PS
         public ActionResult Index()
         {
-            
-            var pSs = db.PSs.Include(p => p.Alumno).Include(p => p.Area).Include(p => p.Organizacion).Include(p => p.TipoPS).Include(p => p.PresentacionesPlanes).Include(p => p.PresentacionesInforme);
+            var pSs = new List<PS>();
+            pSs = db.PSs.ToList();
+            for (int i = 0; i < pSs.Count(); i++)
+            {
+                if (pSs[i].Estado == Estado.PS_Aprobada)
+                {
+                    pSs.RemoveAt(i);
+                }
+            }                      
 
-            return View(pSs.ToList());
+            return View(pSs);
+        }
+
+        public ActionResult HistorialPS()
+        {            
+            var pSs = db.PSs.ToList();
+            
+            return View(pSs);
         }
 
         // GET: PS/Details/5

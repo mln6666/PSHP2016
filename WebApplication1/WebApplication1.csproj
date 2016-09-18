@@ -659,6 +659,7 @@
     <Content Include="Views\PresentacionInformes\EvaluarInforme.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Error\_ErrorPage.cshtml" />
+    <Content Include="Views\PS\HistorialPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
