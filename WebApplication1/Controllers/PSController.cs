@@ -63,7 +63,7 @@ namespace WebApplication1.Controllers
             PS ps;
             foreach (var item in db.Alumnos)
             {
-                if (item.PSs.Count() > 0 )
+                if (item.PSs.Count() > 0)
                 {
                     idmax = item.PSs.Max(p => p.IdPS);
                     ps = db.PSs.Find(idmax);
@@ -72,14 +72,18 @@ namespace WebApplication1.Controllers
                     {
                         alumnos.Add(item);
                     }
-                }else
+                } else
                 {
                     alumnos.Add(item);
                 }
             }
-
-
-            ViewBag.alumnos = alumnos;
+            var band = false;
+            if (alumnos.Count() == 0)
+            {
+                band = true;
+            }
+            ViewBag.band = band;
+            ViewBag.alumnos = alumnos;                       
             ViewBag.areas = db.Areas.ToList();
             ViewBag.organizaciones = db.Organizaciones.ToList();
             ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");
