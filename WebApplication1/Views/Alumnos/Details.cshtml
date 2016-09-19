@@ -1,13 +1,12 @@
 ﻿@model WebApplication1.Models.Alumno
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle";
 }
 
-<h2>Details</h2>
+<h2 class="text-center">Detalles de Alumno</h2>
 
 <div>
-    <h4>Alumno</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -33,7 +32,35 @@
         <dd>
             @Html.DisplayFor(model => model.ApellidoAlu)
         </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AñoIngreso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AñoIngreso)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.movil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.movil)
+        </dd>*@
+        @*/hata aqui//*@
         <dt>
             @Html.DisplayNameFor(model => model.CorreoAlu)
         </dt>
@@ -45,6 +72,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdAlumno }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdAlumno })
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <a href="@Url.Action("Index", "Alumnos")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
 </p>

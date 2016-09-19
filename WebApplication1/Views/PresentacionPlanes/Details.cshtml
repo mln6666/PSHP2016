@@ -43,7 +43,7 @@
 				@Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
 				@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
 			@*@Html.ActionLink("Ver Historial Planes...", "HistorialPlanes", new { id = Model.IdPS })*@
-			@Html.ActionLink("Historial Planes", "HistorialPlanes", new { id = Model.IdPS }, new { @class = "dialog-window2 btn btn-warning btn-sm" })
+			@Html.ActionLink("Historial Planes", "HistorialPlanes", new { id = Model.IdPS }, new { @class = "dialog-window2 btn btn-primary btn-sm" })
 
 			@*@Ajax.ActionLink("Ver Historial Planes", "HistorialPlanes", new {id = Model.IdPS}, new AjaxOptions
 			{
@@ -53,8 +53,8 @@
 			}
 				)*@
 		</td>
-		<td class="text-left">@Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-warning btn-sm" })</td>
-		<td class="text-left">@Html.ActionLink("Editar Plan", "Edit", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-warning btn-sm" })</td>
+		<td class="text-left">@Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm" })</td>
+		<td class="text-left">@Html.ActionLink("Editar Plan", "Edit", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-primary btn-sm" })</td>
 </tr>
 
 </table>

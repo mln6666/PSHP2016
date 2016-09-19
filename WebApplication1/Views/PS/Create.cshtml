@@ -130,8 +130,14 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">                                
-                <input type="submit" value="Guardar" class= "btn btn-success"  />
+            <div class="col-md-offset-2 col-md-10">
+                @if (ViewBag.band)
+                {<input value="Guardar" class="btn btn-success btn-md disabled" style="padding-left:initial;padding-right:initial"/> }
+                else
+                { <input type="submit" value="Guardar" class="btn btn-success" />}
+
+
+                
             </div>
         </div>
     </div>

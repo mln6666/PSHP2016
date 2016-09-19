@@ -4,23 +4,25 @@
 @{
     ViewBag.Title = "PSs";
 }
-<br />
-<div class="panel panel-primary" style="background-color:initial" >
-    <h2 class="text-center ">Lista de Prácticas</h2>
+<div >
+    <h1 class="text-center ">Lista de prácticas</h1>
+    <hr style="color:grey;border-color:grey"/>
 </div>
 <br />
 
 <p>
-    <div class="text-left">
-        <a class="btn btn-success text-center"   href="@Url.Action("Create", "PS")">
-            Nueva PS
-        </a>
+    <div class="row">
+       
+        <div class="col-lg-6">
+            @Html.ActionLink("Nueva PS", "Create", "PS", null, new { @class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+        </div>
+        
+        <div class="col-lg-6 text-right">
+            @Html.ActionLink("Historial", "HistorialPS","PS", null, new { @class = "btn btn-default btn-md text-right", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+
+        </div>
     </div>
-    <div class="text-right">
-        <a class="btn btn-default text-center" href="@Url.Action("HistorialPS", "PS")">
-            Historial
-        </a>
-    </div>
+   
 </p>
 <table id="mitabla" class="table table-striped table-bordered">
     <thead>
@@ -105,7 +107,7 @@
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title"></h4>
             </div>
