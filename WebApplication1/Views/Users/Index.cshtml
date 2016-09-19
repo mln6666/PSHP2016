@@ -19,7 +19,7 @@
             <th class="text-left" style="border-radius: 3px">
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th class="text-left" style="border-radius: 3px">
+            <th class="text-center" style="border-radius: 3px">
                 Acciones
             </th>
 
@@ -38,8 +38,9 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
 
-                <td>
-                    @Html.ActionLink("Permisos", "Roles", new { userID = item.UserID }) |
+                <td class="text-center">
+                    <a href="@Url.Action("Roles", "Users")" class="btn btn-primary btn-sm">Ver Permisos</a>
+                    @*@Html.ActionLink("Permisos", "Roles", new { userID = item.UserID }) |*@
                 </td>
             </tr>
         }

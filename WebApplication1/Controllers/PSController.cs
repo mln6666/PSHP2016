@@ -57,7 +57,29 @@ namespace WebApplication1.Controllers
         // GET: PS/Create
         public ActionResult Create()
         {
-            ViewBag.alumnos = db.Alumnos.ToList();
+            List<Alumno> alumnos = new List<Alumno>();
+            var pSs = db.PSs.ToList();
+            var idmax = 7;
+            PS ps;
+            foreach (var item in db.Alumnos)
+            {
+                if (item.PSs.Count() > 0 )
+                {
+                    idmax = item.PSs.Max(p => p.IdPS);
+                    ps = db.PSs.Find(idmax);
+
+                    if (ps.Estado == Estado.Plan_Rechazado | ps.Estado == Estado.PS_Cancelada | ps.Estado == Estado.PS_Vencida)
+                    {
+                        alumnos.Add(item);
+                    }
+                }else
+                {
+                    alumnos.Add(item);
+                }
+            }
+
+
+            ViewBag.alumnos = alumnos;
             ViewBag.areas = db.Areas.ToList();
             ViewBag.organizaciones = db.Organizaciones.ToList();
             ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");
