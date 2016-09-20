@@ -11,11 +11,14 @@ namespace WebApplication1.Models
         [Key]
         public int IdAlumno { get; set; }
 
+        [Required]
         public int Legajo { get; set; }
 
+        [Required]
         [Display(Name ="Nombre")]
         public string NombreAlu { get; set; }
 
+        [Required]
         [Display(Name = "Apellido")]
         public string ApellidoAlu { get; set; }
 

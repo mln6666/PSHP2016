@@ -10,7 +10,7 @@ namespace WebApplication1.Models
     {
         [Key]
         public int IdPresentacionInforme { get; set; }
-
+                
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
         public DateTime FechaPresentacionInforme { get; set; }

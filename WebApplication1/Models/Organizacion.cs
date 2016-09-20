@@ -11,6 +11,7 @@ namespace WebApplication1.Models
         [Key]
         public int IdOrganizacion { get; set; }
 
+        [Required]
         [Display(Name = "Organización")]
         public string DenominacionOrg { get; set; }
 
@@ -19,7 +20,7 @@ namespace WebApplication1.Models
 
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Teléfono")]
-        public int TelefonoOrg { get; set; }
+        public int? TelefonoOrg { get; set; }
 
         [DataType(DataType.MultilineText)]
         [Display(Name = "Descripción")]

@@ -13,23 +13,25 @@ namespace WebApplication1.Models
 
         
         [Display(Name = "Disposición")]
-        public int NroDisposicion { get; set; }
+        public int? NroDisposicion { get; set; }
 
         public string Tutor { get; set; }
 
         [Display(Name = "Título Proyecto")]
         public string TituloProyecto { get; set; }
 
+        [Required]
         [Display(Name = "Ciclo Lectivo")]
         public int CicloLectivo { get; set; }
 
+        [Required]
         public int Cuatrimestre { get; set; }
 
-        public int IdOrganizacion { get; set; }
+        public int? IdOrganizacion { get; set; }
 
-        public int IdArea { get; set; }
+        public int? IdArea { get; set; }
 
-        public int IdTipoPS { get; set; }
+        public int? IdTipoPS { get; set; }
 
         public int IdAlumno { get; set; }
 

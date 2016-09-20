@@ -11,6 +11,7 @@ namespace WebApplication1.Models
         [Key]
         public int IdArea { get; set; }
 
+        [Required]
         [Display(Name = "Área")]
         public string NombreArea { get; set; }
 
