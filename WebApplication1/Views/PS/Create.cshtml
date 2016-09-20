@@ -104,15 +104,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IdOrganizacion, "Organización", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select class="js-example-basic-single form-control input-sm" id="IdOrganizacion" name="IdOrganizacion" style="font: small-caption; width: 280px; background-color: beige; padding-top: 30px">
-                    <option value="">Buscar organización...</option>
-                    @foreach (var item in ViewBag.organizaciones)
-                    {
-                        <option value="@item.IdOrganizacion">@item.DenominacionOrg</option>
-                    }
-                </select>
+                    <select class="js-example-basic-single form-control input-sm" id="IdOrganizacion" name="IdOrganizacion" style="font: small-caption; width: 280px; background-color: beige; padding-top: 30px">
+                        <option value="">Buscar organización...</option>
+                        @foreach (var item in ViewBag.organizaciones)
+                        {
+                            <option value="@item.IdOrganizacion">@item.DenominacionOrg</option>
+                        }
+                    </select>
+                </div>
             </div>
-        </div>
+           
 
         <div class="form-group">
             @Html.LabelFor(model => model.Estado, htmlAttributes: new {@class = "control-label col-md-2" })
@@ -147,14 +148,53 @@
     <a href="@Url.Action("Index", "PS")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
     @*@Html.ActionLink("Volver", "Index")*@
 </div>
+<div class="modal fade" id="myModal1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
 
+        </div>
+
+    </div>
+
+</div>
 
 <link href="@Url.Content("~/Content/Select2/select2.min.css")" rel="stylesheet" />
 @section Scripts{
 <script src="@Url.Content("~/Content/Select2/select2.min.js")"></script>
 <script>
     /////////////////Start:Select searchable////////////////
-    $(document).ready(function() { $(".js-example-basic-single").select2(); });
+    $(document).ready(function() {
+        $(".js-example-basic-single").select2(); 
+        
+        $("body").on("click", "a.dialog-window", null, function (e) {
+            e.preventDefault();
+
+            var $link = $(this); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            $('#myModal1 .modal-title').html(title);
+
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#myModal1').modal('show');
+            }
+            else {
+                $.get(url, function (data) {
+                    $('#myModal1 .te').html(data);
+                    $('#myModal1').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        });
+
+
+    });
     ////////////////End:Select searchable///////////////////
 </script>
 }

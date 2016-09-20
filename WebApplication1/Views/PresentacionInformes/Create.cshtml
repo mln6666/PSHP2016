@@ -1,11 +1,10 @@
 ﻿@model WebApplication1.Models.PresentacionInforme
-
+@{
+    Layout = null;
+}
 @{
     ViewBag.Title = "Create";
 }
-
-<h2>Nueva Presentación de Informe</h2>
-
 
 @using (Html.BeginForm())
 {    @Html.HiddenFor(model => model.IdPS)
@@ -13,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">        
-        <hr />
+       
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.FechaPresentacionInforme, "Fecha de Presentación",htmlAttributes: new { @class = "control-label col-md-2" })
@@ -60,10 +59,6 @@
     </div>
 }
 
-<div>
-    <a href="@Url.Action("Index", "PS")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
-    @*@Html.ActionLink("Volver", "Index", "PS")*@
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
