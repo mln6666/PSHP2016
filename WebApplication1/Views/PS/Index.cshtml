@@ -5,7 +5,7 @@
     ViewBag.Title = "PSs";
 }
 <div >
-    <h1 class="text-center ">Lista de prácticas</h1>
+    <h1 class="text-center ">Lista de Prácticas Supervisadas en curso</h1>
     <hr style="color:grey;border-color:grey"/>
 </div>
 <br />
@@ -83,13 +83,13 @@
 
 
                     @if (item.Estado == Estado.Plan_Pendiente || item.Estado == Estado.Plan_Desaprobado)
-                    {@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+                    {@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "dialog-window2 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
                     else
                     {@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
                     }
 
                     @if (item.Estado == Estado.Plan_Aprobado || item.Estado == Estado.Informe_Desaprobado)
-                {@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+                {@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "dialog-window3 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
                     else
                     {@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
 
@@ -110,6 +110,44 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4>¿Está seguro de eliminar permanentemente esta PS?</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="myModal2" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4>Agregar Plan</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="myModal3" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4>Agregar Informe</h4>
 
             </div>
             <div class="modal-body">
@@ -158,6 +196,48 @@
                     $.get(url, function (data) {
                         $('#myModal1 .te').html(data);
                         $('#myModal1').modal();
+                    }).success(function () { $('input:text:visible:first').focus(); });
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $("body").on("click", "a.dialog-window2", null, function (e) {
+                e.preventDefault();
+
+                var $link = $(this); // Reference to <a/> link
+                var title = $link.text(); //this is title to fetch in htnl
+                $('#myModal2.modal-title').html(title);
+
+                var url = $(this).attr('href');
+                if (url.indexOf('#') == 0) {
+                    $('#myModal2').modal('show');
+                }
+                else {
+                    $.get(url, function (data) {
+                        $('#myModal2 .te').html(data);
+                        $('#myModal2').modal();
+                    }).success(function () { $('input:text:visible:first').focus(); });
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $("body").on("click", "a.dialog-window3", null, function (e) {
+                e.preventDefault();
+
+                var $link = $(this); // Reference to <a/> link
+                var title = $link.text(); //this is title to fetch in htnl
+                $('#myModal3.modal-title').html(title);
+
+                var url = $(this).attr('href');
+                if (url.indexOf('#') == 0) {
+                    $('#myModal3').modal('show');
+                }
+                else {
+                    $.get(url, function (data) {
+                        $('#myModal3 .te').html(data);
+                        $('#myModal3').modal();
                     }).success(function () { $('input:text:visible:first').focus(); });
                 }
             });
