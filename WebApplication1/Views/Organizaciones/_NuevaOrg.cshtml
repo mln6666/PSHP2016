@@ -1,0 +1,35 @@
+﻿@using WebApplication1.Models
+@model WebApplication1.Models.PS
+
+
+@{
+    Layout = null;
+}
+<script>
+    /////////////////Start:Select searchable////////////////
+    $(document).ready(function() {
+        $(".js-example-basic-single").select2();
+
+
+    });
+    ////////////////End:Select searchable///////////////////
+</script>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.IdOrganizacion, "Organización", htmlAttributes: new {@class = "control-label col-md-2"})
+    <div class="col-md-10">
+        <select class="js-example-basic-single form-control input-sm" id="IdOrganizacion" name="IdOrganizacion" style="font: small-caption; width: 280px; background-color: beige; padding-top: 30px; display: inline-block">
+            <option value="@ViewBag.idultima">@ViewBag.denominacionultima</option>
+            @foreach (var item in ViewBag.organizaciones)
+            {
+                <option value="@item.IdOrganizacion">@item.DenominacionOrg</option>
+            }
+        </select>
+        <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal" style="padding-right: 8px; padding-left: 8px;">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+    </div>
+
+</div>
+
+

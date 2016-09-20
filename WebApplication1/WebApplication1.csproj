@@ -647,6 +647,7 @@
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Error\_ErrorPage.cshtml" />
     <Content Include="Views\PS\HistorialPS.cshtml" />
+    <Content Include="Views\Organizaciones\_NuevaOrg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

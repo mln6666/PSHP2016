@@ -36,7 +36,50 @@ namespace WebApplication1.Controllers
             return View(organizacion);
         }
 
-        // GET: Organizaciones/Create
+        public ActionResult _NuevaOrg(int? prueba)
+        {
+            var lista = db.Organizaciones.ToList();
+            Organizacion ultima = lista.LastOrDefault();
+            ViewBag.organizaciones = lista;
+            ViewBag.error = "mal cargado";
+            ViewBag.idultima = "";
+            ViewBag.denominacionultima = "Buscar organización...";
+           
+
+            if (prueba == 1){
+                ViewBag.error = "";
+                ViewBag.idultima = ultima.IdOrganizacion;
+                ViewBag.denominacionultima = ultima.DenominacionOrg;
+            }
+
+            return View();
+        }
+
+       
+
+        // POST: Organizaciones/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create1([Bind(Include = "IdOrganizacion,DenominacionOrg,DireccionOrg,TelefonoOrg,DescripcionOrg")] Organizacion organizacion)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                db.Organizaciones.Add(organizacion);
+                db.SaveChanges();
+
+                
+                return RedirectToAction("_NuevaOrg" ,new { prueba = 1 });
+            }
+
+            return RedirectToAction("_NuevaOrg");
+           
+
+
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -53,11 +96,13 @@ namespace WebApplication1.Controllers
             {
                 db.Organizaciones.Add(organizacion);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
             return View(organizacion);
         }
+
 
         // GET: Organizaciones/Edit/5
         public ActionResult Edit(int? id)
