@@ -41,17 +41,18 @@ namespace WebApplication1.Controllers
             var lista = db.Organizaciones.ToList();
             Organizacion ultima = lista.LastOrDefault();
             ViewBag.organizaciones = lista;
-            ViewBag.error = "mal cargado";
-            ViewBag.idultima = "";
-            ViewBag.denominacionultima = "Buscar organización...";
-           
 
-            if (prueba == 1){
-                ViewBag.error = "";
-                ViewBag.idultima = ultima.IdOrganizacion;
-                ViewBag.denominacionultima = ultima.DenominacionOrg;
+            if (prueba == null) { 
+            ViewBag.idultima = ultima.IdOrganizacion;
+            ViewBag.denominacionultima = ultima.DenominacionOrg;
             }
-
+            if (prueba != null)
+            {
+                ViewBag.organizacionexistente = "La organización ya se encontraba en la BD.";
+                Organizacion datosOrganizacion = db.Organizaciones.Find(prueba);
+                ViewBag.idultima = datosOrganizacion.IdOrganizacion;
+                ViewBag.denominacionultima = datosOrganizacion.DenominacionOrg;
+            }
             return View();
         }
 
@@ -67,16 +68,30 @@ namespace WebApplication1.Controllers
             
             if (ModelState.IsValid)
             {
-                db.Organizaciones.Add(organizacion);
-                db.SaveChanges();
 
+                IEnumerable<int> query = (from c in db.Organizaciones
+                                          where c.DenominacionOrg == organizacion.DenominacionOrg
+                                          select c.IdOrganizacion);
+
+                if (query.Count() == 0)
+                {
+                    db.Organizaciones.Add(organizacion);
+                    db.SaveChanges();
+
+                    return RedirectToAction("_NuevaOrg");
+                    
+                }
+                if (query.Count()!=0)
+                {
+                    int prueba = query.ElementAt(query.Count() - 1);
+                   
+                    return RedirectToAction("_NuevaOrg", new { prueba=prueba});
+                }
+               
                 
-                return RedirectToAction("_NuevaOrg" ,new { prueba = 1 });
             }
 
             return RedirectToAction("_NuevaOrg");
-           
-
 
         }
 

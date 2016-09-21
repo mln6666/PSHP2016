@@ -106,10 +106,43 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("Details", "PS", new { id = pS.IdPS });
             }
 
-            ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
-            ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
-            ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
-            ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
+            ////empieza copypasteada 
+            List<Alumno> alumnos = new List<Alumno>();
+            var pSs = db.PSs.ToList();
+            var idmax = 7;
+            PS ps1;
+            foreach (var item in db.Alumnos)
+            {
+                if (item.PSs.Count() > 0)
+                {
+                    idmax = item.PSs.Max(p => p.IdPS);
+                    ps1 = db.PSs.Find(idmax);
+
+                    if (ps1.Estado == Estado.Plan_Rechazado | ps1.Estado == Estado.PS_Cancelada | ps1.Estado == Estado.PS_Vencida)
+                    {
+                        alumnos.Add(item);
+                    }
+                }
+                else
+                {
+                    alumnos.Add(item);
+                }
+            }
+            var band = false;
+            if (alumnos.Count() == 0)
+            {
+                band = true;
+            }
+            ViewBag.band = band;
+            ViewBag.alumnos = alumnos;
+            ViewBag.areas = db.Areas.ToList();
+            ViewBag.organizaciones = db.Organizaciones.ToList();
+            ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");
+            ////termina copypasteada
+            //ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
+            //ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
+            //ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
+            //ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
 
             return View(pS);
         }

@@ -14,7 +14,7 @@
 </head>
 <h2>Agregar PS</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","PS",null, FormMethod.Post, new { id = "agregarps" }))
 {
     @Html.AntiForgeryToken()
 
@@ -183,36 +183,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Organizacion.DireccionOrg, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Organizacion.DireccionOrg, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Organizacion.DireccionOrg, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Organizacion.TelefonoOrg, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Organizacion.TelefonoOrg, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Organizacion.TelefonoOrg, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Organizacion.DescripcionOrg, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Organizacion.DescripcionOrg, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Organizacion.DescripcionOrg, "", new { @class = "text-danger" })
-                        </div>
-
-                    </div>
+                  
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                             <input type="submit" value="Guardar" class="btn btn-success">
-                            <input type="reset" value="reset" />
+                            <input type="reset" value="Vaciar" />
 
                         </div>
                     </div>
@@ -237,13 +214,27 @@
     });
     ////////////////End:Select searchable///////////////////
     function OnSuccess() {
-     
-        alert("Operacion completada");
         $("#myModal .close").click();
-        $('.modal-backdrop').remove();
-            
-        }
-    
+        
+        //alert("Operacion completada");
+        bootbox.alert("Operación correcta.", function () {
+            $('.modal-backdrop').remove();
+        });
+
+
+    }
+
+    $('#agregarps').submit(function (e) {
+        var permiso = this;
+        e.preventDefault();
+        //var x=document.getElementById("RoleID").innerText;
+        bootbox.confirm("¿ Está seguro que desea agregar una nueva PS ?", function (result) {
+            if (result) {
+                permiso.submit();
+            }
+        });
+    });
+   
 
 </script>
 }
