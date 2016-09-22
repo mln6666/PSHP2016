@@ -7,6 +7,7 @@
 <h2 class="text-center">Detalles Generales</h2>
 <hr style="color:grey;border-color:grey" />
 
+<h4>@ViewBag.ErrorAprobarPS</h4>
 <div>
 
 	<table class="table table-striped table-bordered ">
@@ -105,9 +106,25 @@
                 {@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
                 @Html.ActionLink("Editar", "Edit", new { id = Model.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm" })
 
+                                
+                <div class="btn-group">
+                    <a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                        Acciones
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Cancelar PS", "CancelarPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window7" })</li>
+                            @if (Model.Estado == WebApplication1.Models.Estado.Informe_Aprobado)
+                            {
+                                <li>@Html.ActionLink("Aprobar PS", "AprobarPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window8" })</li>
+                            }
+                            else
+                            {
+                                <li><a href="#" style="color: grey">Aprobar PS</a></li>
+                            }
 
-
-
+                    </ul>
+                </div>
 
 
             </td>
@@ -180,6 +197,44 @@
 
 </div>
 
+<div class="modal fade" id="myModal7" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>¿Está seguro de Cancelar la PS?</h3>
+            </div>
+            <div class="modal-body">
+                <h5 class="text-danger">Al cancelar esta PS no se podrán volver a realizar cambios sobre ella</h5>
+                <div class="te">Espere...</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="myModal8" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>¿Está seguro de aprobar la PS?</h3>
+            </div>
+            <div class="modal-body">
+                <h5 class="text-danger">Al aprobar esta PS no se podrán volver a realizar cambios sobre ella</h5>
+                <div class="te">Espere...</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 <script>
 	$(document).ready(function () {
 		$("body").on("click", "a.dialog-window1", null, function (e){
@@ -241,5 +296,45 @@
 	        }).success(function () { $('input:text:visible:first').focus(); });
 	    }
 	});
+
+	
+	    $("body").on("click", "a.dialog-window7", null, function (e){
+	        e.preventDefault();
+
+	        var $link = $(this); // Reference to <a/> link
+	        var title = $link.text(); //this is title to fetch in htnl
+	        $('#myModal7.modal-title').html(title);
+
+	        var url = $(this).attr('href');
+	        if (url.indexOf('#') == 0) {
+	            $('#myModal7').modal('show');
+	        }
+	        else
+	        {
+	            $.get(url, function (data) {
+	                $('#myModal7 .te').html(data);
+	                $('#myModal7').modal();
+	            }).success(function () { $('input:text:visible:first').focus(); });
+	        }
+	    });
+
+	    $("body").on("click", "a.dialog-window8", null, function (e) {
+	        e.preventDefault();
+
+	        var $link = $(this); // Reference to <a/> link
+	        var title = $link.text(); //this is title to fetch in htnl
+	        $('#myModal8.modal-title').html(title);
+
+	        var url = $(this).attr('href');
+	        if (url.indexOf('#') == 0) {
+	            $('#myModal8').modal('show');
+	        }
+	        else {
+	            $.get(url, function (data) {
+	                $('#myModal8 .te').html(data);
+	                $('#myModal8').modal();
+	            }).success(function () { $('input:text:visible:first').focus(); });
+	        }
+	    });
 	});
 </script>

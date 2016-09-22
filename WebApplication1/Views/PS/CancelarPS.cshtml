@@ -1,0 +1,17 @@
+﻿@model WebApplication1.Models.PS
+
+@{
+
+    Layout = null;
+}
+
+<p>
+    @using (Html.BeginForm())
+{
+    <br />
+    <div class="form-actions no-color">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <input type="submit" value="Confirmar Cancelación" class="btn btn-danger" />
+    </div>
+}
+</p>

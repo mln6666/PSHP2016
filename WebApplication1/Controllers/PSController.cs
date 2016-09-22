@@ -18,15 +18,10 @@ namespace WebApplication1.Controllers
         // GET: PS
         public ActionResult Index()
         {
-            var pSs = new List<PS>();
-            pSs = db.PSs.ToList();
-            for (int i = 0; i < pSs.Count(); i++)
-            {
-                if (pSs[i].Estado == Estado.PS_Aprobada)
-                {
-                    pSs.RemoveAt(i);
-                }
-            }                      
+
+            var pSs = ( from p in db.PSs
+                        where p.Estado != Estado.PS_Aprobada & p.Estado != Estado.PS_Cancelada & p.Estado != Estado.PS_Vencida & p.Estado != Estado.Plan_Rechazado
+                        select p);                                
 
             return View(pSs);
         }
@@ -166,6 +161,7 @@ namespace WebApplication1.Controllers
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
             ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
             ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
+
             return View(pS);
         }
 
@@ -187,6 +183,79 @@ namespace WebApplication1.Controllers
             ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
             ViewBag.IdOrganizacion = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
             return View(pS);
+        }
+
+        //GET
+        public ActionResult CancelarPS(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PS ps = db.PSs.Find(id);
+            if (ps == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ps);
+        }
+
+        [HttpPost, ActionName("CancelarPS")]
+        public ActionResult CancelarPSConfirmed(int? id)
+        {
+            PS ps = db.PSs.Find(id);
+                        
+              if (ModelState.IsValid)
+              {
+                  ps.Estado = Estado.PS_Cancelada;
+                  db.Entry(ps).State = EntityState.Modified;
+                  db.SaveChanges();
+              }
+              else
+              {
+                  ViewBag.Error = "Error: Los datos de la PS no son válidos";
+              }
+                          
+            return RedirectToAction("Details", "PS", new { id = ps.IdPS });
+        }
+
+        //GET
+        public ActionResult AprobarPS(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PS ps = db.PSs.Find(id);
+            if (ps == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ps);
+        }
+
+        [HttpPost, ActionName("AprobarPS")]
+        public ActionResult AprobarPSConfirmed( int? id)
+        {
+            PS ps = db.PSs.Find(id);
+            
+            if (ps.Estado == Estado.Informe_Aprobado)
+            {
+                if (ModelState.IsValid)
+                {
+                    ps.Estado = Estado.PS_Aprobada;
+                    db.Entry(ps).State = EntityState.Modified;
+                    db.SaveChanges();
+                }else
+                {
+                    ViewBag.Error = "Error: Los datos de la PS no son válidos";
+                }
+
+            }else
+            {
+                ViewBag.ErrorAprobarPS = "Error: La PS seleccionada no se encuentra habilitada para ser Aprobada";
+            }
+            return RedirectToAction("Details", "PS", new { id = ps.IdPS });
         }
 
         // GET: PS/Delete/5
