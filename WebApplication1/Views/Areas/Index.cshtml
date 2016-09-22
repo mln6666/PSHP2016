@@ -41,7 +41,7 @@
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.IdArea }, new { @class = "btn btn-primary btn-sm" }) 
                     @*@Html.ActionLink("Details", "Details", new { id=item.IdArea }) |*@
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdArea }, new { @class = "dialog-window1 btn btn-primary btn-sm" })
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdArea }, new { @class = "btn btn-primary btn-sm" })
                 </td>
             </tr>
         }
@@ -72,25 +72,6 @@
             $("#mitabla").DataTable({
                 "language": {
                     "url": "/Scripts/DataTables/spanish.json"
-                }
-            });
-
-            $("body").on("click", "a.dialog-window1", null, function (e) {
-                e.preventDefault();
-
-                var $link = $(this); // Reference to <a/> link
-                var title = $link.text(); //this is title to fetch in htnl
-                $('#myModal1 .modal-title').html(title);
-
-                var url = $(this).attr('href');
-                if (url.indexOf('#') == 0) {
-                    $('#myModal1').modal('show');
-                }
-                else {
-                    $.get(url, function (data) {
-                        $('#myModal1 .te').html(data);
-                        $('#myModal1').modal();
-                    }).success(function () { $('input:text:visible:first').focus(); });
                 }
             });
     });

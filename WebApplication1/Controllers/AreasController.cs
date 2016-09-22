@@ -111,6 +111,13 @@ namespace WebApplication1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Area area = db.Areas.Find(id);
+            
+            if (area.PSs.Count() !=0)
+            {
+                ViewBag.errorareaps = "Acción no permitida!. Área con PSs relacionadas.";
+                return View(area);
+            }
+
             db.Areas.Remove(area);
             db.SaveChanges();
             return RedirectToAction("Index");

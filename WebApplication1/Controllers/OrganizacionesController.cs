@@ -171,6 +171,14 @@ namespace WebApplication1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Organizacion organizacion = db.Organizaciones.Find(id);
+
+            if (organizacion.PSs.Count() != 0)
+            {
+                ViewBag.errororganizacionps = "Acción no permitida!. Organización con PSs relacionadas.";
+                return View(organizacion);
+            }
+
+
             db.Organizaciones.Remove(organizacion);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -1,13 +1,15 @@
 ﻿@model WebApplication1.Models.Area
 
 @{
-    Layout = null;
+    ViewBag.Title = "Delete";
 }
 
+<h2>Eliminar Área</h2>
 
+<h3>¿Está seguro de eliminar el área?</h3>
 <div>
-    
-    
+
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.NombreArea)
@@ -27,14 +29,19 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    <h2 style="color: red"><hr/>@if (ViewBag.errorareaps != null) { 
+        @ViewBag.errorareaps<hr />}</h2>
+    
+
+
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             <input type="submit" value="Eliminar" class="btn btn-danger" />
             @*@Html.ActionLink("Back to List", "Index")*@
-            
+            <a href="@Url.Action("Index", "Areas")" class="btn btn-default ">Cancelar</a>
         </div>
     }
 </div>

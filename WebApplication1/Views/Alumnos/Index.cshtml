@@ -56,7 +56,7 @@
                     <td class="text-center">
                         @Html.ActionLink("Detalles", "Details", new { id = item.IdAlumno }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
                         @Html.ActionLink("Editar", "Edit", new { id = item.IdAlumno }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdAlumno }, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdAlumno }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
                     </td>
                 </tr>
             }
@@ -91,24 +91,6 @@
                     }
                 });
             
-                $("body").on("click", "a.dialog-window1", null, function (e) {
-                    e.preventDefault();
-
-                    var $link = $(this); // Reference to <a/> link
-                    var title = $link.text(); //this is title to fetch in htnl
-                    $('#myModal1 .modal-title').html(title);
-
-                    var url = $(this).attr('href');
-                    if (url.indexOf('#') == 0) {
-                        $('#myModal1').modal('show');
-                    }
-                    else {
-                        $.get(url, function (data) {
-                            $('#myModal1 .te').html(data);
-                            $('#myModal1').modal();
-                        }).success(function () { $('input:text:visible:first').focus(); });
-                    }
-                });
             });
         </script>
     }
