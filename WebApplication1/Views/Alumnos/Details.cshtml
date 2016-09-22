@@ -4,10 +4,11 @@
     ViewBag.Title = "Detalle";
 }
 
-<h2 class="text-center">Detalles de Alumno</h2>
+<h2 class="text-center">Detalles de @Model.ApellidoAlu, @Model.NombreAlu</h2>
+
+<hr/>
 
 <div>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Legajo)
@@ -80,7 +81,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdAlumno })
-    @*@Html.ActionLink("Back to List", "Index")*@
     <a href="@Url.Action("Index", "Alumnos")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdAlumno }, new {@class = "btn btn-success"  })
+    @*@Html.ActionLink("Back to List", "Index")*@
+    
 </p>

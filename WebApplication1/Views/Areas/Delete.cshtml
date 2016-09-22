@@ -1,15 +1,13 @@
 ﻿@model WebApplication1.Models.Area
 
 @{
-    ViewBag.Title = "Delete";
+    Layout = null;
 }
 
-<h2>Eliminar Área</h2>
 
-<h3>¿Está seguro de eliminar el área?</h3>
 <div>
     
-    <hr />
+    
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.NombreArea)
@@ -33,9 +31,10 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             <input type="submit" value="Eliminar" class="btn btn-danger" />
             @*@Html.ActionLink("Back to List", "Index")*@
-            <a href="@Url.Action("Index", "Areas")" class="btn btn-default ">Cancelar</a>
+            
         </div>
     }
 </div>
