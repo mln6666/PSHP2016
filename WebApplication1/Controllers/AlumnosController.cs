@@ -112,6 +112,12 @@ namespace WebApplication1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Alumno alumno = db.Alumnos.Find(id);
+
+            if (alumno.PSs.Count() != 0)
+            {
+                ViewBag.erroralumnops = "Acción no permitida!. Alumno con PSs relacionadas.";
+                return View(alumno);
+            }
             db.Alumnos.Remove(alumno);
             db.SaveChanges();
             return RedirectToAction("Index");

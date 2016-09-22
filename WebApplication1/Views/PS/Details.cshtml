@@ -46,21 +46,53 @@
 			</td>
 
 			<td class="text-left">
-				@Html.DisplayFor(model => model.NroDisposicion)
+				@if (Model.NroDisposicion != null)
+				{
+					@Html.DisplayFor(model => model.NroDisposicion)
+				}
+				else
+				{<text>- - -</text>
+}
+
+
 			</td>
 			<td class="text-left">
-				@Html.DisplayFor(model => model.Area.NombreArea)
+				@*@Html.DisplayFor(model => model.Area.NombreArea)*@
+
+@if (Model.Area != null)
+{
+	@Html.DisplayFor(model => model.Area.NombreArea)
+}
+else
+{
+	<text>- - -</text>
+}
+
 			</td>
 			<td class="text-left">
-				@Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
+				@*@Html.DisplayFor(model => model.Organizacion.DenominacionOrg)*@
+
+				@if (Model.Organizacion != null)
+				{
+					@Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
+				}
+				else
+				{
+					<text>- - -</text>
+				}
 			</td>
 		</tr>
 		<tr class="text-center" style="color: #2c3e50; background-color: lightblue">
 			<th class="text-left" style="border-radius: 3px">
 				@Html.DisplayNameFor(model => model.Tutor)
+
+
+			  
 			</th>
 			<th class="text-left" style="border-radius: 3px">
 				@Html.DisplayNameFor(model => model.TituloProyecto)
+
+			   
 			</th>
 			<th class="text-left" style="border-radius: 3px">
 				@Html.DisplayNameFor(model => model.CicloLectivo)
@@ -70,6 +102,8 @@
 			</th>
 			<th class="text-left" style="border-radius: 3px">
 				@Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
+
+			   
 			</th>
 
 
@@ -79,10 +113,26 @@
 
 		<tr>
 			<td class="text-left">
-				@Html.DisplayFor(model => model.Tutor)
+				@*@Html.DisplayFor(model => model.Tutor)*@
+				@if (Model.Tutor != null)
+				{
+					@Html.DisplayFor(model => model.Tutor)
+				}
+				else
+				{
+					<text>- - -</text>
+				}
 			</td>
 			<td class="text-left">
-				@Html.DisplayFor(model => model.TituloProyecto)
+				@*@Html.DisplayFor(model => model.TituloProyecto)*@
+				@if (Model.TituloProyecto != null)
+				{
+					@Html.DisplayFor(model => model.TituloProyecto)
+				}
+				else
+				{
+					<text>- - -</text>
+				}
 			</td>
 			<td class="text-left">
 				@Html.DisplayFor(model => model.CicloLectivo)
@@ -91,7 +141,15 @@
 				@Html.DisplayFor(model => model.Cuatrimestre)
 			</td>
 			<td class="text-left">
-				@Html.DisplayFor(model => model.TipoPS.NombreTipoPS)
+				@*@Html.DisplayFor(model => model.TipoPS.NombreTipoPS)*@
+				@if (Model.TipoPS != null)
+				{
+					@Html.DisplayFor(model => model.TipoPS.NombreTipoPS)
+				}
+				else
+				{
+					<text>- - -</text>
+				}
 			</td>
 			<td class="text-left">
 				@if (Model.Estado == WebApplication1.Models.Estado.Plan_Pendiente || Model.Estado == WebApplication1.Models.Estado.Plan_Desaprobado)
@@ -111,35 +169,35 @@
 
 
 				 <div class="btn-group">
-				     <a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-				         Acciones
-				         <span class="caret"></span>
-				     </a>
-				     <ul class="dropdown-menu">
-				         @if (Model.Estado == WebApplication1.Models.Estado.Informe_Aprobado)
-				         {
-				             <li>@Html.ActionLink("Aprobar PS", "AprobarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window8"})</li>
-				         }
-				         else
-				         {
-				             <li><a href="#"onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
-				         }
+					 <a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+						 Acciones
+						 <span class="caret"></span>
+					 </a>
+					 <ul class="dropdown-menu">
+						 @if (Model.Estado == WebApplication1.Models.Estado.Informe_Aprobado)
+						 {
+							 <li>@Html.ActionLink("Aprobar PS", "AprobarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window8"})</li>
+						 }
+						 else
+						 {
+							 <li><a href="#"onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
+						 }
 
-				         @if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada)
-				         {
-				             <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
-				         }
-				         else
-				         {
-				             <li>@Html.ActionLink("Cancelar PS", "CancelarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window7"})</li>
-				         }
+						 @if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada)
+						 {
+							 <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
+						 }
+						 else
+						 {
+							 <li>@Html.ActionLink("Cancelar PS", "CancelarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window7"})</li>
+						 }
 
-				     </ul>
+					 </ul>
 				 </div>
-                @if (User.IsInRole("Administrador"))
-                {                @Html.ActionLink("Editar", "Edit", new { id = Model.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm" })
+				@if (User.IsInRole("Administrador"))
+				{                @Html.ActionLink("Editar", "Edit", new { id = Model.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm" })
 
-                }
+				}
 
 
 			</td>

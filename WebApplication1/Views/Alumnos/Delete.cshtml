@@ -74,6 +74,11 @@
 
 
     </table>
+    <h2 style="color: red">
+        <hr />@if (ViewBag.erroralumnops != null)
+        {
+            @ViewBag.erroralumnops<hr />}
+    </h2>
 
     @using (Html.BeginForm())
     {

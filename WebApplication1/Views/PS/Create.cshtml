@@ -14,15 +14,15 @@
 </head>
 <h2>Agregar PS</h2>
 
-@using (Html.BeginForm("Create","PS",null, FormMethod.Post, new { id = "agregarps" }))
+@using (Html.BeginForm("Create", "PS", null, FormMethod.Post, new { id = "agregarps" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
+
         @if (ViewBag.band)
         {
             <div class="form-group">
@@ -37,7 +37,7 @@
         {
             <div class="form-group">
                 @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">                
+                <div class="col-md-10">
                     <select class="js-example-basic-single form-control input-sm" id="IdAlumno" name="IdAlumno" style="font: small-caption; width: 280px; background-color: beige; padding-top: 30px">
                         <option value="">Buscar alumno...</option>
                         @foreach (var item in ViewBag.alumnos)
@@ -76,10 +76,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Cuatrimestre, htmlAttributes: new {@class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Cuatrimestre, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Cuatrimestre, new {htmlAttributes = new {@class = "form-control input-sm"}})
-                @Html.ValidationMessageFor(model => model.Cuatrimestre, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.Cuatrimestre, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.ValidationMessageFor(model => model.Cuatrimestre, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
@@ -91,7 +91,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdArea, "Área", htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.IdArea, "Área", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select class="js-example-basic-single form-control input-sm" id="IdArea" name="IdArea" style="font: small-caption; width: 280px; background-color: beige; padding-top: 30px">
                     <option value="">Buscar área...</option>
@@ -104,7 +104,7 @@
         </div>
         <div id="ajaxBeginFormResult">
             <div class="form-group">
-                @Html.LabelFor(model => model.IdOrganizacion, "Organización", htmlAttributes: new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.IdOrganizacion, "Organización", htmlAttributes: new { @class = "control-label col-md-2" })
 
                 <div class="col-md-10">
                     <select class="js-example-basic-single form-control input-sm" id="IdOrganizacion" name="IdOrganizacion" style="font: small-caption; width: 280px; background-color: beige; padding-top: 30px; display: inline-block">
@@ -114,24 +114,25 @@
                             <option value="@item.IdOrganizacion">@item.DenominacionOrg</option>
                         }
                     </select>
-                    <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal" style="padding-right: 8px; padding-left: 8px;" >
-                       <span class="glyphicon glyphicon-plus"></span>
+                    <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal" style="padding-right: 8px; padding-left: 8px;">
+                        <span class="glyphicon glyphicon-plus"></span>
                     </a>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Estado, htmlAttributes: new {@class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <p class="form-control" style="width: 280px; background-color: lightgray; font-weight: bold">Plan Pendiente</p>
-                @Html.ValidationMessageFor(model => model.Estado, "", new {@class = "text-danger"})
+                <p class="form-control input-sm" style="width: 280px; background-color: lightgray; font-weight: bold">Plan Pendiente</p>
+                @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.NroDisposicion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NroDisposicion, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @* @Html.EditorFor(model => model.NroDisposicion, new { htmlAttributes = new { @class = "form-control input-sm" } })*@
+                <p class="form-control input-sm" style="width: 280px; background-color: lightgray; font-weight: bold">- - -</p>
                 @Html.ValidationMessageFor(model => model.NroDisposicion, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -139,12 +140,12 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 @if (ViewBag.band)
-                {<input value="Guardar" class="btn btn-success btn-md disabled" style="padding-left:initial;padding-right:initial"/> }
+                {<input value="Guardar" class="btn btn-success btn-md disabled" style="padding-left:initial;padding-right:initial" /> }
                 else
                 { <input type="submit" value="Guardar" class="btn btn-success" />}
 
 
-                
+
             </div>
         </div>
     </div>
@@ -167,37 +168,40 @@
                 <h4 class="modal-title" id="myModalLabel">Nueva organización</h4>
             </div>
             <div class="modal-body">
-               @using (Ajax.BeginForm("Create1", "Organizaciones", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ajaxBeginFormResult",
-                   OnSuccess = "OnSuccess"
-               }))
-               {
-                @Html.AntiForgeryToken()
+                @using (Ajax.BeginForm("Create1", "Organizaciones", new AjaxOptions
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "ajaxBeginFormResult",
+                    OnSuccess = "OnSuccess"
+                }))
+                {
+                    @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Organizacion.DenominacionOrg, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Organizacion.DenominacionOrg, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Organizacion.DenominacionOrg, "", new { @class = "text-danger" })
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Organizacion.DenominacionOrg, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Organizacion.DenominacionOrg, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Organizacion.DenominacionOrg, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <input type="submit" value="Guardar" class="btn btn-success">
+                                <input type="reset" value="Vaciar" />
+
+                            </div>
                         </div>
                     </div>
-
-                  
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <input type="submit" value="Guardar" class="btn btn-success">
-                            <input type="reset" value="Vaciar" />
-
-                        </div>
-                    </div>
-                </div>
-               }
+                }
 
             </div>
-          
+
         </div>
     </div>
 </div>
@@ -205,36 +209,36 @@
 <link href="@Url.Content("~/Content/Select2/select2.min.css")" rel="stylesheet" />
 @section Scripts{
     <script src="@Url.Content("~/Content/Select2/select2.min.js")"></script>
-<script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
 
-<script>
-    /////////////////Start:Select searchable////////////////
-    $(document).ready(function() {
-        $(".js-example-basic-single").select2();
-    });
-    ////////////////End:Select searchable///////////////////
-    function OnSuccess() {
-        $("#myModal .close").click();
-        
-        //alert("Operacion completada");
-        bootbox.alert("Operación correcta.", function () {
-            $('.modal-backdrop').remove();
+    <script>
+        /////////////////Start:Select searchable////////////////
+        $(document).ready(function () {
+            $(".js-example-basic-single").select2();
+        });
+        ////////////////End:Select searchable///////////////////
+        function OnSuccess() {
+            $("#myModal .close").click();
+
+            //alert("Operacion completada");
+            bootbox.alert("Operación correcta.", function () {
+                $('.modal-backdrop').remove();
+            });
+
+
+        }
+
+        $('#agregarps').submit(function (e) {
+            var permiso = this;
+            e.preventDefault();
+            //var x=document.getElementById("RoleID").innerText;
+            bootbox.confirm("¿ Está seguro que desea agregar una nueva PS ?", function (result) {
+                if (result) {
+                    permiso.submit();
+                }
+            });
         });
 
 
-    }
-
-    $('#agregarps').submit(function (e) {
-        var permiso = this;
-        e.preventDefault();
-        //var x=document.getElementById("RoleID").innerText;
-        bootbox.confirm("¿ Está seguro que desea agregar una nueva PS ?", function (result) {
-            if (result) {
-                permiso.submit();
-            }
-        });
-    });
-   
-
-</script>
+    </script>
 }

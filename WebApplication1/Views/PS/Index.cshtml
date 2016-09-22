@@ -75,10 +75,24 @@ else
                    @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.NroDisposicion)
+                    @if (item.NroDisposicion != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.NroDisposicion)
+                    }
+                    else
+                    {<text>- - -</text>
+                    }
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.Area.NombreArea)
+                    @*@Html.DisplayFor(modelItem => item.Area.NombreArea)*@
+                    @if (item.Area != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Area.NombreArea)
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }
                 </td>
 
                 <td class="text-left">
