@@ -7,7 +7,7 @@
 <h2>Nuevo Alumno</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "agregaralumno" }))
 {
     @Html.AntiForgeryToken()
 
@@ -95,4 +95,17 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+        $('#agregaralumno').submit(function (e) {
+            var alumno = this;
+            e.preventDefault();
+            //var x=document.getElementById("RoleID").innerText;
+            bootbox.confirm("Esta por agregar un nuevo Alumno, ¿Desea continuar?", function (result) {
+                if (result) {
+                    alumno.submit();
+                }
+            });
+        });
+</script>
 }

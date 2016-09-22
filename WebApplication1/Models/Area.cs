@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WebApplication1.Models.Validaciones;
 
 namespace WebApplication1.Models
 {
@@ -13,6 +14,7 @@ namespace WebApplication1.Models
 
         [Required]
         [Display(Name = "Área")]
+        [AreaExistente]
         public string NombreArea { get; set; }
 
         [Display(Name = "Descripción")]

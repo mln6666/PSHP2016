@@ -13,14 +13,14 @@
 @using (Html.BeginForm(null, null, new { Alumno = "Alumno" }, FormMethod.Post))
 {
     <div class="text-center" style="padding-top: 5px">
-        <select class="js-example-basic-single form-control" id="Alumno" name="Alumno" style="font: small-caption; width: 250px; height: 25px; background-color: beige;padding-top: 30px">
+        <select class="js-example-basic-single form-control" id="Alumno" name="Alumno" style="font: small-caption; width: 250px; height: 25px; background-color: beige; padding-top: 30px;display: inline-block">
             <option value="">Buscar...</option>
             @foreach (var item in ViewBag.alumnos)
             {
                 <option value="@item.Legajo">@item.Legajo - @item.NombreAlu, @item.ApellidoAlu</option>
             }
         </select>
-            <button type="submit" class="btn btn-success glyphicon glyphicon-search  " style="position: absolute; top: 85%; left: 62%; transform: translate(0, -30%)"/>
+            <button type="submit" class="btn btn-success glyphicon glyphicon-search  "/>
         </div>
 }
 

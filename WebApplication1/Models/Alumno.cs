@@ -12,6 +12,7 @@ namespace WebApplication1.Models
         public int IdAlumno { get; set; }
 
         [Required]
+        [LegajoAlumnoExistente]
         public int Legajo { get; set; }
 
         [Required]
