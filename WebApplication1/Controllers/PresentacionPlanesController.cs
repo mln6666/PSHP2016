@@ -72,6 +72,14 @@ namespace WebApplication1.Controllers
         {
             PresentacionPlan presentacionplan= new PresentacionPlan();
             presentacionplan.IdPS = id;
+
+            PS ps = db.PSs.Find(id);
+
+
+            if (ps.Estado!= Estado.Plan_Pendiente & ps.Estado != Estado.Plan_Desaprobado)
+            {
+                return RedirectToAction("Index", "Error", new { error = 2002 });
+            }
             //ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor");
             return View(presentacionplan);
         }
@@ -110,6 +118,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: PresentacionPlanes/Edit/5
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -130,6 +139,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")] PresentacionPlan presentacionPlan)
         {
             if (ModelState.IsValid)
@@ -168,6 +178,11 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
 
+            if (presentacionPlan.EstadoEvaluacionPlan != Evaluacion.Pendiente)
+            {
+                return RedirectToAction("Index", "Error", new { error = 2000 });
+            }
+
             return PartialView(presentacionPlan);
         }
 
@@ -192,6 +207,10 @@ namespace WebApplication1.Controllers
 
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
                     pS.Estado = Estado.Plan_Desaprobado;
+
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Rechazado)
+                    pS.Estado = Estado.Plan_Rechazado;
+
 
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();

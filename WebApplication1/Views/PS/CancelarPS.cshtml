@@ -6,8 +6,8 @@
 }
 
 <p>
-    @using (Html.BeginForm())
-{
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "cancelarps" }))
+    {
     <br />
     <div class="form-actions no-color">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -15,3 +15,17 @@
     </div>
 }
 </p>
+
+
+<script>
+        $('#cancelarps').submit(function (e) {
+            var cancelar = this;
+            e.preventDefault();
+            //var x=document.getElementById("RoleID").innerText;
+            bootbox.confirm("Esta acción no puede ser restablecida, ¿Desea continuar?", function (result) {
+                if (result) {
+                    cancelar.submit();
+                }
+            });
+        });
+</script>

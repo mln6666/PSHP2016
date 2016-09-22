@@ -12,5 +12,7 @@ namespace WebApplication1.Models
         Aprobado = 1,
 
         Desaprobado = 2,
+
+        Rechazado =3
     }
 }

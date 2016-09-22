@@ -34,24 +34,24 @@ namespace WebApplication1.Models
         [EnumMember(Value = "Informe Entregado")]
         Informe_Entregado =5,
 
-        [Display(Name = "Informe Desaprobado")]
-        [EnumMember(Value = "Informe Desaprobado")]
-        Informe_Desaprobado =6,
-
-        [Display(Name = "PS Vencida")]
-        [EnumMember(Value = "PS Vencida")]
-        PS_Vencida =7,
-
         [Display(Name = "Informe Aprobado")]
         [EnumMember(Value = "Informe Aprobado")]
-        Informe_Aprobado =8,
+        Informe_Aprobado = 6,
+
+        [Display(Name = "Informe Desaprobado")]
+        [EnumMember(Value = "Informe Desaprobado")]
+        Informe_Desaprobado =7,
 
         [Display(Name = "PS Aprobada")]
         [EnumMember(Value = "PS Aprobada")]
-        PS_Aprobada =9,
+        PS_Aprobada =8,
 
         [Display(Name = "PS Cancelada")]
         [EnumMember(Value = "PS Cancelada")]
-        PS_Cancelada =10
+        PS_Cancelada =9,
+
+        [Display(Name = "PS Vencida")]
+        [EnumMember(Value = "PS Vencida")]
+        PS_Vencida = 10,
     }
 }

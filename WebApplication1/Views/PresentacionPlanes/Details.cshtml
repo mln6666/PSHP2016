@@ -1,4 +1,5 @@
-﻿@model WebApplication1.Models.PresentacionPlan
+﻿@using WebApplication1.Models
+@model WebApplication1.Models.PresentacionPlan
 @{
 	Layout = null;
 }
@@ -44,17 +45,22 @@
 				@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
 			@*@Html.ActionLink("Ver Historial Planes...", "HistorialPlanes", new { id = Model.IdPS })*@
 			@Html.ActionLink("Historial Planes", "HistorialPlanes", new { id = Model.IdPS }, new { @class = "dialog-window2 btn btn-primary btn-sm" })
-
-			@*@Ajax.ActionLink("Ver Historial Planes", "HistorialPlanes", new {id = Model.IdPS}, new AjaxOptions
-			{
-				InsertionMode = InsertionMode.Replace,
-				UpdateTargetId = "histoplan",
-
-			}
-				)*@
 		</td>
-		<td class="text-left">@Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm" })</td>
-		<td class="text-left">@Html.ActionLink("Editar Plan", "Edit", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-primary btn-sm" })</td>
+	    <td class="text-left">
+	        @if (Model.EstadoEvaluacionPlan != Evaluacion.Pendiente)
+	        {
+	            @Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm disabled"})
+	        }
+	        else
+	        {
+	            @Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm"})
+	        }
+
+	    </td>
+@if (User.IsInRole("Administrador"))
+{
+    <td class="text-left">@Html.ActionLink("Editar Plan", "Edit", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm"})</td>
+}
 </tr>
 
 </table>

@@ -26,13 +26,20 @@ namespace WebApplication1.Models
         [DataType(DataType.EmailAddress)]
         public string CorreoAlu { get; set; }
 
-        //public int AñoIngreso { get; set; }
+        [Display(Name = "Año de Ingreso")]
+        public int? AñoIngreso { get; set; }
 
-        //public int Telefono { get; set; }
+        [Display(Name = "Telefono")]
+        public int? Telefono { get; set; }
 
-        //public int movil { get; set; }
+        [Display(Name = "Celular")]
+        public int? Celular { get; set; }
 
-        //public string Direccion { get; set; }
+        [Display(Name = "Dirección")]
+        public string Direccion { get; set; }
+
+        [Display(Name = "DNI")]
+        public int? DNI { get; set; }
 
         public virtual ICollection<PS> PSs { get; set; }
     }

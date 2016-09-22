@@ -83,7 +83,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <a href="@Url.Action("Index", "PS")" class="btn btn-default">Cancelar</a>            
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             <input type="submit" value="Eliminar" class="btn btn-danger" />
         </div>
     }

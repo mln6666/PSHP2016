@@ -32,6 +32,10 @@ namespace WebApplication1
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
+        
+
+          
+        
         private void AddPermisionsToSuperuser(ApplicationDbContext db)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));

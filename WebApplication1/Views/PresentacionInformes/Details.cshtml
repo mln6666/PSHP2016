@@ -1,4 +1,5 @@
-﻿@model WebApplication1.Models.PresentacionInforme
+﻿@using WebApplication1.Models
+@model WebApplication1.Models.PresentacionInforme
 
 @{
 	Layout = null;
@@ -23,41 +24,58 @@
 			@*@Html.DisplayNameFor(model => model.ObservacionesInforme)*@Observaciones
 		</th>
 	</tr>
-	<tr>
-		@*<td class="text-left">
-				@Html.DisplayFor(model => model.PS.Tutor)
-			</td>*@
-		<td class="text-left" >
-			@Html.DisplayFor(model => model.FechaPresentacionInforme)
-		</td>
-		<td class="text-left">
-			@Html.DisplayFor(model => model.FechaEvaluacionInforme)
-		</td>
-		<td class="text-left" style="font-weight: bold; font-style: italic">
-			@Html.DisplayFor(model => model.EstadoEvaluacionInforme)
-		</td>
-		<td class="text-left">
-			@Html.DisplayTextFor(model => model.ObservacionesInforme)
-		</td>
-		<td class="text-left">
-			@*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
-				@Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
-				@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
-			@*@Html.ActionLink("Ver Historial Informes...", "HistorialInformes", new { id = Model.IdPS })*@
-		    @*@Ajax.ActionLink("Ver Historial Informes", "HistorialInformes", new {id = Model.IdPS}, new AjaxOptions
-			{
-				InsertionMode = InsertionMode.Replace,
-				UpdateTargetId = "histoinf",
+    <tr>
+        @*<td class="text-left">
+                @Html.DisplayFor(model => model.PS.Tutor)
+            </td>*@
+        <td class="text-left">
+            @Html.DisplayFor(model => model.FechaPresentacionInforme)
+        </td>
+        <td class="text-left">
+            @Html.DisplayFor(model => model.FechaEvaluacionInforme)
+        </td>
+        <td class="text-left" style="font-weight: bold; font-style: italic">
+            @Html.DisplayFor(model => model.EstadoEvaluacionInforme)
+        </td>
+        <td class="text-left">
+            @Html.DisplayTextFor(model => model.ObservacionesInforme)
+        </td>
+        <td class="text-left">
+            @*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
+            @*@Html.ActionLink("Ver Historial Informes...", "HistorialInformes", new { id = Model.IdPS })*@
+            @*@Ajax.ActionLink("Ver Historial Informes", "HistorialInformes", new {id = Model.IdPS}, new AjaxOptions
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "histoinf",
 
-			}
-				)*@
+                }
+                    )*@
             @Html.ActionLink("Historial Informes", "HistorialInformes", new { id = Model.IdPS }, new { @class = "dialog-window3 btn btn-primary btn-sm" })
 
 
-		</td>
-		<td class="text-left">@Html.ActionLink("Evaluar Informe", "EvaluarInforme", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm" })</td>
-		<td class="text-left">@Html.ActionLink("Editar Informe", "Edit", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm" })</td>
-	</tr>
+        </td>
+        <td class="text-left">
+            @if (Model.EstadoEvaluacionInforme != Evaluacion.Pendiente)
+            {
+                @Html.ActionLink("Evaluar Informe", "EvaluarInforme", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm disabled" })
+            }
+            else
+            {
+                @Html.ActionLink("Evaluar Informe", "EvaluarInforme", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm" })
+            }
+        </td>
+
+@if (User.IsInRole("Administrador"))
+{
+        <td class="text-left">@Html.ActionLink("Editar Informe", "Edit", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm" })</td>
+        }
+
+
+
+    
+    </tr>
 </table>
 <div id="histoinf"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"

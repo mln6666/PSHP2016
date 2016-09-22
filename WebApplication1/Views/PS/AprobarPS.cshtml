@@ -5,12 +5,27 @@
     Layout = null;
 }
 
-<p>@using (Html.BeginForm())
+<p>@using (Html.BeginForm(null, null, FormMethod.Post,new { id = "aprobarps" }))
 {
     <br />
     <div class="form-actions no-color">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         <input type="submit" value="Aprobar PS" class="btn btn-success" />        
     </div>
 }
 </p>
+
+
+
+<script>
+        $('#aprobarps').submit(function (e) {
+            var aprobar = this;
+            e.preventDefault();
+            //var x=document.getElementById("RoleID").innerText;
+            bootbox.confirm("Esta acción no puede ser restablecida, ¿Desea continuar?", function (result) {
+                if (result) {
+                    aprobar.submit();
+                }
+            });
+        });
+</script>

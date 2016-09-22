@@ -70,6 +70,13 @@ namespace WebApplication1.Controllers
         {
             PresentacionInforme presentacioninforme = new PresentacionInforme();
             presentacioninforme.IdPS = id;
+            PS ps = db.PSs.Find(id);
+
+
+            if (ps.Estado != Estado.Informe_Desaprobado & ps.Estado != Estado.Plan_Aprobado)
+            {
+                return RedirectToAction("Index", "Error", new { error = 2002 });
+            }
             //ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor");
             return View(presentacioninforme);
         }
@@ -156,6 +163,21 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
+            if (presentacionInforme.EstadoEvaluacionInforme != Evaluacion.Pendiente)
+            {
+                return RedirectToAction("Index", "Error", new { error = 2001 });
+            }
+
+            var selectList = Enum.GetValues(typeof(Evaluacion))
+                        .Cast<Evaluacion>()
+                        .Where(e => e != Evaluacion.Rechazado)
+                        .Select(e => new SelectListItem
+                        {
+                            Value = ((int)e).ToString(),
+                            Text = e.ToString()
+                        });
+
+            ViewBag.SelectList = selectList;
 
             return PartialView(presentacionInforme);
         }
@@ -196,6 +218,7 @@ namespace WebApplication1.Controllers
 
 
         // GET: PresentacionInformes/Edit/5
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -208,6 +231,17 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
             ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor", presentacionInforme.IdPS);
+
+            var selectList = Enum.GetValues(typeof(Evaluacion))
+                       .Cast<Evaluacion>()
+                       .Where(e => e != Evaluacion.Rechazado)
+                       .Select(e => new SelectListItem
+                       {
+                           Value = ((int)e).ToString(),
+                           Text = e.ToString()
+                       });
+
+            ViewBag.SelectList = selectList;
             return View(presentacionInforme);
         }
 
@@ -218,6 +252,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")] PresentacionInforme presentacionInforme)
         {
             if (ModelState.IsValid)

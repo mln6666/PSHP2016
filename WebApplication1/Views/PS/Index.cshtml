@@ -12,18 +12,31 @@
 
 <p>
     <div class="row">
-       
+
         <div class="col-lg-6">
-            @Html.ActionLink("Nueva PS", "Create", "PS", null, new { @class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+            @Html.ActionLink("Nueva PS", "Create", "PS", null, new {@class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
         </div>
-        
+
         <div class="col-lg-6 text-right">
-            @Html.ActionLink("Historial", "HistorialPS","PS", null, new { @class = "btn btn-default btn-md text-right", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+            @Html.ActionLink("Historial", "HistorialPS", "PS", null, new {@class = "btn btn-default btn-md text-right", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
 
         </div>
     </div>
-   
+
 </p>
+
+@if (Model.Count() == 0)
+{<br/><hr  style="color:darkblue;border-color:darkblue"/>
+    <div class="text-center">
+        
+        <h2 style="color: chocolate">
+            No existen Prácticas en curso actualmente, puede acceder al historial completo haciendo click @Html.ActionLink("Aquí", "HistorialPS", "PS").
+        </h2>
+       
+    </div>    <hr  style="color:darkblue;border-color:darkblue"/>}
+else
+{
+
 <table id="mitabla" class="table table-striped table-bordered">
     <thead>
     <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
@@ -101,7 +114,7 @@
             </tr>
         }
     </tbody>
-</table>
+</table>}
 
 <div class="modal fade" id="myModal1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">

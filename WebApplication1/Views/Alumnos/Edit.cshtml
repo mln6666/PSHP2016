@@ -18,8 +18,6 @@
         @Html.HiddenFor(model => model.IdAlumno)
 
         <table class="table table-striped table-bordered ">
-
-
             <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
                 <th class="text-left" style="border-radius: 5px">
                     @Html.DisplayNameFor(model => model.Legajo)
@@ -33,18 +31,6 @@
                 <th class="text-center" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.CorreoAlu)
                 </th>
-                @*<th class="text-center" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Direccion)
-                </th>
-                <th class="text-center" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.AñoIngreso)
-                </th>
-                <th class="text-center" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Telefono)
-                </th>
-                <th class="text-center" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.movil)
-                </th>*@
                
             </tr>
 
@@ -62,36 +48,66 @@
                     @Html.ValidationMessageFor(model => model.ApellidoAlu, "", new { @class = "text-danger" })
                 </td>
                 <td class="text-left">
-                    @Html.EditorFor(model => model.CorreoAlu, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CorreoAlu, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.CorreoAlu, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.CorreoAlu, "", new {@class = "text-danger"})
                 </td>
-                @*<td class="text-left">
-                    @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
-                </td>
+               
+            </tr>
+        </table>
+
+        <table class="table table-striped table-bordered ">
+            <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+                <th class="text-center" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.AñoIngreso)
+                </th>
+                <th class="text-center" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.Direccion)
+                </th>
+
+                <th class="text-center" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </th>
+                <th class="text-center" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.Celular)
+                </th>
+                <th class="text-center" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.DNI)
+                </th>
+            </tr>
+            <tr>
                 <td class="text-left">
                     @Html.EditorFor(model => model.AñoIngreso, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.AñoIngreso, "", new { @class = "text-danger" })
                 </td>
                 <td class="text-left">
+                    @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                </td>
+
+                <td class="text-left">
                     @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
                 </td>
                 <td class="text-left">
-                    @Html.EditorFor(model => model.movil, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.movil, "", new { @class = "text-danger" })
-                </td>*@
-                
-            </tr>
-        </table>         
+                    @Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })
+                </td>
+                <td class="text-left">
+                    @Html.EditorFor(model => model.DNI, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DNI, "", new { @class = "text-danger" })
+                </td>
 
-        
+
+
+            </tr>
+</table>
+
             <div align="center">
-                <input type="submit" value="Guardar" class="btn btn-success"/>
+                <input type="submit" value="Guardar" class="btn btn-success" />
             </div>
 
-        
-        
+
+
 </div>
 }
 

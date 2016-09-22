@@ -24,12 +24,20 @@ namespace ExpVMsape.Controllers
                     break;
 
                 case 2000:
-                    ViewBag.Title = "No hay coincidencias";
-                    ViewBag.Description = "Mugre1. Inténtelo nuevamente.";
+                    ViewBag.Title = "Acción no permitida.";
+                    ViewBag.Description = "No se permite evaluar un Plan cuyo estado de evaluación NO es PENDIENTE.";
                     break;
                 case 2001:
-                    ViewBag.Title = "No hay coincidencias";
-                    ViewBag.Description = "Mugre2. Inténtelo nuevamente.";
+                    ViewBag.Title = "Acción no permitida.";
+                    ViewBag.Description = "No se permite evaluar un Informe cuyo estado de evaluación NO es PENDIENTE.";
+                    break;
+                case 2002:
+                    ViewBag.Title = "Acción no permitida.";
+                    ViewBag.Description = "No se permite agregar planes en una PS cuyo estado NO es Plan Pendiente o Plan Desaprobado";
+                    break;
+                case 2003:
+                    ViewBag.Title = "Acción no permitida.";
+                    ViewBag.Description = "No se permite agregar planes en una PS cuyo estado NO es Plan Aprobado o Informe Desaprobado";
                     break;
 
                 default:
