@@ -7,10 +7,7 @@
 <h2>Permisos del usuario: @Model.Name</h2>
 
 
-<p>
-    @Html.ActionLink("Volver", "Index", new { user = Model }, new { @class = "btn btn-info" })
-    @Html.ActionLink("Agregar permiso", "AddRole", new { userID = Model.UserID }, new { @class = "btn btn-primary" })
-</p>
+
 <table class="table">
     @for (int i = 0; i < Model.Roles.Count; i++)
     {
@@ -27,6 +24,11 @@
     }
 
 </table>
+<p>
+    <a href="@Url.Action("Index", "Users")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    @*@Html.ActionLink("Volver", "Index", new { user = Model }, new { @class = "btn btn-default" })*@
+    @Html.ActionLink("Agregar permiso", "AddRole", new { userID = Model.UserID }, new { @class = "btn btn-success" })
+</p>
 
 
 @section scripts
