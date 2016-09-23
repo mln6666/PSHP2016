@@ -15,23 +15,29 @@
        
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.FechaPresentacionInforme, "Fecha de Presentación",htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.FechaPresentacionInforme, "Fecha de Presentación", htmlAttributes: new { @class = "control-label col-md-10" })
+            </div>
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.FechaPresentacionInforme, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FechaPresentacionInforme, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FechaEvaluacionInforme, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.FechaEvaluacionInforme, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-10" })
+            </div>
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.FechaEvaluacionInforme, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FechaEvaluacionInforme, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.EstadoEvaluacionInforme, "Estado de Evaluación",htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.EstadoEvaluacionInforme, "Estado de Evaluación", htmlAttributes: new { @class = "control-label col-md-10" })
+            </div>
+            <div class="col-md-4">
                 @Html.EnumDropDownListFor(model => model.EstadoEvaluacionInforme, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.EstadoEvaluacionInforme, "", new { @class = "text-danger" })
             </div>
@@ -45,16 +51,18 @@
         </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ObservacionesInforme, "Observaciones", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.ObservacionesInforme, "Observaciones", htmlAttributes: new { @class = "control-label col-md-10" })
+            </div>
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.ObservacionesInforme, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ObservacionesInforme, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+        <div class="form-group row text-center">
+            <div>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <input type="submit" value="Guardar" class="btn btn-success"/>
+                <input type="submit" value="Guardar" class="btn btn-success" />
             </div>
         </div>
     </div>

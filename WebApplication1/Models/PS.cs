@@ -22,6 +22,7 @@ namespace WebApplication1.Models
 
         [Required]
         [Display(Name = "Ciclo Lectivo")]
+        [Range(2000, 2999, ErrorMessage = "Ciclo Lectivo no válido")]
         public int CicloLectivo { get; set; }
 
         [Required]
