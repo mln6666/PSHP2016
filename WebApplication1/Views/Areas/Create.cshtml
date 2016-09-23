@@ -42,11 +42,34 @@
 <div>
     @Html.ActionLink("Volver", "Index")
 </div>
-
+@if (ViewBag.areaexistente != null)
+{
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Aviso.</h3>
+                </div>
+                <div class="modal-body">
+                    <h5 style="color: Red">@ViewBag.areaexistente</h5>
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-<script>
+    <script>
+        $(document).ready(function () {
+            $("#myModal").modal('show');
+        });
+
         $('#agregararea').submit(function (e) {
             var area = this;
             e.preventDefault();
@@ -57,6 +80,6 @@
                 }
             });
         });
-</script>
+    </script>
 }
 

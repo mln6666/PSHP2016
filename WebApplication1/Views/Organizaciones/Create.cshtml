@@ -7,7 +7,6 @@
 
 <h2>Agregar Organización</h2>
 
-
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "agregarorganizacion" }))
 {
     @Html.AntiForgeryToken()
@@ -60,20 +59,44 @@
     @*@Html.ActionLink("Back to List", "Index")*@
 </div>
 
+@if (ViewBag.organizacionexistente != null) {
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">Aviso.</h3>
+            </div>
+            <div class="modal-body">
+                <h5 style="color: Red">@ViewBag.organizacionexistente</h5>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#myModal").modal('show');
+        });
 
-<script>
-        $('#agregarorganizacion').submit(function (e) {
+        $('#agregarorganizacion').submit(function(e) {
             var organizacion = this;
             e.preventDefault();
             //var x=document.getElementById("RoleID").innerText;
-            bootbox.confirm("Esta por agregar una nueva Área, ¿Desea continuar?", function (result) {
+            bootbox.confirm("Esta por agregar una nueva Área, ¿Desea continuar?", function(result) {
                 if (result) {
                     organizacion.submit();
                 }
             });
         });
-</script>
+    </script>
 }
 

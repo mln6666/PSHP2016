@@ -52,6 +52,18 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                IEnumerable<int> query = (from c in db.Alumnos
+                                          where c.Legajo == alumno.Legajo
+                                          select c.IdAlumno);
+
+                if (query.Count() != 0)
+                {
+                    ViewBag.alumnoexistente = "Acción no permitida!. Legajo existente.";
+                    return View(alumno);
+
+                }
+
+
                 db.Alumnos.Add(alumno);
                 db.SaveChanges();
                 return RedirectToAction("Index");

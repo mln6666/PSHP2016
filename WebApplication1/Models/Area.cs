@@ -14,7 +14,6 @@ namespace WebApplication1.Models
 
         [Required]
         [Display(Name = "Área")]
-        [AreaExistente]
         public string NombreArea { get; set; }
 
         [Display(Name = "Descripción")]

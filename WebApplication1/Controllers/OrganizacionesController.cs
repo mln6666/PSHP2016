@@ -109,6 +109,20 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                IEnumerable<int> query = (from c in db.Organizaciones
+                                          where c.DenominacionOrg == organizacion.DenominacionOrg
+                                          select c.IdOrganizacion);
+
+
+
+                if (query.Count() != 0)
+                {
+                    ViewBag.organizacionexistente = "Acción no permitida!. Organización existente.";
+                    return View(organizacion);
+
+                }
+
+
                 db.Organizaciones.Add(organizacion);
                 db.SaveChanges();
 

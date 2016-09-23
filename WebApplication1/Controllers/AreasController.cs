@@ -51,6 +51,19 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                IEnumerable<int> query = (from c in db.Areas
+                                          where c.NombreArea == area.NombreArea
+                                          select c.IdArea);
+                
+                if (query.Count() != 0)
+                {
+                    ViewBag.areaexistente = "Acción no permitida!. Área existente.";
+                    return View(area);
+
+                }
+
+
                 db.Areas.Add(area);
                 db.SaveChanges();
                 return RedirectToAction("Index");

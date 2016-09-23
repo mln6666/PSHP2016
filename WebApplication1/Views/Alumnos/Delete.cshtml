@@ -6,7 +6,7 @@
 
 <h1>Eliminar alumno</h1>
 <hr style="color:grey;border-color:grey" />
-<h3>¿Está seguro que desea eliminar a @Model.ApellidoAlu, @Model.NombreAlu?</h3>
+<h3> @Model.ApellidoAlu, @Model.NombreAlu</h3>
 <br />
 <div id="cerrar">
 
@@ -75,19 +75,19 @@
 
 
     </table>
-    <h2 style="color: red">
-        <hr />@if (ViewBag.erroralumnops != null)
-        {
-            @ViewBag.erroralumnops<hr />}
-    </h2>
+    @*<h2 style="color: red">
+        <hr/>@if (ViewBag.erroralumnops != null)
+             {
+                 @ViewBag.erroralumnops<hr/>}
+    </h2>*@
 
-    @using (Html.BeginForm())
-    {
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "eliminaralumno" }))
+{
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <a href="@Url.Action("Index", "Alumnos")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
-            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            <input type="submit" value="Eliminar" class="btn btn-danger"/>
 
         </div>
     }
@@ -95,3 +95,51 @@
 
 
 </div>
+
+
+@if (ViewBag.erroralumnops != null)
+{
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Aviso.</h3>
+                </div>
+                <div class="modal-body">
+                    <h4 style="color: Red">@ViewBag.erroralumnops</h4>
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $("#myModal").modal('show');
+        });
+
+
+        $('#eliminaralumno').submit(function (e) {
+            var alumno = this;
+            e.preventDefault();
+            //var x=document.getElementById("RoleID").innerText;
+            bootbox.confirm("Esta por eliminar un Alumno, ¿Desea continuar?", function (result) {
+                if (result) {
+                    alumno.submit();
+                }
+            });
+        });
+
+
+
+
+    </script>
+}

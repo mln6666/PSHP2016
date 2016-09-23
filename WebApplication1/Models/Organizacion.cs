@@ -14,7 +14,6 @@ namespace WebApplication1.Models
 
         [Required]
         [Display(Name = "Organización")]
-        [OrganizacionExistente]
         public string DenominacionOrg { get; set; }
 
         [Display(Name = "Dirección")]
