@@ -5,47 +5,50 @@
 }
 
 <h2>Detalles de @Model.DenominacionOrg</h2>
-
+<hr style="color:grey;border-color:grey" />
 <br/>
 
 <div>
-    <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DenominacionOrg)
-        </dt>
+        <table class="table table-striped table-bordered ">
+            <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+                <th class="text-left" style="border-radius: 5px">
+                    @Html.DisplayNameFor(model => model.DenominacionOrg)
+                </th>
+                <th class="text-left" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.DireccionOrg)
+                </th>
+                <th class="text-left" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.TelefonoOrg)
+                </th>
+                <th class="text-left" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.DescripcionOrg)
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.DenominacionOrg)
-        </dd>
+            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DireccionOrg)
-        </dt>
+            <tr>
+                <td class="text-left">
+                    @Html.DisplayFor(model => model.DenominacionOrg)                    
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(model => model.DireccionOrg)                   
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(model => model.TelefonoOrg)                    
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(model => model.DescripcionOrg)                   
+                </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.DireccionOrg)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TelefonoOrg)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TelefonoOrg)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DescripcionOrg)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DescripcionOrg)
-        </dd>
-
+            </tr>
+        </table>
+        
+        <br />
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.IdOrganizacion } ) 
     <a href="@Url.Action("Index", "Organizaciones")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    @Html.ActionLink("Editar", "Edit", "Organizaciones", new { id = Model.IdOrganizacion }, new { @class = "btn btn-success" } ) 
+    
 </p>

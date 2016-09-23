@@ -4,11 +4,11 @@
     ViewBag.Title = "Roles";
 }
 
-<h2>Permisos del usuario: @Model.Name</h2>
+<h1>Permisos del usuario: @Model.Name</h1>
 
+<br />
 
-
-<table class="table">
+<table class="table table-striped">
     @for (int i = 0; i < Model.Roles.Count; i++)
     {
         <tr>
@@ -17,7 +17,7 @@
             </td>
 
             <td>
-                <button userID = @Model.UserID roleID = @Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn-link js-delete">Quitar Permiso</button>
+                <button userID = @Model.UserID roleID = @Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn btn-warning btn-sm js-delete">Quitar Permiso</button>
                @*@Html.ActionLink("Eliminar", "Delete", new {userID = Model.UserID, roleID = Model.Roles[i].RoleID})*@
             </td>
         </tr>

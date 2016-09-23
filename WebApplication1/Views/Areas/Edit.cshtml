@@ -4,16 +4,16 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Editar detalles de área de @Model.NombreArea</h2>
+<hr style="color:grey;border-color:grey" />
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Area</h4>
-        <hr />
+        <br />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IdArea)
 
@@ -35,15 +35,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-default" />
+                <input type="submit" value="Guardar cambios" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
-
 <div>
-    @Html.ActionLink("Volver", "Index")
+    <a href="@Url.Action("Index", "Areas")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
 </div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

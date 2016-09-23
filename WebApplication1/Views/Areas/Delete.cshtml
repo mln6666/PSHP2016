@@ -5,43 +5,48 @@
 }
 
 <h2>Eliminar Área</h2>
-
-<h3>¿Está seguro de eliminar el área?</h3>
+<hr style="color:grey;border-color:grey"/>
+<h3>¿Está seguro de eliminar el área de @Model.NombreArea?</h3>
 <div>
-
-    <hr />
+    
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NombreArea)
-        </dt>
+        <table class="table table-striped table-bordered ">
+            <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+                <th class="text-left" style="border-radius: 5px">
+                    @Html.DisplayNameFor(model => model.NombreArea)
+                </th>
+                <th class="text-left" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.DescripcionArea)
+                </th>
+                
 
-        <dd>
-            @Html.DisplayFor(model => model.NombreArea)
-        </dd>
+            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DescripcionArea)
-        </dt>
+            <tr>
+                <td class="text-left">
+                    @Html.DisplayFor(model => model.NombreArea)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(model => model.DescripcionArea)
+                </td>
+                
 
-        <dd>
-            @Html.DisplayFor(model => model.DescripcionArea)
-        </dd>
+            </tr>
+        </table>
 
     </dl>
 
     <h2 style="color: red"><hr/>@if (ViewBag.errorareaps != null) { 
         @ViewBag.errorareaps<hr />}</h2>
     
-
-
+    
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" />
-            @*@Html.ActionLink("Back to List", "Index")*@
-            <a href="@Url.Action("Index", "Areas")" class="btn btn-default ">Cancelar</a>
+            <a href="@Url.Action("Index", "Areas")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+            <input type="submit" value="Eliminar" class="btn btn-danger" />            
         </div>
     }
 </div>

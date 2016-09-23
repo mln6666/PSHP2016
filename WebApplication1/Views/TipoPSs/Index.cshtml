@@ -31,7 +31,7 @@
             @Html.DisplayFor(modelItem => item.DescripcionTipoPS)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.IdTipoPS })
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdTipoPS }, new {@class = "btn btn-primary btn-sm" })
             @*@Html.ActionLink("Details", "Details", new { id=item.IdTipoPS })|
             @Html.ActionLink("Delete", "Delete", new { id=item.IdTipoPS })*@
         </td>
