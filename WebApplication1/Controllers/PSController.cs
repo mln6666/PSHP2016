@@ -289,8 +289,14 @@ namespace WebApplication1.Controllers
 
         public ActionResult BusquedaPS()
         {
-            ViewBag.alumnos = db.Alumnos.ToList();
-            return View();
+            var alu = (from p in db.Alumnos
+                       where p.PSs.Count()>0
+                       select p);
+
+
+            //ViewBag.alumnos = db.Alumnos.ToList();
+            ViewBag.alumnos = alu;
+            return View(alu);
         }
 
         [HttpPost]

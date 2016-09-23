@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Sistema PS 2016</title>
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>*@
@@ -11,21 +11,21 @@
     @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
     <style>
         .full {
-            background:  no-repeat center center fixed;
-            background-image: url("../Content/Images/BACKGROUND-TOP.jpg");
             -webkit-background-size: cover;
             -moz-background-size: cover;
             background-size: cover;
             -o-background-size: cover;
-            height:100%;
+            height: 100%;
         }
+
     </style>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 
 </head>
-<body class="full">
+
+<body class="full" background="~/Content/Images/BACKGROUND-TOP.jpg" >
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -63,16 +63,17 @@
         </div>
     </div>
 </div>
+
+
+<div class="container body-content">
     
+    @RenderBody()
 
-    <div class="container body-content" >
-        @RenderBody()
-
-        @*<footer class="text-center" id="footer-zone">
+    @*<footer class="text-center" id="footer-zone">
 
             <p> - SiGePS &copy; @DateTime.Now.Year - Godesa Solutions ®  <a style="color:black ">@Html.ActionLink("Contacto", "Contact", "Home")</></a> - </p>
         </footer>*@
-    </div>
+</div>
 
     @*@Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundles/lib")
@@ -84,6 +85,12 @@
             <p> - SiGePS &copy; @DateTime.Now.Year - Godesa Solutions ®  <a style="color:black ">@Html.ActionLink("Contacto", "Contact", "Home")</></a> - </p>
         </div>
     </div>
+
+
+  
+    
+
+
 </body>
 
 </html>
