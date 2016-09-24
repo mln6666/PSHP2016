@@ -19,12 +19,61 @@
         $('#primerplan').submit(function (e) {
             var x = this;
             e.preventDefault();
-            //var x=document.getElementById("RoleID").innerText;
+            var isValidItem = true;
+
+            var fecha1 = new Date($('#FechaPresentacionPlan').val());
+            var fecha2 = new Date($('#FechaEvaluacionPlan').val());
+
+            var minfecha = new Date("01/01/2000");
+            var maxfecha = new Date("01/01/2100");
+
+            if ((fecha1 < minfecha) || (fecha1 > maxfecha)) {
+                var isValidItem = false;
+                $('#spanfechapresentacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
+            }
+            if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
+                var isValidItem = false;
+                $('#spanfechaevaluacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
+            }
+            if ($('#TituloProyecto').val().trim() == '') {
+                var isValidItem = false;
+                $('#spantituloproyecto').text("Campo requerido.");
+            }
+            if ($('#Tutor').val().trim() == '') {
+                var isValidItem = false;
+                $('#spantutor').text("Campo requerido.");
+            }
+            if ($('#IdTipoPS').val().trim() == '') {
+                var isValidItem = false;
+                $('#spantipops').text("Campo requerido.");
+            }
+            if ($('#IdArea').val().trim() == '') {
+                var isValidItem = false;
+                $('#spanarea').text("Campo requerido.");
+            }
+            if ($('#IdOrganizacion').val().trim() == '') {
+                var isValidItem = false;
+                $('#spanorganizacion').text("Campo requerido.");
+            }
+
+            if ($('#CicloLectivo').val().trim() == '') {
+                var isValidItem = false;
+                $('#spanciclolectivo').text("Campo requerido.");
+            }
+
+
+
+
+
+
+
+            if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
+
             bootbox.confirm("Esta por agregar un nuevo plan, ¿Desea continuar?", function (result) {
                 if (result) {
                     x.submit();
                 }
-            });
+            });}
         });
 
         ////////////////End:Select searchable///////////////////
@@ -68,6 +117,8 @@
             <div class="col-md-4">
                 @Html.EditorFor(model => model.CicloLectivo, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
                 @Html.ValidationMessageFor(model => model.CicloLectivo, "", new { @class = "text-danger" })
+                <span id="spanciclolectivo" style="color:red"></span>
+
             </div>
             <div class="col-md-2"></div>
 
@@ -143,8 +194,10 @@
                 @Html.LabelFor(model => model.TituloProyecto, htmlAttributes: new { @class = "control-label ", @Style = "text-align: left" })
             </div>
             <div class="col-md-4">
-                @Html.EditorFor(model => model.TituloProyecto, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
-                @Html.ValidationMessageFor(model => model.TituloProyecto, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TituloProyecto, new {htmlAttributes = new {@class = "form-control input-sm", @Style = "width: 200px"}})
+                <span id="spantituloproyecto" style="color:red"></span>
+
+                @Html.ValidationMessageFor(model => model.TituloProyecto, "", new {@class = "text-danger"})
             </div>
             <div class="col-md-2"></div>
 
@@ -156,8 +209,10 @@
                 @Html.LabelFor(model => model.Tutor, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
             </div>
             <div class="col-md-4">
-                @Html.EditorFor(model => model.Tutor, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
-                @Html.ValidationMessageFor(model => model.Tutor, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Tutor, new {htmlAttributes = new {@class = "form-control input-sm", @Style = "width: 200px"}})
+                <span id="spantutor" style="color:red"></span>
+
+                @Html.ValidationMessageFor(model => model.Tutor, "", new {@class = "text-danger"})
             </div>
             <div class="col-md-2"></div>
 
@@ -169,8 +224,10 @@
                 @Html.LabelFor(model => model.IdTipoPS, "Tipo de PS", htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
             </div>
             <div class="col-md-4">
-                @Html.DropDownList("IdTipoPS", null, "Seleccione un Tipo de PS...", htmlAttributes: new { @class = "form-control input-sm", @Style = "width: 200px" })
-                @Html.ValidationMessageFor(model => model.IdTipoPS, "", new { @class = "text-danger" })
+                @Html.DropDownList("IdTipoPS", null, "Seleccione un Tipo de PS...", htmlAttributes: new {@class = "form-control input-sm", @Style = "width: 200px"})
+                <span id="spantipops" style="color:red"></span>
+
+                @Html.ValidationMessageFor(model => model.IdTipoPS, "", new {@class = "text-danger"})
             </div>
             <div class="col-md-2"></div>
 
@@ -190,7 +247,8 @@
                     }
                     else
                     {
-                        <option value="">Buscar área...</option> }
+                        <option value="">Buscar área...</option>
+                    }
 
 
 
@@ -199,6 +257,7 @@
                         <option value="@item.IdArea">@item.NombreArea</option>
                     }
                 </select>
+                <span id="spanarea" style="color:red"></span>
             </div>
             <div class="col-md-2"></div>
 
@@ -218,13 +277,16 @@
                     }
                     else
                     {
-                        <option value="">Buscar organización...</option> }
+                        <option value="">Buscar organización...</option>
+                    }
 
                     @foreach (var item in ViewBag.organizaciones)
                     {
                         <option value="@item.IdOrganizacion">@item.DenominacionOrg</option>
                     }
                 </select>
+                <span id="spanorganizacion" style="color:red"></span>
+
             </div>
             <div class="col-md-2"></div>
 
@@ -249,6 +311,8 @@
             </div>
             <div class="col-md-4">
                 @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                <span id="spanfechapresentacionplan" style="color:red"></span>
+
                 @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -257,7 +321,9 @@
                 @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-10" })
             </div>
             <div class="col-md-4">
-                @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm",  @Style = "width: 200px" } })
+                <span id="spanfechaevaluacionplan" style="color:red"></span>
+
                 @Html.ValidationMessageFor(model => model.FechaEvaluacionPlan, "", new { @class = "text-danger" })
             </div>
         </div>

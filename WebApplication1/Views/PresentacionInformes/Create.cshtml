@@ -5,8 +5,53 @@
 @{
     ViewBag.Title = "Create";
 }
+<head>
+    <script>
+        /////////////////Start:Select searchable////////////////
+        
+        $('#informe').submit(function (e) {
+            var x = this;
+            e.preventDefault();
+            var isValidItem = true;
 
-@using (Html.BeginForm())
+            var fecha1 = new Date($('#FechaPresentacionInforme').val());
+            var fecha2 = new Date($('#FechaEvaluacionInforme').val());
+
+            var minfecha = new Date("01/01/2000");
+            var maxfecha = new Date("01/01/2100");
+
+            if ((fecha1 < minfecha) || (fecha1 > maxfecha)) {
+                var isValidItem = false;
+                $('#spanfechapresentacioninforme').text("Rango valido: 01/01/2000 - 01/01/2100");
+            }
+            if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
+                var isValidItem = false;
+                $('#spanfechaevaluacioninforme').text("Rango valido: 01/01/2000 - 01/01/2100");
+
+            }
+
+            if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
+                bootbox.confirm("Esta por agregar una presentación del informe, ¿Desea continuar?", function (result) {
+                    if (result) {
+                        x.submit();
+                    }
+                });
+            }
+           
+                
+            
+            
+          
+
+
+               
+        });
+
+        ////////////////End:Select searchable///////////////////
+
+    </script>
+</head>
+@using (Html.BeginForm("Create", "PresentacionInformes", null, FormMethod.Post, new { id = "informe" }))
 {    @Html.HiddenFor(model => model.IdPS)
 
     @Html.AntiForgeryToken()
@@ -20,6 +65,8 @@
             </div>
             <div class="col-md-4">
                 @Html.EditorFor(model => model.FechaPresentacionInforme, new { htmlAttributes = new { @class = "form-control" } })
+                <span id="spanfechapresentacioninforme" style="color:red"></span>
+
                 @Html.ValidationMessageFor(model => model.FechaPresentacionInforme, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -30,6 +77,8 @@
             </div>
             <div class="col-md-4">
                 @Html.EditorFor(model => model.FechaEvaluacionInforme, new { htmlAttributes = new { @class = "form-control" } })
+                <span id="spanfechaevaluacioninforme" style="color:red"></span>
+
                 @Html.ValidationMessageFor(model => model.FechaEvaluacionInforme, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -69,6 +118,3 @@
 }
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
