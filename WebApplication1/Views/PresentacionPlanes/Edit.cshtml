@@ -6,8 +6,68 @@
 @{
     Layout = null;
 }
+<head>
+    <script>
+        /////////////////Start:Select searchable////////////////
 
-@using (Html.BeginForm())
+        $('#editarplan').submit(function (e) {
+            var x = this;
+            e.preventDefault();
+            var isValidItem = true;
+
+            var fecha1 = new Date($('#FechaPresentacionPlan').val());
+            var fecha2 = new Date($('#FechaEvaluacionPlan').val());
+
+            var minfecha = new Date("01/01/2000");
+            var maxfecha = new Date("01/01/2100");
+
+            if ((fecha1 < minfecha) || (fecha1 > maxfecha) ){
+                var isValidItem = false;
+                $('#spanfechapresentacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
+            }
+            if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
+                var isValidItem = false;
+                $('#spanfechaevaluacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
+
+            }
+            if ($('#FechaPresentacionPlan').val().trim() == '') {
+                var isValidItem = false;
+                $('#spanfechapresentacionplan').text("Campo requerido.");
+
+            }
+
+            if (($('#FechaEvaluacionPlan').val().trim() == '') & ($('#EstadoEvaluacionPlan').val().trim() != 0)) {
+                var isValidItem = false;
+                $('#spanfechaevaluacionplan').text("Campo requerido.");
+
+            }
+
+            if (($('#FechaEvaluacionPlan').val().trim() != '')& ($('#EstadoEvaluacionPlan').val().trim() == 0)) {
+                var isValidItem = false;
+                $('#spanfechaestado').text("**Fecha de Evaluación requiere una Evaluación!");
+            }
+
+            if (($('#FechaEvaluacionPlan').val().trim() == '') & ($('#EstadoEvaluacionPlan').val().trim() != 0)) {
+                var isValidItem = false;
+                $('#spanfechaestado').text("**Una Evaluación requiere una Fecha de Evaluación!");
+            }
+
+
+            if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
+                bootbox.confirm("Esta por agregar una presentación del plan, ¿Desea continuar?", function (result) {
+                    if (result) {
+                        x.submit();
+                    }
+                });
+            }
+
+        });
+
+        ////////////////End:Select searchable///////////////////
+
+    </script>
+</head>
+@using (Html.BeginForm("Edit", "PresentacionPlanes", null, FormMethod.Post, new { id = "editarplan" }))
 {
     @Html.AntiForgeryToken()
 
@@ -22,6 +82,8 @@
             <div class="col-md-4">
                 @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
                 @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new { @class = "text-danger" })
+                <span id="spanfechapresentacionplan" style="color:red"></span>
+
             </div>
         </div>
 
@@ -30,6 +92,8 @@
             <div class="col-md-4">
                 @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
                 @Html.ValidationMessageFor(model => model.FechaEvaluacionPlan, "", new { @class = "text-danger" })
+                <span id="spanfechaevaluacionplan" style="color:red"></span>
+
             </div>
         </div>
         <div class="form-group">
@@ -37,6 +101,7 @@
             <div class="col-md-4">
                 @Html.EnumDropDownListFor(model => model.EstadoEvaluacionPlan, htmlAttributes: new { @class = "form-control input-sm" })
                 @Html.ValidationMessageFor(model => model.EstadoEvaluacionPlan, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
@@ -55,6 +120,7 @@
                     @Html.ValidationMessageFor(model => model.IdPS, "", new { @class = "text-danger" })
                 </div>
             </div>*@
+        <span id="spanfechaestado" style="color:red"></span>
 
             <div class="form-group row text-center">
                 <div>

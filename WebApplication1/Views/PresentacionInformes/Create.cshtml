@@ -29,6 +29,17 @@
                 $('#spanfechaevaluacioninforme').text("Rango valido: 01/01/2000 - 01/01/2100");
 
             }
+            if ($('#FechaPresentacionInforme').val().trim() == '') {
+                var isValidItem = false;
+                $('#spanfechapresentacioninforme').text("Campo requerido.");
+
+            }
+            if ($('#FechaEvaluacionInforme').val().trim() == '') {
+                var isValidItem = false;
+                $('#spanfechaevaluacioninforme').text("Campo requerido.");
+
+            }
+
 
             if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
                 bootbox.confirm("Esta por agregar una presentación del informe, ¿Desea continuar?", function (result) {
@@ -38,13 +49,6 @@
                 });
             }
            
-                
-            
-            
-          
-
-
-               
         });
 
         ////////////////End:Select searchable///////////////////

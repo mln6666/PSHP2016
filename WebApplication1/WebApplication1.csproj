@@ -238,6 +238,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609220703250_InitialCreate.cs" />
+    <Compile Include="Migrations\201609220703250_InitialCreate.Designer.cs">
+      <DependentUpon>201609220703250_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609241939587_sape.cs" />
+    <Compile Include="Migrations\201609241939587_sape.Designer.cs">
+      <DependentUpon>201609241939587_sape.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Alumno.cs" />
     <Compile Include="Models\Area.cs" />
@@ -667,6 +676,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609220703250_InitialCreate.resx">
+      <DependentUpon>201609220703250_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609241939587_sape.resx">
+      <DependentUpon>201609241939587_sape.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,6 @@
-﻿@model WebApplication1.ViewModels.PrimerPlanVM
+﻿@using WebApplication1.Models
+
+@model WebApplication1.ViewModels.PrimerPlanVM
 
 @{
     Layout = null;
@@ -35,6 +37,24 @@
                 var isValidItem = false;
                 $('#spanfechaevaluacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
             }
+
+            if (($('#FechaEvaluacionPlan').val().trim() != '')& ($('#EstadoEvaluacionPlan').val().trim() == 0) ) {
+                var isValidItem = false;
+                $('#spanfechaestado').text("**Fecha de Evaluación requiere una Evaluación!");
+            }
+
+            if (($('#FechaEvaluacionPlan').val().trim() == '') & ($('#EstadoEvaluacionPlan').val().trim() != 0)) {
+                var isValidItem = false;
+                $('#spanfechaestado').text("**Una Evaluación requiere una Fecha de Evaluación!");
+            }
+
+            if ($('#FechaPresentacionPlan').val().trim() == '') {
+                var isValidItem = false;
+                $('#spanfechapresentacionplan').text("Campo requerido.");
+
+            }
+           
+        
             if ($('#TituloProyecto').val().trim() == '') {
                 var isValidItem = false;
                 $('#spantituloproyecto').text("Campo requerido.");
@@ -60,12 +80,6 @@
                 var isValidItem = false;
                 $('#spanciclolectivo').text("Campo requerido.");
             }
-
-
-
-
-
-
 
             if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
 
@@ -335,6 +349,8 @@
             <div class="col-md-4">
                 @Html.EnumDropDownListFor(model => model.EstadoEvaluacionPlan, htmlAttributes: new { @class = "form-control input-sm", @Style = "width: 200px" })
                 @Html.ValidationMessageFor(model => model.EstadoEvaluacionPlan, "", new { @class = "text-danger" })
+                <span id="spanestadoevaluacionplan" style="color:red"></span>
+
             </div>
         </div>
 
@@ -347,6 +363,7 @@
                 @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
             </div>
         </div>
+        <span id="spanfechaestado" style="color:red"></span>
 
         <div class="form-group row text-center" style="padding-top: 20px">
             <div>
