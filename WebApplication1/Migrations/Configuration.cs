@@ -9,7 +9,7 @@ namespace WebApplication1.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "WebApplication1.Context.ContextPS";
         }
 
