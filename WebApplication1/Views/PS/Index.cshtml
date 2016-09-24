@@ -106,10 +106,13 @@ else
 
 
 
-                  
+                  @if (item.PresentacionesPlanes.Count() == 0)
+                  {@Html.ActionLink("1er Plan", "CreatePrimerPlan", "PS", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm dialog-window10", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                  }
+                  else
 
 
-                    @if (item.Estado == Estado.Plan_Pendiente || item.Estado == Estado.Plan_Desaprobado)
+                    if (item.Estado == Estado.Plan_Pendiente || item.Estado == Estado.Plan_Desaprobado)
                     {@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "dialog-window2 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
                     else
                     {@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
@@ -129,7 +132,23 @@ else
         }
     </tbody>
 </table>}
+<div class="modal fade" id="myModal10" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Primer Plan</h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
 
+        </div>
+
+    </div>
+
+</div>
 <div class="modal fade" id="myModal1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -264,7 +283,24 @@ else
                 }
             });
                 ///////////////////////////
+            $("body").on("click", "a.dialog-window10", null, function (e) {
+                e.preventDefault();
 
+                var $link = $(this); // Reference to <a/> link
+                var title = $link.text(); //this is title to fetch in htnl
+                $('#myModal10.modal-title').html(title);
+
+                var url = $(this).attr('href');
+                if (url.indexOf('#') == 0) {
+                    $('#myModal10').modal('show');
+                }
+                else {
+                    $.get(url, function (data) {
+                        $('#myModal10 .te').html(data);
+                        $('#myModal10').modal();
+                    }).success(function () { $('input:text:visible:first').focus(); });
+                }
+            });
         });
        
     </script>

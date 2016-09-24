@@ -23,14 +23,15 @@
 			<th class="text-left" style="border-radius: 3px">
 				@Html.DisplayNameFor(model => model.Estado)
 			</th>
+		   
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.CicloLectivo)
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.Cuatrimestre)
+			</th>
 			<th class="text-left" style="border-radius: 3px">
 				@Html.DisplayNameFor(model => model.NroDisposicion)
-			</th>
-			<th class="text-left" style="border-radius: 3px">
-				@Html.DisplayNameFor(model => model.Area.NombreArea)
-			</th>
-			<th class="text-left" style="border-radius: 3px">
-				@Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
 			</th>
 		</tr>
 		<tr>
@@ -44,7 +45,15 @@
 			<td class="text-left" style="font-weight: bold; font-style: italic">
 				@Html.DisplayFor(model => model.Estado)
 			</td>
+		
+			<td class="text-left">
+				@Html.DisplayFor(model => model.CicloLectivo)
+			</td>
+			<td class="text-left">
+				@Html.DisplayFor(model => model.Cuatrimestre)
+			</td>
 
+		   
 			<td class="text-left">
 				@if (Model.NroDisposicion != null)
 				{
@@ -52,22 +61,92 @@
 				}
 				else
 				{
-                    <text>- - -</text>
-                }
+					<text>- - -</text>
+				}
 
 
 			</td>
+		</tr>
+		<tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.TituloProyecto)
+
+
+			</th>
+		   
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.Tutor)
+
+
+
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
+
+
+			</th>
+
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.Area.NombreArea)
+			</th>
+			<th class="text-left" style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
+			</th>
+
+		 
+
+
+		</tr>
+
+
+
+		<tr>
+			<td class="text-left">
+				@*@Html.DisplayFor(model => model.TituloProyecto)*@
+				@if (Model.TituloProyecto != null)
+				{
+					@Html.DisplayFor(model => model.TituloProyecto)
+				}
+				else
+				{
+					<text>- - -</text>
+				}
+			</td>
+			<td class="text-left">
+				@*@Html.DisplayFor(model => model.Tutor)*@
+				@if (Model.Tutor != null)
+				{
+					@Html.DisplayFor(model => model.Tutor)
+				}
+				else
+				{
+					<text>- - -</text>
+				}
+			</td>
+
+			<td class="text-left">
+				@*@Html.DisplayFor(model => model.TipoPS.NombreTipoPS)*@
+				@if (Model.TipoPS != null)
+				{
+					@Html.DisplayFor(model => model.TipoPS.NombreTipoPS)
+				}
+				else
+				{
+					<text>- - -</text>
+				}
+			</td>
+
 			<td class="text-left">
 				@*@Html.DisplayFor(model => model.Area.NombreArea)*@
 
-@if (Model.Area != null)
-{
-	@Html.DisplayFor(model => model.Area.NombreArea)
-}
-else
-{
-	<text>- - -</text>
-}
+				@if (Model.Area != null)
+				{
+					@Html.DisplayFor(model => model.Area.NombreArea)
+				}
+				else
+				{
+					<text>- - -</text>
+				}
 
 			</td>
 			<td class="text-left">
@@ -82,121 +161,64 @@ else
 					<text>- - -</text>
 				}
 			</td>
-		</tr>
-		<tr class="text-center" style="color: #2c3e50; background-color: lightblue">
-			<th class="text-left" style="border-radius: 3px">
-				@Html.DisplayNameFor(model => model.Tutor)
 
 
-			  
-			</th>
-			<th class="text-left" style="border-radius: 3px">
-				@Html.DisplayNameFor(model => model.TituloProyecto)
-
-			   
-			</th>
-			<th class="text-left" style="border-radius: 3px">
-				@Html.DisplayNameFor(model => model.CicloLectivo)
-			</th>
-			<th class="text-left" style="border-radius: 3px">
-				@Html.DisplayNameFor(model => model.Cuatrimestre)
-			</th>
-			<th class="text-left" style="border-radius: 3px">
-				@Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
-
-			   
-			</th>
-
-
-		</tr>
-
-
-
-		<tr>
 			<td class="text-left">
-				@*@Html.DisplayFor(model => model.Tutor)*@
-				@if (Model.Tutor != null)
-				{
-					@Html.DisplayFor(model => model.Tutor)
+				@if (Model.PresentacionesPlanes.Count() == 0)
+				{@Html.ActionLink("1er Plan", "CreatePrimerPlan", "PS", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm dialog-window10", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+				}else
+
+				if (Model.Estado == WebApplication1.Models.Estado.Plan_Pendiente || Model.Estado == WebApplication1.Models.Estado.Plan_Desaprobado)
+				{@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new {id = Model.IdPS}, new {@class = "btn btn-primary btn-sm dialog-window5", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
 				}
 				else
 				{
-					<text>- - -</text>
+					@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new {id = Model.IdPS}, new {@class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
 				}
-			</td>
-			<td class="text-left">
-				@*@Html.DisplayFor(model => model.TituloProyecto)*@
-				@if (Model.TituloProyecto != null)
-				{
-					@Html.DisplayFor(model => model.TituloProyecto)
-				}
-				else
-				{
-					<text>- - -</text>
-				}
-			</td>
-			<td class="text-left">
-				@Html.DisplayFor(model => model.CicloLectivo)
-			</td>
-			<td class="text-left">
-				@Html.DisplayFor(model => model.Cuatrimestre)
-			</td>
-			<td class="text-left">
-				@*@Html.DisplayFor(model => model.TipoPS.NombreTipoPS)*@
-				@if (Model.TipoPS != null)
-				{
-					@Html.DisplayFor(model => model.TipoPS.NombreTipoPS)
-				}
-				else
-				{
-					<text>- - -</text>
-				}
-			</td>
-			<td class="text-left">
-				@if (Model.Estado == WebApplication1.Models.Estado.Plan_Pendiente || Model.Estado == WebApplication1.Models.Estado.Plan_Desaprobado)
-				{@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm dialog-window5", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
-				else
-				{@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-				}
+
+
 
 				@if (Model.Estado == WebApplication1.Models.Estado.Plan_Aprobado || Model.Estado == WebApplication1.Models.Estado.Informe_Desaprobado)
-				{@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm dialog-window6", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+				{@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new {id = Model.IdPS}, new {@class = "btn btn-primary btn-sm dialog-window6", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
+				}
 				else
-				{@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
+				{@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new {id = Model.IdPS}, new {@class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
+				}
 
 
 
 
 
 
-				 <div class="btn-group">
-					 <a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-						 Acciones
-						 <span class="caret"></span>
-					 </a>
-					 <ul class="dropdown-menu">
-						 @if (Model.Estado == WebApplication1.Models.Estado.Informe_Aprobado)
-						 {
-							 <li>@Html.ActionLink("Aprobar PS", "AprobarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window8"})</li>
-						 }
-						 else
-						 {
-							 <li><a href="#"onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
-						 }
+				<div class="btn-group">
+					<a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+						Acciones
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						@if (Model.Estado == WebApplication1.Models.Estado.Informe_Aprobado)
+						{
+							<li>@Html.ActionLink("Aprobar PS", "AprobarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window8"})</li>
+						}
+						else
+						{
+							<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
+						}
 
-						 @if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada)
-						 {
-							 <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
-						 }
-						 else
-						 {
-							 <li>@Html.ActionLink("Cancelar PS", "CancelarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window7"})</li>
-						 }
+						@if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada)
+						{
+							<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
+						}
+						else
+						{
+							<li>@Html.ActionLink("Cancelar PS", "CancelarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window7"})</li>
+						}
 
-					 </ul>
-				 </div>
+					</ul>
+				</div>
 				@if (User.IsInRole("Administrador"))
-				{                @Html.ActionLink("Editar", "Edit", new { id = Model.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm" })
+				{
+					@Html.ActionLink("Editar", "Edit", new {id = Model.IdPS}, new {@class = "dialog-window1 btn btn-primary btn-sm"})
 
 				}
 
@@ -235,7 +257,23 @@ else
 					 </div>
 
 				 </div>
+<div class="modal fade" id="myModal10" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Primer Plan</h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
 
+        </div>
+
+    </div>
+
+</div>
 <div class="modal fade" id="myModal5" role="dialog"
 	 aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -410,6 +448,25 @@ else
 					$('#myModal8').modal();
 				}).success(function () { $('input:text:visible:first').focus(); });
 			}
+		});
+
+		$("body").on("click", "a.dialog-window10", null, function (e) {
+		    e.preventDefault();
+
+		    var $link = $(this); // Reference to <a/> link
+		    var title = $link.text(); //this is title to fetch in htnl
+		    $('#myModal10.modal-title').html(title);
+
+		    var url = $(this).attr('href');
+		    if (url.indexOf('#') == 0) {
+		        $('#myModal10').modal('show');
+		    }
+		    else {
+		        $.get(url, function (data) {
+		            $('#myModal10 .te').html(data);
+		            $('#myModal10').modal();
+		        }).success(function () { $('input:text:visible:first').focus(); });
+		    }
 		});
 	});
 </script>

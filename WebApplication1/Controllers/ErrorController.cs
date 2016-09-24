@@ -39,6 +39,10 @@ namespace ExpVMsape.Controllers
                     ViewBag.Title = "Acción no permitida.";
                     ViewBag.Description = "No se permite agregar planes en una PS cuyo estado NO es Plan Aprobado o Informe Desaprobado";
                     break;
+                case 2004:
+                    ViewBag.Title = "Acción no permitida.";
+                    ViewBag.Description = "No se permite agregar nuevos planes a una PS que ya posee uno.";
+                    break;
 
                 default:
                     ViewBag.Title = "Página no encontrada";

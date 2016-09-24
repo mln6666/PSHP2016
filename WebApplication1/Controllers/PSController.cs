@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Context;
 using WebApplication1.Models;
+using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
@@ -186,6 +187,167 @@ namespace WebApplication1.Controllers
             ViewBag.IdOrganizacion = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
             return View(pS);
         }
+
+        // // // // // / // // // // // // // //
+        public ActionResult CreatePrimerPlan(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PS pS = db.PSs.Find(id);
+            if (pS == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (pS.PresentacionesPlanes.Count != 0)
+            {
+                return RedirectToAction("Index", "Error", new { error = 2004 });
+            }
+
+            PrimerPlanVM pm=new PrimerPlanVM();
+            pm.IdPS = pS.IdPS;
+            pm.NroDisposicion = pS.NroDisposicion;
+            pm.Tutor = pS.Tutor;
+            pm.TituloProyecto = pS.TituloProyecto;
+            pm.CicloLectivo = pS.CicloLectivo;
+            pm.Cuatrimestre = pS.Cuatrimestre;
+
+            pm.IdOrganizacion = pS.IdOrganizacion;
+            pm.Organizacion = pS.Organizacion;
+
+            pm.IdArea = pS.IdArea;
+            pm.Area = pS.Area;
+
+            pm.IdTipoPS = pS.IdTipoPS;
+            pm.TipoPS = pS.TipoPS;
+
+            pm.Alumno = pS.Alumno;
+            pm.IdAlumno = pS.IdAlumno;
+
+            pm.Estado = pS.Estado;
+            //pm.IdPresentacionPlan = pS.IdPS;
+            //pm.FechaPresentacionPlan = pS.IdPS;
+            //pm.FechaEvaluacionPlan = pS.IdPS;
+            //pm.EstadoEvaluacionPlan = pS.IdPS;
+            //pm.ObservacionesPlan = pS.IdPS;
+
+
+
+
+            ViewBag.alumnos = db.Alumnos.ToList();
+            ViewBag.areas = db.Areas.ToList();
+            ViewBag.organizaciones = db.Organizaciones.ToList();
+            ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
+            ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
+            ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
+            ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
+
+            return View(pm);
+        }
+
+        // POST: PS/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreatePrimerPlan([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan")] PrimerPlanVM pm)
+        {
+
+            PS pS= new PS();
+            PresentacionPlan plan=new PresentacionPlan();
+
+            pS.IdPS = pm.IdPS;
+            pS.NroDisposicion = pm.NroDisposicion;
+            pS.Tutor = pm.Tutor;
+            pS.TituloProyecto = pm.TituloProyecto;
+            pS.CicloLectivo = pm.CicloLectivo;
+            pS.Cuatrimestre = pm.Cuatrimestre;
+
+            pS.IdOrganizacion = pm.IdOrganizacion;
+            //pS.Organizacion = pm.Organizacion;
+
+            pS.IdArea = pm.IdArea;
+            //pS.IdArea = pm.IdArea;
+
+            pS.IdTipoPS = pm.IdTipoPS;
+            //pS.TipoPS = pm.TipoPS;
+
+            //pS.Alumno = pm.Alumno;
+            pS.IdAlumno = pm.IdAlumno;
+
+            pS.Estado = pm.Estado;
+            plan.IdPresentacionPlan = pm.IdPresentacionPlan;
+            plan.FechaPresentacionPlan = pm.FechaPresentacionPlan;
+            plan.FechaEvaluacionPlan = pm.FechaEvaluacionPlan;
+            plan.EstadoEvaluacionPlan = pm.EstadoEvaluacionPlan;
+            plan.ObservacionesPlan = pm.ObservacionesPlan;
+            plan.IdPS = pm.IdPS;
+
+
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(pS).State = EntityState.Modified;
+                db.SaveChanges();
+
+
+                db.PresentacionPlanes.Add(plan);
+                db.SaveChanges();
+
+                PS pu = db.PSs.Find(plan.IdPS);
+                if (plan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
+                    pu.Estado = Estado.Plan_Entregado;
+
+                if (plan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                    pu.Estado = Estado.Plan_Aprobado;
+
+                if (plan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
+                    pu.Estado = Estado.Plan_Desaprobado;
+
+                db.Entry(pu).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Details", "PS", new { id = plan.IdPS });
+
+            }
+
+            ViewBag.alumnos = db.Alumnos.ToList();
+            ViewBag.areas = db.Areas.ToList();
+            ViewBag.organizaciones = db.Organizaciones.ToList();
+            ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
+            ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
+            ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
+            ViewBag.IdOrganizacion = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
+            return View(pm);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // // / // / // / // / // / /
+
+
+
+
+
+
+
+
+
+
+
+
 
         //GET
         public ActionResult CancelarPS(int? id)

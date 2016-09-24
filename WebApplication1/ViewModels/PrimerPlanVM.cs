@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WebApplication1.Models;
 
-namespace WebApplication1.Models
+namespace WebApplication1.ViewModels
 {
-    public class PS
+    public class PrimerPlanVM
     {
-        [Key]
+
         public int IdPS { get; set; }
 
-        
+
         [Display(Name = "Disposición")]
         public int? NroDisposicion { get; set; }
 
@@ -50,5 +51,25 @@ namespace WebApplication1.Models
         public virtual TipoPS TipoPS { get; set; }
 
         public virtual Alumno Alumno { get; set; }
+
+
+        public int IdPresentacionPlan { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
+        public DateTime FechaPresentacionPlan { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
+        public DateTime FechaEvaluacionPlan { get; set; }
+
+        public virtual Evaluacion EstadoEvaluacionPlan { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Observaciones")]
+        public string ObservacionesPlan { get; set; }
+       
+
+        public virtual PS PS { get; set; }
     }
 }

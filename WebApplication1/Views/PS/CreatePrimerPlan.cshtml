@@ -1,0 +1,296 @@
+﻿@model WebApplication1.ViewModels.PrimerPlanVM
+
+@{
+    Layout = null;
+}
+
+<head>
+    <link href="@Url.Content("~/Content/Select2/select2.min.css")" rel="stylesheet" />
+
+    <script src="@Url.Content("~/Content/Select2/select2.min.js")"></script>
+
+    <script>
+        /////////////////Start:Select searchable////////////////
+        $(document).ready(function() {
+            $(".js-example-basic-single").select2();
+            $(".js-example-basic-single1").select2();
+
+        });
+        $('#primerplan').submit(function (e) {
+            var x = this;
+            e.preventDefault();
+            //var x=document.getElementById("RoleID").innerText;
+            bootbox.confirm("Esta por agregar un nuevo plan, ¿Desea continuar?", function (result) {
+                if (result) {
+                    x.submit();
+                }
+            });
+        });
+
+        ////////////////End:Select searchable///////////////////
+
+    </script>
+
+</head>
+@using (Html.BeginForm("CreatePrimerPlan", "PS", null, FormMethod.Post, new { id = "primerplan" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IdPS)
+        @Html.HiddenFor(model => model.IdAlumno)
+
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-4">
+
+                <select class="js-example-basic-single form-control input-sm" disabled="disabled" id="IdAlumno" name="IdAlumno" style="font: small-caption; width: 200px; background-color: beige; padding-top: 30px;">
+                    <option value="@Model.IdAlumno">@Model.Alumno.Legajo - @Model.Alumno.ApellidoAlu, @Model.Alumno.NombreAlu</option>
+                    @foreach (var item in ViewBag.alumnos)
+                {
+                        <option value="@item.IdAlumno">@item.Legajo - @item.NombreAlu, @item.ApellidoAlu</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.CicloLectivo, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.CicloLectivo, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                @Html.ValidationMessageFor(model => model.CicloLectivo, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+
+
+        @if (Model.Cuatrimestre == 1)
+        {
+            <div class="form-group">
+                <div class="col-md-2"></div>
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Cuatrimestre, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
+                </div>
+                <div class="radio col-md-4">
+                    <label>
+                        <input name="Cuatrimestre" id="optionsRadios1" value="1" checked="" type="radio">
+                        1er
+                    </label>
+                    <label>    </label>
+                    <label>
+                        <input name="Cuatrimestre" id="optionsRadios2" value="2" type="radio">
+                        2do
+                    </label>
+                </div>
+                <div class="col-md-2"></div>
+
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <div class="col-md-2"></div>
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Cuatrimestre, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
+                </div>
+                <div class="radio col-md-4">
+                    <label>
+                        <input name="Cuatrimestre" id="optionsRadios1" value="1" type="radio">
+                        1er
+                    </label>
+                    <label>    </label>
+                    <label>
+                        <input name="Cuatrimestre" id="optionsRadios2" value="2" checked="" type="radio">
+                        2do
+                    </label>
+                </div>
+                <div class="col-md-2"></div>
+
+            </div>
+        }
+
+
+
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.NroDisposicion, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.NroDisposicion, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                @Html.ValidationMessageFor(model => model.NroDisposicion, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.TituloProyecto, htmlAttributes: new { @class = "control-label ", @Style = "text-align: left" })
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.TituloProyecto, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                @Html.ValidationMessageFor(model => model.TituloProyecto, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Tutor, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Tutor, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                @Html.ValidationMessageFor(model => model.Tutor, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.IdTipoPS, "Tipo de PS", htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownList("IdTipoPS", null, "Seleccione un Tipo de PS...", htmlAttributes: new { @class = "form-control input-sm", @Style = "width: 200px" })
+                @Html.ValidationMessageFor(model => model.IdTipoPS, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.IdArea, "Área", htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-4">
+                <select class="js-example-basic-single form-control input-sm" id="IdArea" name="IdArea" style="font: small-caption; width: 200px; background-color: beige; padding-top: 30px">
+                    @if (Model.IdArea != null)
+                    {
+                        <option value="@Model.IdArea">@Model.Area.NombreArea</option>
+                    }
+                    else
+                    {
+                        <option value="">Buscar área...</option> }
+
+
+
+                    @foreach (var item in ViewBag.areas)
+                    {
+                        <option value="@item.IdArea">@item.NombreArea</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.IdOrganizacion, "Organización", htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
+            </div>
+            <div class="col-md-4">
+                <select class="js-example-basic-single form-control input-sm" id="IdOrganizacion" name="IdOrganizacion" style="font: small-caption; width: 200px; background-color: beige; padding-top: 30px">
+                    @if (Model.IdOrganizacion != null)
+                    {
+                        <option value="@Model.IdOrganizacion">@Model.Organizacion.DenominacionOrg</option>
+                    }
+                    else
+                    {
+                        <option value="">Buscar organización...</option> }
+
+                    @foreach (var item in ViewBag.organizaciones)
+                    {
+                        <option value="@item.IdOrganizacion">@item.DenominacionOrg</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+
+    <div class="form-group">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Estado, htmlAttributes: new {@class = "control-label", @Style = "text-align: left"})
+        </div>
+        <div class="col-md-4">
+            @*@Html.EnumDropDownListFor(model => model.Estado, htmlAttributes: new {@class = "form-control input-sm", @Style = "width: 200px"})*@
+            <p class="form-control input-sm" style="width: 200px; background-color: lightgray; font-weight: bold">Plan Pendiente</p>
+            @Html.ValidationMessageFor(model => model.Estado, "", new {@class = "text-danger"})
+        </div>
+        <div class="col-md-2"></div>
+
+    </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.FechaPresentacionPlan, "Fecha de Presentación", htmlAttributes: new { @class = "control-label col-md-10" })
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-10" })
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                @Html.ValidationMessageFor(model => model.FechaEvaluacionPlan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.EstadoEvaluacionPlan, "Estado de Evaluación", htmlAttributes: new { @class = "control-label col-md-10" })
+            </div>
+            <div class="col-md-4">
+                @Html.EnumDropDownListFor(model => model.EstadoEvaluacionPlan, htmlAttributes: new { @class = "form-control input-sm", @Style = "width: 200px" })
+                @Html.ValidationMessageFor(model => model.EstadoEvaluacionPlan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.ObservacionesPlan, htmlAttributes: new { @class = "control-label col-md-10" })
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.ObservacionesPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row text-center" style="padding-top: 20px">
+            <div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                <input type="submit" value="Guardar cambios" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+
+}
+
+

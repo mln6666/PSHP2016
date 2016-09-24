@@ -257,6 +257,7 @@
     <Compile Include="Models\Validaciones\OrganizacionExistente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\PrimerPlanVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -654,6 +655,7 @@
     <Content Include="Views\Organizaciones\_NuevaOrg.cshtml" />
     <Content Include="Views\PS\CancelarPS.cshtml" />
     <Content Include="Views\PS\AprobarPS.cshtml" />
+    <Content Include="Views\PS\CreatePrimerPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

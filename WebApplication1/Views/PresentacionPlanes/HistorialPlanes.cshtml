@@ -7,57 +7,66 @@
     ViewBag.Title = "HistorialPlanes";
 }*@
 <style>
-    .resaltar tbody tr:nth-child(even) td {
+   .resaltar tbody tr td {
         background-color: khaki;
     }
+
+    .resaltar tbody tr:first-child td {
+        background-color: yellow;
+        font-weight: bold;
+    }
+
+
 </style>
 <div id="cerrar">
-    <table class="table table-striped table-bordered table-condensed resaltar"  >
-        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+    <table class="table table-striped table-bordered table-condensed resaltar">
+        <thead>
+            <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
 
-            <th class="text-left" style="border-radius: 3px">
-                @*@Html.DisplayNameFor(model => model.PresentacionesPlanes.FechaPresentacionPlan)*@
-                Fecha Presentación
-            </th>
-            <th class="text-left" style="border-radius: 3px">
-                @*@Html.DisplayNameFor(model => model.FechaEvaluacionPlan)*@
-                Fecha Evaluación
-            </th>
-            <th class="text-left" style="border-radius: 3px">
-                @*@Html.DisplayNameFor(model => model.EstadoEvaluacionPlan)*@
-                Evaluación
-            </th>
-            <th class="text-left" style="border-radius: 3px; width: 500px">
-                @*@Html.DisplayNameFor(model => model.ObservacionesPlan)*@
-                Observaciones
-            </th>
+                <th class="text-left" style="border-radius: 3px">
+                    @*@Html.DisplayNameFor(model => model.PresentacionesPlanes.FechaPresentacionPlan)*@
+                    Fecha Presentación
+                </th>
+                <th class="text-left" style="border-radius: 3px">
+                    @*@Html.DisplayNameFor(model => model.FechaEvaluacionPlan)*@
+                    Fecha Evaluación
+                </th>
+                <th class="text-left" style="border-radius: 3px">
+                    @*@Html.DisplayNameFor(model => model.EstadoEvaluacionPlan)*@
+                    Evaluación
+                </th>
+                <th class="text-left" style="border-radius: 3px; width: 500px">
+                    @*@Html.DisplayNameFor(model => model.ObservacionesPlan)*@
+                    Observaciones
+                </th>
 
-        </tr>
-
-        @foreach (var item in Model.PresentacionesPlanes)
-        {
-            <tr>
-                <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.FechaPresentacionPlan)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.FechaEvaluacionPlan)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.EstadoEvaluacionPlan)
-                </td>
-                <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.ObservacionesPlan)
-                </td>
-                @*<td class="text-left">
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PresentacionesPlanes)
+            {
+                <tr>
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.FechaPresentacionPlan)
+                    </td>
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.FechaEvaluacionPlan)
+                    </td>
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.EstadoEvaluacionPlan)
+                    </td>
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.ObservacionesPlan)
+                    </td>
+                    @*<td class="text-left">
                         @Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
                         @Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })
                     </td>*@
-            </tr>
-        }
-
-    </table>
+                </tr>
+            }
+        </tbody>
+</table>
     @*@Ajax.ActionLink("Cerrar historial planes...", "Vacio","Home", new AjaxOptions
 {
     InsertionMode = InsertionMode.Replace,
