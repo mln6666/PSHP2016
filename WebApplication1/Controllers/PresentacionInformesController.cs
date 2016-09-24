@@ -77,6 +77,17 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("Index", "Error", new { error = 2002 });
             }
+
+            var selectList = Enum.GetValues(typeof(Evaluacion))
+                       .Cast<Evaluacion>()
+                       .Where(e => e != Evaluacion.Rechazado)
+                       .Select(e => new SelectListItem
+                       {
+                           Value = ((int)e).ToString(),
+                           Text = e.ToString()
+                       });
+
+            ViewBag.SelectList = selectList;
             //ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor");
             return View(presentacioninforme);
         }

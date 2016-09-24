@@ -21,6 +21,10 @@
             var minfecha = new Date("01/01/2000");
             var maxfecha = new Date("01/01/2100");
 
+            if (fecha1 > fecha2){
+                var isValidItem = false;
+                $('#spanfechaestado').text("**La Fecha de Presentación no puede ser mayor a la Fecha de Evaluación.");
+            }
             if ((fecha1 < minfecha) || (fecha1 > maxfecha) ){
                 var isValidItem = false;
                 $('#spanfechapresentacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
