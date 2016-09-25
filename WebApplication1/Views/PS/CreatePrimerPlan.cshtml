@@ -170,7 +170,7 @@
         <div class="form-group">
             <div class="col-md-2"></div>
             <div class="col-md-4">
-                @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
             </div>
             <div class="col-md-4">
 
@@ -376,56 +376,60 @@
         </div>
         <div class="col-md-4">
             @*@Html.EnumDropDownListFor(model => model.Estado, htmlAttributes: new {@class = "form-control input-sm", @Style = "width: 200px"})*@
-            <p class="form-control input-sm" style="width: 200px; background-color: lightgray; font-weight: bold">Plan Pendiente</p>
+            <p class="form-control input-sm" style="width: 200px; background-color: lightgray; font-weight: bold">Plan Entregado</p>
             @Html.ValidationMessageFor(model => model.Estado, "", new {@class = "text-danger"})
         </div>
         <div class="col-md-2"></div>
 
     </div>
-        <div class="form-group">
-            <div class="col-md-6">
-                @Html.LabelFor(model => model.FechaPresentacionPlan, "Fecha de Presentación", htmlAttributes: new { @class = "control-label col-md-10" })
-            </div>
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px"} })
-                <span id="spanfechapresentacionplan" style="color:red"></span>
-
-                @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.FechaPresentacionPlan, "Fecha de Presentación", htmlAttributes: new {@class = "control-label col-md-10", @Style = "text-align: left"})
         </div>
-        <div class="form-group">
-            <div class="col-md-6">
-                @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-10" })
-            </div>
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm",  @Style = "width: 200px" } })
-                <span id="spanfechaevaluacionplan" style="color:red"></span>
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.FechaPresentacionPlan, new {htmlAttributes = new {@class = "form-control input-sm", @Style = "width: 200px"}})
+            <span id="spanfechapresentacionplan" style="color: red"></span>
 
-                @Html.ValidationMessageFor(model => model.FechaEvaluacionPlan, "", new { @class = "text-danger" })
-            </div>
+            @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new {@class = "text-danger"})
         </div>
-
-        <div class="form-group">
-            <div class="col-md-6">
-                @Html.LabelFor(model => model.EstadoEvaluacionPlan, "Estado de Evaluación", htmlAttributes: new { @class = "control-label col-md-10" })
-            </div>
-            <div class="col-md-4">
-                @Html.EnumDropDownListFor(model => model.EstadoEvaluacionPlan, htmlAttributes: new { @class = "form-control input-sm", @Style = "width: 200px" })
-                @Html.ValidationMessageFor(model => model.EstadoEvaluacionPlan, "", new { @class = "text-danger" })
-                <span id="spanestadoevaluacionplan" style="color:red"></span>
-
-            </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new {@class = "control-label col-md-10", @Style = "text-align: left"})
         </div>
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.FechaEvaluacionPlan, new {htmlAttributes = new {@class = "form-control input-sm", @Style = "width: 200px"}})
+            <span id="spanfechaevaluacionplan" style="color: red"></span>
 
-        <div class="form-group">
-            <div class="col-md-6">
-                @Html.LabelFor(model => model.ObservacionesPlan, htmlAttributes: new { @class = "control-label col-md-10" })
-            </div>
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.ObservacionesPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
-                @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
-            </div>
+            @Html.ValidationMessageFor(model => model.FechaEvaluacionPlan, "", new {@class = "text-danger"})
         </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.EstadoEvaluacionPlan, "Estado de Evaluación", htmlAttributes: new {@class = "control-label col-md-10", @Style = "text-align: left"})
+        </div>
+        <div class="col-md-4">
+            @Html.EnumDropDownListFor(model => model.EstadoEvaluacionPlan, htmlAttributes: new {@class = "form-control input-sm", @Style = "width: 200px"})
+            @Html.ValidationMessageFor(model => model.EstadoEvaluacionPlan, "", new {@class = "text-danger"})
+            <span id="spanestadoevaluacionplan" style="color: red"></span>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.ObservacionesPlan, htmlAttributes: new {@class = "control-label col-md-10", @Style = "text-align: left"})
+        </div>
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.ObservacionesPlan, new {htmlAttributes = new {@class = "form-control input-sm", @Style = "width: 200px"}})
+            @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new {@class = "text-danger"})
+        </div>
+    </div>
         <span id="spanfechaestado" style="color:red"></span>
 
         <div class="form-group row text-center" style="padding-top: 20px">
