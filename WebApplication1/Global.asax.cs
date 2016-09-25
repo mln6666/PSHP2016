@@ -57,6 +57,27 @@ namespace WebApplication1
                 dc.SaveChanges();
             }
 
+            if (dc.Areas.Count() == 0 | dc.Areas == null)
+            {
+                Area area1 = new Area();
+                Area area2 = new Area();
+                Area area3 = new Area();
+                Area area4 = new Area();
+
+                area1.NombreArea = "Desarrollo";
+                area1.DescripcionArea = "- - -";
+                area2.NombreArea = "Testing";
+                area2.DescripcionArea = "- - -";
+                area3.NombreArea = "Redes";
+                area3.DescripcionArea = "- - -";
+                area4.NombreArea = "Calidad / QA";
+                area4.DescripcionArea = "- - -";
+                dc.Areas.Add(area1);
+                dc.Areas.Add(area2);
+                dc.Areas.Add(area3);
+                dc.Areas.Add(area4);
+                dc.SaveChanges();
+            }
 
 
 
