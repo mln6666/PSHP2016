@@ -4,8 +4,8 @@
     Layout = null;
 }
 @*@{
-    ViewBag.Title = "Evaluar Plan";
-}*@
+        ViewBag.Title = "Evaluar Plan";
+    }*@
 <head>
     <script>
         /////////////////Start:Select searchable////////////////
@@ -18,11 +18,20 @@
             var fechaestado = true;
             var fechaevaluacionplan = true;
 
-
+            var fecha1 = new Date($('#fechita').val());
             var fecha2 = new Date($('#FechaEvaluacionPlan').val());
 
             var minfecha = new Date("01/01/2000");
             var maxfecha = new Date("01/01/2100");
+
+
+            if (fecha2 < fecha1) {
+                var isValidItem = false;
+                var fechaestado = false;
+
+                $('#spanfechaestado').text("Fecha de Evaluación debe ser mayor a la Fecha de Presentación.");
+
+            }
 
             if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
                 var isValidItem = false;
@@ -31,7 +40,7 @@
                 $('#spanfechaevaluacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
 
             }
-          
+
             if ($('#FechaEvaluacionPlan').val().trim() == '') {
                 var isValidItem = false;
                 var fechaevaluacionplan = false;
@@ -82,17 +91,25 @@
 
 @using (Html.BeginForm("EvaluarPlan", "PresentacionPlanes", null, FormMethod.Post, new { id = "evaluarplan" }))
 {
-    @Html.HiddenFor(model => model.FechaPresentacionPlan)           
+    @Html.HiddenFor(model => model.FechaPresentacionPlan, new {id="fechita", Value= Model.FechaPresentacionPlan})
     @Html.HiddenFor(model => model.IdPS)
-    
+
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal" >
+    <div class="form-horizontal">
         @*<h2>Evaluar Plan</h2>*@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IdPresentacionPlan)
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.FechaPresentacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
         <div class="form-group">
-            @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-6", @Style="text-align: center" })
+            @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
             <div class="col-md-4">
                 @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
                 @Html.ValidationMessageFor(model => model.FechaEvaluacionPlan, "", new { @class = "text-danger" })
@@ -108,20 +125,20 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.ObservacionesPlan, "Observaciones", htmlAttributes: new {@class = "control-label col-md-6", @Style = "text-align: center"})
+            @Html.LabelFor(model => model.ObservacionesPlan, "Observaciones", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
             <div class="col-md-6">
-                @Html.EditorFor(model => model.ObservacionesPlan, new {htmlAttributes = new {@class = "form-control input-sm"}})
-                @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.ObservacionesPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
             </div>
         </div>
         <span id="spanfechaestado" style="color:red"></span>
 
-         <div class="form-group">
-             <div class="col-md-offset-5 col-md-10">
-                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-10">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 
-                 <input type="submit" value="Guardar" class="btn btn-success"/>
-             </div>
+                <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
         </div>
     </div>
 }

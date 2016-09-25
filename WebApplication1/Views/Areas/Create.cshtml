@@ -40,7 +40,8 @@
 }
 
 <div>
-    @Html.ActionLink("Volver", "Index")
+    <a href="@Url.Action("Index", "Areas")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    @*@Html.ActionLink("Back to List", "Index")*@
 </div>
 @if (ViewBag.areaexistente != null)
 {

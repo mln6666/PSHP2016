@@ -23,7 +23,13 @@
             var minfecha = new Date("01/01/2000");
             var maxfecha = new Date("01/01/2100");
 
-          
+            if (fecha2 < fecha1) {
+                var isValidItem = false;
+                var fechaestado = false;
+
+                $('#spanfechaestado').text("Fecha de Evaluación debe ser mayor a la Fecha de Presentación.");
+
+            }
 
             if ((fecha1 < minfecha) || (fecha1 > maxfecha) ){
                 var isValidItem = false;

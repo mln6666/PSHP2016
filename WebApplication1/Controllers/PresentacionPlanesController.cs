@@ -182,6 +182,7 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("Index", "Error", new { error = 2000 });
             }
+            ViewBag.fechapresentacionplan = presentacionPlan.FechaPresentacionPlan;
 
             return PartialView(presentacionPlan);
         }

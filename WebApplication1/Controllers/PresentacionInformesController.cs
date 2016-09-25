@@ -189,7 +189,7 @@ namespace WebApplication1.Controllers
                         });
 
             ViewBag.SelectList = selectList;
-
+            ViewBag.fechapresentacioninforme = presentacionInforme.FechaPresentacionInforme;
             return PartialView(presentacionInforme);
         }
 
