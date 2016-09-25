@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using WebApplication1.Context;
 using WebApplication1.Models;
 using WebApplication1.ViewModels;
@@ -206,27 +207,29 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("Index", "Error", new { error = 2004 });
             }
 
-            PrimerPlanVM pm=new PrimerPlanVM();
-            pm.IdPS = pS.IdPS;
-            pm.NroDisposicion = pS.NroDisposicion;
-            pm.Tutor = pS.Tutor;
-            pm.TituloProyecto = pS.TituloProyecto;
-            pm.CicloLectivo = pS.CicloLectivo;
-            pm.Cuatrimestre = pS.Cuatrimestre;
+            var pm = Mapper.Map<PS,PrimerPlanVM>(pS);
 
-            pm.IdOrganizacion = pS.IdOrganizacion;
-            pm.Organizacion = pS.Organizacion;
+            //PrimerPlanVM pm=new PrimerPlanVM();
+            //pm.IdPS = pS.IdPS;
+            //pm.NroDisposicion = pS.NroDisposicion;
+            //pm.Tutor = pS.Tutor;
+            //pm.TituloProyecto = pS.TituloProyecto;
+            //pm.CicloLectivo = pS.CicloLectivo;
+            //pm.Cuatrimestre = pS.Cuatrimestre;
 
-            pm.IdArea = pS.IdArea;
-            pm.Area = pS.Area;
+            //pm.IdOrganizacion = pS.IdOrganizacion;
+            //pm.Organizacion = pS.Organizacion;
 
-            pm.IdTipoPS = pS.IdTipoPS;
-            pm.TipoPS = pS.TipoPS;
+            //pm.IdArea = pS.IdArea;
+            //pm.Area = pS.Area;
 
-            pm.Alumno = pS.Alumno;
-            pm.IdAlumno = pS.IdAlumno;
+            //pm.IdTipoPS = pS.IdTipoPS;
+            //pm.TipoPS = pS.TipoPS;
 
-            pm.Estado = pS.Estado;
+            //pm.Alumno = pS.Alumno;
+            //pm.IdAlumno = pS.IdAlumno;
+
+            //pm.Estado = pS.Estado;
             //pm.IdPresentacionPlan = pS.IdPS;
             //pm.FechaPresentacionPlan = pS.IdPS;
             //pm.FechaEvaluacionPlan = pS.IdPS;

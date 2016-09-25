@@ -8,8 +8,10 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using WebApplication1.App_Start;
 using WebApplication1.Context;
 using WebApplication1.Models;
 
@@ -24,7 +26,7 @@ namespace WebApplication1
             CreateSuperuser(db);
             AddPermisionsToSuperuser(db);
             db.Dispose();
-
+            Mapper.Initialize(c => c.AddProfile<MappingProfile>());
             AreaRegistration.RegisterAllAreas();            
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
