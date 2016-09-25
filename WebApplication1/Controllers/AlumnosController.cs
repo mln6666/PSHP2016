@@ -20,8 +20,8 @@ namespace WebApplication1.Controllers
         {
 
             var pss = (   from p in db.PSs
-                           where p.Estado == Estado.PS_Aprobada | p.Estado == Estado.PS_Cancelada 
-                           | p.Estado == Estado.PS_Vencida | p.Estado == Estado.Plan_Rechazado
+                           where p.Estado == Estado.PS_Aprobada /*| p.Estado == Estado.PS_Cancelada */
+                           | p.Estado == Estado.PS_Vencida /*| p.Estado == Estado.Plan_Rechazado*/
                            select p);
 
             var alumnos = db.Alumnos.ToList();

@@ -10,7 +10,10 @@
 </div>
 
 <p>
-    <a href="@Url.Action("Create", "Areas")" class="btn btn-success ">Nueva Área</a>
+    @*<a href="@Url.Action("Create", "Areas")" class="btn btn-success ">Nueva Área</a>*@
+    @Html.ActionLink("Nueva Área", "Create", "Areas", null, new { @class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+
+
     @*@Html.ActionLink("Agregar área", "Create")*@
 </p>
 <table id="mitabla" class="table table-striped table-bordered ">
