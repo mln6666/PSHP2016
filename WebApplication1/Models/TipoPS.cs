@@ -11,7 +11,7 @@ namespace WebApplication1.Models
         [Key]
         public int IdTipoPS { get; set; }
 
-        [Display(Name = "Nombre")]
+        [Display(Name = "Tipo PS")]
         public string NombreTipoPS { get; set; }
 
         [DataType(DataType.MultilineText)]

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using i18n;
 using WebApplication1.Context;
 using WebApplication1.Models;
 using WebApplication1.ViewModels;
@@ -24,10 +25,27 @@ namespace WebApplication1.Controllers
         {
 
             var pSs = ( from p in db.PSs
-                        where (p.Estado == Estado.PS_Aprobada & p.NroDisposicion == null) & p.Estado != Estado.PS_Cancelada & p.Estado != Estado.PS_Vencida & p.Estado != Estado.Plan_Rechazado
-                        select p);                                
+                        where p.Estado == Estado.PS_Aprobada  & p.Estado == Estado.PS_Cancelada & p.Estado == Estado.PS_Vencida & p.Estado == Estado.Plan_Rechazado
+                        select p);
 
-            return View(pSs);
+            var pos = db.PSs.ToList();
+
+            foreach (var item in pSs)
+            {
+                pos.Remove(item);
+            }
+
+
+
+            foreach (var item in pos)
+            {
+                if(item.Estado==Estado.PS_Aprobada &item.NroDisposicion==null)
+                pos.Remove(item);
+
+            }
+
+
+            return View(pos);
         }
 
         [Authorize(Roles = "Moderador,Invitado")]
