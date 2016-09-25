@@ -17,13 +17,42 @@
           
         });
 
+
       
         ////////////////End:Select searchable///////////////////
+
+        $('#editarps').submit(function (e) {
+            var x = this;
+            e.preventDefault();
+            var isValidItem = true;
+            var ciclolectivo = true;
+
+         
+            if ($('#CicloLectivo').val().trim() == '') {
+                var isValidItem = false;
+                var ciclolectivo = false;
+
+                $('#spanciclolectivo').text("Campo requerido.");
+
+            }
+          
+            if (ciclolectivo) {
+                $('#spanciclolectivo').text("");
+            }
+            if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
+                bootbox.confirm("Esta por editar una presentación del plan, ¿Desea continuar?", function (result) {
+                    if (result) {
+                        x.submit();
+                    }
+                });
+            }
+
+        });
 
     </script>
 
 </head>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "PS", null, FormMethod.Post, new { id = "editarps" }))
 {
     @Html.AntiForgeryToken()
 
@@ -59,6 +88,8 @@
             <div class="col-md-4">
                 @Html.EditorFor(model => model.CicloLectivo, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
                 @Html.ValidationMessageFor(model => model.CicloLectivo, "", new { @class = "text-danger" })
+                <span id="spanciclolectivo" style="color:red"></span>
+
             </div>
             <div class="col-md-2"></div>
 

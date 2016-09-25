@@ -1,4 +1,6 @@
-﻿@model WebApplication1.ViewModels.PrimerPlanVM
+﻿@using WebApplication1.Models
+
+@model WebApplication1.ViewModels.PrimerPlanVM
 
 @{
     Layout = null;
@@ -20,6 +22,16 @@
             var x = this;
             e.preventDefault();
             var isValidItem = true;
+            var fechapresentacionplan = true;
+            var fechaevaluacionplan = true;
+            var tituloproyecto = true;
+            var tutor = true;
+            var area = true;
+            var organizacion = true;
+            var ciclolectivo = true;
+            var tipops = true;
+            var fechaestado = true;
+
 
             var fecha1 = new Date($('#FechaPresentacionPlan').val());
             var fecha2 = new Date($('#FechaEvaluacionPlan').val());
@@ -29,40 +41,105 @@
 
             if ((fecha1 < minfecha) || (fecha1 > maxfecha)) {
                 var isValidItem = false;
+                var fechapresentacionplan = false;
+
                 $('#spanfechapresentacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
             }
             if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
                 var isValidItem = false;
+                var fechaevaluacionplan = false;
+
                 $('#spanfechaevaluacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
             }
+
+            if (($('#FechaEvaluacionPlan').val().trim() != '')& ($('#EstadoEvaluacionPlan').val().trim() == 0) ) {
+                var isValidItem = false;
+                var fechaestado = false;
+
+                $('#spanfechaestado').text("**Fecha de Evaluación requiere una Evaluación!");
+            }
+
+            if (($('#FechaEvaluacionPlan').val().trim() == '') & ($('#EstadoEvaluacionPlan').val().trim() != 0)) {
+                var isValidItem = false;
+                var fechaestado = false;
+
+                $('#spanfechaestado').text("**Una Evaluación requiere una Fecha de Evaluación!");
+            }
+
+            if ($('#FechaPresentacionPlan').val().trim() == '') {
+                var isValidItem = false;
+                var fechapresentacionplan = false;
+
+                $('#spanfechapresentacionplan').text("Campo requerido.");
+
+            }
+           
+        
             if ($('#TituloProyecto').val().trim() == '') {
                 var isValidItem = false;
+                var tituloproyecto = false;
+
                 $('#spantituloproyecto').text("Campo requerido.");
             }
             if ($('#Tutor').val().trim() == '') {
                 var isValidItem = false;
+                var tutor = false;
+
                 $('#spantutor').text("Campo requerido.");
             }
             if ($('#IdTipoPS').val().trim() == '') {
                 var isValidItem = false;
+                var tipops = false;
+
                 $('#spantipops').text("Campo requerido.");
             }
             if ($('#IdArea').val().trim() == '') {
                 var isValidItem = false;
+                var area = false;
+
                 $('#spanarea').text("Campo requerido.");
             }
             if ($('#IdOrganizacion').val().trim() == '') {
-                var isValidItem = false;
+                var isValidItem = false; var organizacion = false;
+
                 $('#spanorganizacion').text("Campo requerido.");
             }
 
             if ($('#CicloLectivo').val().trim() == '') {
                 var isValidItem = false;
+                var ciclolectivo = false;
+
                 $('#spanciclolectivo').text("Campo requerido.");
             }
 
-
-
+            if (fechapresentacionplan) {
+                $('#spanfechapresentacionplan').text("");
+            }
+            if (fechaevaluacionplan) {
+                $('#spanfechaevaluacionplan').text("");
+            }
+           
+            if (tituloproyecto) {
+                $('#spantituloproyecto').text("");
+            }
+            if (fechaestado) {
+                $('#spanfechaestado').text("");
+            }
+            if (tutor) {
+                $('#spantutor').text("");
+            }
+            if (area) {
+                $('#spanarea').text("");
+            }
+            if (organizacion) {
+                $('#spanorganizacion').text("");
+            }
+            if (ciclolectivo) {
+                $('#spanciclolectivo').text("");
+            }
+            if (tipops) {
+                $('#spantipops').text("");
+            }
 
 
 
@@ -335,6 +412,8 @@
             <div class="col-md-4">
                 @Html.EnumDropDownListFor(model => model.EstadoEvaluacionPlan, htmlAttributes: new { @class = "form-control input-sm", @Style = "width: 200px" })
                 @Html.ValidationMessageFor(model => model.EstadoEvaluacionPlan, "", new { @class = "text-danger" })
+                <span id="spanestadoevaluacionplan" style="color:red"></span>
+
             </div>
         </div>
 
@@ -347,6 +426,7 @@
                 @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
             </div>
         </div>
+        <span id="spanfechaestado" style="color:red"></span>
 
         <div class="form-group row text-center" style="padding-top: 20px">
             <div>

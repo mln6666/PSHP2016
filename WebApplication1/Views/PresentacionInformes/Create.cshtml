@@ -14,6 +14,12 @@
             e.preventDefault();
             var isValidItem = true;
 
+            var fechapresentacioninforme = true;
+            var fechaevaluacioninforme = true;
+            var fechaestado = true;
+            
+
+
             var fecha1 = new Date($('#FechaPresentacionInforme').val());
             var fecha2 = new Date($('#FechaEvaluacionInforme').val());
 
@@ -22,12 +28,55 @@
 
             if ((fecha1 < minfecha) || (fecha1 > maxfecha)) {
                 var isValidItem = false;
+                var fechapresentacioninforme = false;
+
                 $('#spanfechapresentacioninforme').text("Rango valido: 01/01/2000 - 01/01/2100");
             }
             if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
                 var isValidItem = false;
+                var fechaevaluacioninforme = false;
+
                 $('#spanfechaevaluacioninforme').text("Rango valido: 01/01/2000 - 01/01/2100");
 
+            }
+            if ($('#FechaPresentacionInforme').val().trim() == '') {
+                var isValidItem = false;
+                var fechapresentacioninforme = false;
+
+                $('#spanfechapresentacioninforme').text("Campo requerido.");
+
+            }
+
+            if (($('#FechaEvaluacionInforme').val().trim() == '') & ($('#EstadoEvaluacionInforme').val().trim() != 0)) {
+                var isValidItem = false;
+                var fechaevaluacioninforme = false;
+
+                $('#spanfechaevaluacioninforme').text("Campo requerido.");
+
+            }
+
+            if (($('#FechaEvaluacionInforme').val().trim() != '') & ($('#EstadoEvaluacionInforme').val().trim() == 0)) {
+                var isValidItem = false;
+                var fechaestado = false;
+
+                $('#spanfechaestado').text("**Fecha de Evaluación requiere una Evaluación!");
+            }
+
+            if (($('#FechaEvaluacionInforme').val().trim() == '') & ($('#EstadoEvaluacionInforme').val().trim() != 0)) {
+                var isValidItem = false;
+                var fechaestado = false;
+
+                $('#spanfechaestado').text("**Una Evaluación requiere una Fecha de Evaluación!");
+            }
+
+            if (fechaestado) {
+                $('#spanfechaestado').text("");
+            }
+            if (fechaevaluacioninforme) {
+                $('#spanfechaevaluacioninforme').text("");
+            }
+            if (fechapresentacioninforme) {
+                $('#spanfechapresentacioninforme').text("");
             }
 
             if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
@@ -38,13 +87,6 @@
                 });
             }
            
-                
-            
-            
-          
-
-
-               
         });
 
         ////////////////End:Select searchable///////////////////
@@ -73,24 +115,25 @@
 
         <div class="form-group">
             <div class="col-md-6">
-                @Html.LabelFor(model => model.FechaEvaluacionInforme, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.LabelFor(model => model.FechaEvaluacionInforme, "Fecha de Evaluación", htmlAttributes: new {@class = "control-label col-md-10"})
             </div>
             <div class="col-md-4">
-                @Html.EditorFor(model => model.FechaEvaluacionInforme, new { htmlAttributes = new { @class = "form-control" } })
-                <span id="spanfechaevaluacioninforme" style="color:red"></span>
+                @Html.EditorFor(model => model.FechaEvaluacionInforme, new {htmlAttributes = new {@class = "form-control"}})
+                <span id="spanfechaevaluacioninforme" style="color: red"></span>
 
-                @Html.ValidationMessageFor(model => model.FechaEvaluacionInforme, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.FechaEvaluacionInforme, "", new {@class = "text-danger"})
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-6">
-                @Html.LabelFor(model => model.EstadoEvaluacionInforme, "Estado de Evaluación", htmlAttributes: new { @class = "control-label col-md-10" })
-            </div>
+            @Html.LabelFor(model => model.EstadoEvaluacionInforme, "Estado de Evaluación", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
             <div class="col-md-4">
-                @Html.EnumDropDownListFor(model => model.EstadoEvaluacionInforme, htmlAttributes: new { @class = "form-control" })
+                @*@Html.EnumDropDownListFor(model => model.EstadoEvaluacionInforme, htmlAttributes: new { @class = "form-control input-sm" })*@
+                @Html.DropDownListFor(m => m.EstadoEvaluacionInforme, (IEnumerable<SelectListItem>)ViewBag.SelectList, htmlAttributes: new { @class = "form-control input-sm" })
+
                 @Html.ValidationMessageFor(model => model.EstadoEvaluacionInforme, "", new { @class = "text-danger" })
             </div>
         </div>
+    
         @*<div class="form-group">
             @Html.LabelFor(model => model.EstadoEvaluacionInforme, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -101,13 +144,15 @@
 
         <div class="form-group">
             <div class="col-md-6">
-                @Html.LabelFor(model => model.ObservacionesInforme, "Observaciones", htmlAttributes: new { @class = "control-label col-md-10" })
+                @Html.LabelFor(model => model.ObservacionesInforme, "Observaciones", htmlAttributes: new {@class = "control-label col-md-10"})
             </div>
             <div class="col-md-4">
-                @Html.EditorFor(model => model.ObservacionesInforme, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ObservacionesInforme, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ObservacionesInforme, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.ObservacionesInforme, "", new {@class = "text-danger"})
             </div>
         </div>
+        <span id="spanfechaestado" style="color:red"></span>
+
         <div class="form-group row text-center">
             <div>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

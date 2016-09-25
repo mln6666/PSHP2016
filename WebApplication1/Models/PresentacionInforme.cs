@@ -17,7 +17,7 @@ namespace WebApplication1.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
-        public DateTime FechaEvaluacionInforme { get; set; }
+        public DateTime? FechaEvaluacionInforme { get; set; }
                 
         public virtual Evaluacion EstadoEvaluacionInforme { get; set; }
 

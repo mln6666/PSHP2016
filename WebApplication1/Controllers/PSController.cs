@@ -398,25 +398,30 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
+            if (ps.Estado != Estado.Informe_Aprobado)
+            {
+                return RedirectToAction("Index", "Error", new { error = 2005 });
+            }
             return View(ps);
         }
 
-        [HttpPost, ActionName("AprobarPS")]
-        public ActionResult AprobarPSConfirmed( int? id)
+        [HttpPost]
+        public ActionResult AprobarPS([Bind(Include = "IdPS,NroDisposicion")] PS pS)
         {
-            PS ps = db.PSs.Find(id);
+            PS ps=new PS();
+            ps = db.PSs.Find(pS.IdPS);
             
             if (ps.Estado == Estado.Informe_Aprobado)
             {
-                if (ModelState.IsValid)
-                {
+                
+                    if (pS.NroDisposicion != null)
+                    {
+                        ps.NroDisposicion = pS.NroDisposicion;}
+
                     ps.Estado = Estado.PS_Aprobada;
                     db.Entry(ps).State = EntityState.Modified;
                     db.SaveChanges();
-                }else
-                {
-                    ViewBag.Error = "Error: Los datos de la PS no son válidos";
-                }
+               
 
             }else
             {
