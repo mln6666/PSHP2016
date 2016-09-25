@@ -70,8 +70,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CicloLectivo, htmlAttributes: new { @class = "control-label col-md-2", @onkeypress = "solonumeros()" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CicloLectivo, new { htmlAttributes = new { @class = "form-control input-sm", @Value = @DateTime.Now.Year, @Min= 2000 } })
+                @Html.EditorFor(model => model.CicloLectivo, new { htmlAttributes = new { @class = "form-control input-sm", @Value = @DateTime.Now.Year, @Min = 2000 } })
                 @Html.ValidationMessageFor(model => model.CicloLectivo, "", new { @class = "text-danger" })
+                <span id="spanciclolectivo" style="color:red"></span>
+
             </div>
         </div>
 
@@ -88,7 +90,7 @@
                         <input name="Cuatrimestre" id="optionsRadios2" value="2" type="radio">
                         2º
                     </label>
-                </div>                
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -240,12 +242,29 @@
         $('#agregarps').submit(function (e) {
             var permiso = this;
             e.preventDefault();
-            //var x=document.getElementById("RoleID").innerText;
-            bootbox.confirm("¿ Está seguro que desea agregar una nueva PS ?", function (result) {
-                if (result) {
-                    permiso.submit();
-                }
-            });
+
+            var isValidItem = true;
+            var ciclolectivo = true;
+
+            if ($('#CicloLectivo').val().trim() == '') {
+                var isValidItem = false;
+                var ciclolectivo = false;
+
+                $('#spanciclolectivo').text("Campo requerido.");
+            }
+
+            if (ciclolectivo) {
+                $('#spanciclolectivo').text("");
+            }
+            if (isValidItem) {
+
+                //var x=document.getElementById("RoleID").innerText;
+                bootbox.confirm("¿ Está seguro que desea agregar una nueva PS ?", function (result) {
+                    if (result) {
+                        permiso.submit();
+                    }
+                });
+            }
         });
 
 

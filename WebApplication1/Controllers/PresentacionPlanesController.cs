@@ -182,7 +182,6 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("Index", "Error", new { error = 2000 });
             }
-            ViewBag.fechapresentacionplan = presentacionPlan.FechaPresentacionPlan;
 
             return PartialView(presentacionPlan);
         }
@@ -194,6 +193,7 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EvaluarPlan([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")] PresentacionPlan presentacionPlan)
         {
+
             if (ModelState.IsValid)
             {
                 db.Entry(presentacionPlan).State = EntityState.Modified;

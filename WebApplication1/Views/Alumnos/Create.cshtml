@@ -116,19 +116,26 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#myModal").modal('show');
         });
 
-        $('#agregaralumno').submit(function (e) {
+        $('#agregaralumno').submit(function(e) {
             var alumno = this;
             e.preventDefault();
             //var x=document.getElementById("RoleID").innerText;
-            bootbox.confirm("Esta por agregar un nuevo Alumno, ¿Desea continuar?", function (result) {
-                if (result) {
-                    alumno.submit();
-                }
-            });
+            
+
+
+          
+
+            
+                bootbox.confirm("Esta por agregar un nuevo Alumno, ¿Desea continuar?", function(result) {
+                    if (result) {
+                        alumno.submit();
+                    }
+                });
+           
         });
     </script>
 }
