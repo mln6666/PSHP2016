@@ -664,6 +664,7 @@
     <Content Include="Views\PS\AprobarPS.cshtml" />
     <Content Include="Views\PS\CreatePrimerPlan.cshtml" />
     <Content Include="Views\Alumnos\HistorialAlu.cshtml" />
+    <Content Include="Views\PS\NumeroDisposicion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

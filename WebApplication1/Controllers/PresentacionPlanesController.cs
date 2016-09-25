@@ -11,20 +11,22 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class PresentacionPlanesController : Controller
     {
         private ContextPS db = new ContextPS();
 
         // GET: PresentacionPlanes
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Index()
         {
             var presentacionPlans = db.PresentacionPlanes.Include(p => p.PS);
             return View(presentacionPlans.ToList());
         }
 
-        
 
 
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult HistorialPlanes(int id)
         {
             var historial = db.PSs.Include(m => m.PresentacionesPlanes).SingleOrDefault(m => m.IdPS == id);
@@ -33,8 +35,9 @@ namespace WebApplication1.Controllers
             return View(historial);
         }
 
-        
+
         // GET: PresentacionPlanes/Details/5
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -49,6 +52,7 @@ namespace WebApplication1.Controllers
             return View(presentacionPlan);
         }
         // GET: PresentacionPlanes/Details/5
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Details2(int? idps)
         {
             ContextPS db = new ContextPS();
@@ -68,6 +72,7 @@ namespace WebApplication1.Controllers
 
 
         // GET: PresentacionPlanes/Create
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create(int id)
         {
             PresentacionPlan presentacionplan= new PresentacionPlan();
@@ -89,6 +94,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")] PresentacionPlan presentacionPlan)
         {
             if (ModelState.IsValid)
@@ -118,7 +124,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: PresentacionPlanes/Edit/5
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Moderador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -139,7 +145,6 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrador")]
         public ActionResult Edit([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")] PresentacionPlan presentacionPlan)
         {
             if (ModelState.IsValid)
@@ -167,6 +172,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: PresentacionPlanes/Edit/5
+        [Authorize(Roles = "Moderador")]
         public ActionResult EvaluarPlan(int? id)
         {
             if (id == null)
@@ -191,6 +197,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderador")]
         public ActionResult EvaluarPlan([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")] PresentacionPlan presentacionPlan)
         {
 

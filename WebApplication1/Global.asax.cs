@@ -21,6 +21,8 @@ namespace WebApplication1
     {
         protected void Application_Start()
         {
+
+            ContextPS dc = new ContextPS();
             ApplicationDbContext db = new ApplicationDbContext();
             CreateRoles(db);
             CreateSuperuser(db);
@@ -32,6 +34,33 @@ namespace WebApplication1
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            if (dc.TipoPSs.Count() == 0 | dc.TipoPSs == null)
+            {
+                TipoPS tipo1 = new TipoPS();
+                TipoPS tipo2 = new TipoPS();
+                TipoPS tipo3 = new TipoPS();
+                TipoPS tipo4 = new TipoPS();
+
+                tipo1.NombreTipoPS = "Pasantía / Laboral";
+                tipo1.DescripcionTipoPS = "Una Relación Laboral o Pasantía rentada en empresas del medio.";
+                tipo2.NombreTipoPS = "Proyecto Final";
+                tipo2.DescripcionTipoPS = "Desarrollo de un Proyecto Final que haya sido acordado mediante un convenio específico con terceros, entes y/o empresas privadas o públicas, grupos de investigación y/o desarrollo tecnológico y de servicios.";
+                tipo3.NombreTipoPS = "Investigación / Desarrollo";
+                tipo3.DescripcionTipoPS = "Participación activa en Grupos de Investigación, Desarrollo y/o Aplicación Tecnológica y de Servicios a terceros realizados por Grupos de Investigación o desarrollo tecnológico y de servicios acreditados, perteneciente a instituciones de nivel académico reconocido.";
+                tipo4.NombreTipoPS = "ONG / Instituciones / Empresas";
+                tipo4.DescripcionTipoPS = "Desarrollar tareas de ingeniería en el ambito de ONG y/o Instituciones y/o Empresas Productivas o de Servicios públicas o privadas.";
+                dc.TipoPSs.Add(tipo1);
+                dc.TipoPSs.Add(tipo2);
+                dc.TipoPSs.Add(tipo3);
+                dc.TipoPSs.Add(tipo4);
+                dc.SaveChanges();
+            }
+
+
+
+
+
         }
 
         
@@ -46,16 +75,7 @@ namespace WebApplication1
 
             var user = userManager.FindByName("admin@utnfrre.com");
 
-            if (!userManager.IsInRole(user.Id, "Ver"))
-            {
-                userManager.AddToRole(user.Id, "Ver");
-                
-            }
-            if (!userManager.IsInRole(user.Id, "Crear"))
-            {
-                userManager.AddToRole(user.Id, "Crear");
-
-            }
+          
             if (!userManager.IsInRole(user.Id, "Editar"))
             {
                 userManager.AddToRole(user.Id, "Editar");
@@ -65,82 +85,19 @@ namespace WebApplication1
             {
                 userManager.AddToRole(user.Id, "Eliminar");
                 }
-          
-            //if (!userManager.IsInRole(user.Id, "CrearAlumno"))
-            //{
-            //    userManager.AddToRole(user.Id, "CrearAlumno");
-            //}
-            //if (!userManager.IsInRole(user.Id, "CrearPS"))
-            //{
-            //    userManager.AddToRole(user.Id, "CrearPS");
-            //}
-            //if (!userManager.IsInRole(user.Id, "CrearPlan"))
-            //{
-            //    userManager.AddToRole(user.Id, "CrearPlan");
-            //}
-            //if (!userManager.IsInRole(user.Id, "CrearInforme"))
-            //{
-            //    userManager.AddToRole(user.Id, "CrearInforme");
-            //}
-            //if (!userManager.IsInRole(user.Id, "CrearArea"))
-            //{
-            //    userManager.AddToRole(user.Id, "CrearArea");
-            //}
-            //if (!userManager.IsInRole(user.Id, "CrearOrganizacion"))
-            //{
-            //    userManager.AddToRole(user.Id, "CrearOrganizacion");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EditarAlumno"))
-            //{
-            //    userManager.AddToRole(user.Id, "EditarAlumno");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EditarPS"))
-            //{
-            //    userManager.AddToRole(user.Id, "EditarPS");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EditarPlan"))
-            //{
-            //    userManager.AddToRole(user.Id, "EditarPlan");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EditarInforme"))
-            //{
-            //    userManager.AddToRole(user.Id, "EditarInforme");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EditarArea"))
-            //{
-            //    userManager.AddToRole(user.Id, "EditarArea");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EditarOrganizacion"))
-            //{
-            //    userManager.AddToRole(user.Id, "EditarOrganizacion");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EliminarAlumno"))
-            //{
-            //    userManager.AddToRole(user.Id, "EliminarAlumno");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EliminarPS"))
-            //{
-            //    userManager.AddToRole(user.Id, "EliminarPS");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EliminarPlan"))
-            //{
-            //    userManager.AddToRole(user.Id, "EliminarPlan");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EliminarInforme"))
-            //{
-            //    userManager.AddToRole(user.Id, "EliminarInforme");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EliminarArea"))
-            //{
-            //    userManager.AddToRole(user.Id, "EliminarArea");
-            //}
-            //if (!userManager.IsInRole(user.Id, "EliminarOrganizacion"))
-            //{
-            //    userManager.AddToRole(user.Id, "EliminarOrganizacion");
-            //}
+            if (!userManager.IsInRole(user.Id, "Moderador"))
+            {
+                userManager.AddToRole(user.Id, "Moderador");
+            }
+
+           
             if (!userManager.IsInRole(user.Id, "Administrador"))
             {
                 userManager.AddToRole(user.Id, "Administrador");
+            }
+            if (!userManager.IsInRole(user.Id, "Invitado"))
+            {
+                userManager.AddToRole(user.Id, "Invitado");
             }
 
 
@@ -172,24 +129,25 @@ namespace WebApplication1
                 roleManager.Create(new IdentityRole("Administrador"));
             }
 
-            if (!roleManager.RoleExists("Ver"))
-            {
-                roleManager.Create(new IdentityRole("Ver"));
-            }
+          
 
             if (!roleManager.RoleExists("Editar"))
             {
                 roleManager.Create(new IdentityRole("Editar"));
             }
 
-            if (!roleManager.RoleExists("Crear"))
-            {
-                roleManager.Create(new IdentityRole("Crear"));
-            }
-
+          
             if (!roleManager.RoleExists("Eliminar"))
             {
                 roleManager.Create(new IdentityRole("Eliminar"));
+            }
+            if (!roleManager.RoleExists("Moderador"))
+            {
+                roleManager.Create(new IdentityRole("Moderador"));
+            }
+            if (!roleManager.RoleExists("Invitado"))
+            {
+                roleManager.Create(new IdentityRole("Invitado"));
             }
 
         }

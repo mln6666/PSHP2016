@@ -11,11 +11,13 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class AlumnosController : Controller
     {
         private ContextPS db = new ContextPS();
 
         // GET: Alumnos
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Index()
         {
 
@@ -51,6 +53,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Alumnos/Details/5
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -66,7 +69,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Alumnos/Create
-        [Authorize(Roles = "Crear")]
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create()
         {
             return View();

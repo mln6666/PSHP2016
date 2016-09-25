@@ -27,7 +27,7 @@ namespace WebApplication1.Models
         public string CorreoAlu { get; set; }
 
         [Display(Name = "Año de Ingreso")]
-        public int? AñoIngreso { get; set; }
+        public int AñoIngreso { get; set; }
 
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }

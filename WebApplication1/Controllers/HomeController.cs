@@ -7,34 +7,35 @@ using WebApplication1.Context;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class HomeController : Controller
     {
         private ContextPS db = new ContextPS();
+        [AllowAnonymous]
         public ActionResult Index()
         {
             
             return View();
         }
 
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Vacio()
         {
-
             return View();
         }
 
 
 
-
+        [AllowAnonymous]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
-
+        [AllowAnonymous]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+           
 
             return View();
         }

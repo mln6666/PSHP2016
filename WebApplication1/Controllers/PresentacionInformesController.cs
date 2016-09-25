@@ -11,17 +11,20 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class PresentacionInformesController : Controller
     {
         private ContextPS db = new ContextPS();
 
         // GET: PresentacionInformes
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Index()
         {
             var presentacionInformes = db.PresentacionInformes.Include(p => p.PS);
             return View(presentacionInformes.ToList());
         }
 
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult HistorialInformes(int id)
         {
             var historial = db.PSs.Include(m => m.PresentacionesInforme).SingleOrDefault(m => m.IdPS == id);
@@ -31,6 +34,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: PresentacionInformes/Details/5
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -45,6 +49,7 @@ namespace WebApplication1.Controllers
             return View(presentacionInforme);
         }
 
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Details2(int? idps)
         {
             ContextPS db = new ContextPS();
@@ -66,6 +71,7 @@ namespace WebApplication1.Controllers
 
 
         // GET: PresentacionInformes/Create
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create(int id)
         {
             PresentacionInforme presentacioninforme = new PresentacionInforme();
@@ -97,6 +103,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")] PresentacionInforme presentacionInforme)
         {
             if (ModelState.IsValid)
@@ -125,45 +132,46 @@ namespace WebApplication1.Controllers
         }
 
         // GET:
-        public ActionResult EditUltimoInf(int? id)
-        {
-            IEnumerable<int> query = (from c in db.PresentacionInformes
-                                      where c.IdPS == id
-                                      select c.IdPresentacionInforme);
+        //public ActionResult EditUltimoInf(int? id)
+        //{
+        //    IEnumerable<int> query = (from c in db.PresentacionInformes
+        //                              where c.IdPS == id
+        //                              select c.IdPresentacionInforme);
 
-            int idinf = query.ElementAt(query.Count() - 1);
-            PresentacionInforme presentacionInforme = db.PresentacionInformes.Find(idinf);
+        //    int idinf = query.ElementAt(query.Count() - 1);
+        //    PresentacionInforme presentacionInforme = db.PresentacionInformes.Find(idinf);
 
-            return View(presentacionInforme);
-        }
+        //    return View(presentacionInforme);
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditUltimoInf([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")] PresentacionInforme presentacionInforme)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(presentacionInforme).State = EntityState.Modified;
-                db.SaveChanges();
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EditUltimoInf([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")] PresentacionInforme presentacionInforme)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(presentacionInforme).State = EntityState.Modified;
+        //        db.SaveChanges();
 
-                PS pS = db.PSs.Find(presentacionInforme.IdPS);
-                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Pendiente)
-                    pS.Estado = Estado.Informe_Entregado;
+        //        PS pS = db.PSs.Find(presentacionInforme.IdPS);
+        //        if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Pendiente)
+        //            pS.Estado = Estado.Informe_Entregado;
 
-                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Aprobado)
-                    pS.Estado = Estado.Informe_Aprobado;
+        //        if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Aprobado)
+        //            pS.Estado = Estado.Informe_Aprobado;
 
-                if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
-                    pS.Estado = Estado.Informe_Desaprobado;
+        //        if (presentacionInforme.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
+        //            pS.Estado = Estado.Informe_Desaprobado;
 
-                db.Entry(pS).State = EntityState.Modified;
-                db.SaveChanges();
+        //        db.Entry(pS).State = EntityState.Modified;
+        //        db.SaveChanges();
 
-                return RedirectToAction("Details", "PS", new { id = presentacionInforme.IdPS });
-            }
-            return View(presentacionInforme);
-        }
+        //        return RedirectToAction("Details", "PS", new { id = presentacionInforme.IdPS });
+        //    }
+        //    return View(presentacionInforme);
+        //}
 
+        [Authorize(Roles = "Moderador")]
         public ActionResult EvaluarInforme(int? id)
         {
             if (id == null)
@@ -198,6 +206,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderador")]
         public ActionResult EvaluarInforme([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")] PresentacionInforme presentacionInforme)
         {
             if (ModelState.IsValid)
@@ -229,7 +238,6 @@ namespace WebApplication1.Controllers
 
 
         // GET: PresentacionInformes/Edit/5
-        [Authorize(Roles = "Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -263,7 +271,6 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrador")]
         public ActionResult Edit([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")] PresentacionInforme presentacionInforme)
         {
             if (ModelState.IsValid)

@@ -1,11 +1,12 @@
 ﻿@model WebApplication1.Models.PS
 
 @{
-    
+
     Layout = null;
 }
 
-<p>@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "aprobarps" }))
+<p>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "aprobarps" }))
 { @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -38,21 +39,21 @@
 }
 <script>
         $('#aprobarps').submit(function (e) {
-            var aprobar = this;
+            var x = this;
             e.preventDefault();
             var isValidItem = true;
 
 
-            //if ($('#NroDisposicion').val().trim() == '') {
-            //    var isValidItem = false;
-            //    $('#spannrodisposicion').text("Campo requerido.");
+            if ($('#NroDisposicion').val().trim() == '') {
+                var isValidItem = false;
+                $('#spannrodisposicion').text("Campo requerido.");
 
-            //}
+            }
             if (isValidItem) {
             //var x=document.getElementById("RoleID").innerText;
-            bootbox.confirm("Esta acción no puede ser restablecida, ¿Desea continuar?", function (result) {
+            bootbox.confirm("Esta por agregar un nuevo Nro de Disposición, ¿Desea continuar?", function (result) {
                 if (result) {
-                    aprobar.submit();
+                    x.submit();
                 }
             });}
         });
