@@ -39,14 +39,14 @@
 		<td class="text-left">
 			@Html.DisplayFor(model => model.ObservacionesPlan)
 		</td>
-		<td class="text-left">
+		<td class="text-center">
 			@*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
 				@Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
 				@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
 			@*@Html.ActionLink("Ver Historial Planes...", "HistorialPlanes", new { id = Model.IdPS })*@
 			@Html.ActionLink("Historial Planes", "HistorialPlanes", new { id = Model.IdPS }, new { @class = "dialog-window2 btn btn-primary btn-sm" })
 		</td>
-	    <td class="text-left">
+	    <td class="text-center">
 	        @if (Model.EstadoEvaluacionPlan != Evaluacion.Pendiente)
 	        {
 	            @Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm disabled"})
@@ -59,7 +59,7 @@
 	    </td>
 @if (User.IsInRole("Administrador"))
 {
-    <td class="text-left">@Html.ActionLink("Editar Plan", "Edit", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm"})</td>
+    <td class="text-center">@Html.ActionLink("Editar Plan", "Edit", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm"})</td>
 }
 </tr>
 
