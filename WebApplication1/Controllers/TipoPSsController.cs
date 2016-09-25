@@ -11,41 +11,36 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class TipoPSsController : Controller
     {
         private ContextPS db = new ContextPS();
 
-        
-
-
-
-
-
-
         // GET: TipoPSs
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Index()
         {
-            if (db.TipoPSs.Count()==0)
-            {
-                TipoPS tipo1 = new TipoPS();
-                TipoPS tipo2 = new TipoPS();
-                TipoPS tipo3 = new TipoPS();
-                TipoPS tipo4 = new TipoPS();
+            //if (db.TipoPSs.Count()==0)
+            //{
+            //    TipoPS tipo1 = new TipoPS();
+            //    TipoPS tipo2 = new TipoPS();
+            //    TipoPS tipo3 = new TipoPS();
+            //    TipoPS tipo4 = new TipoPS();
 
-                tipo1.NombreTipoPS = "Pasantía / Laboral";
-                tipo1.DescripcionTipoPS = "Una Relación Laboral o Pasantía rentada en empresas del medio.";
-                tipo2.NombreTipoPS = "Proyecto Final";
-                tipo2.DescripcionTipoPS = "Desarrollo de un Proyecto Final que haya sido acordado mediante un convenio específico con terceros, entes y/o empresas privadas o públicas, grupos de investigación y/o desarrollo tecnológico y de servicios.";
-                tipo3.NombreTipoPS = "Investigación / Desarrollo";
-                tipo3.DescripcionTipoPS = "Participación activa en Grupos de Investigación, Desarrollo y/o Aplicación Tecnológica y de Servicios a terceros realizados por Grupos de Investigación o desarrollo tecnológico y de servicios acreditados, perteneciente a instituciones de nivel académico reconocido.";
-                tipo4.NombreTipoPS = "ONG / Instituciones / Empresas";
-                tipo4.DescripcionTipoPS = "Desarrollar tareas de ingeniería en el ambito de ONG y/o Instituciones y/o Empresas Productivas o de Servicios públicas o privadas.";
-                db.TipoPSs.Add(tipo1);
-                db.TipoPSs.Add(tipo2);
-                db.TipoPSs.Add(tipo3);
-                db.TipoPSs.Add(tipo4);
-                db.SaveChanges();
-            }
+            //    tipo1.NombreTipoPS = "Pasantía / Laboral";
+            //    tipo1.DescripcionTipoPS = "Una Relación Laboral o Pasantía rentada en empresas del medio.";
+            //    tipo2.NombreTipoPS = "Proyecto Final";
+            //    tipo2.DescripcionTipoPS = "Desarrollo de un Proyecto Final que haya sido acordado mediante un convenio específico con terceros, entes y/o empresas privadas o públicas, grupos de investigación y/o desarrollo tecnológico y de servicios.";
+            //    tipo3.NombreTipoPS = "Investigación / Desarrollo";
+            //    tipo3.DescripcionTipoPS = "Participación activa en Grupos de Investigación, Desarrollo y/o Aplicación Tecnológica y de Servicios a terceros realizados por Grupos de Investigación o desarrollo tecnológico y de servicios acreditados, perteneciente a instituciones de nivel académico reconocido.";
+            //    tipo4.NombreTipoPS = "ONG / Instituciones / Empresas";
+            //    tipo4.DescripcionTipoPS = "Desarrollar tareas de ingeniería en el ambito de ONG y/o Instituciones y/o Empresas Productivas o de Servicios públicas o privadas.";
+            //    db.TipoPSs.Add(tipo1);
+            //    db.TipoPSs.Add(tipo2);
+            //    db.TipoPSs.Add(tipo3);
+            //    db.TipoPSs.Add(tipo4);
+            //    db.SaveChanges();
+            //}
 
 
 

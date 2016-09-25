@@ -11,17 +11,20 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class AreasController : Controller
     {
         private ContextPS db = new ContextPS();
 
         // GET: Areas
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Index()
         {
             return View(db.Areas.ToList());
         }
 
         // GET: Areas/Details/5
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +40,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Areas/Create
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +51,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create([Bind(Include = "IdArea,NombreArea,DescripcionArea")] Area area)
         {
             if (ModelState.IsValid)

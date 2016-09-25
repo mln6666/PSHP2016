@@ -11,17 +11,20 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class OrganizacionesController : Controller
     {
         private ContextPS db = new ContextPS();
 
         // GET: Organizaciones
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Index()
         {
             return View(db.Organizaciones.ToList());
         }
 
         // GET: Organizaciones/Details/5
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace WebApplication1.Controllers
             return View(organizacion);
         }
 
+        [Authorize(Roles = "Moderador")]
         public ActionResult _NuevaOrg(int? prueba)
         {
             var lista = db.Organizaciones.ToList();
@@ -63,6 +67,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create1([Bind(Include = "IdOrganizacion,DenominacionOrg,DireccionOrg,TelefonoOrg,DescripcionOrg")] Organizacion organizacion)
         {
             
@@ -95,6 +100,7 @@ namespace WebApplication1.Controllers
 
         }
 
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create()
         {
             return View();
@@ -105,6 +111,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create([Bind(Include = "IdOrganizacion,DenominacionOrg,DireccionOrg,TelefonoOrg,DescripcionOrg")] Organizacion organizacion)
         {
             if (ModelState.IsValid)

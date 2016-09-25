@@ -13,30 +13,34 @@ using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class PSController : Controller
     {
         private ContextPS db = new ContextPS();
 
         // GET: PS
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Index()
         {
 
             var pSs = ( from p in db.PSs
-                        where p.Estado != Estado.PS_Aprobada & p.Estado != Estado.PS_Cancelada & p.Estado != Estado.PS_Vencida & p.Estado != Estado.Plan_Rechazado
+                        where (p.Estado == Estado.PS_Aprobada & p.NroDisposicion == null) & p.Estado != Estado.PS_Cancelada & p.Estado != Estado.PS_Vencida & p.Estado != Estado.Plan_Rechazado
                         select p);                                
 
             return View(pSs);
         }
 
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult HistorialPS()
         {            
             var pSs = db.PSs.ToList();
             
             return View(pSs);
         }
-       
+
 
         // GET: PS/Details/5
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -53,6 +57,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: PS/Create
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create()
         {
             List<Alumno> alumnos = new List<Alumno>();
@@ -93,6 +98,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderador")]
         public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno")] PS pS)
         {
             if (ModelState.IsValid)
@@ -145,7 +151,6 @@ namespace WebApplication1.Controllers
         }
 
         // GET: PS/Edit/5
-        [Authorize(Roles = "Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -180,7 +185,6 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrador")]
         public ActionResult Edit([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado")] PS pS)
         {
             
@@ -204,6 +208,7 @@ namespace WebApplication1.Controllers
         }
 
         // // // // // / // // // // // // // //
+        [Authorize(Roles = "Moderador")]
         public ActionResult CreatePrimerPlan(int? id)
         {
             if (id == null)
@@ -269,6 +274,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderador")]
         public ActionResult CreatePrimerPlan([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan")] PrimerPlanVM pm)
         {
 
@@ -340,32 +346,7 @@ namespace WebApplication1.Controllers
             return View(pm);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-        // // // / // / // / // / // / /
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
         //GET
         public ActionResult CancelarPS(int? id)
         {
@@ -401,6 +382,7 @@ namespace WebApplication1.Controllers
         }
 
         //GET
+        [Authorize(Roles = "Moderador")]
         public ActionResult AprobarPS(int? id)
         {
             if (id == null)
@@ -420,6 +402,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Moderador")]
         public ActionResult AprobarPS([Bind(Include = "IdPS,NroDisposicion")] PS pS)
         {
             PS ps=new PS();
@@ -443,6 +426,57 @@ namespace WebApplication1.Controllers
             }
             return RedirectToAction("Details", "PS", new { id = ps.IdPS });
         }
+
+        // // // // // // // // // // // // // // //
+
+        //GET
+        [Authorize(Roles = "Moderador")]
+        public ActionResult NumeroDisposicion(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PS ps = db.PSs.Find(id);
+            if (ps == null)
+            {
+                return HttpNotFound();
+            }
+            if (ps.Estado != Estado.PS_Aprobada)
+            {
+                return RedirectToAction("Index", "Error", new { error = 2006 });
+            }
+            return View(ps);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Moderador")]
+        public ActionResult NumeroDisposicion([Bind(Include = "IdPS,NroDisposicion")] PS pS)
+        {
+            PS ps = new PS();
+            ps = db.PSs.Find(pS.IdPS);
+
+            if (ps.Estado == Estado.PS_Aprobada)
+            {
+
+                if (pS.NroDisposicion != null)
+                {
+                    ps.NroDisposicion = pS.NroDisposicion;
+                }
+
+                db.Entry(ps).State = EntityState.Modified;
+                db.SaveChanges();
+
+
+            }
+            
+            return RedirectToAction("Details", "PS", new { id = ps.IdPS });
+        }
+
+
+        // // // // // // // // // // // // // // //
+
+
 
         // GET: PS/Delete/5
         public ActionResult Delete(int? id)
@@ -484,6 +518,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Moderador,Invitado")]
         public ActionResult BusquedaPS([Bind(Include = "Alumno")] string alumno)
         {
             int legajo = Int32.Parse(alumno); ;
