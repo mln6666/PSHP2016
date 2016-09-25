@@ -4,21 +4,22 @@
 @{
     ViewBag.Title = "PSs";
 }
-<div >
+<div>
     <h1 class="text-center ">Prácticas Supervisadas en curso</h1>
-    <hr style="color:grey;border-color:grey"/>
+    <hr style="color:grey;border-color:grey" />
 </div>
-<br />
 
 <p>
     <div class="row">
 
         <div class="col-lg-6">
-            @Html.ActionLink("Nueva PS", "Create", "PS", null, new {@class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
+            @Html.ActionLink("Nueva PS", "Create", "PS", null, new { @class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+
+        
         </div>
 
         <div class="col-lg-6 text-right">
-            @Html.ActionLink("Historial", "HistorialPS", "PS", null, new {@class = "btn btn-default btn-md text-right", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
+            @Html.ActionLink("Historial", "HistorialPS", "PS", null, new { @class = "btn btn-default btn-md text-right", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
 
         </div>
     </div>
@@ -26,112 +27,155 @@
 </p>
 
 @if (Model.Count() == 0)
-{<br/><hr  style="color:darkblue;border-color:darkblue"/>
+{<br /><hr style="color:darkblue;border-color:darkblue" />
     <div class="text-center">
-        
+
         <h2 style="color: chocolate">
             No existen Prácticas en curso actualmente, puede acceder al historial completo haciendo click @Html.ActionLink("Aquí", "HistorialPS", "PS").
         </h2>
-       
-    </div>    <hr  style="color:darkblue;border-color:darkblue"/>}
+
+    </div>    <hr style="color:darkblue;border-color:darkblue" />}
 else
 {
 
-<table id="mitabla" class="table table-striped table-bordered">
-    <thead>
-    <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+    <table id="mitabla" class="table table-striped table-bordered">
+        <thead>
+            <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
 
-        <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.Alumno.Legajo)
-        </th>
-        <th class="text-left" style="border-radius: 3px">
-           Apellido y Nombre
-        </th>
-       <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.NroDisposicion)
-        </th>
-        <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.Area.NombreArea)
-        </th>
+                <th class="text-left" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.Alumno.Legajo)
+                </th>
+                <th class="text-left" style="border-radius: 3px">
+                    Apellido y Nombre
+                </th>
+                <th class="text-left" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.NroDisposicion)
+                </th>
+                <th class="text-left" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.Area.NombreArea)
+                </th>
 
-        <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.CicloLectivo)
-        </th>
+                <th class="text-left" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.CicloLectivo)
+                </th>
 
-        <th class="text-left" style="border-radius: 3px">
-            @Html.DisplayNameFor(model => model.Estado)
-        </th>
-        <th class="text-center" style="border-radius: 3px">Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.Alumno.Legajo)
-                </td>
-                <td class="text-left">
-                   @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
-                </td>
-                <td class="text-left">
-                    @if (item.NroDisposicion != null)
-                    {
-                        @Html.DisplayFor(modelItem => item.NroDisposicion)
-                    }
-                    else
-                    {<text>- - -</text>
-                    }
-                </td>
-                <td class="text-left">
-                    @*@Html.DisplayFor(modelItem => item.Area.NombreArea)*@
-                    @if (item.Area != null)
-                    {
-                        @Html.DisplayFor(modelItem => item.Area.NombreArea)
-                    }
-                    else
-                    {
-                        <text>- - -</text>
-                    }
-                </td>
-
-                <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.CicloLectivo)
-                </td>
-
-                <td class="text-left" style="font-weight: bold; font-style: italic;">
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
-                <td class="text-left">
-
-
-
-                  @if (item.PresentacionesPlanes.Count() == 0)
-                  {@Html.ActionLink("1er Plan", "CreatePrimerPlan", "PS", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm dialog-window10", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                  }
-                  else
-
-
-                    if (item.Estado == Estado.Plan_Pendiente || item.Estado == Estado.Plan_Desaprobado)
-                    {@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "dialog-window2 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
-                    else
-                    {@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                    }
-
-                    @if (item.Estado == Estado.Plan_Aprobado || item.Estado == Estado.Informe_Desaprobado)
-                {@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "dialog-window3 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
-                    else
-                    {@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })}
-
-                        
-                                    
-                    @Html.ActionLink("Detalles", "Details", new {id = item.IdPS}, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" }) 
-                    @Html.ActionLink("Eliminar", "Delete", new {id = item.IdPS}, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                </td>
+                <th class="text-left" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th class="text-center" style="border-radius: 3px">Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>}
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.Alumno.Legajo)
+                    </td>
+                    <td class="text-left">
+                        @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
+                    </td>
+                    <td class="text-left">
+                        @if (item.NroDisposicion != null)
+                    {
+                            @Html.DisplayFor(modelItem => item.NroDisposicion)
+                        }
+                        else
+                        {<text>- - -</text>
+                        }
+                    </td>
+                    <td class="text-left">
+                        @*@Html.DisplayFor(modelItem => item.Area.NombreArea)*@
+                        @if (item.Area != null)
+                    {
+                            @Html.DisplayFor(modelItem => item.Area.NombreArea)
+                        }
+                        else
+                        {
+                            <text>- - -</text>
+                        }
+                    </td>
+
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.CicloLectivo)
+                    </td>
+
+                    <td class="text-left" style="font-weight: bold; font-style: italic;">
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    <td class="text-left">
+
+
+
+                        @if (item.PresentacionesPlanes.Count() == 0)
+                        {
+
+                            @*@Html.ActionLink("1er Plan", "CreatePrimerPlan", "PS", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm dialog-window10", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+
+                            <a href="@Url.Action("CreatePrimerPlan", "PS", new { id = item.IdPS })" class="btn btn-primary btn-sm dialog-window10" style="color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500">Plan  <span class="glyphicon glyphicon-plus"></span></a>
+
+
+
+                        }
+                        else if (item.Estado == Estado.Plan_Pendiente || item.Estado == Estado.Plan_Desaprobado)
+                        {
+
+                            @*@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "dialog-window2 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+
+                            <a href="@Url.Action("Create", "PresentacionPlanes", new { id = item.IdPS })" class="btn btn-primary btn-sm dialog-window2" style="color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500">Plan  <span class="glyphicon glyphicon-plus"></span></a>
+
+                        }
+                        else
+                        {
+
+                            @*@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+
+                            <a href="@Url.Action("Create", "PresentacionPlanes", new { id = item.IdPS })" class="btn btn-primary btn-sm disabled" style="color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500">Plan  <span class="glyphicon glyphicon-plus"></span></a>
+
+                        }
+
+                        @if (item.Estado == Estado.Plan_Aprobado || item.Estado == Estado.Informe_Desaprobado)
+                        {
+
+                            @*@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "dialog-window3 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+
+                            <a href="@Url.Action("Create", "PresentacionInformes", new {id = item.IdPS})" c class="btn btn-primary btn-sm dialog-window3" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
+
+                        }
+
+                        else
+                        {
+
+                            @*@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+
+                            <a href="@Url.Action("Create", "PresentacionInformes", new { id = item.IdPS })" class="btn btn-primary btn-sm disabled" style="color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500">Plan  <span class="glyphicon glyphicon-plus"></span></a>
+
+                        }
+
+
+
+                        @Html.ActionLink("Detalles", "Details", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                    </td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </tr>
+            }
+        </tbody>
+    </table>}
 <div class="modal fade" id="myModal10" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -209,19 +253,19 @@ else
 {
 
     <script>
-      
-            $(document).ready(function () {
 
-                ////Grilla automatica//
-                $("#mitabla").DataTable({
-                    "language": {
-                        "url": "/Scripts/DataTables/spanish.json"
-                    }
-                });
+        $(document).ready(function () {
 
-                ////////////////
+            ////Grilla automatica//
+            $("#mitabla").DataTable({
+                "language": {
+                    "url": "/Scripts/DataTables/spanish.json"
+                }
+            });
 
-                ///////////Eliminar PS////
+            ////////////////
+
+            ///////////Eliminar PS////
             $("body").on("click", "a.dialog-window1", null, function (e) {
                 e.preventDefault();
 
@@ -240,9 +284,9 @@ else
                     }).success(function () { $('input:text:visible:first').focus(); });
                 }
             });
-                //////////////
+            //////////////
 
-                //////////+PLAN/////
+            //////////+PLAN/////
             $("body").on("click", "a.dialog-window2", null, function (e) {
                 e.preventDefault();
 
@@ -261,9 +305,9 @@ else
                     }).success(function () { $('input:text:visible:first').focus(); });
                 }
             });
-                ////////////////
+            ////////////////
 
-                //////////////+INFORME/////
+            //////////////+INFORME/////
             $("body").on("click", "a.dialog-window3", null, function (e) {
                 e.preventDefault();
 
@@ -282,7 +326,7 @@ else
                     }).success(function () { $('input:text:visible:first').focus(); });
                 }
             });
-                ///////////////////////////
+            ///////////////////////////
             $("body").on("click", "a.dialog-window10", null, function (e) {
                 e.preventDefault();
 
@@ -302,7 +346,7 @@ else
                 }
             });
         });
-       
+
     </script>
 
 

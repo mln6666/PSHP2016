@@ -16,6 +16,7 @@ namespace WebApplication1.Models
         [Display(Name = "Área")]
         public string NombreArea { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Descripción")]
         public string DescripcionArea { get; set; }
 

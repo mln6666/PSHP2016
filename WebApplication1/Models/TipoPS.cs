@@ -14,6 +14,7 @@ namespace WebApplication1.Models
         [Display(Name = "Nombre")]
         public string NombreTipoPS { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Descripción")]
         public string DescripcionTipoPS { get; set; }
 
