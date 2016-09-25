@@ -4,7 +4,7 @@
     ViewBag.Title = "Detalle";
 }
 
-<h2 class="text-center">Detalles: @Model.ApellidoAlu, @Model.NombreAlu</h2>
+<h2 class="text-center">Detalles alumno: @Model.ApellidoAlu, @Model.NombreAlu</h2>
 
 <hr style="color:grey;border-color:grey"/>
 
@@ -106,8 +106,9 @@
 
     </div>
 }
+
 <p>
-    <a href="@Url.Action("Index", "Alumnos")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    <a href="@Url.Action("HistorialAlu")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
     @Html.ActionLink("Editar", "Edit", new { id = Model.IdAlumno }, new {@class = "btn btn-success"  })
     @*@Html.ActionLink("Back to List", "Index")*@
     

@@ -1,10 +1,10 @@
 ﻿@model WebApplication1.Models.Organizacion
 
 @{
-    ViewBag.Title = "Editar Organización";
+    ViewBag.Title = "Editar organización";
 }
 
-<h2>Editar @Model.DenominacionOrg</h2>
+<h2 class="text-center">Editar organización</h2>
 <hr style="color:grey;border-color:grey"/>
 <br />
 
@@ -43,7 +43,7 @@
                     @Html.ValidationMessageFor(model => model.DireccionOrg, "", new { @class = "text-danger" })
                 </td>
                 <td class="text-left">
-                    @Html.EditorFor(model => model.TelefonoOrg, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.TelefonoOrg, new { htmlAttributes = new { @class = "form-control", @onkeypress = "solonumeros()" } })
                     @Html.ValidationMessageFor(model => model.TelefonoOrg, "", new { @class = "text-danger" })
                 </td>
                 <td class="text-left">
@@ -55,14 +55,18 @@
         </table>
     </div>
 
-
+    <div class="text-center">
+        <input type="submit" value="Guardar cambios" class="btn btn-success" />
+    </div>
 
 <div>
     <a href="@Url.Action("Index", "Organizaciones")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
-    <input type="submit" value="Guardar cambios" class="btn btn-success" />
+    
 </div>
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    
+    
 }

@@ -127,7 +127,7 @@ namespace WebApplication1.Controllers
             
             if (area.PSs.Count() !=0)
             {
-                ViewBag.errorareaps = "Acción no permitida!. Área con PSs relacionadas.";
+                ViewBag.errorareaps = "Acción no permitida! Área con PSs relacionadas.";
                 return View(area);
             }
 

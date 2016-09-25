@@ -35,7 +35,7 @@
 
             <tr>
                 <td class="text-left">
-                    @Html.EditorFor(model => model.Legajo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Legajo, new { htmlAttributes = new { @class = "form-control", @onkeypress = "solonumeros()" } })
                     @Html.ValidationMessageFor(model => model.Legajo, "", new { @class = "text-danger" })
                 </td>
                 <td class="text-left">
@@ -75,7 +75,7 @@
             </tr>
             <tr>
                 <td class="text-left">
-                    @Html.EditorFor(model => model.AñoIngreso, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.AñoIngreso, new { htmlAttributes = new { @class = "form-control", @onkeypress = "solonumeros()" } })
                     @Html.ValidationMessageFor(model => model.AñoIngreso, "", new { @class = "text-danger" })
                 </td>
                 <td class="text-left">
@@ -84,15 +84,15 @@
                 </td>
 
                 <td class="text-left">
-                    @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control", @onkeypress = "solonumeros()" } })
                     @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
                 </td>
                 <td class="text-left">
-                    @Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control", @onkeypress = "solonumeros()" } })
                     @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })
                 </td>
                 <td class="text-left">
-                    @Html.EditorFor(model => model.DNI, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.DNI, new { htmlAttributes = new { @class = "form-control", @onkeypress = "solonumeros()" } })
                     @Html.ValidationMessageFor(model => model.DNI, "", new { @class = "text-danger" })
                 </td>
 

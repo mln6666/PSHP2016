@@ -40,13 +40,13 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-
+                <li style="font-weight: bold;">@Html.ActionLink("Inicio", "Index", "Home")</li>
                 <li style="font-weight: bold;">@Html.ActionLink("Alumnos", "Index", "Alumnos")
                 <li style="font-weight: bold;">@Html.ActionLink("Lista de PS", "Index", "PS")</li>
                 <li class="dropdown" style="left: auto">
                     <a style="font-weight: bold" class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Preferencias<span class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="download">
-
+                        
                         <li>@Html.ActionLink("Organizaciones", "Index", "Organizaciones")</li>
                         <li>@Html.ActionLink("Áreas", "Index", "Areas")</li>
                         <li>@Html.ActionLink("Tipos de PS", "Index", "TipoPSs")</li>

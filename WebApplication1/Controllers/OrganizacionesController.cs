@@ -188,7 +188,7 @@ namespace WebApplication1.Controllers
 
             if (organizacion.PSs.Count() != 0)
             {
-                ViewBag.errororganizacionps = "Acción no permitida!. Organización con PSs relacionadas.";
+                ViewBag.errororganizacionps = "Acción no permitida! Organización con PSs relacionadas.";
                 return View(organizacion);
             }
 

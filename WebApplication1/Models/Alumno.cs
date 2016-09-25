@@ -30,10 +30,10 @@ namespace WebApplication1.Models
         public int? AñoIngreso { get; set; }
 
         [Display(Name = "Telefono")]
-        public int? Telefono { get; set; }
+        public string Telefono { get; set; }
 
         [Display(Name = "Celular")]
-        public int? Celular { get; set; }
+        public string Celular { get; set; }
 
         [Display(Name = "Dirección")]
         public string Direccion { get; set; }

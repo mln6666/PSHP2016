@@ -153,17 +153,24 @@ namespace WebApplication1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PS pS = db.PSs.Find(id);
+
             if (pS == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.alumnos = db.Alumnos.ToList();
-            ViewBag.areas = db.Areas.ToList();
-            ViewBag.organizaciones = db.Organizaciones.ToList();
-            ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
-            ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
-            ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
-            ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
+
+           
+                ViewBag.alumnos = db.Alumnos.ToList();
+                ViewBag.areas = db.Areas.ToList();
+                ViewBag.organizaciones = db.Organizaciones.ToList();
+                ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
+                ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
+                ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
+                ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
+            
+
+            
+           
 
             return View(pS);
         }
@@ -176,12 +183,19 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Administrador")]
         public ActionResult Edit([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado")] PS pS)
         {
-            if (ModelState.IsValid)
+            
+                
+            
+            if (ModelState.IsValid )
             {
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Details", "PS", new { id = pS.IdPS });
             }
+
+            
+
+
             ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
             ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);

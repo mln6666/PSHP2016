@@ -18,7 +18,36 @@ namespace WebApplication1.Controllers
         // GET: Alumnos
         public ActionResult Index()
         {
-            return View(db.Alumnos.ToList());
+
+            var pss = (   from p in db.PSs
+                           where p.Estado == Estado.PS_Aprobada | p.Estado == Estado.PS_Cancelada 
+                           | p.Estado == Estado.PS_Vencida | p.Estado == Estado.Plan_Rechazado
+                           select p);
+
+            var alumnos = db.Alumnos.ToList();
+
+            foreach (var item in pss)
+            {
+                alumnos.Remove(item.Alumno);
+            }
+            
+                          //where pss.Contains() == a.PSs.LastOrDefault().IdPS
+                          //select a;
+
+            //IQueryable<Alumno> alumnos = Enumerable.Empty<Alumno>().AsQueryable();
+
+                              //foreach (var item in psList)
+                              //{
+                              //      alumnos = from a in db.Alumnos
+                              //              where item.IdPS == a.PSs.LastOrDefault().IdPS
+                              //              select a;
+
+
+                              //}
+
+
+
+            return View(alumnos);
         }
 
         // GET: Alumnos/Details/5
@@ -127,12 +156,19 @@ namespace WebApplication1.Controllers
 
             if (alumno.PSs.Count() != 0)
             {
-                ViewBag.erroralumnops = "Acción no permitida!. Alumno con PSs relacionadas.";
+                ViewBag.erroralumnops = "Acción no permitida! Alumno con PSs relacionadas.";
                 return View(alumno);
             }
             db.Alumnos.Remove(alumno);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult HistorialAlu()
+        {
+            var alus = db.Alumnos.ToList();
+
+            return View(alus);
         }
 
         protected override void Dispose(bool disposing)

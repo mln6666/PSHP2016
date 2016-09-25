@@ -4,7 +4,7 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Eliminar Área</h2>
+<h2 class="text-center">Eliminar área</h2>
 <hr style="color:grey;border-color:grey"/>
 <h3>@Model.NombreArea</h3>
 <div>
@@ -41,10 +41,12 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "eliminararea" }))
 {
         @Html.AntiForgeryToken()
-
+    <div class="text-center">
+        <input type="submit" value="Eliminar" class="btn btn-danger text-center"/>
+    </div>
         <div class="form-actions no-color">
             <a href="@Url.Action("Index", "Areas")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
-            <input type="submit" value="Eliminar" class="btn btn-danger"/>
+            
         </div>
     }
 </div>

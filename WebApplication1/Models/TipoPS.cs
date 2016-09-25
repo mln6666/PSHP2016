@@ -11,7 +11,7 @@ namespace WebApplication1.Models
         [Key]
         public int IdTipoPS { get; set; }
 
-        [Display(Name = "Tipo PS")]
+        [Display(Name = "Nombre")]
         public string NombreTipoPS { get; set; }
 
         [Display(Name = "Descripción")]

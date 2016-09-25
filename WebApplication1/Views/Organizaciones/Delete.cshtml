@@ -1,10 +1,10 @@
 ﻿@model WebApplication1.Models.Organizacion
 
 @{
-    ViewBag.Title = "Eliminar Organizacion";
+    ViewBag.Title = "Eliminar organizacion";
 }
 
-<h2>Eliminar Organización</h2>
+<h2 class="text-center">Eliminar Organización</h2>
 <hr style="color:grey;border-color:grey"/>
 <h3>@Model.DenominacionOrg</h3>
 <br />
@@ -54,10 +54,12 @@
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "eliminarorganizacion" }))
     {
         @Html.AntiForgeryToken()
-
+        <div class="text-center">
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+        </div>
         <div class="form-actions no-color">
             <a href="@Url.Action("Index", "Organizaciones")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
-            <input type="submit" value="Eliminar" class="btn btn-danger"/>
+           
         </div>
     }
 </div>

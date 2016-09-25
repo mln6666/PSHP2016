@@ -1,10 +1,10 @@
 ﻿@model WebApplication1.Models.Organizacion
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles organización";
 }
 
-<h2>Detalles de @Model.DenominacionOrg</h2>
+<h2 class="text-center">Detalles de organización</h2>
 <hr style="color:grey;border-color:grey" />
 <br/>
 
@@ -48,7 +48,8 @@
     </dl>
 </div>
 <p>
-    <a href="@Url.Action("Index", "Organizaciones")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
-    @Html.ActionLink("Editar", "Edit", "Organizaciones", new { id = Model.IdOrganizacion }, new { @class = "btn btn-success" } ) 
     
+    <a href="@Url.Action("Index", "Organizaciones")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    @Html.ActionLink("Editar", "Edit", "Organizaciones", new {id = Model.IdOrganizacion}, new {@class = "btn btn-success"})
+
 </p>

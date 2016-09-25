@@ -19,9 +19,9 @@ namespace WebApplication1.Models
         [Display(Name = "Dirección")]
         public string DireccionOrg { get; set; }
 
-        [DataType(DataType.PhoneNumber)]
+        
         [Display(Name = "Teléfono")]
-        public int? TelefonoOrg { get; set; }
+        public string TelefonoOrg { get; set; }
 
         [DataType(DataType.MultilineText)]
         [Display(Name = "Descripción")]

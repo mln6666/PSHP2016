@@ -5,17 +5,31 @@
 }
 
 <div>
-    <h1 class="text-center ">Lista de Alumnos Inscriptos</h1>
+    <h1 class="text-center ">Alumnos en curso</h1>
     <hr style="color:grey;border-color:grey" />
 </div>
 
-    <p>
+<p>
+    <div class="row">
+
+        <div class="col-lg-6">
+            @Html.ActionLink("Nuevo alumno", "Create", null, new { @class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+        </div>
+
+        <div class="col-lg-6 text-right">
+            @Html.ActionLink("Historial", "HistorialAlu", null, new { @class = "btn btn-default btn-md text-right", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+
+        </div>
+    </div>
+
+</p>
+@*<p>
         <div class="text-left">
             <a class="btn btn-success text-center" href="@Url.Action("Create", "Alumnos")">
                 Agregar Alumno
             </a>
         </div>
-    </p>
+    </p>*@
     @*<p>
             @Html.ActionLink("Agregar alumno", "Create")
         </p>*@

@@ -3,7 +3,7 @@
 @model WebApplication1.Models.PS
 
 @{
-    ViewBag.Title = "Agregar PS";
+    ViewBag.Title = "Nueva PS";
 }
 <head>
     <script>
@@ -12,7 +12,7 @@
         ////////////////End:Select searchable///////////////////
     </script>
 </head>
-<h2>Agregar PS</h2>
+<h2>Nueva PS</h2>
 
 @using (Html.BeginForm("Create", "PS", null, FormMethod.Post, new { id = "agregarps" }))
 {
@@ -42,7 +42,7 @@
                         <option value="">Buscar alumno...</option>
                         @foreach (var item in ViewBag.alumnos)
                         {
-                            <option value="@item.IdAlumno">@item.Legajo - @item.NombreAlu, @item.ApellidoAlu</option>
+                            <option value="@item.IdAlumno">@item.Legajo -@item.ApellidoAlu ,@item.NombreAlu </option>
                         }
                     </select>
                 </div>
@@ -68,9 +68,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CicloLectivo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CicloLectivo, htmlAttributes: new { @class = "control-label col-md-2", @onkeypress = "solonumeros()" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CicloLectivo, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.EditorFor(model => model.CicloLectivo, new { htmlAttributes = new { @class = "form-control input-sm", @Value = @DateTime.Now.Year, @Min= 2000 } })
                 @Html.ValidationMessageFor(model => model.CicloLectivo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -81,12 +81,12 @@
                 <div class="radio">
                     <label>
                         <input name="Cuatrimestre" id="optionsRadios1" value="1" checked="" type="radio">
-                        1er
+                        1º
                     </label>
                     <label>    </label>
                     <label>
                         <input name="Cuatrimestre" id="optionsRadios2" value="2" type="radio">
-                        2do
+                        2º
                     </label>
                 </div>                
             </div>
@@ -123,7 +123,7 @@
                             <option value="@item.IdOrganizacion">@item.DenominacionOrg</option>
                         }
                     </select>
-                    <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal" style="padding-right: 8px; padding-left: 8px; padding-top: 4px;padding-bottom: 4px">
+                    <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" style="padding-right: 5px; padding-left: 5px; padding-top: 4px;padding-bottom: 4px">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
                 </div>

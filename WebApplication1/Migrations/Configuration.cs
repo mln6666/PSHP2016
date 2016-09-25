@@ -10,7 +10,6 @@ namespace WebApplication1.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "WebApplication1.Context.ContextPS";
         }
 
         protected override void Seed(WebApplication1.Context.ContextPS context)
