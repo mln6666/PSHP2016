@@ -11,7 +11,7 @@
 
 <p>
     @*<a href="@Url.Action("Create", "Organizaciones")" class="btn btn-success btn-md ">Nueva Organización</a>*@
-    @Html.ActionLink("Nueva Organización", "Create", "Organizaciones", null, new { @class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+    @Html.ActionLink("Nueva Organización", "Create", "Organizaciones", null, new { @class = "btn btn-success text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
 
 
     @*@Html.ActionLink("Agregar organización", "Create")*@
@@ -46,10 +46,24 @@
                     @Html.DisplayFor(modelItem => item.DenominacionOrg)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DireccionOrg)
+                    @if (item.DireccionOrg != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.DireccionOrg)
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }                    
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TelefonoOrg)
+                    @if (item.TelefonoOrg != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.TelefonoOrg)
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }
                 </td>
                 @*<td>
                     @Html.DisplayFor(modelItem => item.DescripcionOrg)

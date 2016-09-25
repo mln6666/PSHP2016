@@ -27,7 +27,14 @@
                     @Html.DisplayFor(model => model.NombreArea)
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.DescripcionArea)
+                    @if (Model.DescripcionArea != null)
+            {
+                        @Html.DisplayFor(model => model.DescripcionArea)
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }
                 </td>
 
 

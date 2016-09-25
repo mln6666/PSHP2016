@@ -38,7 +38,15 @@
             @Html.DisplayFor(model => model.EstadoEvaluacionInforme)
         </td>
         <td class="text-left">
-            @Html.DisplayTextFor(model => model.ObservacionesInforme)
+            @if (Model.ObservacionesInforme != null)
+            {
+                @Html.DisplayTextFor(model => model.ObservacionesInforme)
+            }
+            else
+            {
+                <text>- - -</text>
+            }
+
         </td>
         <td class="text-center">
             @*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |

@@ -42,7 +42,14 @@
                     @item.ApellidoAlu, @item.NombreAlu
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.CorreoAlu)
+                    @if (item.CorreoAlu != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.CorreoAlu)
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }                    
                 </td>
                 <td class="text-center">
                     @Html.ActionLink("Detalles", "Details", new { id = item.IdAlumno }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })

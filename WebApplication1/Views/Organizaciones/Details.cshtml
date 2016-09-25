@@ -32,13 +32,35 @@
                     @Html.DisplayFor(model => model.DenominacionOrg)                    
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.DireccionOrg)                   
+                    @if (Model.DireccionOrg != null)
+                    {
+                        @Html.DisplayFor(model => model.DireccionOrg)
+                    }
+                    else
+                    {
+                        <text>---</text>
+                    }                
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.TelefonoOrg)                    
+                    @if (Model.TelefonoOrg != null)
+                    {
+                        @Html.DisplayFor(model => model.TelefonoOrg)
+                    }
+                    else
+                    {
+                        <text>---</text>
+                    }
+                                        
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.DescripcionOrg)                   
+                    @if (Model.DescripcionOrg != null)
+                    {
+                        @Html.DisplayFor(model => model.DescripcionOrg)
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }                   
                 </td>
 
             </tr>

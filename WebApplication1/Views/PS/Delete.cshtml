@@ -17,7 +17,15 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NroDisposicion)
+            @if (Model.NroDisposicion != null)
+            {
+                @Html.DisplayFor(model => model.NroDisposicion)
+            }
+            else
+            {
+                <text>- - -</text>
+            }
+            
         </dd>
 
         <dt>
@@ -33,7 +41,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TituloProyecto)
+            @if (Model.TituloProyecto != null)
+            {
+                @Html.DisplayFor(model => model.TituloProyecto)
+            }
+            else
+            {
+                <text>- - -</text>
+            }
         </dd>
 
         <dt>
@@ -41,7 +56,15 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
+            @if (Model.Organizacion != null)
+            {
+                @Html.DisplayFor(model => model.Organizacion.DenominacionOrg)
+            }
+            else
+            {
+                <text>- - -</text>
+            }
+            
         </dd>        
 
         <dt>
@@ -49,7 +72,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Tutor)
+            @if (Model.Tutor != null)
+            {
+                @Html.DisplayFor(model => model.Tutor)
+            }
+            else
+            {
+                <text>- - -</text>
+            }
         </dd>
                 
         <dt>

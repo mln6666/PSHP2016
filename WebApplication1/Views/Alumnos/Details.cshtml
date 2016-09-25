@@ -48,8 +48,14 @@
                     @*@Html.ValidationMessageFor(model => model.ApellidoAlu, "", new { @class = "text-danger" })*@
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.CorreoAlu, new { htmlAttributes = new { @class = "form-control" } })
-                    @*@Html.ValidationMessageFor(model => model.CorreoAlu, "", new { @class = "text-danger" })*@
+                    @if (Model.CorreoAlu != null)
+                    {
+                        @Html.DisplayFor(model => model.CorreoAlu, new { htmlAttributes = new { @class = "form-control" } })
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }
                 </td>
 
             </tr>
@@ -60,12 +66,13 @@
                 <th class="text-left" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.AñoIngreso)
                 </th>
-                <th class="text-left" style="border-radius: 3px">
+                <th class="text-left" style="border-radius: 3px">                    
                     @Html.DisplayNameFor(model => model.Direccion)
                 </th>
 
-                <th class="text-left" style="border-radius: 3px">
+                <th class="text-left" style="border-radius: 3px"> 
                     @Html.DisplayNameFor(model => model.Telefono)
+                    
                 </th>
                 <th class="text-left" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.Celular)
@@ -80,21 +87,48 @@
                     @*@Html.ValidationMessageFor(model => model.AñoIngreso, "", new { @class = "text-danger" })*@
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
-                    @*@Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })*@
+                    @if (Model.Direccion != null)
+                    {
+                        @Html.DisplayFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }
+                    
+                    
                 </td>
 
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
-                    @*@Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })*@
+                    @if (Model.Telefono != null)
+                    {
+                        @Html.DisplayFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control" } })
-                    @*@Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })*@
+                    @if (Model.Celular != null)
+                    {
+
+                        @Html.DisplayFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control" } })
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.DNI, new { htmlAttributes = new { @class = "form-control" } })
-                    @*@Html.ValidationMessageFor(model => model.DNI, "", new { @class = "text-danger" })*@
+                    @if (Model.DNI != null)
+                    {
+                        @Html.DisplayFor(model => model.DNI, new { htmlAttributes = new { @class = "form-control" } })
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }
                 </td>
 
 

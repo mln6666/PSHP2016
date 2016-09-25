@@ -59,16 +59,44 @@
                 @Html.DisplayFor(model => model.AñoIngreso)
             </td>
             <td class="text-left">
-                @Html.DisplayFor(model => model.Telefono)
+                @if (Model.Telefono != null)
+                {
+                    @Html.DisplayFor(model => model.Telefono)
+                }
+                else
+                {
+                    <text>- - -</text>
+                }
             </td>
             <td class="text-left">
-                @Html.DisplayFor(model => model.Celular)
+                @if (Model.Celular != null)
+                {
+                    @Html.DisplayFor(model => model.Celular)
+                }
+                else
+                {
+                    <text>- - -</text>
+                }
             </td>
             <td class="text-left">
-                @Html.DisplayFor(model => model.Direccion)
+                @if (Model.Direccion != null)
+                {
+                    @Html.DisplayFor(model => model.Direccion)
+                }
+                else
+                {
+                    <text>- - -</text>
+                }
             </td>
             <td class="text-left">
-                @Html.DisplayFor(model => model.DNI)
+                @if (Model.DNI != null)
+                {
+                    @Html.DisplayFor(model => model.DNI)
+                }
+                else
+                {
+                    <text>- - -</text>
+                }
             </td>
 
         </tr>
