@@ -13,43 +13,71 @@
             e.preventDefault();
             var isValidItem = true;
 
+            var fechapresentacioninforme = true;
+            var fechaevaluacioninforme = true;
+            var fechaestado = true;
+
             var fecha1 = new Date($('#FechaPresentacionInforme').val());
             var fecha2 = new Date($('#FechaEvaluacionInforme').val());
 
             var minfecha = new Date("01/01/2000");
             var maxfecha = new Date("01/01/2100");
 
+          
+
             if ((fecha1 < minfecha) || (fecha1 > maxfecha) ){
                 var isValidItem = false;
+                var fechapresentacioninforme = false;
+
                 $('#spanfechapresentacioninforme').text("Rango valido: 01/01/2000 - 01/01/2100");
             }
             if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
                 var isValidItem = false;
+                var fechaevaluacioninforme = false;
+
                 $('#spanfechaevaluacioninforme').text("Rango valido: 01/01/2000 - 01/01/2100");
 
             }
             if ($('#FechaPresentacionInforme').val().trim() == '') {
                 var isValidItem = false;
+                var fechapresentacioninforme = false;
+
                 $('#spanfechapresentacioninforme').text("Campo requerido.");
 
             }
 
             if (($('#FechaEvaluacionInforme').val().trim() == '') & ($('#EstadoEvaluacionInforme').val().trim() != 0)) {
                 var isValidItem = false;
+                var fechaevaluacioninforme = false;
+
                 $('#spanfechaevaluacioninforme').text("Campo requerido.");
 
             }
 
             if (($('#FechaEvaluacionInforme').val().trim() != '')& ($('#EstadoEvaluacionInforme').val().trim() == 0)) {
                 var isValidItem = false;
+                var fechaestado = false;
+
                 $('#spanfechaestado').text("**Fecha de Evaluación requiere una Evaluación!");
             }
 
             if (($('#FechaEvaluacionInforme').val().trim() == '') & ($('#EstadoEvaluacionInforme').val().trim() != 0)) {
                 var isValidItem = false;
+                var fechaestado = false;
+
                 $('#spanfechaestado').text("**Una Evaluación requiere una Fecha de Evaluación!");
             }
 
+
+            if (fechaestado) {
+                $('#spanfechaestado').text("");
+            }
+            if (fechaevaluacioninforme) {
+                $('#spanfechaevaluacioninforme').text("");
+            }
+            if (fechapresentacioninforme) {
+                $('#spanfechapresentacioninforme').text("");
+            }
 
             if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
                 bootbox.confirm("Esta por editar una presentación del informe, ¿Desea continuar?", function (result) {

@@ -25,15 +25,20 @@
             var x = this;
             e.preventDefault();
             var isValidItem = true;
-        
+            var ciclolectivo = true;
+
          
             if ($('#CicloLectivo').val().trim() == '') {
                 var isValidItem = false;
+                var ciclolectivo = false;
+
                 $('#spanciclolectivo').text("Campo requerido.");
 
             }
           
-
+            if (ciclolectivo) {
+                $('#spanciclolectivo').text("");
+            }
             if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
                 bootbox.confirm("Esta por editar una presentación del plan, ¿Desea continuar?", function (result) {
                     if (result) {

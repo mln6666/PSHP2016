@@ -14,6 +14,11 @@
             var x = this;
             e.preventDefault();
             var isValidItem = true;
+
+            var fechaestado = true;
+            var fechaevaluacionplan = true;
+
+
             var fecha2 = new Date($('#FechaEvaluacionPlan').val());
 
             var minfecha = new Date("01/01/2000");
@@ -21,23 +26,38 @@
 
             if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
                 var isValidItem = false;
+                var fechaevaluacionplan = false;
+
                 $('#spanfechaevaluacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
 
             }
           
             if ($('#FechaEvaluacionPlan').val().trim() == '') {
                 var isValidItem = false;
+                var fechaevaluacionplan = false;
+
                 $('#spanfechaevaluacionplan').text("Campo requerido.");
 
             }
             if (($('#FechaEvaluacionPlan').val().trim() != '') & ($('#EstadoEvaluacionPlan').val().trim() == 0)) {
                 var isValidItem = false;
+                var fechaestado = false;
+
                 $('#spanfechaestado').text("**Fecha de Evaluación requiere una Evaluación!");
             }
 
             if (($('#FechaEvaluacionPlan').val().trim() == '') & ($('#EstadoEvaluacionPlan').val().trim() != 0)) {
                 var isValidItem = false;
+                var fechaestado = false;
+
                 $('#spanfechaestado').text("**Una Evaluación requiere una Fecha de Evaluación!");
+            }
+
+            if (fechaestado) {
+                $('#spanfechaestado').text("");
+            }
+            if (fechaevaluacionplan) {
+                $('#spanfechaevaluacionplan').text("");
             }
 
             if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
