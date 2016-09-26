@@ -213,40 +213,40 @@
 
 
 
-                <div class="btn-group">
-                    <a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                        Finalizar
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        @if (Model.Estado == WebApplication1.Models.Estado.Informe_Aprobado)
-                        {
-                            <li>@Html.ActionLink("Aprobar PS", "AprobarPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window8" })</li>
-                        }
-                        else
-                        {
-                            <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
-                        }
+				<div class="btn-group">
+					<a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+						Finalizar
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						@if (Model.Estado == WebApplication1.Models.Estado.Informe_Aprobado)
+						{
+							<li>@Html.ActionLink("Aprobar PS", "AprobarPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window8" })</li>
+						}
+						else
+						{
+							<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
+						}
 
-                        @if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada)
-                        {
-                            <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
-                        }
-                        else
-                        {
-                            <li>@Html.ActionLink("Cancelar PS", "CancelarPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window7" })</li>
-                        }
+						@if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada)
+						{
+							<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
+						}
+						else
+						{
+							<li>@Html.ActionLink("Cancelar PS", "CancelarPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window7" })</li>
+						}
 
-                        @if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada)
-                        {
-                            <li>@Html.ActionLink("Disposición", "NumeroDisposicion", "PS", new { id = Model.IdPS }, new { @class = "dialog-window20" })</li>
-                        }
-                        else
-                        {
-                            <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Disposición</a></li>
-                        }
-                    </ul>
-                </div>
+						@if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada)
+						{
+							<li>@Html.ActionLink("Disposición", "NumeroDisposicion", "PS", new { id = Model.IdPS }, new { @class = "dialog-window20" })</li>
+						}
+						else
+						{
+							<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Disposición</a></li>
+						}
+					</ul>
+				</div>
 				@if (User.IsInRole("Administrador"))
 				{
 					@Html.ActionLink("Editar", "Edit", new { id = Model.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm" })
@@ -273,9 +273,8 @@
 	</div>
 	
 	
-</div>
-<p>
-	@if (ViewBag.vuelta)
+</div>*<p>
+    @if (ViewBag.vuelta!=null)
     {
         <a href="@Url.Action("HistorialPS")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
     }
@@ -283,8 +282,9 @@
     {
         <a href="@Url.Action("Index")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
     }
-	@*@Html.ActionLink("Volver", "Index",null,new {@class="btn btn-default btn-sm"})*@
 </p>
+	@*@Html.ActionLink("Volver", "Index",null,new {@class="btn btn-default btn-sm"})*@
+
 				 <div class="modal fade" id="myModal1" role="dialog"
 					  aria-labelledby="myModalLabel" aria-hidden="true">
 					 <div class="modal-dialog">

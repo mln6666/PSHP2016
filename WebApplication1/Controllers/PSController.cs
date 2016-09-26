@@ -59,7 +59,7 @@ namespace WebApplication1.Controllers
 
         // GET: PS/Details/5
         [Authorize(Roles = "Moderador,Invitado")]
-        public ActionResult Details(int? id, bool var)
+        public ActionResult Details(int? id, bool? var)
         {
             if (id == null)
             {
