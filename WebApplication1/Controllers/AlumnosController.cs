@@ -35,8 +35,10 @@ namespace WebApplication1.Controllers
 
             foreach (var item in lista)
             {
-                if (item.PSs.LastOrDefault().Estado == Estado.PS_Aprobada & item.PSs.LastOrDefault().NroDisposicion == null)
-                    alumnos.Add(item);
+                if (item.PSs.Count() > 0)
+                {
+                    if (item.PSs.LastOrDefault().Estado == Estado.PS_Aprobada & item.PSs.LastOrDefault().NroDisposicion == null)
+                    alumnos.Add(item);}
             }
 
 
