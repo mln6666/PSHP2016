@@ -59,7 +59,7 @@ namespace WebApplication1.Controllers
 
         // GET: PS/Details/5
         [Authorize(Roles = "Moderador,Invitado")]
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, bool var)
         {
             if (id == null)
             {
@@ -71,6 +71,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.vuelta = var;
             return View(pS);
         }
 

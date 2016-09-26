@@ -141,9 +141,18 @@
     </div>
 }
 
-<p>
-    <a href="@Url.Action("HistorialAlu")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+<p>  
+    @if (ViewBag.var)
+    {
+        <a href="@Url.Action("HistorialAlu")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    }
+    else
+    {
+        <a href="@Url.Action("Index")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    }
+
+
     @Html.ActionLink("Editar", "Edit", new { id = Model.IdAlumno }, new {@class = "btn btn-success"  })
-    @*@Html.ActionLink("Back to List", "Index")*@
+    
     
 </p>

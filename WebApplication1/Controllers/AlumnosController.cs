@@ -32,29 +32,28 @@ namespace WebApplication1.Controllers
             {
                 alumnos.Remove(item.Alumno);
             }
-            
-                          //where pss.Contains() == a.PSs.LastOrDefault().IdPS
-                          //select a;
+
+            //where pss.Contains() == a.PSs.LastOrDefault().IdPS
+            //select a;
 
             //IQueryable<Alumno> alumnos = Enumerable.Empty<Alumno>().AsQueryable();
 
-                              //foreach (var item in psList)
-                              //{
-                              //      alumnos = from a in db.Alumnos
-                              //              where item.IdPS == a.PSs.LastOrDefault().IdPS
-                              //              select a;
+            //foreach (var item in psList)
+            //{
+            //      alumnos = from a in db.Alumnos
+            //              where item.IdPS == a.PSs.LastOrDefault().IdPS
+            //              select a;
 
 
-                              //}
+            //}
 
-
-
+            
             return View(alumnos);
         }
 
         // GET: Alumnos/Details/5
         [Authorize(Roles = "Moderador,Invitado")]
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, bool var)
         {
             if (id == null)
             {
@@ -65,6 +64,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.var = var;
             return View(alumno);
         }
 
@@ -170,7 +170,7 @@ namespace WebApplication1.Controllers
         public ActionResult HistorialAlu()
         {
             var alus = db.Alumnos.ToList();
-
+                       
             return View(alus);
         }
 

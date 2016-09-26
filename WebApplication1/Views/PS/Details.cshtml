@@ -275,7 +275,14 @@
 	
 </div>
 <p>
-	<a href="@Url.Action("Index")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+	@if (ViewBag.vuelta)
+    {
+        <a href="@Url.Action("HistorialPS")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    }
+    else
+    {
+        <a href="@Url.Action("Index")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+    }
 	@*@Html.ActionLink("Volver", "Index",null,new {@class="btn btn-default btn-sm"})*@
 </p>
 				 <div class="modal fade" id="myModal1" role="dialog"
