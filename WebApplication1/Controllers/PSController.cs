@@ -28,20 +28,25 @@ namespace WebApplication1.Controllers
                         select p);
 
             var pos = db.PSs.ToList();
-
+            var lista = db.PSs.ToList();
             foreach (var item in pSs)
             {
+
                 pos.Remove(item);
             }
 
-
-
-            foreach (var item in pos)
+            foreach (var item in lista)
             {
-                if(item.Estado==Estado.PS_Aprobada &item.NroDisposicion==null)
-                pos.Remove(item);
-
+                if(item.Estado==Estado.PS_Aprobada & item.NroDisposicion ==null)
+                pos.Add(item);
             }
+
+            //foreach (var item in pos)
+            //{
+            //    if(item.Estado==Estado.PS_Aprobada &item.NroDisposicion==null)
+            //    pos.Remove(item);
+
+            //}
 
 
             return View(pos);
