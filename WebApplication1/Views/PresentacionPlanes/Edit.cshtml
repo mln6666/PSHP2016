@@ -31,7 +31,7 @@
                 var isValidItem = false;
                 var fechaestado = false;
 
-                $('#spanfechaestado').text("Fecha de Evaluación debe ser mayor a la Fecha de Presentación.");
+                $('#spanfechaestado').text("** La Fecha de Evaluación debe ser mayor a la Fecha de Presentación.");
 
             }
 
@@ -39,13 +39,13 @@
                 var isValidItem = false;
                 var fechapresentacionplan = false;
 
-                $('#spanfechapresentacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
+                $('#spanfechapresentacionplan').text("Rango válido: 01/01/2000 - 01/01/2100");
             }
             if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
                 var isValidItem = false;
                 var fechaevaluacionplan = false;
 
-                $('#spanfechaevaluacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
+                $('#spanfechaevaluacionplan').text("Rango válido: 01/01/2000 - 01/01/2100");
 
             }
             if ($('#FechaPresentacionPlan').val().trim() == '') {
@@ -68,7 +68,7 @@
                 var isValidItem = false;
                 var fechaestado = false;
 
-                $('#spanfechaestado').text("**Fecha de Evaluación requiere una Evaluación!");
+                $('#spanfechaestado').text("** Una Fecha de Evaluación requiere una Evaluación!");
             }
 
             if (($('#FechaEvaluacionPlan').val().trim() == '') & ($('#EstadoEvaluacionPlan').val().trim() != 0)) {
@@ -89,7 +89,7 @@
             }
 
             if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
-                bootbox.confirm("Esta por editar una presentación del plan, ¿Desea continuar?", function (result) {
+                bootbox.confirm("** Está por editar una presentación del plan, ¿Desea continuar?", function (result) {
                     if (result) {
                         x.submit();
                     }

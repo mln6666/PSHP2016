@@ -28,19 +28,19 @@
             if (fecha1 > fecha2){
                 var isValidItem = false;
                 var fechaestado = false;
-                $('#spanfechaestado').text("**La Fecha de Presentación no puede ser mayor a la Fecha de Evaluación.");
+                $('#spanfechaestado').text("** La Fecha de Presentación no puede ser posterior a la Fecha de Evaluación.");
             }
             if ((fecha1 < minfecha) || (fecha1 > maxfecha) ){
                 var isValidItem = false;
                 var fechapresentacionplan = false;
 
-                $('#spanfechapresentacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
+                $('#spanfechapresentacionplan').text("Rango válido: 01/01/2000 -- 01/01/2100");
             }
             if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
                 var isValidItem = false;
                 var fechaevaluacionplan = false;
 
-                $('#spanfechaevaluacionplan').text("Rango valido: 01/01/2000 - 01/01/2100");
+                $('#spanfechaevaluacionplan').text("Rango válido: 01/01/2000 -- 01/01/2100");
 
             }
             if ($('#FechaPresentacionPlan').val().trim() == '') {
@@ -63,14 +63,14 @@
                 var isValidItem = false;
                 var fechaestado = false;
 
-                $('#spanfechaestado').text("**Fecha de Evaluación requiere una Evaluación!");
+                $('#spanfechaestado').text("** Una Fecha de Evaluación requiere una Evaluación!");
             }
 
             if (($('#FechaEvaluacionPlan').val().trim() == '') & ($('#EstadoEvaluacionPlan').val().trim() != 0)) {
                 var isValidItem = false;
                 var fechaestado = false;
 
-                $('#spanfechaestado').text("**Una Evaluación requiere una Fecha de Evaluación!");
+                $('#spanfechaestado').text("** Una Evaluación requiere una Fecha de Evaluación!");
             }
 
             if (fechaestado) {
@@ -84,7 +84,7 @@
             }
 
             if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
-                bootbox.confirm("Esta por agregar una presentación del plan, ¿Desea continuar?", function (result) {
+                bootbox.confirm("** Está por agregar una presentación del plan, ¿Desea continuar?", function (result) {
                     if (result) {
                         x.submit();
                     }

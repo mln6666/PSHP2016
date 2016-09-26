@@ -29,7 +29,7 @@
                 var isValidItem = false;
                 var fechaestado = false;
 
-                $('#spanfechaestado').text("Fecha de Evaluación debe ser mayor a la Fecha de Presentación.");
+                $('#spanfechaestado').text("** Una Fecha de Evaluación debe ser mayor a la Fecha de Presentación.");
 
             }
 
@@ -37,7 +37,7 @@
                 var isValidItem = false;
                 var fechaevaluacioninforme = false;
 
-                $('#spanfechaevaluacioninforme').text("Rango valido: 01/01/2000 - 01/01/2100");
+                $('#spanfechaevaluacioninforme').text("Rango válido: 01/01/2000 - 01/01/2100");
 
             }
 
@@ -52,14 +52,14 @@
                 var isValidItem = false;
                 var fechaestado = false;
 
-                $('#spanfechaestado').text("**Fecha de Evaluación requiere una Evaluación!");
+                $('#spanfechaestado').text("** Una Fecha de Evaluación requiere una Evaluación!");
             }
 
             if (($('#FechaEvaluacionInforme').val().trim() == '') & ($('#EstadoEvaluacionInforme').val().trim() != 0)) {
                 var isValidItem = false;
                 var fechaestado = false;
 
-                $('#spanfechaestado').text("**Una Evaluación requiere una Fecha de Evaluación!");
+                $('#spanfechaestado').text("** Una Evaluación requiere una Fecha de Evaluación!");
             }
 
             if (fechaestado) {
@@ -70,7 +70,7 @@
             }
 
             if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
-                bootbox.confirm("Esta por evaluar una presentación del informe, ¿Desea continuar?", function (result) {
+                bootbox.confirm("Está por evaluar una presentación del informe, ¿Desea continuar?", function (result) {
                     if (result) {
                         x.submit();
                     }
