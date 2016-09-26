@@ -115,7 +115,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm"} })
                 @Html.ValidationMessageFor(model => model.FechaEvaluacionPlan, "", new { @class = "text-danger" })
                 <span id="spanfechaevaluacionplan" style="color:red"></span>
 

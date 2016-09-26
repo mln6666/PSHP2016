@@ -188,7 +188,6 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("Index", "Error", new { error = 2000 });
             }
-
             return PartialView(presentacionPlan);
         }
 
