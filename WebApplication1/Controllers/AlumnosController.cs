@@ -26,11 +26,21 @@ namespace WebApplication1.Controllers
                            select p);
 
             var alumnos = db.Alumnos.ToList();
+            var lista = db.Alumnos.ToList();
 
             foreach (var item in pss)
             {
                 alumnos.Remove(item.Alumno);
             }
+
+            foreach (var item in lista)
+            {
+                if (item.PSs.LastOrDefault().Estado == Estado.PS_Aprobada & item.PSs.LastOrDefault().NroDisposicion == null)
+                    alumnos.Add(item);
+            }
+
+
+
 
             //where pss.Contains() == a.PSs.LastOrDefault().IdPS
             //select a;
@@ -46,7 +56,7 @@ namespace WebApplication1.Controllers
 
             //}
 
-            
+
             return View(alumnos);
         }
 
