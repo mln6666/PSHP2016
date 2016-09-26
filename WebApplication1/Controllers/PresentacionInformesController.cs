@@ -11,20 +11,19 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Administrador")]
     public class PresentacionInformesController : Controller
     {
         private ContextPS db = new ContextPS();
 
         // GET: PresentacionInformes
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Index()
         {
             var presentacionInformes = db.PresentacionInformes.Include(p => p.PS);
             return View(presentacionInformes.ToList());
         }
 
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult HistorialInformes(int id)
         {
             var historial = db.PSs.Include(m => m.PresentacionesInforme).SingleOrDefault(m => m.IdPS == id);
@@ -34,7 +33,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: PresentacionInformes/Details/5
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -49,7 +48,7 @@ namespace WebApplication1.Controllers
             return View(presentacionInforme);
         }
 
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Details2(int? idps)
         {
             ContextPS db = new ContextPS();
@@ -71,7 +70,7 @@ namespace WebApplication1.Controllers
 
 
         // GET: PresentacionInformes/Create
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult Create(int id)
         {
             PresentacionInforme presentacioninforme = new PresentacionInforme();
@@ -103,7 +102,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult Create([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")] PresentacionInforme presentacionInforme)
         {
             if (ModelState.IsValid)
@@ -171,7 +170,7 @@ namespace WebApplication1.Controllers
         //    return View(presentacionInforme);
         //}
 
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult EvaluarInforme(int? id)
         {
             if (id == null)
@@ -206,7 +205,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult EvaluarInforme([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")] PresentacionInforme presentacionInforme)
         {
             if (ModelState.IsValid)
@@ -238,6 +237,7 @@ namespace WebApplication1.Controllers
 
 
         // GET: PresentacionInformes/Edit/5
+        [Authorize(Roles = "Editar Plan/Informe,Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -271,6 +271,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Editar Plan/Informe,Administrador")]
         public ActionResult Edit([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")] PresentacionInforme presentacionInforme)
         {
             if (ModelState.IsValid)
@@ -298,6 +299,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: PresentacionInformes/Delete/5
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -313,8 +315,10 @@ namespace WebApplication1.Controllers
         }
 
         // POST: PresentacionInformes/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public ActionResult DeleteConfirmed(int id)
         {
             PresentacionInforme presentacionInforme = db.PresentacionInformes.Find(id);

@@ -11,20 +11,19 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Administrador")]
     public class AreasController : Controller
     {
         private ContextPS db = new ContextPS();
 
         // GET: Areas
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Index()
         {
             return View(db.Areas.ToList());
         }
 
         // GET: Areas/Details/5
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,7 +39,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Areas/Create
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult Create()
         {
             return View();
@@ -51,7 +50,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult Create([Bind(Include = "IdArea,NombreArea,DescripcionArea")] Area area)
         {
             if (ModelState.IsValid)
@@ -78,6 +77,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Areas/Edit/5
+        [Authorize(Roles = "Editar Area/Organizacion,Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -97,6 +97,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Editar Area/Organizacion,Administrador")]
         public ActionResult Edit([Bind(Include = "IdArea,NombreArea,DescripcionArea")] Area area)
         {
             if (ModelState.IsValid)
@@ -109,6 +110,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Areas/Delete/5
+        [Authorize(Roles = "Eliminar Area/Organizacion,Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -126,6 +128,7 @@ namespace WebApplication1.Controllers
         // POST: Areas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Eliminar Area/Organizacion,Administrador")]
         public ActionResult DeleteConfirmed(int id)
         {
             Area area = db.Areas.Find(id);

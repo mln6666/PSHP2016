@@ -418,6 +418,7 @@
     <Content Include="Content\Images\configuracion.png" />
     <Content Include="Content\Images\logogodesa.png" />
     <Content Include="Content\Images\logoUTN.png" />
+    <Content Include="Content\Images\logoUTNdeptosistemas.png" />
     <Content Include="Content\Images\logoUTNISI.png" />
     <Content Include="Content\Images\w2background.jpg" />
     <Content Include="Content\Select2\select2.min.css" />

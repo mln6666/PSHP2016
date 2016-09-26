@@ -7,7 +7,6 @@ using WebApplication1.Context;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Administrador")]
     public class HomeController : Controller
     {
         private ContextPS db = new ContextPS();
@@ -18,7 +17,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Vacio()
         {
             return View();

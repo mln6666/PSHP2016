@@ -247,42 +247,50 @@
 						}
 					</ul>
 				</div>
-				@if (User.IsInRole("Administrador"))
-				{
-					@Html.ActionLink("Editar", "Edit", new { id = Model.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm" })
+				@if (User.IsInRole("Administrador") | User.IsInRole("Editar PS"))
+            
+                {
+                                @Html.ActionLink("Editar", "Edit", new { id = Model.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm" })
+            
 
-				}
-
-
-
-			</td>
+                }
 
 
 
 
+            </td>
 
 
 
-		</tr>
-	</table>
-	<div>
-		@Html.Action("Details2", "PresentacionPlanes", new { idps = Model.IdPS })
-	</div>
-	<div>
-		@Html.Action("Details2", "PresentacionInformes", new { idps = Model.IdPS })
-	</div>
-	
-	
+
+
+
+
+
+        </tr>
+
+    </table>
+
+    <div>
+        @Html.Action("Details2", "PresentacionPlanes", new { idps = Model.IdPS })
+    </div>
+
+    <div>
+        @Html.Action("Details2", "PresentacionInformes", new { idps = Model.IdPS })
+    </div>
+
+
+
 </div>
 <p>
     @if (ViewBag.vuelta!=null)
     {
         <a href="@Url.Action("HistorialPS")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
-    }
+                    }
     else
     {
         <a href="@Url.Action("Index")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
-    }
+                }
 </p>
 	@*@Html.ActionLink("Volver", "Index",null,new {@class="btn btn-default btn-sm"})*@
 

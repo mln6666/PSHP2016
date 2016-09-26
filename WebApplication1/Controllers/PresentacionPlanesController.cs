@@ -11,13 +11,12 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Administrador")]
     public class PresentacionPlanesController : Controller
     {
         private ContextPS db = new ContextPS();
 
         // GET: PresentacionPlanes
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Index()
         {
             var presentacionPlans = db.PresentacionPlanes.Include(p => p.PS);
@@ -26,7 +25,7 @@ namespace WebApplication1.Controllers
 
 
 
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult HistorialPlanes(int id)
         {
             var historial = db.PSs.Include(m => m.PresentacionesPlanes).SingleOrDefault(m => m.IdPS == id);
@@ -37,7 +36,7 @@ namespace WebApplication1.Controllers
 
 
         // GET: PresentacionPlanes/Details/5
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -52,7 +51,7 @@ namespace WebApplication1.Controllers
             return View(presentacionPlan);
         }
         // GET: PresentacionPlanes/Details/5
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Details2(int? idps)
         {
             ContextPS db = new ContextPS();
@@ -72,7 +71,7 @@ namespace WebApplication1.Controllers
 
 
         // GET: PresentacionPlanes/Create
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult Create(int id)
         {
             PresentacionPlan presentacionplan= new PresentacionPlan();
@@ -94,7 +93,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult Create([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")] PresentacionPlan presentacionPlan)
         {
             if (ModelState.IsValid)
@@ -124,7 +123,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: PresentacionPlanes/Edit/5
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Editar Plan/Informe,Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -144,6 +143,7 @@ namespace WebApplication1.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Editar Plan/Informe,Administrador")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")] PresentacionPlan presentacionPlan)
         {
@@ -172,7 +172,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: PresentacionPlanes/Edit/5
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult EvaluarPlan(int? id)
         {
             if (id == null)
@@ -196,7 +196,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult EvaluarPlan([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")] PresentacionPlan presentacionPlan)
         {
 
@@ -230,6 +230,7 @@ namespace WebApplication1.Controllers
 
 
         // GET: PresentacionPlanes/Delete/5
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -247,6 +248,7 @@ namespace WebApplication1.Controllers
         // POST: PresentacionPlanes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public ActionResult DeleteConfirmed(int id)
         {
             PresentacionPlan presentacionPlan = db.PresentacionPlanes.Find(id);

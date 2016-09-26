@@ -11,13 +11,12 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Administrador")]
     public class TipoPSsController : Controller
     {
         private ContextPS db = new ContextPS();
 
         // GET: TipoPSs
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Index()
         {
             //if (db.TipoPSs.Count()==0)
@@ -86,6 +85,7 @@ namespace WebApplication1.Controllers
         //}
 
         // GET: TipoPSs/Edit/5
+        [Authorize(Roles = "Editar TipoPS,Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -105,6 +105,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Editar TipoPS,Administrador")]
         public ActionResult Edit([Bind(Include = "IdTipoPS,NombreTipoPS,DescripcionTipoPS")] TipoPS tipoPS)
         {
             if (ModelState.IsValid)

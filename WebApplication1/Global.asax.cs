@@ -96,16 +96,16 @@ namespace WebApplication1
 
             var user = userManager.FindByName("admin@utnfrre.com");
 
-          
-            if (!userManager.IsInRole(user.Id, "Editar"))
-            {
-                userManager.AddToRole(user.Id, "Editar");
 
-            }
-            if (!userManager.IsInRole(user.Id, "Eliminar"))
+            //if (!userManager.IsInRole(user.Id, "Editar"))
+            //{
+            //    userManager.AddToRole(user.Id, "Editar");
+
+            //}
+            if (!userManager.IsInRole(user.Id, "Editar TipoPS"))
             {
-                userManager.AddToRole(user.Id, "Eliminar");
-                }
+                userManager.AddToRole(user.Id, "Editar TipoPS");
+            }
             if (!userManager.IsInRole(user.Id, "Moderador"))
             {
                 userManager.AddToRole(user.Id, "Moderador");
@@ -119,6 +119,35 @@ namespace WebApplication1
             if (!userManager.IsInRole(user.Id, "Invitado"))
             {
                 userManager.AddToRole(user.Id, "Invitado");
+            }
+
+            if (!userManager.IsInRole(user.Id, "Editar Plan/Informe"))
+            {
+                userManager.AddToRole(user.Id, "Editar Plan/Informe");
+            }
+            if (!userManager.IsInRole(user.Id, "Editar Alumno"))
+            {
+                userManager.AddToRole(user.Id, "Editar Alumno");
+            }
+            if (!userManager.IsInRole(user.Id, "Editar Area/Organizacion"))
+            {
+                userManager.AddToRole(user.Id, "Editar Area/Organizacion");
+            }
+            if (!userManager.IsInRole(user.Id, "Eliminar Alumno"))
+            {
+                userManager.AddToRole(user.Id, "Eliminar Alumno");
+            }
+            if (!userManager.IsInRole(user.Id, "Eliminar Area/Organizacion"))
+            {
+                userManager.AddToRole(user.Id, "Eliminar Area/Organizacion");
+            }
+            if (!userManager.IsInRole(user.Id, "Eliminar PS"))
+            {
+                userManager.AddToRole(user.Id, "Eliminar PS");
+            }
+            if (!userManager.IsInRole(user.Id, "Editar PS"))
+            {
+                userManager.AddToRole(user.Id, "Editar PS");
             }
 
 
@@ -149,18 +178,40 @@ namespace WebApplication1
             {
                 roleManager.Create(new IdentityRole("Administrador"));
             }
-
-          
-
-            if (!roleManager.RoleExists("Editar"))
+            if (!roleManager.RoleExists("Editar Plan/Informe"))
             {
-                roleManager.Create(new IdentityRole("Editar"));
+                roleManager.Create(new IdentityRole("Editar Plan/Informe"));
+            }
+            if (!roleManager.RoleExists("Editar Alumno"))
+            {
+                roleManager.Create(new IdentityRole("Editar Alumno"));
+            }
+            if (!roleManager.RoleExists("Editar Area/Organizacion"))
+            {
+                roleManager.Create(new IdentityRole("Editar Area/Organizacion"));
+            }
+            if (!roleManager.RoleExists("Eliminar Alumno"))
+            {
+                roleManager.Create(new IdentityRole("Eliminar Alumno"));
+            }
+            if (!roleManager.RoleExists("Eliminar Area/Organizacion"))
+            {
+                roleManager.Create(new IdentityRole("Eliminar Area/Organizacion"));
+            }
+            if (!roleManager.RoleExists("Eliminar PS"))
+            {
+                roleManager.Create(new IdentityRole("Eliminar PS"));
             }
 
-          
-            if (!roleManager.RoleExists("Eliminar"))
+            if (!roleManager.RoleExists("Editar PS"))
             {
-                roleManager.Create(new IdentityRole("Eliminar"));
+                roleManager.Create(new IdentityRole("Editar PS"));
+            }
+
+
+            if (!roleManager.RoleExists("Editar TipoPS"))
+            {
+                roleManager.Create(new IdentityRole("Editar TipoPS"));
             }
             if (!roleManager.RoleExists("Moderador"))
             {

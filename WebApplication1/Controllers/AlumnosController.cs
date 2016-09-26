@@ -11,13 +11,12 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Administrador")]
     public class AlumnosController : Controller
     {
         private ContextPS db = new ContextPS();
 
         // GET: Alumnos
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Index()
         {
 
@@ -52,7 +51,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Alumnos/Details/5
-        [Authorize(Roles = "Moderador,Invitado")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Details(int? id, bool? var)
         {
             if (id == null)
@@ -69,7 +68,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Alumnos/Create
-        [Authorize(Roles = "Moderador")]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult Create()
         {
             return View();
@@ -80,6 +79,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult Create([Bind(Include = "IdAlumno,Legajo,NombreAlu,ApellidoAlu,CorreoAlu,AñoIngreso,Telefono,Celular,Direccion,DNI")] Alumno alumno)
         {
             if (ModelState.IsValid)
@@ -105,6 +105,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Alumnos/Edit/5
+        [Authorize(Roles = "Editar Alumno,Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -124,6 +125,7 @@ namespace WebApplication1.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Editar Alumno,Administrador")]
         public ActionResult Edit([Bind(Include = "IdAlumno,Legajo,NombreAlu,ApellidoAlu,CorreoAlu,AñoIngreso,Telefono,Celular,Direccion,DNI")] Alumno alumno)
         {
             if (ModelState.IsValid)
@@ -136,6 +138,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Alumnos/Delete/5
+        [Authorize(Roles = "Eliminar Alumno,Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -153,6 +156,7 @@ namespace WebApplication1.Controllers
         // POST: Alumnos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Eliminar Alumno,Administrador")]
         public ActionResult DeleteConfirmed(int id)
         {
             Alumno alumno = db.Alumnos.Find(id);
@@ -167,6 +171,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult HistorialAlu()
         {
             var alus = db.Alumnos.ToList();

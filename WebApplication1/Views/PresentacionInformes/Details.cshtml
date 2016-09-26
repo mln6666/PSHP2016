@@ -75,7 +75,7 @@
             }
         </td>
 
-@if (User.IsInRole("Administrador"))
+@if (User.IsInRole("Administrador") | User.IsInRole("Editar Plan/Informe"))
 {
         <td class="text-center">@Html.ActionLink("Editar Informe", "Edit", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm" })</td>
         }
