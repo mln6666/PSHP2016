@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebApplication1.Models.Alumno>
+﻿@using WebApplication1.Models
+@model IEnumerable<WebApplication1.Models.Alumno>
 
 @{
     ViewBag.Title = "Alumnos";
@@ -37,16 +38,19 @@
         <thead>
 
             <tr class="text-left" style="color: #2c3e50; background-color: lightblue">
-                <th class="text-left" style="border-radius: 3px">
+                <th class="text-left" width="7%" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.Legajo)
                 </th>
-                <th class="text-left" style="border-radius: 3px">
+                <th class="text-left"width="20%" style="border-radius: 3px">
                     Apellido y Nombre
+                </th>
+                <th class="text-left" width="15%" style="border-radius: 3px">
+                    Estado
                 </th>
                 <th class="text-left" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.CorreoAlu)
                 </th>
-                <th class="text-center" style="border-radius: 3px" >
+                <th class="text-center" width="30%" style="border-radius: 3px" >
                     Acciones
                 </th>
                 @*<th style="background-color: whitesmoke"></th>*@
@@ -58,16 +62,59 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td class="text-left">
+                    <td class="text-left" >
                         @Html.DisplayFor(modelItem => item.Legajo)
                     </td>
                     <td class="text-left">
                         @item.ApellidoAlu, @item.NombreAlu
                     </td>
+
+                    <td class="text-left" style="font-weight: bold; font-style: italic">
+                        @*@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)*@
+                        @if (item.PSs.Count() == 0)
+                        {
+                            <text>
+                                Sin PS    <a href="@Url.Action("Create","PS",new { idalu = item.IdAlumno })"><span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span></a>
+                            </text>
+
+
+
+                        }
+                        else
+                        if (item.PSs.LastOrDefault().Estado == Estado.Plan_Rechazado | item.PSs.LastOrDefault().Estado == Estado.PS_Cancelada)
+                        {
+                            <text> <a href="@Url.Action("Details", "PS", new {id = item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a> |<a href="@Url.Action("Create","PS",new { idalu = item.IdAlumno })">
+                                <span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span>
+                            </a></text>}
+                        else
+                        {                             <a href="@Url.Action("Details","PS", new { id=item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>
+                        }
+
+
+                    </td>
+
+
+                    @*<td class="text-left" style="font-weight: bold; font-style: italic">
+                        @if (item.PSs.Count() == 0)
+                        {                        <a href="@Url.Action("Details","PS", new { id=item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>
+                        }
+                        else
+                        if (item.PSs.LastOrDefault().Estado == Estado.Plan_Rechazado | item.PSs.LastOrDefault().Estado == Estado.PS_Cancelada)
+                        {
+                            <text> <a href="@Url.Action("Details", "PS", new {id = item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>-<a href="@Url.Action("Create","PS",new { idalu = item.IdAlumno })">
+    <span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span>
+</a></text>}else
+                        {<text>
+    Sin PS    <a href="@Url.Action("Create","PS",new { idalu = item.IdAlumno })"><span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span></a>
+</text>}
+
+
+</td>*@
                     <td class="text-left">
                         @if (item.CorreoAlu != null)
                         {
                             @Html.DisplayFor(modelItem => item.CorreoAlu)
+
                         }
                         else
                         {

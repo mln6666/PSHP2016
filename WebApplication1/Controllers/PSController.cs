@@ -77,8 +77,19 @@ namespace WebApplication1.Controllers
 
         // GET: PS/Create
         [Authorize(Roles = "Moderador")]
-        public ActionResult Create()
+        public ActionResult Create(int? idalu)
         {
+
+            if(idalu!=null)
+            { var sinps =  db.Alumnos.Find(idalu);
+
+                ViewBag.aluid = sinps.IdAlumno;
+                ViewBag.alulegajo = sinps.Legajo;
+                ViewBag.aluapellido = sinps.ApellidoAlu;
+                ViewBag.alunombre = sinps.NombreAlu;
+            }
+
+
             List<Alumno> alumnos = new List<Alumno>();
             var pSs = db.PSs.ToList();
             var idmax = 7;
@@ -96,6 +107,8 @@ namespace WebApplication1.Controllers
                     }
                 } else
                 {
+                    if(idalu!=null & item.IdAlumno==idalu)
+                    { continue;}
                     alumnos.Add(item);
                 }
             }
@@ -104,8 +117,12 @@ namespace WebApplication1.Controllers
             {
                 band = true;
             }
+
+           
+
+
             ViewBag.band = band;
-            ViewBag.alumnos = alumnos;                       
+            ViewBag.alumnos = alumnos; 
             ViewBag.areas = db.Areas.ToList();
             ViewBag.organizaciones = db.Organizaciones.ToList();
             ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");

@@ -1,4 +1,5 @@
-﻿@model WebApplication1.Models.Alumno
+﻿@using WebApplication1.Models
+@model WebApplication1.Models.Alumno
 
 @{
     ViewBag.Title = "Detalle";
@@ -19,14 +20,17 @@
 
         <table class="table table-striped table-bordered ">
             <tr class="text-left" style="color: #2c3e50; background-color: lightblue">
-                <th class="text-left" style="border-radius: 5px">
+                <th class="text-left" width="7%" style="border-radius: 5px">
                     @Html.DisplayNameFor(model => model.Legajo)
                 </th>
-                <th class="text-left" style="border-radius: 3px">
+                <th class="text-left" width="20%" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.NombreAlu)
                 </th>
-                <th class="text-left" style="border-radius: 3px">
+                <th class="text-left" width="20%" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.ApellidoAlu)
+                </th>
+                <th class="text-left" width="15%"style="border-radius: 3px">
+                    Estado
                 </th>
                 <th class="text-left" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.CorreoAlu)
@@ -44,9 +48,39 @@
                     @*@Html.ValidationMessageFor(model => model.NombreAlu, "", new { @class = "text-danger" })*@
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.ApellidoAlu, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DisplayFor(model => model.ApellidoAlu, new {htmlAttributes = new {@class = "form-control"}})
                     @*@Html.ValidationMessageFor(model => model.ApellidoAlu, "", new { @class = "text-danger" })*@
                 </td>
+              
+
+                <td class="text-left" style="font-weight: bold; font-style: italic">
+                    @*@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)*@
+                    @if (Model.PSs.Count() == 0)
+                    {
+                        <text>
+                            Sin PS    <a href="@Url.Action("Create","PS",new { idalu = Model.IdAlumno })"><span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span></a>
+                        </text>
+
+
+
+                    }
+                    else
+                        if (Model.PSs.LastOrDefault().Estado == Estado.Plan_Rechazado | Model.PSs.LastOrDefault().Estado == Estado.PS_Cancelada)
+                    {
+                        <text> <a href="@Url.Action("Details", "PS", new {id = Model.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => Model.PSs.LastOrDefault().Estado)</a> |<a href="@Url.Action("Create","PS",new { idalu = Model.IdAlumno })">
+                            <span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span>
+                        </a></text>}
+                    else
+                    {                             <a href="@Url.Action("Details","PS", new { id=Model.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => Model.PSs.LastOrDefault().Estado)</a>
+                    }
+
+
+                </td>
+
+
+
+
+
                 <td class="text-left">
                     @if (Model.CorreoAlu != null)
                     {
@@ -63,42 +97,30 @@
 
         <table class="table table-striped table-bordered ">
             <tr class="text-left" style="color: #2c3e50; background-color: lightblue">
-                <th class="text-left" style="border-radius: 3px">
+                <th class="text-left"width="12%" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.AñoIngreso)
+                </th>
+                <th class="text-left" width="15%" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.Telefono)
+
+                </th>
+                <th class="text-left" width="15%" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.Celular)
+                </th>
+                <th class="text-left" width="15%" style="border-radius: 3px">
+                    @Html.DisplayNameFor(model => model.DNI)
                 </th>
                 <th class="text-left" style="border-radius: 3px">                    
                     @Html.DisplayNameFor(model => model.Direccion)
                 </th>
 
-                <th class="text-left" style="border-radius: 3px"> 
-                    @Html.DisplayNameFor(model => model.Telefono)
-                    
-                </th>
-                <th class="text-left" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Celular)
-                </th>
-                <th class="text-left" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.DNI)
-                </th>
+               
             </tr>
             <tr>
                 <td class="text-left">
                     @Html.DisplayFor(model => model.AñoIngreso, new { htmlAttributes = new { @class = "form-control" } })
                     @*@Html.ValidationMessageFor(model => model.AñoIngreso, "", new { @class = "text-danger" })*@
                 </td>
-                <td class="text-left">
-                    @if (Model.Direccion != null)
-                    {
-                        @Html.DisplayFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
-                    }
-                    else
-                    {
-                        <text>- - -</text>
-                    }
-                    
-                    
-                </td>
-
                 <td class="text-left">
                     @if (Model.Telefono != null)
                     {
@@ -130,6 +152,20 @@
                         <text>- - -</text>
                     }
                 </td>
+                <td class="text-left">
+                    @if (Model.Direccion != null)
+                    {
+                        @Html.DisplayFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }
+                    
+                    
+                </td>
+
+               
 
 
 
@@ -140,6 +176,7 @@
 
     </div>
 }
+
 
 <p>  
     @if (ViewBag.var!=null)

@@ -47,6 +47,9 @@ namespace WebApplication1.Controllers
             ViewBag.organizaciones = lista;
 
             if (prueba == null) { 
+
+                lista.RemoveAt(lista.Count()-1);
+                ViewBag.organizaciones = lista;
             ViewBag.idultima = ultima.IdOrganizacion;
             ViewBag.denominacionultima = ultima.DenominacionOrg;
             }
@@ -54,6 +57,8 @@ namespace WebApplication1.Controllers
             {
                 ViewBag.organizacionexistente = "La organización ya se encontraba en la BD.";
                 Organizacion datosOrganizacion = db.Organizaciones.Find(prueba);
+                lista.Remove(datosOrganizacion);
+                ViewBag.organizaciones = lista;
                 ViewBag.idultima = datosOrganizacion.IdOrganizacion;
                 ViewBag.denominacionultima = datosOrganizacion.DenominacionOrg;
             }
