@@ -234,11 +234,12 @@
         ////////////////End:Select searchable///////////////////
         function OnSuccess() {
             $("#myModal .close").click();
+            $('.modal-backdrop').remove();
 
             //alert("Operacion completada");
-            bootbox.alert("Operación correcta.", function () {
-                $('.modal-backdrop').remove();
-            });
+            //bootbox.alert("Operación correcta.", function () {
+            //    $('.modal-backdrop').remove();
+            //});
 
 
         }

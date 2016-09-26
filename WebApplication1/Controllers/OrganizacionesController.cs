@@ -40,17 +40,27 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize(Roles = "Moderador")]
-        public ActionResult _NuevaOrg(int? prueba)
+        public ActionResult _NuevaOrg(int? prueba,int? vacio)
         {
             var lista = db.Organizaciones.ToList();
             Organizacion ultima = lista.LastOrDefault();
             ViewBag.organizaciones = lista;
 
-            if (prueba == null) { 
+            if (prueba == null) {
+
+                if (vacio != null)
+                {
+                    ViewBag.idultima ="";
+                    ViewBag.denominacionultima = "Buscar organización...";
+                    return View();
+                }
+
 
                 lista.RemoveAt(lista.Count()-1);
                 ViewBag.organizaciones = lista;
-            ViewBag.idultima = ultima.IdOrganizacion;
+                ViewBag.organizacionexistente = "Operación exitosa.";
+
+                ViewBag.idultima = ultima.IdOrganizacion;
             ViewBag.denominacionultima = ultima.DenominacionOrg;
             }
             if (prueba != null)
@@ -75,7 +85,13 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Moderador")]
         public ActionResult Create1([Bind(Include = "IdOrganizacion,DenominacionOrg,DireccionOrg,TelefonoOrg,DescripcionOrg")] Organizacion organizacion)
         {
-            
+            int vacio = 1;
+            if (organizacion.DenominacionOrg==null)
+            {
+                return RedirectToAction("_NuevaOrg", new { vacio = vacio });
+            }
+
+
             if (ModelState.IsValid)
             {
 
