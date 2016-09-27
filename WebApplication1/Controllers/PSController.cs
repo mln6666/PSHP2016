@@ -78,15 +78,16 @@ namespace WebApplication1.Controllers
             ViewBag.vuelta = var;
             return View(pS);
         }
-
+        
         // GET: PS/Create
         [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult Create(int? idalu)
         {
             var band = false;
 
-            if (idalu!=null)
-            { var sinps =  db.Alumnos.Find(idalu);
+            if (idalu != null)
+            {
+                var sinps = db.Alumnos.Find(idalu);
 
                 ViewBag.aluid = sinps.IdAlumno;
                 ViewBag.alulegajo = sinps.Legajo;
@@ -125,10 +126,11 @@ namespace WebApplication1.Controllers
                     {
                         alumnos.Add(item);
                     }
-                } else
+                }
+                else
                 {
-                    if(idalu!=null & item.IdAlumno==idalu)
-                    { continue;}
+                    if (idalu != null & item.IdAlumno == idalu)
+                    { continue; }
                     alumnos.Add(item);
                 }
             }
@@ -138,11 +140,11 @@ namespace WebApplication1.Controllers
                 band = true;
             }
 
-           
+
 
 
             ViewBag.band = band;
-            ViewBag.alumnos = alumnos; 
+            ViewBag.alumnos = alumnos;
             ViewBag.areas = db.Areas.ToList();
             ViewBag.organizaciones = db.Organizaciones.ToList();
             ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");
@@ -155,56 +157,207 @@ namespace WebApplication1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Moderador,Administrador")]
-        public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno")] PS pS)
+        public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan")] PrimerPlanVM pm)
         {
+
+            PS pS = new PS();
+            PresentacionPlan plan = new PresentacionPlan();
+
+            //pS.IdPS = pm.IdPS;
+            pS.NroDisposicion = pm.NroDisposicion;
+            pS.Tutor = pm.Tutor;
+            pS.TituloProyecto = pm.TituloProyecto;
+            pS.CicloLectivo = pm.CicloLectivo;
+            pS.Cuatrimestre = pm.Cuatrimestre;
+
+            pS.IdOrganizacion = pm.IdOrganizacion;
+            //pS.Organizacion = pm.Organizacion;
+
+            pS.IdArea = pm.IdArea;
+            //pS.IdArea = pm.IdArea;
+
+            pS.IdTipoPS = pm.IdTipoPS;
+            //pS.TipoPS = pm.TipoPS;
+
+            //pS.Alumno = pm.Alumno;
+            pS.IdAlumno = pm.IdAlumno;
+
+            pS.Estado = pm.Estado;
+            //plan.IdPresentacionPlan = pm.IdPresentacionPlan;
+            plan.FechaPresentacionPlan = pm.FechaPresentacionPlan;
+            plan.FechaEvaluacionPlan = pm.FechaEvaluacionPlan;
+            plan.EstadoEvaluacionPlan = pm.EstadoEvaluacionPlan;
+            plan.ObservacionesPlan = pm.ObservacionesPlan;
+            plan.IdPS = pm.IdPS;
+
+
+
             if (ModelState.IsValid)
             {
-                pS.Estado=Estado.Plan_Pendiente;
                 db.PSs.Add(pS);
+               db.SaveChanges();
+                plan.IdPS = pS.IdPS;
+
+                db.PresentacionPlanes.Add(plan);
                 db.SaveChanges();
-                return RedirectToAction("Details", "PS", new { id = pS.IdPS });
+
+                PS pu = db.PSs.Find(plan.IdPS);
+                if (plan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
+                    pu.Estado = Estado.Plan_Entregado;
+
+                if (plan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                    pu.Estado = Estado.Plan_Aprobado;
+
+                if (plan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
+                    pu.Estado = Estado.Plan_Desaprobado;
+
+                if (plan.EstadoEvaluacionPlan == Evaluacion.Rechazado)
+                    pu.Estado = Estado.Plan_Rechazado;
+
+                db.Entry(pu).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Details", "PS", new { id = plan.IdPS });
+
             }
 
-            ////empieza copypasteada 
-            List<Alumno> alumnos = new List<Alumno>();
-            var pSs = db.PSs.ToList();
-            var idmax = 7;
-            PS ps1;
-            foreach (var item in db.Alumnos)
-            {
-                if (item.PSs.Count() > 0)
-                {
-                    idmax = item.PSs.Max(p => p.IdPS);
-                    ps1 = db.PSs.Find(idmax);
-
-                    if (ps1.Estado == Estado.Plan_Rechazado | ps1.Estado == Estado.PS_Cancelada | ps1.Estado == Estado.PS_Vencida)
-                    {
-                        alumnos.Add(item);
-                    }
-                }
-                else
-                {
-                    alumnos.Add(item);
-                }
-            }
-            var band = false;
-            if (alumnos.Count() == 0)
-            {
-                band = true;
-            }
-            ViewBag.band = band;
-            ViewBag.alumnos = alumnos;
+            ViewBag.alumnos = db.Alumnos.ToList();
             ViewBag.areas = db.Areas.ToList();
             ViewBag.organizaciones = db.Organizaciones.ToList();
-            ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");
-            ////termina copypasteada
-            //ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
-            //ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
-            //ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
-            //ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
-
-            return View(pS);
+            ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
+            ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
+            ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
+            ViewBag.IdOrganizacion = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
+            return View(pm);
         }
+
+
+        //// GET: PS/Create ORIGINAL
+        //[Authorize(Roles = "Moderador,Administrador")]
+        //public ActionResult Create(int? idalu)
+        //{
+        //    var band = false;
+
+        //    if (idalu!=null)
+        //    { var sinps =  db.Alumnos.Find(idalu);
+
+        //        ViewBag.aluid = sinps.IdAlumno;
+        //        ViewBag.alulegajo = sinps.Legajo;
+        //        ViewBag.aluapellido = sinps.ApellidoAlu;
+        //        ViewBag.alunombre = sinps.NombreAlu;
+
+        //        if (db.Alumnos.Count() == 1)
+        //        {
+        //            band = false;
+        //            ViewBag.band = band;
+        //            ViewBag.alumnos = "";
+        //            ViewBag.areas = db.Areas.ToList();
+        //            ViewBag.organizaciones = db.Organizaciones.ToList();
+        //            ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");
+
+        //            return View();
+
+        //        }
+
+
+        //    }
+
+
+        //    List<Alumno> alumnos = new List<Alumno>();
+        //    var pSs = db.PSs.ToList();
+        //    var idmax = 7;
+        //    PS ps;
+        //    foreach (var item in db.Alumnos)
+        //    {
+        //        if (item.PSs.Count() > 0)
+        //        {
+        //            idmax = item.PSs.Max(p => p.IdPS);
+        //            ps = db.PSs.Find(idmax);
+
+        //            if (ps.Estado == Estado.Plan_Rechazado | ps.Estado == Estado.PS_Cancelada | ps.Estado == Estado.PS_Vencida)
+        //            {
+        //                alumnos.Add(item);
+        //            }
+        //        } else
+        //        {
+        //            if(idalu!=null & item.IdAlumno==idalu)
+        //            { continue;}
+        //            alumnos.Add(item);
+        //        }
+        //    }
+        //    //var band = false;
+        //    if (alumnos.Count() == 0)
+        //    {
+        //        band = true;
+        //    }
+
+
+
+
+        //    ViewBag.band = band;
+        //    ViewBag.alumnos = alumnos; 
+        //    ViewBag.areas = db.Areas.ToList();
+        //    ViewBag.organizaciones = db.Organizaciones.ToList();
+        //    ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");
+        //    return View();
+        //}
+
+        //// POST: PS/Create ORIGINAL
+        //// Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        //// más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Moderador,Administrador")]
+        //public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno")] PS pS)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        pS.Estado=Estado.Plan_Pendiente;
+        //        db.PSs.Add(pS);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Details", "PS", new { id = pS.IdPS });
+        //    }
+
+        //    ////empieza copypasteada 
+        //    List<Alumno> alumnos = new List<Alumno>();
+        //    var pSs = db.PSs.ToList();
+        //    var idmax = 7;
+        //    PS ps1;
+        //    foreach (var item in db.Alumnos)
+        //    {
+        //        if (item.PSs.Count() > 0)
+        //        {
+        //            idmax = item.PSs.Max(p => p.IdPS);
+        //            ps1 = db.PSs.Find(idmax);
+
+        //            if (ps1.Estado == Estado.Plan_Rechazado | ps1.Estado == Estado.PS_Cancelada | ps1.Estado == Estado.PS_Vencida)
+        //            {
+        //                alumnos.Add(item);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            alumnos.Add(item);
+        //        }
+        //    }
+        //    var band = false;
+        //    if (alumnos.Count() == 0)
+        //    {
+        //        band = true;
+        //    }
+        //    ViewBag.band = band;
+        //    ViewBag.alumnos = alumnos;
+        //    ViewBag.areas = db.Areas.ToList();
+        //    ViewBag.organizaciones = db.Organizaciones.ToList();
+        //    ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS");
+        //    ////termina copypasteada
+        //    //ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
+        //    //ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
+        //    //ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
+        //    //ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
+
+        //    return View(pS);
+        //}
 
         // GET: PS/Edit/5
         [Authorize(Roles = "Editar PS,Administrador")]
@@ -386,6 +539,9 @@ namespace WebApplication1.Controllers
 
                 if (plan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
                     pu.Estado = Estado.Plan_Desaprobado;
+
+                if (plan.EstadoEvaluacionPlan == Evaluacion.Rechazado)
+                    pu.Estado = Estado.Plan_Rechazado;
 
                 db.Entry(pu).State = EntityState.Modified;
                 db.SaveChanges();

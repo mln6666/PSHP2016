@@ -1,7 +1,8 @@
 ﻿
+
 @using WebApplication1.Models
 
-@model WebApplication1.ViewModels.PrimerPlanVM
+@model WebApplication1.Models.PS
 
 @{
     ViewBag.Title = "Nueva PS";
@@ -9,21 +10,11 @@
 <head>
     <script>
         /////////////////Start:Select searchable////////////////
-        $(document).ready(function() { $(".js-example-basic-single").select2(); });
+        $(document).ready(function () { $(".js-example-basic-single").select2(); });
         ////////////////End:Select searchable///////////////////
     </script>
-    <style>
-        .hr5 {
-            margin-top: 3px;
-            margin-bottom: 15px;
-            border: 0;
-            border-top: 1px solid #eeeeee;
-        }
-
-       
-    </style>
 </head>
-<h2 class="text-center">Nueva PS</h2>
+<h2>Nueva PS</h2>
 
 @*/////////////EMPIEZA VISTA ORIGINAL//////////////////*@
 
@@ -56,10 +47,10 @@
 
                         @if (ViewBag.aluid != null)
                         {
-                            <option value="@ViewBag.aluid">@ViewBag.alulegajo -@ViewBag.aluapellido ,@ViewBag.alunombre</option>}
+                        <option value="@ViewBag.aluid">@ViewBag.alulegajo -@ViewBag.aluapellido ,@ViewBag.alunombre</option>}
                         else
                         {
-                            <option value="">Buscar alumno...</option>}
+                        <option value="">Buscar alumno...</option>}
                         @foreach (var item in ViewBag.alumnos)
                         {
                             <option value="@item.IdAlumno">@item.Legajo -@item.ApellidoAlu ,@item.NombreAlu </option>
@@ -79,32 +70,28 @@
             </div>
         </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Cuatrimestre, htmlAttributes: new {@class = "control-label col-md-2"})
-        <div class="col-lg-10">
-            <div class="radio">
-                <label>
-                    <input name="Cuatrimestre" id="optionsRadios1" value="1" checked="" type="radio">
-                    1º
-                </label>
-                <label> </label>
-                <label>
-                    <input name="Cuatrimestre" id="optionsRadios2" value="2" type="radio">
-                    2º
-                </label>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cuatrimestre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-lg-10">
+                <div class="radio">
+                    <label>
+                        <input name="Cuatrimestre" id="optionsRadios1" value="1" checked="" type="radio">
+                        1º
+                    </label>
+                    <label>    </label>
+                    <label>
+                        <input name="Cuatrimestre" id="optionsRadios2" value="2" type="radio">
+                        2º
+                    </label>
+                </div>
             </div>
         </div>
-    </div>
-        <h3 style="padding-left:">Datos del Plan</h3>
-        <hr align="left" class="hr5" style="color: grey; border-color: lightgray; width: 550px;" />
-
+        <hr align="left" style="color: grey; border-color: lightgray; width: 550px;" />
         <div class="form-group">
             @Html.LabelFor(model => model.Tutor, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Tutor, new { htmlAttributes = new { @class = "form-control input-sm" } })
                 @Html.ValidationMessageFor(model => model.Tutor, "", new { @class = "text-danger" })
-                <span id="spantutor" style="color:red"></span>
-
             </div>
         </div>
 
@@ -113,9 +100,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TituloProyecto, new { htmlAttributes = new { @class = "form-control input-sm" } })
                 @Html.ValidationMessageFor(model => model.TituloProyecto, "", new { @class = "text-danger" })
-                <span id="spantituloproyecto" style="color:red"></span>
-
-
             </div>
         </div>
 
@@ -124,9 +108,7 @@
             @Html.LabelFor(model => model.IdTipoPS, "Tipo de PS", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("IdTipoPS", null, "Seleccione un Tipo de PS...", htmlAttributes: new { @class = "form-control input-sm" })
-                @Html.ValidationMessageFor(model => model.IdTipoPS, "", new { @class = "text-danger" })
-                <span id="spantipops" style="color:red"></span>
-
+                @Html.ValidationMessageFor(model => model.IdArea, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -140,8 +122,6 @@
                         <option value="@item.IdArea">@item.NombreArea</option>
                     }
                 </select>
-                <span id="spanarea" style="color:red"></span>
-
             </div>
         </div>
         <div id="ajaxBeginFormResult">
@@ -156,11 +136,9 @@
                             <option value="@item.IdOrganizacion">@item.DenominacionOrg</option>
                         }
                     </select>
-                    <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" style="padding-right: 6px; padding-left: 6px; padding-top: 4px; padding-bottom: 4px">
+                    <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" style="padding-right: 6px; padding-left: 6px; padding-top: 4px;padding-bottom: 4px">
                         <span class="glyphicon glyphicon-plus text-center"></span>
                     </a>
-                    <span id="spanorganizacion" style="color:red"></span>
-
                 </div>
             </div>
         </div>
@@ -180,53 +158,6 @@
                 @Html.ValidationMessageFor(model => model.NroDisposicion, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-                @Html.LabelFor(model => model.FechaPresentacionPlan, "Fecha de Presentación", htmlAttributes: new { @class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
-                <span id="spanfechapresentacionplan" style="color: red"></span>
-
-                @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new { @class = "text-danger" })
-            </div>
-
-        </div>
-        <div class="form-group">
-                @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-2 "})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
-                <span id="spanfechaevaluacionplan" style="color: red"></span>
-
-                @Html.ValidationMessageFor(model => model.FechaEvaluacionPlan, "", new { @class = "text-danger" })
-            </div>
-
-        </div>
-
-        <div class="form-group">
-                @Html.LabelFor(model => model.EstadoEvaluacionPlan, "Estado de Evaluación", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.EstadoEvaluacionPlan, htmlAttributes: new { @class = "form-control input-sm", @Style = "width: 200px" })
-                @Html.ValidationMessageFor(model => model.EstadoEvaluacionPlan, "", new { @class = "text-danger" })
-                <span id="spanestadoevaluacionplan" style="color: red"></span>
-
-            </div>
-
-        </div>
-
-        <div class="form-group">
-                @Html.LabelFor(model => model.ObservacionesPlan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ObservacionesPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
-                @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
-            </div>
-
-        </div>
-        <span id="spanfechaestado" style="color:red"></span>
-
-
-
-
-
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -330,95 +261,7 @@
             e.preventDefault();
 
             var isValidItem = true;
-            var fechapresentacionplan = true;
-            var fechaevaluacionplan = true;
-            var tituloproyecto = true;
-            var tutor = true;
-            var area = true;
-            var organizacion = true;
             var ciclolectivo = true;
-            var tipops = true;
-            var fechaestado = true;
-
-            var fecha1 = new Date($('#FechaPresentacionPlan').val());
-            var fecha2 = new Date($('#FechaEvaluacionPlan').val());
-
-            var minfecha = new Date("01/01/2000");
-            var maxfecha = new Date("01/01/2100");
-
-            if (fecha2 < fecha1) {
-                var isValidItem = false;
-                var fechaestado = false;
-
-                $('#spanfechaestado').text("** La Fecha de Evaluación debe ser posterior a la Fecha de Presentación.");
-
-            }
-
-            if ((fecha1 < minfecha) || (fecha1 > maxfecha)) {
-                var isValidItem = false;
-                var fechapresentacionplan = false;
-
-                $('#spanfechapresentacionplan').text("Rango válido : 01/01/2000 - 01/01/2100");
-            }
-            if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
-                var isValidItem = false;
-                var fechaevaluacionplan = false;
-
-                $('#spanfechaevaluacionplan').text("Rango válido: 01/01/2000 - 01/01/2100");
-            }
-
-            if (($('#FechaEvaluacionPlan').val().trim() != '') & ($('#EstadoEvaluacionPlan').val().trim() == 0)) {
-                var isValidItem = false;
-                var fechaestado = false;
-
-                $('#spanfechaestado').text("** Una Fecha de Evaluación requiere una Evaluación!");
-            }
-
-            if (($('#FechaEvaluacionPlan').val().trim() == '') & ($('#EstadoEvaluacionPlan').val().trim() != 0)) {
-                var isValidItem = false;
-                var fechaestado = false;
-
-                $('#spanfechaestado').text("** Una Evaluación requiere una Fecha de Evaluación!");
-            }
-
-            if ($('#FechaPresentacionPlan').val().trim() == '') {
-                var isValidItem = false;
-                var fechapresentacionplan = false;
-
-                $('#spanfechapresentacionplan').text("Campo requerido.");
-
-            }
-
-
-            if ($('#TituloProyecto').val().trim() == '') {
-                var isValidItem = false;
-                var tituloproyecto = false;
-
-                $('#spantituloproyecto').text("Campo requerido.");
-            }
-            if ($('#Tutor').val().trim() == '') {
-                var isValidItem = false;
-                var tutor = false;
-
-                $('#spantutor').text("Campo requerido.");
-            }
-            if ($('#IdTipoPS').val().trim() == '') {
-                var isValidItem = false;
-                var tipops = false;
-
-                $('#spantipops').text("Campo requerido.");
-            }
-            if ($('#IdArea').val().trim() == '') {
-                var isValidItem = false;
-                var area = false;
-
-                $('#spanarea').text("Campo requerido.");
-            }
-            if ($('#IdOrganizacion').val().trim() == '') {
-                var isValidItem = false; var organizacion = false;
-
-                $('#spanorganizacion').text("Campo requerido.");
-            }
 
             if ($('#CicloLectivo').val().trim() == '') {
                 var isValidItem = false;
@@ -427,35 +270,9 @@
                 $('#spanciclolectivo').text("Campo requerido.");
             }
 
-            if (fechapresentacionplan) {
-                $('#spanfechapresentacionplan').text("");
-            }
-            if (fechaevaluacionplan) {
-                $('#spanfechaevaluacionplan').text("");
-            }
-
-            if (tituloproyecto) {
-                $('#spantituloproyecto').text("");
-            }
-            if (fechaestado) {
-                $('#spanfechaestado').text("");
-            }
-            if (tutor) {
-                $('#spantutor').text("");
-            }
-            if (area) {
-                $('#spanarea').text("");
-            }
-            if (organizacion) {
-                $('#spanorganizacion').text("");
-            }
             if (ciclolectivo) {
                 $('#spanciclolectivo').text("");
             }
-            if (tipops) {
-                $('#spantipops').text("");
-            }
-
             if (isValidItem) {
 
                 //var x=document.getElementById("RoleID").innerText;

@@ -110,7 +110,9 @@ namespace WebApplication1.Controllers
                 
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
                     pS.Estado = Estado.Plan_Desaprobado;
-                
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Rechazado)
+                    pS.Estado = Estado.Plan_Rechazado;
+
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -161,6 +163,8 @@ namespace WebApplication1.Controllers
 
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
                     pS.Estado = Estado.Plan_Desaprobado;
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Rechazado)
+                    pS.Estado = Estado.Plan_Rechazado;
 
                 db.Entry(pS).State = EntityState.Modified;
                 db.SaveChanges();
