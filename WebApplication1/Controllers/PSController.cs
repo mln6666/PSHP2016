@@ -159,6 +159,12 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan")] PrimerPlanVM pm)
         {
+            if(pm.IdAlumno==null| pm.IdArea == null | pm.IdOrganizacion == null | pm.IdTipoPS == null | pm.TituloProyecto == null |
+                pm.Tutor == null | pm.Cuatrimestre == null | pm.CicloLectivo == null | pm.FechaPresentacionPlan == null)
+            {  return RedirectToAction("Index", "Error", new { error = 2007 });}
+
+
+
 
             PS pS = new PS();
             PresentacionPlan plan = new PresentacionPlan();
@@ -227,7 +233,7 @@ namespace WebApplication1.Controllers
             ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
             ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
-            ViewBag.IdOrganizacion = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
+            ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
             return View(pm);
         }
 

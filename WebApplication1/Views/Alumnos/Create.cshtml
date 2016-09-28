@@ -81,7 +81,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-success" />
+                <input type="submit" value="Guardar y Crear Ps" class="btn btn-success dos" />
+                <input type="submit" value="Guardar" class="btn btn-success uno"/>
+
+
             </div>
         </div>
     </div>
@@ -120,22 +123,26 @@
             $("#myModal").modal('show');
         });
 
-        $('#agregaralumno').submit(function(e) {
-            var alumno = this;
-            e.preventDefault();
-            //var x=document.getElementById("RoleID").innerText;
-            
-
-
-          
-
-            
-                bootbox.confirm("Esta por agregar un nuevo Alumno, ¿Desea continuar?", function(result) {
-                    if (result) {
-                        alumno.submit();
-                    }
-                });
-           
+        $(".dos").click(function () {
+            $("form").attr("action", "/Alumnos/Createalups");
         });
+
+        $(".uno").click(function () {
+            $("form").attr("action", "/Alumnos/Create");
+        });
+
+
+        //$('#agregaralumno').submit(function(e) {
+        //    var alumno = this;
+        //    e.preventDefault();
+        //    //var x=document.getElementById("RoleID").innerText;
+            
+        //        bootbox.confirm("Esta por agregar un nuevo Alumno, ¿Desea continuar?", function(result) {
+        //            if (result) {
+        //                alumno.submit();
+        //            }
+        //        });
+           
+        //});
     </script>
 }

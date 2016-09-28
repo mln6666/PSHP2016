@@ -8,7 +8,7 @@
 <head>
     <script>
         /////////////////Start:Select searchable////////////////
-        
+
         $('#informe').submit(function (e) {
             var x = this;
             e.preventDefault();
@@ -17,7 +17,8 @@
             var fechapresentacioninforme = true;
             var fechaevaluacioninforme = true;
             var fechaestado = true;
-            
+            var observacion = true;
+
 
 
             var fecha1 = new Date($('#FechaPresentacionInforme').val());
@@ -76,6 +77,20 @@
                 $('#spanfechaestado').text("** Una Evaluación requiere una Fecha de Evaluación!");
             }
 
+            if (($('#EstadoEvaluacionInforme').val().trim() == 2) & ($('#ObservacionesInforme').val().trim() == '')) {
+                var isValidItem = false;
+                var observacion = false;
+
+                $('#spanobservacion').text("Campo requerido.");
+                $('#spanobservacionabajo').text("** El Estado de Evaluación -Desaprobado- requiere una Observación !");
+            }
+
+            if (observacion) {
+                $('#spanobservacion').text("");
+                $('#spanobservacionabajo').text("");
+            }
+
+
             if (fechaestado) {
                 $('#spanfechaestado').text("");
             }
@@ -93,7 +108,7 @@
                     }
                 });
             }
-           
+
         });
 
         ////////////////End:Select searchable///////////////////
@@ -104,9 +119,9 @@
 {    @Html.HiddenFor(model => model.IdPS)
 
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">        
-       
+
+    <div class="form-horizontal">
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <div class="col-md-6">
@@ -122,13 +137,13 @@
 
         <div class="form-group">
             <div class="col-md-6">
-                @Html.LabelFor(model => model.FechaEvaluacionInforme, "Fecha de Evaluación", htmlAttributes: new {@class = "control-label col-md-10"})
+                @Html.LabelFor(model => model.FechaEvaluacionInforme, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-10" })
             </div>
             <div class="col-md-4">
-                @Html.EditorFor(model => model.FechaEvaluacionInforme, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.EditorFor(model => model.FechaEvaluacionInforme, new { htmlAttributes = new { @class = "form-control" } })
                 <span id="spanfechaevaluacioninforme" style="color: red"></span>
 
-                @Html.ValidationMessageFor(model => model.FechaEvaluacionInforme, "", new {@class = "text-danger"})
+                @Html.ValidationMessageFor(model => model.FechaEvaluacionInforme, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
@@ -140,25 +155,30 @@
                 @Html.ValidationMessageFor(model => model.EstadoEvaluacionInforme, "", new { @class = "text-danger" })
             </div>
         </div>
-    
+
         @*<div class="form-group">
-            @Html.LabelFor(model => model.EstadoEvaluacionInforme, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EstadoEvaluacionInforme, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EstadoEvaluacionInforme, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.EstadoEvaluacionInforme, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EstadoEvaluacionInforme, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EstadoEvaluacionInforme, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             <div class="col-md-6">
-                @Html.LabelFor(model => model.ObservacionesInforme, "Observaciones", htmlAttributes: new {@class = "control-label col-md-10"})
+                @Html.LabelFor(model => model.ObservacionesInforme, "Observaciones", htmlAttributes: new { @class = "control-label col-md-10" })
             </div>
             <div class="col-md-4">
-                @Html.EditorFor(model => model.ObservacionesInforme, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.ObservacionesInforme, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.ObservacionesInforme, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ObservacionesInforme, "", new { @class = "text-danger" })
+                <span id="spanobservacion" style="color:red"></span>
+
             </div>
         </div>
-        <span id="spanfechaestado" style="color:red"></span>
+        <p> <span id="spanfechaestado" style="color: red"></span></p>
+        <p>
+            <span id="spanobservacionabajo" style="color:red"></span>
+        </p>
 
         <div class="form-group row text-center">
             <div>

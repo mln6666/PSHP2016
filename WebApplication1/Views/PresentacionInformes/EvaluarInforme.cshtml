@@ -4,8 +4,8 @@
     Layout = null;
 }
 @*@{
-    ViewBag.Title = "Evaluar Informe";
-}*@
+        ViewBag.Title = "Evaluar Informe";
+    }*@
 <head>
     <script>
         /////////////////Start:Select searchable////////////////
@@ -28,6 +28,8 @@
             if (fecha2 < fecha1) {
                 var isValidItem = false;
                 var fechaestado = false;
+                var observacion = true;
+
 
                 $('#spanfechaestado').text("** Una Fecha de Evaluación debe ser mayor a la Fecha de Presentación.");
 
@@ -60,6 +62,19 @@
                 var fechaestado = false;
 
                 $('#spanfechaestado').text("** Una Evaluación requiere una Fecha de Evaluación!");
+            }
+
+            if (($('#EstadoEvaluacionInforme').val().trim() == 2) & ($('#ObservacionesInforme').val().trim() == '')) {
+                var isValidItem = false;
+                var observacion = false;
+
+                $('#spanobservacion').text("Campo requerido.");
+                $('#spanobservacionabajo').text("** El Estado de Evaluación -Desaprobado- requiere una Observación !");
+            }
+
+            if (observacion) {
+                $('#spanobservacion').text("");
+                $('#spanobservacionabajo').text("");
             }
 
             if (fechaestado) {
@@ -124,13 +139,18 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.ObservacionesInforme, "Observaciones", htmlAttributes: new {@class = "control-label col-md-6", @Style = "text-align: center"})
+            @Html.LabelFor(model => model.ObservacionesInforme, "Observaciones", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.ObservacionesInforme, new {htmlAttributes = new {@class = "form-control input-sm"}})
-                @Html.ValidationMessageFor(model => model.ObservacionesInforme, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.ObservacionesInforme, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.ValidationMessageFor(model => model.ObservacionesInforme, "", new { @class = "text-danger" })
+                <span id="spanobservacion" style="color:red"></span>
+
             </div>
         </div>
-        <span id="spanfechaestado" style="color:red"></span>
+        <p> <span id="spanfechaestado" style="color: red"></span></p>
+        <p>
+            <span id="spanobservacionabajo" style="color:red"></span>
+        </p>
 
         <div class="form-group">
             <div class="col-md-offset-5 col-md-10">

@@ -92,7 +92,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Moderador,Administrador")]
-        public ActionResult Create([Bind(Include = "IdAlumno,Legajo,NombreAlu,ApellidoAlu,CorreoAlu,AñoIngreso,Telefono,Celular,Direccion,DNI")] Alumno alumno)
+        public ActionResult Create([Bind(Include = "IdAlumno,Legajo,NombreAlu,ApellidoAlu,CorreoAlu,AñoIngreso,Telefono,Celular,Direccion,DNI")] Alumno alumno, string psnueva)
         {
             if (ModelState.IsValid)
             {
@@ -110,10 +110,47 @@ namespace WebApplication1.Controllers
 
                 db.Alumnos.Add(alumno);
                 db.SaveChanges();
+
+                if (psnueva != null)
+                {
+                    return RedirectToAction("Create","PS", new {idalu=alumno.IdAlumno});
+                }
+
+
+
                 return RedirectToAction("Index");
             }
 
             return View(alumno);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult Createalups([Bind(Include = "IdAlumno,Legajo,NombreAlu,ApellidoAlu,CorreoAlu,AñoIngreso,Telefono,Celular,Direccion,DNI")] Alumno alumno, string psnueva)
+        {
+            if (ModelState.IsValid)
+            {
+                IEnumerable<int> query = (from c in db.Alumnos
+                                          where c.Legajo == alumno.Legajo
+                                          select c.IdAlumno);
+
+                if (query.Count() != 0)
+                {
+                    ViewBag.alumnoexistente = "Acción no permitida!. Legajo existente.";
+                    return RedirectToAction("Create");
+
+                }
+
+
+                db.Alumnos.Add(alumno);
+                db.SaveChanges();
+               
+                    return RedirectToAction("Create", "PS", new { idalu = alumno.IdAlumno });
+                
+                }
+
+            return RedirectToAction("Create");
         }
 
         // GET: Alumnos/Edit/5

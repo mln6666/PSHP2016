@@ -51,6 +51,10 @@ namespace ExpVMsape.Controllers
                     ViewBag.Title = "Acción no permitida.";
                     ViewBag.Description = "No se permite cargar Nro de Disposición a una PS cuyo estado NO es Plan Aprobado.";
                     break;
+                case 2007:
+                    ViewBag.Title = "Error.";
+                    ViewBag.Description = "No se pudo completar la acción. Verifíque que se hayan completado todos los campos correctamente.";
+                    break;
 
                 default:
                     ViewBag.Title = "Página no encontrada";

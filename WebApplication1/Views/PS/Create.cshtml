@@ -65,7 +65,10 @@
                             <option value="@item.IdAlumno">@item.Legajo -@item.ApellidoAlu ,@item.NombreAlu </option>
                         }
                     </select>
+
                 </div>
+                <span id="spanalumno" style="color:red"></span>
+
             </div>
         }
 
@@ -140,9 +143,10 @@
                         <option value="@item.IdArea">@item.NombreArea</option>
                     }
                 </select>
-                <span id="spanarea" style="color:red"></span>
 
             </div>
+            <span id="spanarea" style="color:red"></span>
+
         </div>
         <div id="ajaxBeginFormResult">
             <div class="form-group">
@@ -159,9 +163,9 @@
                     <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal" style="padding-right: 6px; padding-left: 6px; padding-top: 4px; padding-bottom: 4px">
                         <span class="glyphicon glyphicon-plus text-center"></span>
                     </a>
-                    <span id="spanorganizacion" style="color:red"></span>
 
                 </div>
+                <span id="spanorganizacion" style="color:red"></span>
             </div>
         </div>
 
@@ -218,28 +222,34 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ObservacionesPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
                 @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
+                <span id="spanobservacion" style="color:red"></span>
+
             </div>
 
         </div>
-        <span id="spanfechaestado" style="color:red"></span>
+        <p> <span id="spanfechaestado" style="color: red"></span></p>
+        <p>
+            <span id="spanobservacionabajo" style="color:red"></span>
+        </p>
 
 
 
 
 
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                @if (ViewBag.band)
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @if (ViewBag.band)
                 {<input value="Guardar" class="btn btn-success btn-md disabled" style="padding-left:initial;padding-right:initial" /> }
                 else
                 { <input type="submit" value="Guardar" class="btn btn-success" />}
 
 
 
+                </div>
             </div>
-        </div>
-    </div>
+</div>
 }
 
 
@@ -339,6 +349,8 @@
             var ciclolectivo = true;
             var tipops = true;
             var fechaestado = true;
+            var alumno = true;
+            var observacion = true;
 
             var fecha1 = new Date($('#FechaPresentacionPlan').val());
             var fecha2 = new Date($('#FechaEvaluacionPlan').val());
@@ -389,6 +401,12 @@
 
             }
 
+            if ($('#IdAlumno').val().trim() == '') {
+                var isValidItem = false;
+                var alumno = false;
+
+                $('#spanalumno').text("Campo requerido.");
+            }
 
             if ($('#TituloProyecto').val().trim() == '') {
                 var isValidItem = false;
@@ -426,6 +444,33 @@
 
                 $('#spanciclolectivo').text("Campo requerido.");
             }
+            if (($('#FechaEvaluacionPlan').val().trim() == '') & ($('#EstadoEvaluacionPlan').val().trim() != 0)) {
+                var isValidItem = false;
+                var fechaestado = false;
+
+                $('#spanfechaestado').text("** Una Evaluación requiere una Fecha de Evaluación!");
+            }
+
+            if (($('#EstadoEvaluacionPlan').val().trim() == 2) & ($('#ObservacionesPlan').val().trim() == '')) {
+                var isValidItem = false;
+                var observacion = false;
+
+                $('#spanobservacion').text("Campo requerido.");
+                $('#spanobservacionabajo').text("** El Estado de Evaluación -Desaprobado- requiere una Observación !");
+            }
+
+            if (($('#EstadoEvaluacionPlan').val().trim() == 3) & ($('#ObservacionesPlan').val().trim() == '')) {
+                var isValidItem = false;
+                var observacion = false;
+
+                $('#spanobservacion').text("Campo requerido.");
+                $('#spanobservacionabajo').text("** El Estado de Evaluación -Rechazado- requiere una Observación !");
+            }
+
+            if (observacion) {
+                $('#spanobservacion').text("");
+                $('#spanobservacionabajo').text("");
+            }
 
             if (fechapresentacionplan) {
                 $('#spanfechapresentacionplan').text("");
@@ -436,6 +481,9 @@
 
             if (tituloproyecto) {
                 $('#spantituloproyecto').text("");
+
+            } if (alumno) {
+                $('#spanalumno').text("");
             }
             if (fechaestado) {
                 $('#spanfechaestado').text("");

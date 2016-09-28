@@ -1,8 +1,8 @@
 ﻿@model WebApplication1.Models.PresentacionPlan
 
 @*@{
-    ViewBag.Title = "Edit";
-}*@
+        ViewBag.Title = "Edit";
+    }*@
 @{
     Layout = null;
 }
@@ -18,6 +18,7 @@
             var fechapresentacionplan = true;
             var fechaevaluacionplan = true;
             var fechaestado = true;
+            var observacion = true;
 
 
 
@@ -35,7 +36,7 @@
 
             }
 
-            if ((fecha1 < minfecha) || (fecha1 > maxfecha) ){
+            if ((fecha1 < minfecha) || (fecha1 > maxfecha)) {
                 var isValidItem = false;
                 var fechapresentacionplan = false;
 
@@ -64,7 +65,7 @@
 
             }
 
-            if (($('#FechaEvaluacionPlan').val().trim() != '')& ($('#EstadoEvaluacionPlan').val().trim() == 0)) {
+            if (($('#FechaEvaluacionPlan').val().trim() != '') & ($('#EstadoEvaluacionPlan').val().trim() == 0)) {
                 var isValidItem = false;
                 var fechaestado = false;
 
@@ -76,6 +77,27 @@
                 var fechaestado = false;
 
                 $('#spanfechaestado').text("**Una Evaluación requiere una Fecha de Evaluación!");
+            }
+
+            if (($('#EstadoEvaluacionPlan').val().trim() == 2) & ($('#ObservacionesPlan').val().trim() == '')) {
+                var isValidItem = false;
+                var observacion = false;
+
+                $('#spanobservacion').text("Campo requerido.");
+                $('#spanobservacionabajo').text("** El Estado de Evaluación -Desaprobado- requiere una Observación !");
+            }
+
+            if (($('#EstadoEvaluacionPlan').val().trim() == 3) & ($('#ObservacionesPlan').val().trim() == '')) {
+                var isValidItem = false;
+                var observacion = false;
+
+                $('#spanobservacion').text("Campo requerido.");
+                $('#spanobservacionabajo').text("** El Estado de Evaluación -Rechazado- requiere una Observación !");
+            }
+
+            if (observacion) {
+                $('#spanobservacion').text("");
+                $('#spanobservacionabajo').text("");
             }
 
             if (fechaestado) {
@@ -140,32 +162,37 @@
             </div>
         </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ObservacionesPlan, "Observaciones", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.ObservacionesPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
-                    @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ObservacionesPlan, "Observaciones", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.ObservacionesPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
+                <span id="spanobservacion" style="color:red"></span>
 
-            @*<div class="form-group">
+            </div>
+        </div>
+
+        @*<div class="form-group">
                 @Html.LabelFor(model => model.IdPS, "IdPS", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                     @Html.DropDownList("IdPS", null, htmlAttributes: new { @class = "form-control input-sm" })
                     @Html.ValidationMessageFor(model => model.IdPS, "", new { @class = "text-danger" })
                 </div>
             </div>*@
-        <span id="spanfechaestado" style="color:red"></span>
+        <p> <span id="spanfechaestado" style="color: red"></span></p>
+        <p>
+            <span id="spanobservacionabajo" style="color:red"></span>
+        </p>
 
-            <div class="form-group row text-center">
-                <div>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <div class="form-group row text-center">
+            <div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 
-                    <input type="submit" value="Guardar cambios" class="btn btn-success"/>
-                </div>
+                <input type="submit" value="Guardar cambios" class="btn btn-success" />
             </div>
         </div>
-    
+    </div>
+
 
 }
 

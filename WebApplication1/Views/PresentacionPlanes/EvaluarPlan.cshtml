@@ -17,8 +17,9 @@
 
             var fechaestado = true;
             var fechaevaluacionplan = true;
+            var observacion = true;
 
-           
+
 
             var fecha1 = new Date($('#FechaPresentacionPlan').val());
 
@@ -65,6 +66,27 @@
                 $('#spanfechaestado').text("** Una Evaluación requiere una Fecha de Evaluación!");
             }
 
+            if (($('#EstadoEvaluacionPlan').val().trim() == 2) & ($('#ObservacionesPlan').val().trim() == '')) {
+                var isValidItem = false;
+                var observacion = false;
+
+                $('#spanobservacion').text("Campo requerido.");
+                $('#spanobservacionabajo').text("** El Estado de Evaluación -Desaprobado- requiere una Observación !");
+            }
+
+            if (($('#EstadoEvaluacionPlan').val().trim() == 3) & ($('#ObservacionesPlan').val().trim() == '')) {
+                var isValidItem = false;
+                var observacion = false;
+
+                $('#spanobservacion').text("Campo requerido.");
+                $('#spanobservacionabajo').text("** El Estado de Evaluación -Rechazado- requiere una Observación !");
+            }
+
+            if (observacion) {
+                $('#spanobservacion').text("");
+                $('#spanobservacionabajo').text("");
+            }
+
             if (fechaestado) {
                 $('#spanfechaestado').text("");
             }
@@ -107,7 +129,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FechaPresentacionPlan, "Fecha de Presentación", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @readonly = "readonly" ,Style= "background-color:palegoldenrod" } })
+                @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @readonly = "readonly", Style = "background-color:palegoldenrod" } })
                 @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new { @class = "text-danger" })
 
             </div>
@@ -115,7 +137,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm"} })
+                @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
                 @Html.ValidationMessageFor(model => model.FechaEvaluacionPlan, "", new { @class = "text-danger" })
                 <span id="spanfechaevaluacionplan" style="color:red"></span>
 
@@ -133,9 +155,14 @@
             <div class="col-md-6">
                 @Html.EditorFor(model => model.ObservacionesPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
                 @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
+                <span id="spanobservacion" style="color:red"></span>
+
             </div>
         </div>
-        <span id="spanfechaestado" style="color:red"></span>
+        <p> <span id="spanfechaestado" style="color: red"></span></p>
+        <p>
+            <span id="spanobservacionabajo" style="color:red"></span>
+        </p>
 
         <div class="form-group">
             <div class="col-md-offset-5 col-md-10">

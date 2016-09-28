@@ -16,6 +16,8 @@
             var fechapresentacioninforme = true;
             var fechaevaluacioninforme = true;
             var fechaestado = true;
+            var observacion = true;
+
 
             var fecha1 = new Date($('#FechaPresentacionInforme').val());
             var fecha2 = new Date($('#FechaEvaluacionInforme').val());
@@ -31,7 +33,7 @@
 
             }
 
-            if ((fecha1 < minfecha) || (fecha1 > maxfecha) ){
+            if ((fecha1 < minfecha) || (fecha1 > maxfecha)) {
                 var isValidItem = false;
                 var fechapresentacioninforme = false;
 
@@ -60,7 +62,7 @@
 
             }
 
-            if (($('#FechaEvaluacionInforme').val().trim() != '')& ($('#EstadoEvaluacionInforme').val().trim() == 0)) {
+            if (($('#FechaEvaluacionInforme').val().trim() != '') & ($('#EstadoEvaluacionInforme').val().trim() == 0)) {
                 var isValidItem = false;
                 var fechaestado = false;
 
@@ -72,6 +74,19 @@
                 var fechaestado = false;
 
                 $('#spanfechaestado').text("** Una Evaluación requiere una Fecha de Evaluación!");
+            }
+
+            if (($('#EstadoEvaluacionInforme').val().trim() == 2) & ($('#ObservacionesInforme').val().trim() == '')) {
+                var isValidItem = false;
+                var observacion = false;
+
+                $('#spanobservacion').text("Campo requerido.");
+                $('#spanobservacionabajo').text("** El Estado de Evaluación -Desaprobado- requiere una Observación !");
+            }
+
+            if (observacion) {
+                $('#spanobservacion').text("");
+                $('#spanobservacionabajo').text("");
             }
 
 
@@ -131,7 +146,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EstadoEvaluacionInforme, "Estado de Evaluación", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
             <div class="col-md-4">
-               @* @Html.EnumDropDownListFor(model => model.EstadoEvaluacionInforme, htmlAttributes: new { @class = "form-control input-sm" })*@
+                @* @Html.EnumDropDownListFor(model => model.EstadoEvaluacionInforme, htmlAttributes: new { @class = "form-control input-sm" })*@
                 @Html.DropDownListFor(m => m.EstadoEvaluacionInforme, (IEnumerable<SelectListItem>)ViewBag.SelectList, htmlAttributes: new { @class = "form-control input-sm" })
 
 
@@ -144,6 +159,8 @@
             <div class="col-md-6">
                 @Html.EditorFor(model => model.ObservacionesInforme, new { htmlAttributes = new { @class = "form-control input-sm" } })
                 @Html.ValidationMessageFor(model => model.ObservacionesInforme, "", new { @class = "text-danger" })
+                <span id="spanobservacion" style="color:red"></span>
+
             </div>
         </div>
 
@@ -154,7 +171,10 @@
                     @Html.ValidationMessageFor(model => model.IdPS, "", new { @class = "text-danger" })
                 </div>
             </div>*@
-        <span id="spanfechaestado" style="color:red"></span>
+        <p> <span id="spanfechaestado" style="color: red"></span></p>
+        <p>
+            <span id="spanobservacionabajo" style="color:red"></span>
+        </p>
 
         <div class="form-group row text-center">
             <div>
