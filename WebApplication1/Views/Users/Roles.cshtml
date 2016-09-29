@@ -15,10 +15,22 @@
             <th class="text-left" width="20%" style="border-radius: 3px">
                 @*@Html.DisplayNameFor(model => model.Name)*@Permiso
             </th>
-            <th class="text-left" style="border-radius: 3px">Descripción  </th>
+            <th class="text-left" style="border-radius: 3px">Descripción </th>
+@if (Model.Roles.Count() != 0)
+{
+    if (Model.Roles[0].Name != "Administrador")
+    {
             <th class="text-center" style="border-radius: 3px">
                 Acciones
             </th>
+    }
+
+}
+else
+{
+            <th class="text-center" style="border-radius: 3px">
+                Acciones
+            </th> }
         </tr>
     </thead>
     @for (int i = 0; i < Model.Roles.Count; i++)
@@ -77,11 +89,26 @@
                 }
             </td>
 
+@if (Model.Roles.Count() != 0)
+{
+    if (Model.Roles[0].Name != "Administrador")
+    {
+        <td class="text-center">
+            <button userID=@Model.UserID roleID=@Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn btn-warning btn-sm js-delete">Quitar Permiso</button>
+        </td>
+    }
 
-            <td class="text-center">
-                <button userID=@Model.UserID roleID=@Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn btn-warning btn-sm js-delete">Quitar Permiso</button>
+}
+else
+{
+    <td class="text-center">
+        <button userID=@Model.UserID roleID=@Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn btn-warning btn-sm js-delete">Quitar Permiso</button>
+    </td> }
+            
+   
+   
                 @*@Html.ActionLink("Eliminar", "Delete", new {userID = Model.UserID, roleID = Model.Roles[i].RoleID})*@
-            </td>
+
         </tr>
     }
 
