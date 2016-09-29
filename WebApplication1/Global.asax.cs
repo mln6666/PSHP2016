@@ -17,16 +17,22 @@ using WebApplication1.Models;
 
 namespace WebApplication1
 {
+
     public class MvcApplication : System.Web.HttpApplication
     {
+
         protected void Application_Start()
         {
 
             ContextPS dc = new ContextPS();
             ApplicationDbContext db = new ApplicationDbContext();
-            CreateRoles(db);
-            CreateSuperuser(db);
-            AddPermisionsToSuperuser(db);
+            if (db.Users.Count()==0)
+            {
+                CreateRoles(db);
+                CreateSuperuser(db);
+                AddPermisionsToSuperuser(db);
+            }
+          
             db.Dispose();
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
             AreaRegistration.RegisterAllAreas();            
@@ -158,7 +164,7 @@ namespace WebApplication1
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
             var user = userManager.FindByName("admin@utnfrre.com");
 
-            if (user == null)
+            if (user == null )
             {
                 user = new ApplicationUser
                 {

@@ -58,7 +58,6 @@ namespace WebApplication1.Controllers
             var roles = roleManager.Roles.ToList();
             var rolesView = new List<RoleView>();
 
-
             foreach (var item in user.Roles)
             {
                 var role = roles.Find(r => r.Id == item.RoleId);
@@ -76,8 +75,23 @@ namespace WebApplication1.Controllers
                 Email = user.Email,
                 Name = user.UserName,
                 UserID = user.Id,
-                Roles = rolesView
+                Roles = rolesView.OrderBy(name=>name.Name).ToList()
             };
+
+            ViewBag.dadministrador = "Descripción Administrador.";
+            ViewBag.deditartipops = "Descripción Editar TipoPS.";
+            ViewBag.deliminarareaorganizacion = "Descripción Eliminar Area/Organizacion.";
+            ViewBag.deliminaralumno = "Descripción Eliminar Alumno.";
+            ViewBag.deditarplaninforme = "Descripción Editar Plan/Informe.";
+            ViewBag.deditarps = "Descripción Editar PS.";
+            ViewBag.dinvitado = "Descripción Invitado.";
+            ViewBag.deliminarps = "Descripción Eliminar PS.";
+            ViewBag.deditaralumno = "Descripción Editar Alumno.";
+            ViewBag.dmoderador = "Descripción Moderador.";
+            ViewBag.deditarareaorganizacion = "Descripción Editar Area/Organizacion.";
+
+
+
 
             return View(userView);
         }

@@ -135,7 +135,7 @@ namespace WebApplication1.Controllers
                 }
             }
             //var band = false;
-            if (alumnos.Count() == 0)
+            if (alumnos.Count() == 0 & idalu == null)
             {
                 band = true;
             }
