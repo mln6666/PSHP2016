@@ -24,7 +24,7 @@ namespace WebApplication1.Controllers
         {
 
             var pSs = ( from p in db.PSs
-                        where p.Estado == Estado.PS_Aprobada  | p.Estado == Estado.PS_Cancelada | p.Estado == Estado.PS_Vencida | p.Estado == Estado.Plan_Rechazado
+                        where p.Estado == Estado.PS_Aprobada  | p.Estado == Estado.PS_Cancelada | p.Estado == Estado.PS_Vencida 
                         select p);
 
             var pos = db.PSs.ToList();
@@ -122,7 +122,7 @@ namespace WebApplication1.Controllers
                     idmax = item.PSs.Max(p => p.IdPS);
                     ps = db.PSs.Find(idmax);
 
-                    if (ps.Estado == Estado.Plan_Rechazado | ps.Estado == Estado.PS_Cancelada | ps.Estado == Estado.PS_Vencida)
+                    if (ps.Estado == Estado.PS_Cancelada | ps.Estado == Estado.PS_Vencida)
                     {
                         alumnos.Add(item);
                     }
@@ -157,11 +157,23 @@ namespace WebApplication1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Moderador,Administrador")]
-        public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan")] PrimerPlanVM pm)
+        public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,ObservacionesPS")] PrimerPlanVM pm)
         {
             if(pm.IdAlumno==null| pm.IdArea == null | pm.IdOrganizacion == null | pm.IdTipoPS == null | pm.TituloProyecto == null |
                 pm.Tutor == null | pm.Cuatrimestre == null | pm.CicloLectivo == null | pm.FechaPresentacionPlan == null)
             {  return RedirectToAction("Index", "Error", new { error = 2007 });}
+
+
+            //Mensaje de error en caso de que el ALumno no tenga PS-cancelada/PS-vencida/SinPS
+            Alumno erroralumno = db.Alumnos.Find(pm.IdAlumno);
+            if (erroralumno.PSs.Count() != 0)
+            {
+                if (erroralumno.PSs.LastOrDefault().Estado!=Estado.PS_Cancelada || erroralumno.PSs.LastOrDefault().Estado!= Estado.PS_Vencida)
+                {
+                    return RedirectToAction("Index", "Error", new { error = 2008 });
+                }
+
+            }
 
 
 
@@ -175,6 +187,7 @@ namespace WebApplication1.Controllers
             pS.TituloProyecto = pm.TituloProyecto;
             pS.CicloLectivo = pm.CicloLectivo;
             pS.Cuatrimestre = pm.Cuatrimestre;
+            pS.ObservacionesPS = pm.ObservacionesPS;
 
             pS.IdOrganizacion = pm.IdOrganizacion;
             //pS.Organizacion = pm.Organizacion;
@@ -402,7 +415,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Editar PS,Administrador")]
-        public ActionResult Edit([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado")] PS pS)
+        public ActionResult Edit([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,ObservacionesPS,FechaFinalizacion")] PS pS)
         {
             
                 
@@ -438,10 +451,13 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
 
-            if (pS.PresentacionesPlanes.Count != 0)
+            if (pS.Estado!=Estado.Plan_Rechazado)
             {
                 return RedirectToAction("Index", "Error", new { error = 2004 });
             }
+
+
+
 
             var pm = Mapper.Map<PS,PrimerPlanVM>(pS);
 
@@ -494,6 +510,9 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult CreatePrimerPlan([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan")] PrimerPlanVM pm)
         {
+
+
+
 
             PS pS= new PS();
             PresentacionPlan plan=new PresentacionPlan();
@@ -567,6 +586,8 @@ namespace WebApplication1.Controllers
         }
 
 
+
+
         //GET
         [Authorize(Roles = "Administrador")]
         public ActionResult CancelarPS(int? id)
@@ -583,26 +604,51 @@ namespace WebApplication1.Controllers
             return View(ps);
         }
 
-        [HttpPost, ActionName("CancelarPS")]
+        [HttpPost]
         [Authorize(Roles = "Administrador")]
-        public ActionResult CancelarPSConfirmed(int? id)
+        public ActionResult CancelarPS([Bind(Include = "IdPS,ObservacionesPS,FechaFinalizacion")] PS pS)
         {
-            PS ps = db.PSs.Find(id);
-                        
-              if (ModelState.IsValid)
-              {
-                  ps.Estado = Estado.PS_Cancelada;
-                  db.Entry(ps).State = EntityState.Modified;
-                  db.SaveChanges();
-              }
-              else
-              {
-                  ViewBag.Error = "Error: Los datos de la PS no son válidos";
-              }
-                          
-            return RedirectToAction("Details", "PS", new { id = ps.IdPS });
-        }
+            //PS ps = db.PSs.Find(id);
 
+            //if (ModelState.IsValid)
+            //{
+            //    ps.Estado = Estado.PS_Cancelada;
+            //    db.Entry(ps).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //}
+            //else
+            //{
+            //    ViewBag.Error = "Error: Los datos de la PS no son válidos";
+            //}
+
+            //return RedirectToAction("Details", "PS", new { id = ps.IdPS });
+
+            PS ps = new PS();
+            ps = db.PSs.Find(pS.IdPS);
+            if (pS.FechaFinalizacion == null || pS.ObservacionesPS == null)
+            {
+
+                return RedirectToAction("Index", "Error", new { error = 2009 });
+            }
+          
+
+               
+              
+                    ps.FechaFinalizacion = pS.FechaFinalizacion;
+                
+                
+                    ps.ObservacionesPS = pS.ObservacionesPS;
+                
+
+                ps.Estado = Estado.PS_Cancelada;
+                db.Entry(ps).State = EntityState.Modified;
+                db.SaveChanges();
+
+
+          
+            return RedirectToAction("Details", "PS", new { id = ps.IdPS });
+
+        }
         //GET
         [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult AprobarPS(int? id)
@@ -625,7 +671,7 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Moderador,Administrador")]
-        public ActionResult AprobarPS([Bind(Include = "IdPS,NroDisposicion")] PS pS)
+        public ActionResult AprobarPS([Bind(Include = "IdPS,NroDisposicion,ObservacionesPS,FechaFinalizacion")] PS pS)
         {
             PS ps=new PS();
             ps = db.PSs.Find(pS.IdPS);
@@ -635,9 +681,18 @@ namespace WebApplication1.Controllers
                 
                     if (pS.NroDisposicion != null)
                     {
-                        ps.NroDisposicion = pS.NroDisposicion;}
+                        ps.NroDisposicion = pS.NroDisposicion;
+                    }
+                if (pS.FechaFinalizacion != null)
+                {
+                    ps.FechaFinalizacion = pS.FechaFinalizacion;
+                }
+                if (pS.ObservacionesPS != null)
+                {
+                    ps.ObservacionesPS = pS.ObservacionesPS;
+                }
 
-                    ps.Estado = Estado.PS_Aprobada;
+                ps.Estado = Estado.PS_Aprobada;
                     db.Entry(ps).State = EntityState.Modified;
                     db.SaveChanges();
                

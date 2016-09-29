@@ -65,7 +65,7 @@
 
                     }
                     else
-                        if ( Model.PSs.LastOrDefault().Estado == Estado.PS_Cancelada)
+                        if ( Model.PSs.LastOrDefault().Estado == Estado.PS_Cancelada || Model.PSs.LastOrDefault().Estado == Estado.PS_Vencida)
                     {
                         <text> <a href="@Url.Action("Details", "PS", new {id = Model.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => Model.PSs.LastOrDefault().Estado)</a> |<a href="@Url.Action("Create","PS",new { idalu = Model.IdAlumno })">
                             <span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span>

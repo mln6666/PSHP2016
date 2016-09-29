@@ -41,7 +41,7 @@ namespace ExpVMsape.Controllers
                     break;
                 case 2004:
                     ViewBag.Title = "Acción no permitida.";
-                    ViewBag.Description = "No se permite agregar nuevos planes a una PS que ya posee uno.";
+                    ViewBag.Description = "No se puede acceder a esta acción si el estado de la PS no es Plan Rechazado.";
                     break;
                 case 2005:
                     ViewBag.Title = "Acción no permitida.";
@@ -54,6 +54,14 @@ namespace ExpVMsape.Controllers
                 case 2007:
                     ViewBag.Title = "Error.";
                     ViewBag.Description = "No se pudo completar la acción. Verifíque que se hayan completado todos los campos correctamente.";
+                    break;
+                case 2008:
+                    ViewBag.Title = "Acción no permitida.";
+                    ViewBag.Description = "Solo se puede crear una PS si el alumno no posee PSs o su PS se encuenta Vencida o Cancelada.";
+                    break;
+                case 2009:
+                    ViewBag.Title = "Acción no permitida.";
+                    ViewBag.Description = "Al Cancelar una PS es obligatorio cargar una Observación y la Fecha de Finalización.";
                     break;
 
                 default:

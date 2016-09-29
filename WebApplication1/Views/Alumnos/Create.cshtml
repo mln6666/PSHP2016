@@ -81,8 +81,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar y Crear Ps" class="btn btn-success dos" />
-                <input type="submit" value="Guardar" class="btn btn-success uno"/>
+                <input type="submit" value="Guardar y Crear Ps" id="guardarycrear" class="btn btn-success dos" />
+                <input type="submit" value="Guardar" id="guardar" class="btn btn-success uno"/>
 
 
             </div>
@@ -124,11 +124,42 @@
         });
 
         $(".dos").click(function () {
+            mensaje = "Esta por agregar un nuevo Alumno y Crear su PS, ¿Desea continuar?";
+
             $("form").attr("action", "/Alumnos/Createalups");
         });
 
         $(".uno").click(function () {
+            mensaje = "Esta por agregar un nuevo Alumno, ¿Desea continuar?";
+
             $("form").attr("action", "/Alumnos/Create");
+        });
+
+
+        $('#agregaralumno').submit(function(e) {
+            alumno = this;
+            e.preventDefault();
+            //var x=document.getElementById("RoleID").innerText;
+            bootbox.confirm( {
+            
+                message: mensaje,
+                buttons: {
+                    confirm: {
+                        label: 'Ok',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                    callback:function(result) {
+                    if (result) {
+                        alumno.submit();
+                    }
+                }
+            });
+
         });
 
 
@@ -136,13 +167,13 @@
         //    var alumno = this;
         //    e.preventDefault();
         //    //var x=document.getElementById("RoleID").innerText;
-            
+
         //        bootbox.confirm("Esta por agregar un nuevo Alumno, ¿Desea continuar?", function(result) {
         //            if (result) {
         //                alumno.submit();
         //            }
         //        });
-           
+
         //});
     </script>
-}
+    }

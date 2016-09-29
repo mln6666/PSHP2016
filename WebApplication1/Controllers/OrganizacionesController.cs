@@ -51,6 +51,7 @@ namespace WebApplication1.Controllers
                 {
                     ViewBag.idultima ="";
                     ViewBag.denominacionultima = "Buscar organización...";
+                    ViewBag.vacio = "No has cargado ninguna Denominación de la Organización.";
                     return View();
                 }
 

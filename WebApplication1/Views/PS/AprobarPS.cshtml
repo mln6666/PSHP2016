@@ -1,59 +1,154 @@
 ﻿@model WebApplication1.Models.PS
 
 @{
-    
+
     Layout = null;
 }
 
-<p>@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "aprobarps" }))
-{ @Html.AntiForgeryToken()
+<p>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "aprobarps" }))
+    { @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IdPS)
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.IdPS)
 
-        <div class="form-group">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-                @Html.LabelFor(model => model.NroDisposicion, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    Estado PS
+                </div>
+
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control input-sm", @readonly = "readonly", Style = "background-color:palegoldenrod; width: 200px" } })
+                    @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-md-2"></div>
             </div>
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.NroDisposicion, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
-                @Html.ValidationMessageFor(model => model.NroDisposicion, "", new { @class = "text-danger" })
-                <span id="spannrodisposicion" style="color:red"></span>
-            </div>
-            <div class="col-md-2"></div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    Fecha Evaluacion Informe
+                </div>
 
-        </div>
-        <hr />
-        <div class="form-group row text-center" style="padding-top: 20px">
-            <div>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.PresentacionesInforme.LastOrDefault().FechaEvaluacionInforme, new { htmlAttributes = new { @class = "form-control input-sm", @readonly = "readonly", Style = "background-color:palegoldenrod; width: 200px" } })
+                    @Html.ValidationMessageFor(model => model.PresentacionesInforme.LastOrDefault().FechaEvaluacionInforme, "", new { @class = "text-danger" })
 
-                <input type="submit" value="Aprobar PS" class="btn btn-success" />
+                </div>
+                <div class="col-md-2"></div>
             </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.FechaFinalizacion, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.FechaFinalizacion, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px", @onkeypress = "solonumeros()" } })
+                    @Html.ValidationMessageFor(model => model.FechaFinalizacion, "", new { @class = "text-danger" })
+                    <span id="spanfechafinalizacion" style="color: red"></span>
+
+                </div>
+                <div class="col-md-2"></div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.NroDisposicion, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.NroDisposicion, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                    @Html.ValidationMessageFor(model => model.NroDisposicion, "", new { @class = "text-danger" })
+                    <span id="spannrodisposicion" style="color: red"></span>
+                </div>
+                <div class="col-md-2"></div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ObservacionesPS, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ObservacionesPS, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px"} })
+                    @Html.ValidationMessageFor(model => model.ObservacionesPS, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-2"></div>
+
+            </div>
+    <p> <span id="spanfechaestado" style="color: red"></span></p>
+
+    <hr />
+    <div class="form-group row text-center" style="padding-top: 20px">
+        <div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+            <input type="submit" value="Aprobar PS" class="btn btn-success" />
         </div>
     </div>
+    </div>
 
-}
-<script>
+    }
+    <script>
         $('#aprobarps').submit(function (e) {
             var aprobar = this;
             e.preventDefault();
             var isValidItem = true;
+            var fechafinalizacion = true;
+
+            var fecha1 = new Date($('#FechaFinalizacion').val());
+            var fecha2 = new Date($('#FechaEvaluacionInforme').val());
+            var fechaestado = true;
+
+            var minfecha = new Date("01/01/2000");
+            var maxfecha = new Date("01/01/2100");
+
+            if (fecha1 < fecha2) {
+                var isValidItem = false;
+                var fechaestado = false;
 
 
+
+                $('#spanfechaestado').text("** La Fecha de Evaluacion no puede ser mayor que la Fecha de Finalización");
+
+            }
+
+            if ((fecha1 < minfecha) || (fecha1 > maxfecha)) {
+                var isValidItem = false;
+                var fechafinalizacion = false;
+
+                $('#spanfechafinalizacion').text("Rango válido: 01/01/2000 - 01/01/2100");
+
+            }
+            if ($('#FechaFinalizacion').val().trim() == '') {
+                var isValidItem = false;
+                var fechafinalizacion = false;
+
+                $('#spanfechafinalizacion').text("Campo requerido.");
+
+            }
+            if (fechafinalizacion) {
+                $('#spanfechafinalizacion').text("");
+            }
+
+            if (fechaestado) {
+                $('#spanfechaestado').text("");
+            }
             //if ($('#NroDisposicion').val().trim() == '') {
             //    var isValidItem = false;
             //    $('#spannrodisposicion').text("Campo requerido.");
 
             //}
             if (isValidItem) {
-            //var x=document.getElementById("RoleID").innerText;
-            bootbox.confirm("Esta acción no puede ser restablecida, ¿Desea continuar?", function (result) {
-                if (result) {
-                    aprobar.submit();
-                }
-            });}
+                //var x=document.getElementById("RoleID").innerText;
+                bootbox.confirm("Esta acción no puede ser restablecida, ¿Desea continuar?", function (result) {
+                    if (result) {
+                        aprobar.submit();
+                    }
+                });
+            }
         });
-</script>
+    </script>

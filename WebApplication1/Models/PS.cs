@@ -29,6 +29,14 @@ namespace WebApplication1.Models
         [Display(Name = "Cuatrimestre")]
         public int Cuatrimestre { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
+        public DateTime? FechaFinalizacion { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Observaciones Grales")]
+        public string ObservacionesPS { get; set; }
+
         public int? IdOrganizacion { get; set; }
 
         public int? IdArea { get; set; }

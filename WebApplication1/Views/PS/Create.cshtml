@@ -9,7 +9,7 @@
 <head>
     <script>
         /////////////////Start:Select searchable////////////////
-        $(document).ready(function() { $(".js-example-basic-single").select2(); });
+        $(document).ready(function () { $(".js-example-basic-single").select2(); });
         ////////////////End:Select searchable///////////////////
     </script>
     <style>
@@ -19,8 +19,6 @@
             border: 0;
             border-top: 1px solid #eeeeee;
         }
-
-       
     </style>
 </head>
 <h2 class="text-center">Nueva PS</h2>
@@ -98,6 +96,16 @@
             </div>
         </div>
     </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ObservacionesPS, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ObservacionesPS, new { htmlAttributes = new { @class = "form-control input-sm"} })
+                @Html.ValidationMessageFor(model => model.ObservacionesPS, "", new { @class = "text-danger" })
+             
+
+            </div>
+
+        </div>
         <h3 style="padding-left:">Datos del Plan</h3>
         <hr align="left" class="hr5" style="color: grey; border-color: lightgray; width: 550px;" />
 
@@ -136,7 +144,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IdArea, "Área", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select class="js-example-basic-single form-control input-sm" id="IdArea" name="IdArea" style="font: small-caption; width: 280px; background-color: beige; padding-top: 30px">
+                <select class="js-example-basic-single form-control input-sm" id="IdArea" name="IdArea" style="font: small-caption; background-color: beige; padding-top: 30px">
                     <option value="">Buscar área...</option>
                     @foreach (var item in ViewBag.areas)
                     {
@@ -153,7 +161,7 @@
                 @Html.LabelFor(model => model.IdOrganizacion, "Organización", htmlAttributes: new { @class = "control-label col-md-2" })
 
                 <div class="col-md-10">
-                    <select class="js-example-basic-single form-control input-sm" id="IdOrganizacion" name="IdOrganizacion" style="font: small-caption; width: 280px; background-color: beige; padding-top: 30px; display: inline-block">
+                    <select class="js-example-basic-single form-control input-sm" id="IdOrganizacion" name="IdOrganizacion" style="font: small-caption; background-color: beige; padding-top: 30px; display: inline-block">
                         <option value="">Buscar organización...</option>
                         @foreach (var item in ViewBag.organizaciones)
                         {
@@ -169,26 +177,25 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <p class="form-control input-sm" style="width: 280px; background-color: lightgray; font-weight: bold">Plan Pendiente</p>
+                <p class="form-control input-sm" style=" background-color: lightgray; font-weight: bold">Plan Pendiente</p>
                 @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.NroDisposicion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @* @Html.EditorFor(model => model.NroDisposicion, new { htmlAttributes = new { @class = "form-control input-sm" } })*@
-                <p class="form-control input-sm" style="width: 280px; background-color: lightgray; font-weight: bold">- - -</p>
+                <p class="form-control input-sm" style=" background-color: lightgray; font-weight: bold">- - -</p>
                 @Html.ValidationMessageFor(model => model.NroDisposicion, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
-                @Html.LabelFor(model => model.FechaPresentacionPlan, "Fecha de Presentación", htmlAttributes: new { @class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.FechaPresentacionPlan, "Fecha de Presentación", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
                 <span id="spanfechapresentacionplan" style="color: red"></span>
 
                 @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new { @class = "text-danger" })
@@ -196,9 +203,9 @@
 
         </div>
         <div class="form-group">
-                @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-2 "})
+            @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-2 " })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                @Html.EditorFor(model => model.FechaEvaluacionPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
                 <span id="spanfechaevaluacionplan" style="color: red"></span>
 
                 @Html.ValidationMessageFor(model => model.FechaEvaluacionPlan, "", new { @class = "text-danger" })
@@ -207,9 +214,9 @@
         </div>
 
         <div class="form-group">
-                @Html.LabelFor(model => model.EstadoEvaluacionPlan, "Estado de Evaluación", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EstadoEvaluacionPlan, "Estado de Evaluación", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.EstadoEvaluacionPlan, htmlAttributes: new { @class = "form-control input-sm", @Style = "width: 200px" })
+                @Html.EnumDropDownListFor(model => model.EstadoEvaluacionPlan, htmlAttributes: new { @class = "form-control input-sm"})
                 @Html.ValidationMessageFor(model => model.EstadoEvaluacionPlan, "", new { @class = "text-danger" })
                 <span id="spanestadoevaluacionplan" style="color: red"></span>
 
@@ -218,9 +225,9 @@
         </div>
 
         <div class="form-group">
-                @Html.LabelFor(model => model.ObservacionesPlan, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ObservacionesPlan, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ObservacionesPlan, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
+                @Html.EditorFor(model => model.ObservacionesPlan, new { htmlAttributes = new { @class = "form-control input-sm"} })
                 @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
                 <span id="spanobservacion" style="color:red"></span>
 
@@ -238,18 +245,18 @@
 
 
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    @if (ViewBag.band)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @if (ViewBag.band)
                 {<input value="Guardar" class="btn btn-success btn-md disabled" style="padding-left:initial;padding-right:initial" /> }
                 else
                 { <input type="submit" value="Guardar" class="btn btn-success" />}
 
 
 
-                </div>
             </div>
-</div>
+        </div>
+    </div>
 }
 
 
@@ -285,9 +292,39 @@
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.Organizacion.DenominacionOrg, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Organizacion.DenominacionOrg, "", new { @class = "text-danger" })
+                                <span style="color:red">Campo requerido.</span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Organizacion.DireccionOrg, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Organizacion.DireccionOrg, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Organizacion.DireccionOrg, "", new { @class = "text-danger" })
+                                <span style="color:green">Conveniente.</span>
+
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Organizacion.TelefonoOrg, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Organizacion.TelefonoOrg, new { htmlAttributes = new { @class = "form-control", @onkeypress = "solonumeros()" } })
+                                @Html.ValidationMessageFor(model => model.Organizacion.TelefonoOrg, "", new { @class = "text-danger" })
+                                <span style="color:green">Conveniente.</span>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Organizacion.DescripcionOrg, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Organizacion.DescripcionOrg, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Organizacion.DescripcionOrg, "", new { @class = "text-danger" })
+                                <span style="color:green">Conveniente.</span>
+
+                            </div>
+                        </div>
 
 
                         <div class="form-group">

@@ -16,6 +16,14 @@ namespace WebApplication1.ViewModels
         [Display(Name = "Disposición")]
         public int? NroDisposicion { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
+        public DateTime? FechaFinalizacion { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Observaciones Grales")]
+        public string ObservacionesPS { get; set; }
+
         public string Tutor { get; set; }
 
         [Display(Name = "Título Proyecto")]
