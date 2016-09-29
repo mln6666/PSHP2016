@@ -4,7 +4,8 @@
     ViewBag.Title = "Roles";
 }
 
-<h1>Permisos del usuario: @Model.Name</h1>
+<h1 class="text-center">Permisos del usuario: <span style="color:royalblue">@Model.Name</span>
+</h1>
 
 <br />
 
@@ -17,8 +18,8 @@
             </td>
 
             <td>
-                <button userID = @Model.UserID roleID = @Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn btn-warning btn-sm js-delete">Quitar Permiso</button>
-               @*@Html.ActionLink("Eliminar", "Delete", new {userID = Model.UserID, roleID = Model.Roles[i].RoleID})*@
+                <button userID=@Model.UserID roleID=@Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn btn-warning btn-sm js-delete">Quitar Permiso</button>
+                @*@Html.ActionLink("Eliminar", "Delete", new {userID = Model.UserID, roleID = Model.Roles[i].RoleID})*@
             </td>
         </tr>
     }
@@ -27,18 +28,40 @@
 <p>
     <a href="@Url.Action("Index", "Users")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
     @*@Html.ActionLink("Volver", "Index", new { user = Model }, new { @class = "btn btn-default" })*@
-    @Html.ActionLink("Agregar permiso", "AddRole", new { userID = Model.UserID }, new { @class = "btn btn-success" })
+    @*@Html.ActionLink("Agregar permiso", "AddRole", new { userID = Model.UserID }, new { @class = "btn btn-success" })*@
+
+    <a href="@Url.Action("AddRole", new {userID = Model.UserID })" class="btn btn-success dialog-window10" style="color: white;line-height:inherit;border-radius:5px;font-weight: 500">Permiso  <span class="glyphicon glyphicon-plus"></span></a>
+
 </p>
+
+<div class="modal fade" id="myModal10" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Agregar Permiso</h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 
 @section scripts
 {
     <script>
-        $(document).ready(function() {
-            $(".js-delete").on("click", function() {
-            var button = $(this);
+        $(document).ready(function () {
+            $(".js-delete").on("click", function () {
+                var button = $(this);
 
-            bootbox.confirm("¿Está seguro que desea quitar el permiso: "+button.attr("nombrepermiso")+ "?", function(result) {
+                bootbox.confirm("¿Está seguro que desea quitar el permiso: " + button.attr("nombrepermiso") + "?", function (result) {
                     if (result) {
                         $.ajax({
                             url: "/Users/Delete/",
@@ -47,14 +70,35 @@
                                 userID: button.attr("userID"),
                                 RoleID: button.attr("roleID")
                             },
-                            success: function() {
+                            success: function () {
                                 button.parents("tr").remove();
                             }
                         });
                     }
                 });
             });
-    });
+        });
+      
+
+        $("body").on("click", "a.dialog-window10", null, function (e) {
+            e.preventDefault();
+
+            var $link = $(this); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            $('#myModal10.modal-title').html(title);
+
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#myModal10').modal('show');
+            }
+            else {
+                $.get(url, function (data) {
+                    $('#myModal10 .te').html(data);
+                    $('#myModal10').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        });
+
     </script>
 }
 

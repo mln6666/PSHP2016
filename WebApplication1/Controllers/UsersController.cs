@@ -109,8 +109,9 @@ namespace WebApplication1.Controllers
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var list = roleManager.Roles.ToList();
-            list.Add(new IdentityRole { Id = "", Name = "[Seleccione un permiso...]" });
+            //list.Add(new IdentityRole { Id = "", Name = "[Seleccione un permiso...]" });
             list = list.OrderBy(r => r.Name).ToList();
+            ViewBag.permisos = list;
             ViewBag.RoleID = new SelectList(list, "Id", "Name");
 
             return View(userView);
