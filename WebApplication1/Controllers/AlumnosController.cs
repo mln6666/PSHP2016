@@ -150,7 +150,7 @@ namespace WebApplication1.Controllers
                 
                 }
 
-            return RedirectToAction("Create");
+            return View("Create",alumno);
         }
 
         // GET: Alumnos/Edit/5

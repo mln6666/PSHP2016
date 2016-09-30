@@ -117,8 +117,19 @@ else
     <a href="@Url.Action("Index", "Users")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
     @*@Html.ActionLink("Volver", "Index", new { user = Model }, new { @class = "btn btn-default" })*@
     @*@Html.ActionLink("Agregar permiso", "AddRole", new { userID = Model.UserID }, new { @class = "btn btn-success" })*@
+    @if (Model.Roles.Count() != 0)
+    {
+        if (Model.Roles[0].Name != "Administrador")
+        {
+            <a href="@Url.Action("AddRole", new {userID = Model.UserID })" class="btn btn-success dialog-window10" style="color: white;line-height:inherit;border-radius:5px;font-weight: 500">Permiso  <span class="glyphicon glyphicon-plus"></span></a>
 
-    <a href="@Url.Action("AddRole", new {userID = Model.UserID })" class="btn btn-success dialog-window10" style="color: white;line-height:inherit;border-radius:5px;font-weight: 500">Permiso  <span class="glyphicon glyphicon-plus"></span></a>
+        }
+
+    }
+    else
+    {             <a href="@Url.Action("AddRole", new {userID = Model.UserID })" class="btn btn-success dialog-window10" style="color: white;line-height:inherit;border-radius:5px;font-weight: 500">Permiso  <span class="glyphicon glyphicon-plus"></span></a>
+    }
+
 
 </p>
 
