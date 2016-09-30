@@ -1,0 +1,99 @@
+﻿
+
+@model WebApplication1.Models.UserView
+@{
+    ViewBag.Title = "Roles";
+}
+
+
+<div>
+    <h1 class="text-center ">Permisos</h1>
+    <hr style="color:grey;border-color:grey" />
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+
+        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+            <th class="text-left" width="20%" style="border-radius: 3px">
+               Permiso
+            </th>
+            <th class="text-left" style="border-radius: 3px">Descripción </th>
+        </tr>
+    </thead>
+    @for (int i = 0; i < Model.Roles.Count; i++)
+    {
+        <tr>
+            <td style="font-weight: bold; color: #2c3e50;font-style: italic">
+                @Html.DisplayFor(modelItem => Model.Roles[i].Name)
+            </td>
+            <td>
+                @if (Model.Roles[i].Name == "Administrador")
+                {
+                    <span>@ViewBag.dadministrador</span>
+                }
+                @if (Model.Roles[i].Name == "Editar TipoPS")
+                {
+                    <span>@ViewBag.deditartipops</span>
+                }
+                @if (Model.Roles[i].Name == "Eliminar Area/Organizacion")
+                {
+                    <span>@ViewBag.deliminarareaorganizacion</span>
+                }
+                @if (Model.Roles[i].Name == "Eliminar Alumno")
+                {
+                    <span>@ViewBag.deliminaralumno</span>
+                }
+                @if (Model.Roles[i].Name == "Editar Plan/Informe")
+                {
+                    <span>@ViewBag.deditarplaninforme</span>
+                }
+                @if (Model.Roles[i].Name == "Editar PS")
+                {
+                    <span>@ViewBag.deditarps</span>
+                }
+                @if (Model.Roles[i].Name == "Invitado")
+                {
+                    <span>@ViewBag.dinvitado</span>
+                }
+                @if (Model.Roles[i].Name == "Eliminar PS")
+                {
+                    <span>@ViewBag.deliminarps</span>
+                }
+                @if (Model.Roles[i].Name == "Editar Alumno")
+                {
+                    <span>@ViewBag.deditaralumno</span>
+                }
+                @if (Model.Roles[i].Name == "Moderador")
+                {
+                    <span>@ViewBag.dmoderador</span>
+                }
+                @if (Model.Roles[i].Name == "Editar Area/Organizacion")
+                {
+                    <span>@ViewBag.deditarareaorganizacion</span>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+<p><a href="@Url.Action("Index", "Users")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+  </p>
+
+
+
+
+@section scripts
+{
+    <script>
+    
+
+    </script>
+}
+
+
+
+
+
+

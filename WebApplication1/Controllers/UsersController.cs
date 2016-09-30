@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -34,6 +35,60 @@ namespace WebApplication1.Controllers
                 usersView.Add(userView);
             }
             return View(usersView);
+        }
+
+        [Authorize(Roles = "Administrador")]
+        public ActionResult VerPermisos()
+        {
+           
+
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            var user = userManager.Users.ToList().FirstOrDefault();
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var roles = roleManager.Roles.ToList();
+            var rolesView = new List<RoleView>();
+            foreach (var item in user.Roles)
+            {
+                var role = roles.Find(r => r.Id == item.RoleId);
+                var roleView = new RoleView
+                {
+                    RoleID = role.Id,
+                    Name = role.Name
+                };
+                rolesView.Add(roleView);
+            }
+
+
+            var userView = new UserView
+            {
+                Email = user.Email,
+                Name = user.UserName,
+                UserID = user.Id,
+                Roles = rolesView.OrderBy(name => name.Name).ToList()
+            };
+
+            ViewBag.dadministrador = "Descripción Administrador.";
+            ViewBag.deditartipops = "Descripción Editar TipoPS.";
+            ViewBag.deliminarareaorganizacion = "Descripción Eliminar Area/Organizacion.";
+            ViewBag.deliminaralumno = "Descripción Eliminar Alumno.";
+            ViewBag.deditarplaninforme = "Descripción Editar Plan/Informe.";
+            ViewBag.deditarps = "Descripción Editar PS.";
+            ViewBag.dinvitado = "Descripción Invitado.";
+            ViewBag.deliminarps = "Descripción Eliminar PS.";
+            ViewBag.deditaralumno = "Descripción Editar Alumno.";
+            ViewBag.dmoderador = "Descripción Moderador.";
+            ViewBag.deditarareaorganizacion = "Descripción Editar Area/Organizacion.";
+
+
+
+
+            return View(userView);
         }
 
         [Authorize(Roles = "Administrador")]
@@ -130,6 +185,9 @@ namespace WebApplication1.Controllers
             ViewBag.permisos = list;
             ViewBag.RoleID = new SelectList(list, "Id", "Name");
 
+
+
+
             return View(userView);
         }
         [Authorize(Roles = "Administrador")]
@@ -137,7 +195,17 @@ namespace WebApplication1.Controllers
         public ActionResult AddRole(string userID, FormCollection form)
         {
             var roleID = Request["RoleID"];
-
+            ViewBag.dadministrador = "Descripción Administrador.";
+            ViewBag.deditartipops = "Descripción Editar TipoPS.";
+            ViewBag.deliminarareaorganizacion = "Descripción Eliminar Area/Organizacion.";
+            ViewBag.deliminaralumno = "Descripción Eliminar Alumno.";
+            ViewBag.deditarplaninforme = "Descripción Editar Plan/Informe.";
+            ViewBag.deditarps = "Descripción Editar PS.";
+            ViewBag.dinvitado = "Descripción Invitado.";
+            ViewBag.deliminarps = "Descripción Eliminar PS.";
+            ViewBag.deditaralumno = "Descripción Editar Alumno.";
+            ViewBag.dmoderador = "Descripción Moderador.";
+            ViewBag.deditarareaorganizacion = "Descripción Editar Area/Organizacion.";
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var users = userManager.Users.ToList();
@@ -242,7 +310,18 @@ namespace WebApplication1.Controllers
             return View("Roles", userView);
         }
 
+        // POST: /Users/Delete/5
+        [Authorize(Roles = "Administrador")]
+        public async Task<ActionResult> DeleteUser(string id)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            var user = userManager.Users.ToList().Find(u => u.Id == id);
+            await userManager.DeleteAsync(user);
+            db.SaveChanges();
 
+            return RedirectToAction("Index");
+
+        }
 
         protected override void Dispose(bool disposing)
         {

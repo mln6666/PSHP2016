@@ -123,13 +123,13 @@
             $("#myModal").modal('show');
         });
 
-        $(".dos").click(function () {
+        $(".dos").click(function() {
             mensaje = "Esta por agregar un nuevo Alumno y Crear su PS, ¿Desea continuar?";
 
             $("form").attr("action", "/Alumnos/Createalups");
         });
 
-        $(".uno").click(function () {
+        $(".uno").click(function() {
             mensaje = "Esta por agregar un nuevo Alumno, ¿Desea continuar?";
 
             $("form").attr("action", "/Alumnos/Create");
@@ -140,25 +140,26 @@
             alumno = this;
             e.preventDefault();
             //var x=document.getElementById("RoleID").innerText;
-            bootbox.confirm( {
-            
-                message: mensaje,
-                buttons: {
-                    confirm: {
-                        label: 'Confirmar',
-                        className: 'btn-success'
+            if ($(this).valid()) {
+                bootbox.confirm({
+                    message: mensaje,
+                    buttons: {
+                        confirm: {
+                            label: 'Confirmar',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'Cancelar',
+                            className: 'btn-danger'
+                        }
                     },
-                    cancel: {
-                        label: 'Cancelar',
-                        className: 'btn-danger'
+                    callback: function(result) {
+                        if (result) {
+                            alumno.submit();
+                        }
                     }
-                },
-                    callback:function(result) {
-                    if (result) {
-                        alumno.submit();
-                    }
-                }
-            });
+                });
+            }
 
         });
 
@@ -176,4 +177,4 @@
 
         //});
     </script>
-    }
+}

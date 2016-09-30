@@ -67,19 +67,21 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#myModal").modal('show');
         });
 
-        $('#agregararea').submit(function (e) {
+        $('#agregararea').submit(function(e) {
             var area = this;
             e.preventDefault();
             //var x=document.getElementById("RoleID").innerText;
-            bootbox.confirm("Esta por agregar una nueva Área, ¿Desea continuar?", function (result) {
-                if (result) {
-                    area.submit();
-                }
-            });
+            if ($(this).valid()) {
+                bootbox.confirm("Esta por agregar una nueva Área, ¿Desea continuar?", function(result) {
+                    if (result) {
+                        area.submit();
+                    }
+                });
+            }
         });
     </script>
 }

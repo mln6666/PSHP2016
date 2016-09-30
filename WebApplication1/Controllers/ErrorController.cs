@@ -63,6 +63,10 @@ namespace ExpVMsape.Controllers
                     ViewBag.Title = "Acción no permitida.";
                     ViewBag.Description = "Al Cancelar una PS es obligatorio cargar una Observación y la Fecha de Finalización.";
                     break;
+                case 2010:
+                    ViewBag.Title = "Sin autorización.";
+                    ViewBag.Description = "Su usuario no cuenta con los permisos necesarios!";
+                    break;
 
                 default:
                     ViewBag.Title = "Página no encontrada";

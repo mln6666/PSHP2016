@@ -58,6 +58,13 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                ViewBag.usuariosinpermisos = "Acceso restringido. El usuario no cuenta con los permisos necesarios !";
+                //return RedirectToAction("Index","Error", new { error=2010});
+            }
+          
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

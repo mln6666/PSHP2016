@@ -32,80 +32,90 @@
 
     <div class="form-horizontal">
 
-        <hr />
+        <hr style="color:grey;border-color:grey" />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        @if (ViewBag.band)
-        {
-            <div class="form-group">
-                @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <p class="form-control input-sm" style="width: 280px; background-color: lightgray; font-weight: bold">Sin alumnos habilitados</p>
-                    @Html.ValidationMessageFor(model => model.IdAlumno, "", new { @class = "text-danger" })
+    <div class="col-lg-12">
+        <div class="col-lg-4">
+            @if (ViewBag.band)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-7">
+                        <p class="form-control input-sm" style="width: 280px; background-color: lightgray; font-weight: bold">Sin alumnos habilitados</p>
+                        @Html.ValidationMessageFor(model => model.IdAlumno, "", new {@class = "text-danger"})
+                    </div>
                 </div>
-            </div>
-        }
-        else
-        {
-            <div class="form-group">
-                @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <select class="js-example-basic-single form-control input-sm" id="IdAlumno" name="IdAlumno" style="font: small-caption; width: 280px; background-color: beige; padding-top: 30px">
+            }
+            else
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-7">
+                        <select class="js-example-basic-single form-control input-sm" id="IdAlumno" name="IdAlumno" style="font: small-caption; width: 280px; background-color: beige; padding-top: 30px">
 
-                        @if (ViewBag.aluid != null)
-                        {
-                            <option value="@ViewBag.aluid">@ViewBag.alulegajo -@ViewBag.aluapellido ,@ViewBag.alunombre</option>}
-                        else
-                        {
-                            <option value="">Buscar alumno...</option>}
-                        @foreach (var item in ViewBag.alumnos)
-                        {
-                            <option value="@item.IdAlumno">@item.Legajo -@item.ApellidoAlu ,@item.NombreAlu </option>
-                        }
-                    </select>
+                            @if (ViewBag.aluid != null)
+                            {
+                                <option value="@ViewBag.aluid">@ViewBag.alulegajo -@ViewBag.aluapellido ,@ViewBag.alunombre</option>}
+                            else
+                            {
+                                <option value="">Buscar alumno...</option>}
+                            @foreach (var item in ViewBag.alumnos)
+                            {
+                                <option value="@item.IdAlumno">@item.Legajo -@item.ApellidoAlu ,@item.NombreAlu </option>
+                            }
+                        </select>
+
+                    </div>
+                    <span id="spanalumno" style="color: red"></span>
 
                 </div>
-                <span id="spanalumno" style="color:red"></span>
-
-            </div>
-        }
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CicloLectivo, htmlAttributes: new { @class = "control-label col-md-2", @onkeypress = "solonumeros()" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CicloLectivo, new { htmlAttributes = new { @class = "form-control input-sm", Value = @DateTime.Now.Year, @Min = 2000 } })
-                @Html.ValidationMessageFor(model => model.CicloLectivo, "", new { @class = "text-danger" })
-                <span id="spanciclolectivo" style="color:red"></span>
-
-            </div>
+            }
         </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CicloLectivo, htmlAttributes: new {@class = "control-label col-md-3", @onkeypress = "solonumeros()"})
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.CicloLectivo, new {htmlAttributes = new {@class = "form-control input-sm", Value = @DateTime.Now.Year, @Min = 2000}})
+                    @Html.ValidationMessageFor(model => model.CicloLectivo, "", new {@class = "text-danger"})
+                    <span id="spanciclolectivo" style="color: red"></span>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Cuatrimestre, htmlAttributes: new {@class = "control-label col-md-2"})
-        <div class="col-lg-10">
-            <div class="radio">
-                <label>
-                    <input name="Cuatrimestre" id="optionsRadios1" value="1" checked="" type="radio">
-                    1º
-                </label>
-                <label> </label>
-                <label>
-                    <input name="Cuatrimestre" id="optionsRadios2" value="2" type="radio">
-                    2º
-                </label>
+                </div>
             </div>
         </div>
     </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.ObservacionesPS, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ObservacionesPS, new { htmlAttributes = new { @class = "form-control input-sm"} })
-                @Html.ValidationMessageFor(model => model.ObservacionesPS, "", new { @class = "text-danger" })
-             
+    <div class="col-lg-12">
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Cuatrimestre, htmlAttributes: new {@class = "control-label col-md-3"})
+                <div class="col-lg-2"></div>
+                <div class="col-lg-7">
+                    <div class="radio">
+                        <label>
+                            <input name="Cuatrimestre" id="optionsRadios1" value="1" checked="" type="radio">
+                            1º
+                        </label>
+                        <label> </label>
+                        <label>
+                            <input name="Cuatrimestre" id="optionsRadios2" value="2" type="radio">
+                            2º
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ObservacionesPS, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.ObservacionesPS, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                    @Html.ValidationMessageFor(model => model.ObservacionesPS, "", new { @class = "text-danger" })
+
+
+                </div>
 
             </div>
-
         </div>
+    </div>
         <h3 style="padding-left:">Datos del Plan</h3>
         <hr align="left" class="hr5" style="color: grey; border-color: lightgray; width: 550px;" />
 
@@ -292,7 +302,7 @@
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.Organizacion.DenominacionOrg, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Organizacion.DenominacionOrg, "", new { @class = "text-danger" })
-                                <span style="color:red">**</span>
+                                <span style="color:red">** Campo requerido</span>
 
                             </div>
                         </div>
@@ -332,8 +342,6 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <input type="submit" value="Guardar" class="btn btn-success">
                                 @*<input type="reset" value="Vaciar"/>*@
-                                <text class="text-right" style="size: 5px">** requerido</text>
-
                             </div>
                         </div>
                     </div>

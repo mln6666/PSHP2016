@@ -83,7 +83,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#myModal").modal('show');
         });
 
@@ -91,11 +91,13 @@
             var organizacion = this;
             e.preventDefault();
             //var x=document.getElementById("RoleID").innerText;
-            bootbox.confirm("Esta por agregar una nueva Área, ¿Desea continuar?", function(result) {
-                if (result) {
-                    organizacion.submit();
-                }
-            });
+            if ($(this).valid()) {
+                bootbox.confirm("Esta por agregar una nueva Área, ¿Desea continuar?", function(result) {
+                    if (result) {
+                        organizacion.submit();
+                    }
+                });
+            }
         });
     </script>
 }
