@@ -28,17 +28,41 @@
             </tr>
 
             <tr>
-                <td class="text-left">
+                <td class="text-left">                    
                     @Html.DisplayFor(model => model.DenominacionOrg)
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.DireccionOrg)
+                    @if (Model.DireccionOrg == null)
+                    {
+                        <text>- - -</text>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.DireccionOrg)
+                    }
+                    
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.TelefonoOrg)
+                    @if (Model.TelefonoOrg == null)
+                    {
+                        <text>- - -</text>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.TelefonoOrg)
+                    }
+                    
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(model => model.DescripcionOrg)
+                    @if (Model.DescripcionOrg == null)
+                    {
+                        <text>- - -</text>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.DescripcionOrg)
+                    }
+                    
                 </td>
 
             </tr>
