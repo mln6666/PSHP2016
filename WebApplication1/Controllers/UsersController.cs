@@ -66,18 +66,18 @@ namespace WebApplication1.Controllers
                 Roles = rolesView.OrderBy(name => name.Name).ToList()
             };
 
-            ViewBag.dadministrador = "Descripción Administrador.";
-            ViewBag.deditartipops = "Descripción Editar TipoPS.";
-            ViewBag.deliminarareaorganizacion = "Descripción Eliminar Area/Organizacion.";
-            ViewBag.deliminaralumno = "Descripción Eliminar Alumno.";
-            ViewBag.deditarplaninforme = "Descripción Editar Plan/Informe.";
-            ViewBag.deditarps = "Descripción Editar PS.";
-            ViewBag.dinvitado = "Descripción Invitado.";
-            ViewBag.deliminarps = "Descripción Eliminar PS.";
-            ViewBag.deditaralumno = "Descripción Editar Alumno.";
-            ViewBag.dmoderador = "Descripción Moderador.";
-            ViewBag.deditarareaorganizacion = "Descripción Editar Area/Organizacion.";
-            ViewBag.dcancelarps = "Descripción Cancelar PS.";
+            ViewBag.dadministrador = "Posee todos los permisos y además cuenta con la posibilidad de Agregar/Eliminar usuarios y Asignar/Quitar los permisos que tendrán con el sistema.";
+            ViewBag.deditartipops = "Permite al Moderador Modificar un Tipo de PS.";
+            ViewBag.deliminarareaorganizacion = "Permite al Moderador Eliminar un/a Área/Organización.";
+            ViewBag.deliminaralumno = "Permite al Moderador Eliminar un Alumno.";
+            ViewBag.deditarplaninforme = "Permite al Moderador Modificar un Plan/Informe perteneciente a la PS de un Alumno.";
+            ViewBag.deditarps = "Permite al Moderador Modificar los datos generales de una Práctica Supervisada.";
+            ViewBag.dinvitado = "Permite al usuario Visualizar los detalles de Alumnos, Practicas Supervisadas, Planes, Informes, Áreas, Organizaciones y Tipo de PS.";
+            ViewBag.deliminarps = "Permite al Moderador Eliminar una Práctica Supervisada perteneciente a un Alumno.";
+            ViewBag.deditaralumno = "Permite al Moderador Modificar un Alumno.";
+            ViewBag.dmoderador = "Permite al usuario: ** Ver PS, Alumnos, Planes, Informes, Áreas, Organizaciones y Tipos de PS. ** Crear PS, Alumnos, Planes, Informes, Áreas y Organizaciones. ** Evaluar Planes e Informes";
+            ViewBag.deditarareaorganizacion = "Permite al Moderador Eliminar un/a Área/Organización.";
+            ViewBag.dcancelarps = "Permite al Moderador Cancelar una PS.";
 
 
 
@@ -128,18 +128,19 @@ namespace WebApplication1.Controllers
                 Roles = rolesView.OrderBy(name=>name.Name).ToList()
             };
 
-            ViewBag.dadministrador = "Descripción Administrador.";
-            ViewBag.deditartipops = "Descripción Editar TipoPS.";
-            ViewBag.deliminarareaorganizacion = "Descripción Eliminar Area/Organizacion.";
-            ViewBag.deliminaralumno = "Descripción Eliminar Alumno.";
-            ViewBag.deditarplaninforme = "Descripción Editar Plan/Informe.";
-            ViewBag.deditarps = "Descripción Editar PS.";
-            ViewBag.dinvitado = "Descripción Invitado.";
-            ViewBag.deliminarps = "Descripción Eliminar PS.";
-            ViewBag.deditaralumno = "Descripción Editar Alumno.";
-            ViewBag.dmoderador = "Descripción Moderador.";
-            ViewBag.deditarareaorganizacion = "Descripción Editar Area/Organizacion.";
-            ViewBag.dcancelarps = "Descripción Cancelar PS.";
+            ViewBag.dadministrador = "Posee todos los permisos y además cuenta con la posibilidad de Agregar/Eliminar usuarios y Asignar/Quitar los permisos que tendrán con el sistema.";
+            ViewBag.deditartipops = "Permite al Moderador Modificar un Tipo de PS.";
+            ViewBag.deliminarareaorganizacion = "Permite al Moderador Eliminar un/a Área/Organización.";
+            ViewBag.deliminaralumno = "Permite al Moderador Eliminar un Alumno.";
+            ViewBag.deditarplaninforme = "Permite al Moderador Modificar un Plan/Informe perteneciente a la PS de un Alumno.";
+            ViewBag.deditarps = "Permite al Moderador Modificar los datos generales de una Práctica Supervisada.";
+            ViewBag.dinvitado = "Permite al usuario Visualizar los detalles de Alumnos, Practicas Supervisadas, Planes, Informes, Áreas, Organizaciones y Tipo de PS.";
+            ViewBag.deliminarps = "Permite al Moderador Eliminar una Práctica Supervisada perteneciente a un Alumno.";
+            ViewBag.deditaralumno = "Permite al Moderador Modificar un Alumno.";
+            ViewBag.dmoderador = "Permite al usuario: ** Ver PS, Alumnos, Planes, Informes, Áreas, Organizaciones y Tipos de PS. ** Crear PS, Alumnos, Planes, Informes, Áreas y Organizaciones. ** Evaluar Planes e Informes";
+            ViewBag.deditarareaorganizacion = "Permite al Moderador Eliminar un/a Área/Organización.";
+            ViewBag.dcancelarps = "Permite al Moderador Cancelar una PS.";
+
 
 
 
@@ -190,18 +191,19 @@ namespace WebApplication1.Controllers
                 Roles = rolesView.OrderBy(name => name.Name).ToList()
             };
 
-            ViewBag.dadministrador = "Descripción Administrador.";
-            ViewBag.deditartipops = "Descripción Editar TipoPS.";
-            ViewBag.deliminarareaorganizacion = "Descripción Eliminar Area/Organizacion.";
-            ViewBag.deliminaralumno = "Descripción Eliminar Alumno.";
-            ViewBag.deditarplaninforme = "Descripción Editar Plan/Informe.";
-            ViewBag.deditarps = "Descripción Editar PS.";
-            ViewBag.dinvitado = "Descripción Invitado.";
-            ViewBag.deliminarps = "Descripción Eliminar PS.";
-            ViewBag.deditaralumno = "Descripción Editar Alumno.";
-            ViewBag.dmoderador = "Descripción Moderador.";
-            ViewBag.deditarareaorganizacion = "Descripción Editar Area/Organizacion.";
-            ViewBag.dcancelarps = "Descripción Cancelar PS.";
+            ViewBag.dadministrador = "Posee todos los permisos y además cuenta con la posibilidad de Agregar/Eliminar usuarios y Asignar/Quitar los permisos que tendrán con el sistema.";
+            ViewBag.deditartipops = "Permite al Moderador Modificar un Tipo de PS.";
+            ViewBag.deliminarareaorganizacion = "Permite al Moderador Eliminar un/a Área/Organización.";
+            ViewBag.deliminaralumno = "Permite al Moderador Eliminar un Alumno.";
+            ViewBag.deditarplaninforme = "Permite al Moderador Modificar un Plan/Informe perteneciente a la PS de un Alumno.";
+            ViewBag.deditarps = "Permite al Moderador Modificar los datos generales de una Práctica Supervisada.";
+            ViewBag.dinvitado = "Permite al usuario Visualizar los detalles de Alumnos, Practicas Supervisadas, Planes, Informes, Áreas, Organizaciones y Tipo de PS.";
+            ViewBag.deliminarps = "Permite al Moderador Eliminar una Práctica Supervisada perteneciente a un Alumno.";
+            ViewBag.deditaralumno = "Permite al Moderador Modificar un Alumno.";
+            ViewBag.dmoderador = "Permite al usuario: ** Ver PS, Alumnos, Planes, Informes, Áreas, Organizaciones y Tipos de PS. ** Crear PS, Alumnos, Planes, Informes, Áreas y Organizaciones. ** Evaluar Planes e Informes";
+            ViewBag.deditarareaorganizacion = "Permite al Moderador Eliminar un/a Área/Organización.";
+            ViewBag.dcancelarps = "Permite al Moderador Cancelar una PS.";
+
 
 
 
@@ -254,18 +256,19 @@ namespace WebApplication1.Controllers
         public ActionResult AddRole(string userID, FormCollection form)
         {
             var roleID = Request["RoleID"];
-            ViewBag.dadministrador = "Descripción Administrador.";
-            ViewBag.deditartipops = "Descripción Editar TipoPS.";
-            ViewBag.deliminarareaorganizacion = "Descripción Eliminar Area/Organizacion.";
-            ViewBag.deliminaralumno = "Descripción Eliminar Alumno.";
-            ViewBag.deditarplaninforme = "Descripción Editar Plan/Informe.";
-            ViewBag.deditarps = "Descripción Editar PS.";
-            ViewBag.dinvitado = "Descripción Invitado.";
-            ViewBag.deliminarps = "Descripción Eliminar PS.";
-            ViewBag.deditaralumno = "Descripción Editar Alumno.";
-            ViewBag.dmoderador = "Descripción Moderador.";
-            ViewBag.deditarareaorganizacion = "Descripción Editar Area/Organizacion.";
-            ViewBag.dcancelarps = "Descripción Cancelar PS.";
+            ViewBag.dadministrador = "Posee todos los permisos y además cuenta con la posibilidad de Agregar/Eliminar usuarios y Asignar/Quitar los permisos que tendrán con el sistema.";
+            ViewBag.deditartipops = "Permite al Moderador Modificar un Tipo de PS.";
+            ViewBag.deliminarareaorganizacion = "Permite al Moderador Eliminar un/a Área/Organización.";
+            ViewBag.deliminaralumno = "Permite al Moderador Eliminar un Alumno.";
+            ViewBag.deditarplaninforme = "Permite al Moderador Modificar un Plan/Informe perteneciente a la PS de un Alumno.";
+            ViewBag.deditarps = "Permite al Moderador Modificar los datos generales de una Práctica Supervisada.";
+            ViewBag.dinvitado = "Permite al usuario Visualizar los detalles de Alumnos, Practicas Supervisadas, Planes, Informes, Áreas, Organizaciones y Tipo de PS.";
+            ViewBag.deliminarps = "Permite al Moderador Eliminar una Práctica Supervisada perteneciente a un Alumno.";
+            ViewBag.deditaralumno = "Permite al Moderador Modificar un Alumno.";
+            ViewBag.dmoderador = "Permite al usuario: ** Ver PS, Alumnos, Planes, Informes, Áreas, Organizaciones y Tipos de PS. ** Crear PS, Alumnos, Planes, Informes, Áreas y Organizaciones. ** Evaluar Planes e Informes";
+            ViewBag.deditarareaorganizacion = "Permite al Moderador Eliminar un/a Área/Organización.";
+            ViewBag.dcancelarps = "Permite al Moderador Cancelar una PS.";
+
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var users = userManager.Users.ToList();

@@ -393,10 +393,18 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
 
-           
-                ViewBag.alumnos = db.Alumnos.ToList();
-                ViewBag.areas = db.Areas.ToList();
-                ViewBag.organizaciones = db.Organizaciones.ToList();
+            var listareas = db.Areas.ToList();
+            var listorganizaciones = db.Organizaciones.ToList();
+
+
+
+            listareas.Remove(listareas.Single(x => x.IdArea == pS.IdArea));
+            listorganizaciones.Remove(listorganizaciones.Single(x => x.IdOrganizacion == pS.IdOrganizacion));
+            ViewBag.areas = listareas;
+            ViewBag.organizaciones = listorganizaciones;
+            ViewBag.alumnos = db.Alumnos.ToList();
+                //ViewBag.areas = db.Areas.ToList();
+                //ViewBag.organizaciones = db.Organizaciones.ToList();
                 ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
                 ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
                 ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
@@ -504,11 +512,11 @@ namespace WebApplication1.Controllers
 
             listareas.Remove(listareas.Single(x => x.IdArea == pS.IdArea));
             listorganizaciones.Remove(listorganizaciones.Single(x => x.IdOrganizacion == pS.IdOrganizacion));
-
-
-            ViewBag.alumnos = db.Alumnos.ToList();
             ViewBag.areas = listareas;
             ViewBag.organizaciones = listorganizaciones;
+
+            ViewBag.alumnos = db.Alumnos.ToList();
+           
             ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
             ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
