@@ -31,10 +31,11 @@ namespace WebApplication1.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
+        [Display(Name = "Fecha Finalización")]
         public DateTime? FechaFinalizacion { get; set; }
 
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Observaciones Grales")]
+        [Display(Name = "Observaciones Generales")]
         public string ObservacionesPS { get; set; }
 
         public int? IdOrganizacion { get; set; }
