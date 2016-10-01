@@ -2,14 +2,13 @@
 
 @model WebApplication1.Models.UserView
 @{
-    ViewBag.Title = "Roles";
+    ViewBag.Title = "MisPermisos";
 }
 
-
-<div>
-    <h1 class="text-center ">Permisos</h1>
-    <hr style="color:grey;border-color:grey" />
-</div>
+<h1 class="text-center">
+    Permisos del usuario: <span style="color:royalblue">@Model.Name</span>
+</h1>
+<hr style="color:grey;border-color:grey" />
 
 
 <table class="table table-striped">
@@ -17,9 +16,10 @@
 
         <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
             <th class="text-left" width="20%" style="border-radius: 3px">
-               Permiso
+              Permiso
             </th>
             <th class="text-left" style="border-radius: 3px">Descripción </th>
+         
         </tr>
     </thead>
     @for (int i = 0; i < Model.Roles.Count; i++)
@@ -78,26 +78,17 @@
                     <span>@ViewBag.dcancelarps</span>
                 }
             </td>
+          
+
         </tr>
     }
 
 </table>
-<p><a href="@Url.Action("Index", "Users")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
-  </p>
+<p>
+  
+       <a href="@Url.Action("Index", "Manage")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
 
-
-
-
-@section scripts
-{
-    <script>
-    
-
-    </script>
-}
-
-
-
+</p>
 
 
 

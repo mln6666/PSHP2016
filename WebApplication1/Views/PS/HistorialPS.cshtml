@@ -4,6 +4,11 @@
 @{
     ViewBag.Title = "Historial Prácticas";
 }
+<style>
+    .aprobada {color: blue}
+    .desaprobada {color: red}
+
+</style>
 <div>
     <h1 class="text-center ">Historial Prácticas Supervisadas</h1>
     <hr style="color:grey;border-color:grey" />
@@ -57,9 +62,30 @@
                     @Html.DisplayFor(modelItem => item.CicloLectivo)
                 </td>
 
-                <td class="text-left" style="font-weight: bold; font-style: italic;">
+               
+    @if (item.Estado == Estado.PS_Aprobada & item.NroDisposicion!=null)
+
+    {
+                <td class="text-left" style="font-weight: bolder; font-style: italic; color: forestgreen;font-size: larger ">
                     @Html.DisplayFor(modelItem => item.Estado)
-                </td>
+                    </td>}
+    else
+                    if (item.Estado == Estado.PS_Cancelada)
+    {
+        <td class="text-left" style="font-weight: bold; font-style: italic;color: darkred">
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+    }
+    else if (item.Estado == Estado.PS_Aprobada & item.NroDisposicion == null)
+    {
+                <td class="text-left" style="font-weight: bold; font-style: italic;color: midnightblue">
+                    @Html.DisplayFor(modelItem => item.Estado)<p style="color: midnightblue;font-size: smaller">[Sin Nro. Disposición]</p>
+                </td> }else
+    {
+        <td class="text-left" style="font-weight: bold; font-style: italic;">
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>}
+            
                 <td class="text-center">                                      
                     @Html.ActionLink("Detalles", "Details", new { id = item.IdPS, var = true }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
                     @*@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@

@@ -42,24 +42,19 @@ namespace WebApplication1.Controllers
         {
            
 
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-            var user = userManager.Users.ToList().FirstOrDefault();
-
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
+           
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var roles = roleManager.Roles.ToList();
             var rolesView = new List<RoleView>();
-            foreach (var item in user.Roles)
+
+            foreach (var item in roles)
             {
-                var role = roles.Find(r => r.Id == item.RoleId);
+                
                 var roleView = new RoleView
                 {
-                    RoleID = role.Id,
-                    Name = role.Name
+                    RoleID = item.Id,
+                    Name = item.Name
                 };
                 rolesView.Add(roleView);
             }
@@ -67,9 +62,7 @@ namespace WebApplication1.Controllers
 
             var userView = new UserView
             {
-                Email = user.Email,
-                Name = user.UserName,
-                UserID = user.Id,
+               
                 Roles = rolesView.OrderBy(name => name.Name).ToList()
             };
 
@@ -84,6 +77,8 @@ namespace WebApplication1.Controllers
             ViewBag.deditaralumno = "Descripción Editar Alumno.";
             ViewBag.dmoderador = "Descripción Moderador.";
             ViewBag.deditarareaorganizacion = "Descripción Editar Area/Organizacion.";
+            ViewBag.dcancelarps = "Descripción Cancelar PS.";
+
 
 
 
@@ -144,11 +139,75 @@ namespace WebApplication1.Controllers
             ViewBag.deditaralumno = "Descripción Editar Alumno.";
             ViewBag.dmoderador = "Descripción Moderador.";
             ViewBag.deditarareaorganizacion = "Descripción Editar Area/Organizacion.";
+            ViewBag.dcancelarps = "Descripción Cancelar PS.";
+
 
 
 
 
             return View(userView);
+        }
+
+        public ActionResult MisRoles(string name1)
+        {
+            if (string.IsNullOrEmpty(name1))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            var users = userManager.Users.ToList();
+
+            var user = users.Find(u => u.UserName == name1);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var roles = roleManager.Roles.ToList();
+            var rolesView = new List<RoleView>();
+
+            foreach (var item in user.Roles)
+            {
+                var role = roles.Find(r => r.Id == item.RoleId);
+                var roleView = new RoleView
+                {
+                    RoleID = role.Id,
+                    Name = role.Name
+                };
+                rolesView.Add(roleView);
+            }
+
+
+            var userView = new UserView
+            {
+                Email = user.Email,
+                Name = user.UserName,
+                UserID = user.Id,
+                Roles = rolesView.OrderBy(name => name.Name).ToList()
+            };
+
+            ViewBag.dadministrador = "Descripción Administrador.";
+            ViewBag.deditartipops = "Descripción Editar TipoPS.";
+            ViewBag.deliminarareaorganizacion = "Descripción Eliminar Area/Organizacion.";
+            ViewBag.deliminaralumno = "Descripción Eliminar Alumno.";
+            ViewBag.deditarplaninforme = "Descripción Editar Plan/Informe.";
+            ViewBag.deditarps = "Descripción Editar PS.";
+            ViewBag.dinvitado = "Descripción Invitado.";
+            ViewBag.deliminarps = "Descripción Eliminar PS.";
+            ViewBag.deditaralumno = "Descripción Editar Alumno.";
+            ViewBag.dmoderador = "Descripción Moderador.";
+            ViewBag.deditarareaorganizacion = "Descripción Editar Area/Organizacion.";
+            ViewBag.dcancelarps = "Descripción Cancelar PS.";
+
+
+
+
+
+            return View("MisPermisos",userView);
         }
 
         //get
@@ -206,6 +265,7 @@ namespace WebApplication1.Controllers
             ViewBag.deditaralumno = "Descripción Editar Alumno.";
             ViewBag.dmoderador = "Descripción Moderador.";
             ViewBag.deditarareaorganizacion = "Descripción Editar Area/Organizacion.";
+            ViewBag.dcancelarps = "Descripción Cancelar PS.";
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var users = userManager.Users.ToList();

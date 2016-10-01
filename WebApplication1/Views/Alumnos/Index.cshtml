@@ -91,8 +91,10 @@
                         { <text> <a href="@Url.Action("Details", "PS", new {id = item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>
                             </text>}
                         else
-                        {                             <a href="@Url.Action("Details","PS", new { id=item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>
-                        }
+                        {
+                            <a href="@Url.Action("Details", "PS", new {id = item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>
+                            if(item.PSs.LastOrDefault().Estado == Estado.PS_Aprobada){<p style="color: midnightblue;font-size: smaller">[Sin Nro. Disposición]</p>}
+                            }
 
 
                     </td>

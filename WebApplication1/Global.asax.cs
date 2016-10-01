@@ -26,7 +26,7 @@ namespace WebApplication1
 
             ContextPS dc = new ContextPS();
             ApplicationDbContext db = new ApplicationDbContext();
-            if (db.Users.Count()==0)
+            if (db.Users==null||db.Users.Count()==0 )
             {
                 CreateRoles(db);
                 CreateSuperuser(db);
@@ -155,6 +155,10 @@ namespace WebApplication1
             {
                 userManager.AddToRole(user.Id, "Editar PS");
             }
+            if (!userManager.IsInRole(user.Id, "Cancelar PS"))
+            {
+                userManager.AddToRole(user.Id, "Cancelar PS");
+            }
 
 
         }
@@ -226,6 +230,10 @@ namespace WebApplication1
             if (!roleManager.RoleExists("Invitado"))
             {
                 roleManager.Create(new IdentityRole("Invitado"));
+            }
+            if (!roleManager.RoleExists("Cancelar PS"))
+            {
+                roleManager.Create(new IdentityRole("Cancelar PS"));
             }
 
         }

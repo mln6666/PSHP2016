@@ -668,6 +668,7 @@
     <Content Include="Views\PS\NumeroDisposicion.cshtml" />
     <Content Include="Views\PS\CreateOriginal.cshtml" />
     <Content Include="Views\Users\VerPermisos.cshtml" />
+    <Content Include="Views\Users\MisPermisos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

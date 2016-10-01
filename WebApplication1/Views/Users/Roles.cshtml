@@ -17,7 +17,8 @@
                 @*@Html.DisplayNameFor(model => model.Name)*@Permiso
             </th>
             <th class="text-left" style="border-radius: 3px">Descripción </th>
-@if (Model.Roles.Count() != 0)
+            @if (User.IsInRole("Administrador")) { 
+if (Model.Roles.Count() != 0)
 {
     if (Model.Roles[0].Name != "Administrador")
     {
@@ -32,6 +33,7 @@ else
             <th class="text-center" style="border-radius: 3px">
                 Acciones
             </th> }
+            }
         </tr>
     </thead>
     @for (int i = 0; i < Model.Roles.Count; i++)
@@ -88,50 +90,62 @@ else
                 {
                     <span>@ViewBag.deditarareaorganizacion</span>
                 }
+                @if (Model.Roles[i].Name == "Cancelar PS")
+                {
+                    <span>@ViewBag.dcancelarps</span>
+                }
             </td>
-
-@if (Model.Roles.Count() != 0)
+@if (User.IsInRole("Administrador"))
 {
-    if (Model.Roles[0].Name != "Administrador")
-    {
-        <td class="text-center">
-            <button userID=@Model.UserID roleID=@Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn btn-warning btn-sm js-delete">Quitar Permiso</button>
-        </td>
-    }
+if (Model.Roles.Count() != 0)
+ {
+     if (Model.Roles[0].Name != "Administrador")
+     {
+         <td class="text-center">
+             <button userID=@Model.UserID roleID=@Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn btn-warning btn-sm js-delete">Quitar Permiso</button>
+         </td>
+     }
 
+ }
+ else
+ {
+     <td class="text-center">
+         <button userID=@Model.UserID roleID=@Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn btn-warning btn-sm js-delete">Quitar Permiso</button>
+     </td>
+ }
 }
-else
-{
-    <td class="text-center">
-        <button userID=@Model.UserID roleID=@Model.Roles[i].RoleID nombrepermiso=@Model.Roles[i].Name id="eliminar" class="btn btn-warning btn-sm js-delete">Quitar Permiso</button>
-    </td> }
-            
-   
-   
+
+
+
                 @*@Html.ActionLink("Eliminar", "Delete", new {userID = Model.UserID, roleID = Model.Roles[i].RoleID})*@
 
         </tr>
     }
 
 </table>
-<p>
-    <a href="@Url.Action("Index", "Users")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+<p>@if (User.IsInRole("Administrador"))
+   {
+       <a href="@Url.Action("Index", "Users")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
     @*@Html.ActionLink("Volver", "Index", new { user = Model }, new { @class = "btn btn-default" })*@
     @*@Html.ActionLink("Agregar permiso", "AddRole", new { userID = Model.UserID }, new { @class = "btn btn-success" })*@
-    @if (Model.Roles.Count() != 0)
-    {
-        if (Model.Roles[0].Name != "Administrador")
+       if (Model.Roles.Count() != 0)
         {
-            <a href="@Url.Action("AddRole", new {userID = Model.UserID })" class="btn btn-success dialog-window10" style="color: white;line-height:inherit;border-radius:5px;font-weight: 500">Permiso  <span class="glyphicon glyphicon-plus"></span></a>
+            if (Model.Roles[0].Name != "Administrador")
+            {
+                <a href="@Url.Action("AddRole", new {userID = Model.UserID})" class="btn btn-success dialog-window10" style="color: white; line-height: inherit; border-radius: 5px; font-weight: 500">Permiso <span class="glyphicon glyphicon-plus"></span></a>
+
+            }
 
         }
-
+        else
+        {
+            <a href="@Url.Action("AddRole", new {userID = Model.UserID})" class="btn btn-success dialog-window10" style="color: white; line-height: inherit; border-radius: 5px; font-weight: 500">Permiso <span class="glyphicon glyphicon-plus"></span></a>
     }
-    else
-    {             <a href="@Url.Action("AddRole", new {userID = Model.UserID })" class="btn btn-success dialog-window10" style="color: white;line-height:inherit;border-radius:5px;font-weight: 500">Permiso  <span class="glyphicon glyphicon-plus"></span></a>
-    }
 
-
+}
+else
+{        <a href="@Url.Action("Index", "Manage")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+}
 </p>
 
 <div class="modal fade" id="myModal10" role="dialog"

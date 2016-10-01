@@ -40,18 +40,20 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-<script>
-        $('#agregarusuario').submit(function (e) {
+    <script>
+        $('#agregarusuario').submit(function(e) {
             var usuario = this;
             e.preventDefault();
             //var x=document.getElementById("RoleID").innerText;
-            bootbox.confirm("Esta por agregar un nuevo usuario, ¿Desea continuar?", function (result) {
-                if (result) {
-                    usuario.submit();
-                }
-            });
+            if ($(this).valid()) {
+                bootbox.confirm("Esta por agregar un nuevo usuario, ¿Desea continuar?", function(result) {
+                    if (result) {
+                        usuario.submit();
+                    }
+                });
+            }
         });
-</script>
+    </script>
 
 
 }

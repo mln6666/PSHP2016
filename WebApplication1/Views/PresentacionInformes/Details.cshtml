@@ -60,20 +60,23 @@
 
                 }
                     )*@
-            @Html.ActionLink("Historial Informes", "HistorialInformes", new { id = Model.IdPS }, new { @class = "dialog-window3 btn btn-primary btn-sm" })
+            @Html.ActionLink("Historial Informes", "HistorialInformes", new {id = Model.IdPS}, new {@class = "dialog-window3 btn btn-primary btn-sm"})
 
 
         </td>
-        <td class="text-center">
-            @if (Model.EstadoEvaluacionInforme != Evaluacion.Pendiente)
-            {
-                @Html.ActionLink("Evaluar Informe", "EvaluarInforme", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm disabled" })
-            }
-            else
-            {
-                @Html.ActionLink("Evaluar Informe", "EvaluarInforme", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm" })
-            }
-        </td>
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    <td class="text-center">
+        @if (Model.EstadoEvaluacionInforme != Evaluacion.Pendiente)
+        {
+            @Html.ActionLink("Evaluar Informe", "EvaluarInforme", new {id = Model.IdPresentacionInforme}, new {@class = "dialog-window btn btn-primary btn-sm disabled"})
+        }
+        else
+        {
+            @Html.ActionLink("Evaluar Informe", "EvaluarInforme", new {id = Model.IdPresentacionInforme}, new {@class = "dialog-window btn btn-primary btn-sm"})
+        }
+    </td>
+}
 
 @if (User.IsInRole("Administrador") | User.IsInRole("Editar Plan/Informe"))
 {

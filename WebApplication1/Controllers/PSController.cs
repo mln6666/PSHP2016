@@ -401,10 +401,19 @@ namespace WebApplication1.Controllers
                 ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
                 ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
                 ViewBag.IdTipoPS = new SelectList(db.TipoPSs, "IdTipoPS", "NombreTipoPS", pS.IdTipoPS);
-            
 
-            
-           
+            var selectList = Enum.GetValues(typeof(Estado))
+                      .Cast<Estado>()
+                      .Where(e => e != Estado.Plan_Pendiente)
+                      .Select(e => new SelectListItem
+                      {
+                          Value = ((int)e).ToString(),
+                          Text = e.ToString()
+                      });
+
+            ViewBag.SelectList = selectList;
+
+
 
             return View(pS);
         }
@@ -488,12 +497,18 @@ namespace WebApplication1.Controllers
             //pm.EstadoEvaluacionPlan = pS.IdPS;
             //pm.ObservacionesPlan = pS.IdPS;
 
+            var listareas= db.Areas.ToList();
+            var listorganizaciones= db.Organizaciones.ToList();
 
+
+
+            listareas.Remove(listareas.Single(x => x.IdArea == pS.IdArea));
+            listorganizaciones.Remove(listorganizaciones.Single(x => x.IdOrganizacion == pS.IdOrganizacion));
 
 
             ViewBag.alumnos = db.Alumnos.ToList();
-            ViewBag.areas = db.Areas.ToList();
-            ViewBag.organizaciones = db.Organizaciones.ToList();
+            ViewBag.areas = listareas;
+            ViewBag.organizaciones = listorganizaciones;
             ViewBag.IdAlumno = new SelectList(db.Alumnos, "IdAlumno", "NombreAlu", pS.IdAlumno);
             ViewBag.IdArea = new SelectList(db.Areas, "IdArea", "NombreArea", pS.IdArea);
             ViewBag.IdOrganizacion = new SelectList(db.Organizaciones, "IdOrganizacion", "DenominacionOrg", pS.IdOrganizacion);
@@ -589,7 +604,7 @@ namespace WebApplication1.Controllers
 
 
         //GET
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador,Cancelar PS")]
         public ActionResult CancelarPS(int? id)
         {
             if (id == null)
@@ -605,7 +620,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador,Cancelar PS")]
         public ActionResult CancelarPS([Bind(Include = "IdPS,ObservacionesPS,FechaFinalizacion")] PS pS)
         {
             //PS ps = db.PSs.Find(id);
