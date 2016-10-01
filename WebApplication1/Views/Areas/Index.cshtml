@@ -38,7 +38,15 @@
                     @Html.DisplayFor(modelItem => item.NombreArea)
                 </td>
                 <td class="text-left">
-                    @Html.DisplayFor(modelItem => item.DescripcionArea)
+                    @if (item.DescripcionArea != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.DescripcionArea)
+                    }
+                    else
+                    {
+                        <text>- - -</text>
+                    }
+                    
                 </td>
                 <td style="width: 230px" class="text-center">
                     @Html.ActionLink("Editar", "Edit", new { id = item.IdArea }, new { @class = "btn btn-primary btn-sm" })
