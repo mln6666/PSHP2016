@@ -20,9 +20,10 @@
 		<th class="text-left"width="8%"style="border-radius: 3px">
 			@*@Html.DisplayNameFor(model => model.EstadoEvaluacionInforme)*@Evaluación
 		</th>
-		<th class="text-left"width="29%" style="border-radius: 3px">
-			@*@Html.DisplayNameFor(model => model.ObservacionesInforme)*@Observaciones
-		</th>
+	    <th class="text-left"width="29%" style="border-radius: 3px">
+	        @*@Html.DisplayNameFor(model => model.ObservacionesInforme)*@Observaciones
+	    </th>
+        <th class="text-center" style="border-radius: 3px">Acciones</th>
 	</tr>
     <tr>
         @*<td class="text-left">
@@ -50,40 +51,40 @@
         </td>
         <td class="text-center">
             @*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
+            @Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
             @*@Html.ActionLink("Ver Historial Informes...", "HistorialInformes", new { id = Model.IdPS })*@
             @*@Ajax.ActionLink("Ver Historial Informes", "HistorialInformes", new {id = Model.IdPS}, new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "histoinf",
+
+            }
+                )*@
+            @Html.ActionLink("Historial Informes", "HistorialInformes", new { id = Model.IdPS }, new { @class = "dialog-window3 btn btn-primary btn-sm" })
+
+
+
+            @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+            {
+
+                if (Model.EstadoEvaluacionInforme != Evaluacion.Pendiente)
                 {
-                    InsertionMode = InsertionMode.Replace,
-                    UpdateTargetId = "histoinf",
-
+                    @Html.ActionLink("Evaluar Informe", "EvaluarInforme", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm disabled" })
                 }
-                    )*@
-            @Html.ActionLink("Historial Informes", "HistorialInformes", new {id = Model.IdPS}, new {@class = "dialog-window3 btn btn-primary btn-sm"})
+                else
+                {
+                    @Html.ActionLink("Evaluar Informe", "EvaluarInforme", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm" })
+                }
 
+            }
+
+            @if (User.IsInRole("Administrador") | User.IsInRole("Editar Plan/Informe"))
+            {
+                @Html.ActionLink("Editar Informe", "Edit", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm" })
+            }
 
         </td>
-@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
-{
-    <td class="text-center">
-        @if (Model.EstadoEvaluacionInforme != Evaluacion.Pendiente)
-        {
-            @Html.ActionLink("Evaluar Informe", "EvaluarInforme", new {id = Model.IdPresentacionInforme}, new {@class = "dialog-window btn btn-primary btn-sm disabled"})
-        }
-        else
-        {
-            @Html.ActionLink("Evaluar Informe", "EvaluarInforme", new {id = Model.IdPresentacionInforme}, new {@class = "dialog-window btn btn-primary btn-sm"})
-        }
-    </td>
-}
-
-@if (User.IsInRole("Administrador") | User.IsInRole("Editar Plan/Informe"))
-{
-        <td class="text-center">@Html.ActionLink("Editar Informe", "Edit", new { id = Model.IdPresentacionInforme }, new { @class = "dialog-window btn btn-primary btn-sm" })</td>
-        }
-
-
 
     
     </tr>

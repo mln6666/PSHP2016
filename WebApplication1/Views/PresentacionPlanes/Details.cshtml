@@ -19,9 +19,10 @@
 		<th class="text-left"width="8%"style="border-radius: 3px">
 			@*@Html.DisplayNameFor(model => model.EstadoEvaluacionPlan)*@Evaluación
 		</th>
-		<th class="text-left"width="29%" style="border-radius: 3px">
-			@*@Html.DisplayNameFor(model => model.ObservacionesPlan)*@Observaciones
-		</th>
+	    <th class="text-left"width="29%" style="border-radius: 3px">
+	        @*@Html.DisplayNameFor(model => model.ObservacionesPlan)*@Observaciones
+	    </th>
+        <th class="text-center" style="border-radius: 3px">Acciones</th>
 	</tr>
 	<tr>
 		@*<td class="text-left">
@@ -47,30 +48,32 @@
             }
 			
 		</td>
-	    <td class="text-center">
-	        @*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
-				@Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
-				@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
-	        @*@Html.ActionLink("Ver Historial Planes...", "HistorialPlanes", new { id = Model.IdPS })*@
-	        @Html.ActionLink("Historial Planes", "HistorialPlanes", new {id = Model.IdPS}, new {@class = "dialog-window2 btn btn-primary btn-sm"})
-	    </td>
+        <td class="text-center">
+            @*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
+            @Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
+            @*@Html.ActionLink("Ver Historial Planes...", "HistorialPlanes", new { id = Model.IdPS })*@
+            @Html.ActionLink("Historial Planes", "HistorialPlanes", new { id = Model.IdPS }, new { @class = "dialog-window2 btn btn-primary btn-sm" })
 
-@if (User.IsInRole("Administrador") | User.IsInRole("Moderador")) { 
-	    <td class="text-center">
-	        @if (Model.EstadoEvaluacionPlan != Evaluacion.Pendiente)
-	        {
-	            @Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm disabled"})
-	        }
-	        else
-	        {
-	            @Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm"})
-	        }
 
-	    </td>}
-@if (User.IsInRole("Administrador") | User.IsInRole("Editar Plan/Informe"))
-{
-    <td class="text-center">@Html.ActionLink("Editar Plan", "Edit", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm"})</td>
-}
+            @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+            {
+
+                if (Model.EstadoEvaluacionPlan != Evaluacion.Pendiente)
+                {
+                    @Html.ActionLink("Evaluar Plan", "EvaluarPlan", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-primary btn-sm disabled" })
+                }
+                else
+                {
+                    @Html.ActionLink("Evaluar Plan", "EvaluarPlan", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-primary btn-sm" })
+                }
+
+            }
+            @if (User.IsInRole("Administrador") | User.IsInRole("Editar Plan/Informe"))
+            {
+                @Html.ActionLink("Editar Plan", "Edit", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-primary btn-sm" })
+            }
+        </td>
 </tr>
 
 </table>
