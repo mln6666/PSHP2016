@@ -205,114 +205,117 @@
 				}
 			</td>
 
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+		    <td class="text-center">
 
-	<td class="text-center">
-		@if (Model.Estado == Estado.Plan_Rechazado)
-		{
+               
+                @if (Model.Estado == Estado.Plan_Rechazado)
+                {
 					@*@Html.ActionLink("Agregar plan", "CreatePrimerPlan", "PS", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm dialog-window10", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
 
-			<a href="@Url.Action("CreatePrimerPlan", "PS", new {id = Model.IdPS})" class="btn btn-primary btn-sm dialog-window10" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
+		            <a href="@Url.Action("CreatePrimerPlan", "PS", new {id = Model.IdPS})" class="btn btn-primary btn-sm dialog-window10" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
 
 
-		}
-		else if (Model.Estado == WebApplication1.Models.Estado.Plan_Pendiente || Model.Estado == WebApplication1.Models.Estado.Plan_Desaprobado)
-		{
+		        }
+		        else if (Model.Estado == WebApplication1.Models.Estado.Plan_Pendiente || Model.Estado == WebApplication1.Models.Estado.Plan_Desaprobado)
+		        {
 					@*@Html.ActionLink("Agregar plan", "Create", "PresentacionPlanes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm dialog-window5", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
 
-			<a href="@Url.Action("Create", "PresentacionPlanes", new {id = Model.IdPS})" class="btn btn-primary btn-sm dialog-window5" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
+		            <a href="@Url.Action("Create", "PresentacionPlanes", new {id = Model.IdPS})" class="btn btn-primary btn-sm dialog-window5" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
 
 
-		}
-		else
-		{
+		        }
+		        else
+		        {
 					@*@Html.ActionLink("Agregar plan", "Create", "PresentacionPlanes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
-			<a href="@Url.Action("Create", "PresentacionPlanes", new {id = Model.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
+		            <a href="@Url.Action("Create", "PresentacionPlanes", new {id = Model.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
 
-		}
+		        }
 
 
 
-		@if (Model.Estado == WebApplication1.Models.Estado.Plan_Aprobado || Model.Estado == WebApplication1.Models.Estado.Informe_Desaprobado)
-		{
+		        @if (Model.Estado == WebApplication1.Models.Estado.Plan_Aprobado || Model.Estado == WebApplication1.Models.Estado.Informe_Desaprobado)
+		        {
 
 					@*@Html.ActionLink("Agregar informe", "Create", "PresentacionInformes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm dialog-window6", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
 
-			<a href="@Url.Action("Create", "PresentacionInformes", new {id = Model.IdPS})" class="btn btn-primary btn-sm dialog-window6" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
+		            <a href="@Url.Action("Create", "PresentacionInformes", new {id = Model.IdPS})" class="btn btn-primary btn-sm dialog-window6" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
 
-		}
-		else
-		{
+		        }
+		        else
+		        {
 					@*@Html.ActionLink("Agregar informe", "Create", "PresentacionInformes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
 
-			<a href="@Url.Action("Create", "PresentacionInformes", new {id = Model.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
+		            <a href="@Url.Action("Create", "PresentacionInformes", new {id = Model.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
 
-		}
-
-
-
-
-
-
-		<div class="btn-group">
-			<a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-				Finalizar
-				<span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-				@if (User.IsInRole("Administrador") == false & User.IsInRole("Moderador") == false)
-				{
-					<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
-				}
-
-				else if (Model.Estado != WebApplication1.Models.Estado.Informe_Aprobado)
-				{
-					<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
-				}
-
-				else
-				{
-					<li>@Html.ActionLink("Aprobar PS", "AprobarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window8"})</li>
-				}
-
-
-
-				@if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada)
-				{
-					<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
-				}
-				else if (User.IsInRole("Administrador") == false & User.IsInRole("Cancelar PS") == false)
-				{
-					<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
-				}
-				else
-				{
-					<li>@Html.ActionLink("Cancelar PS", "CancelarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window7"})</li>
-				}
-
-				@if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada)
-				{
-					<li>@Html.ActionLink("Disposición", "NumeroDisposicion", "PS", new {id = Model.IdPS}, new {@class = "dialog-window20"})</li>
-				}
-				else
-				{
-					<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Disposición</a></li>
-				}
-			</ul>
-		</div>
-		@if (User.IsInRole("Administrador") | User.IsInRole("Editar PS"))
-
-		{
-			@Html.ActionLink("Editar", "Edit", new {id = Model.IdPS}, new {@class = "dialog-window1 btn btn-primary btn-sm"})
-
-
-		}
+		        }
+                
 
 
 
 
-	</td>
+
+		        <div class="btn-group">
+		            <a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+		                Finalizar
+		                <span class="caret"></span>
+		            </a>
+		            <ul class="dropdown-menu">
+		                @if (User.IsInRole("Administrador") == false & User.IsInRole("Moderador") == false)
+		                {
+		                    <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
+		                }
+
+		                else if (Model.Estado != WebApplication1.Models.Estado.Informe_Aprobado)
+		                {
+		                    <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
+		                }
+
+		                else
+		                {
+		                    <li>@Html.ActionLink("Aprobar PS", "AprobarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window8"})</li>
+		                }
 
 
+
+		                @if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada)
+		                {
+		                    <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
+		                }
+		                else if (User.IsInRole("Administrador") == false & User.IsInRole("Cancelar PS") == false)
+		                {
+		                    <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
+		                }
+		                else
+		                {
+		                    <li>@Html.ActionLink("Cancelar PS", "CancelarPS", "PS", new {id = Model.IdPS}, new {@class = "dialog-window7"})</li>
+		                }
+
+		                @if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada)
+		                {
+		                    <li>@Html.ActionLink("Disposición", "NumeroDisposicion", "PS", new {id = Model.IdPS}, new {@class = "dialog-window20"})</li>
+		                }
+		                else
+		                {
+		                    <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Disposición</a></li>
+		                }
+		            </ul>
+		        </div>
+		        @if (User.IsInRole("Administrador") | User.IsInRole("Editar PS"))
+
+		        {
+		            @Html.ActionLink("Editar", "Edit", new {id = Model.IdPS}, new {@class = "dialog-window1 btn btn-primary btn-sm"})
+
+
+		        }
+
+
+
+
+		    </td>
+
+}
 
 
 
