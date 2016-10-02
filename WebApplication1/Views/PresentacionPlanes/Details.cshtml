@@ -24,7 +24,7 @@
 	    </th>
         <th class="text-center" style="border-radius: 3px">Acciones</th>
 	</tr>
-	<tr>
+	<tr style="background-color: azure">
 		@*<td class="text-left">
 				@Html.DisplayFor(model => model.PS.Tutor)
 			</td>*@
@@ -68,10 +68,11 @@
                     @Html.ActionLink("Evaluar Plan", "EvaluarPlan", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-primary btn-sm" })
                 }
 
-            }
-            @if (User.IsInRole("Administrador") | User.IsInRole("Editar Plan/Informe"))
+            
+            if (User.IsInRole("Administrador") | User.IsInRole("Editar Plan/Informe"))
             {
                 @Html.ActionLink("Editar Plan", "Edit", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-primary btn-sm" })
+            }
             }
         </td>
 </tr>

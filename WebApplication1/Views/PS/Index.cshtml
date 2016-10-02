@@ -12,10 +12,11 @@
 <p>
     <div class="row">
 
-        <div class="col-lg-6">
-            @Html.ActionLink("Nueva PS", "Create", "PS", null, new { @class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+        <div class="col-lg-6">@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+                              {
+                                  @Html.ActionLink("Nueva PS", "Create", "PS", null, new {@class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
 
-        
+                              }
         </div>
 
         <div class="col-lg-6 text-right">
@@ -68,7 +69,7 @@ else
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr style="background-color: azure">
                     <td class="text-left">
                         @Html.DisplayFor(modelItem => item.Alumno.Legajo)
                     </td>

@@ -24,6 +24,33 @@
             <th class="text-left" style="border-radius: 3px">
                 @Html.DisplayNameFor(model => model.CorreoAlu)
             </th>
+           
+            @*<th style="background-color: whitesmoke"></th>*@
+        </tr>
+
+        <tr style="background-color: azure">
+            <td class="text-left">
+                @Html.DisplayFor(model => model.Legajo)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.NombreAlu)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.ApellidoAlu)
+            </td>
+            <td class="text-left">
+                @Html.DisplayFor(model => model.CorreoAlu)
+            </td>
+           
+
+        </tr>
+
+
+    </table>
+
+    <table class="table table-striped table-bordered table-condensed ">
+        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+           
             <th class="text-left" style="border-radius: 3px">
                 @Html.DisplayNameFor(model => model.AñoIngreso)
             </th>
@@ -42,19 +69,8 @@
             @*<th style="background-color: whitesmoke"></th>*@
         </tr>
 
-        <tr>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.Legajo)
-            </td>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.NombreAlu)
-            </td>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.ApellidoAlu)
-            </td>
-            <td class="text-left">
-                @Html.DisplayFor(model => model.CorreoAlu)
-            </td>
+        <tr style="background-color: azure">
+           
             <td class="text-left">
                 @Html.DisplayFor(model => model.AñoIngreso)
             </td>

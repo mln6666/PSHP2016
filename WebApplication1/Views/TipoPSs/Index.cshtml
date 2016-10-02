@@ -23,18 +23,21 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr style="background-color: azure">
         <td style="font-weight: bold" >
             @Html.DisplayFor(modelItem => item.NombreTipoPS)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DescripcionTipoPS)
         </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.IdTipoPS }, new {@class = "btn btn-primary btn-sm" })
-            @*@Html.ActionLink("Details", "Details", new { id=item.IdTipoPS })|
+        @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+        {
+            <td>
+                @Html.ActionLink("Editar", "Edit", new {id = item.IdTipoPS}, new {@class = "btn btn-primary btn-sm"})
+                @*@Html.ActionLink("Details", "Details", new { id=item.IdTipoPS })|
             @Html.ActionLink("Delete", "Delete", new { id=item.IdTipoPS })*@
-        </td>
+            </td>
+        }
     </tr>
 }
 

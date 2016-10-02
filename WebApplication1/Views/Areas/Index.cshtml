@@ -11,8 +11,10 @@
 
 <p>
     @*<a href="@Url.Action("Create", "Areas")" class="btn btn-success ">Nueva Área</a>*@
-    @Html.ActionLink("Nueva Área", "Create", "Areas", null, new { @class = "btn btn-success text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    @Html.ActionLink("Nueva Área", "Create", "Areas", null, new {@class = "btn btn-success text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
+}
 
     @*@Html.ActionLink("Agregar área", "Create")*@
 </p>
@@ -26,14 +28,16 @@
             <th class="text-left" style="color: #2c3e50; background-color: lightblue">
                 @Html.DisplayNameFor(model => model.DescripcionArea)
             </th>
-            <th class="text-center" style="border-radius: 3px; width: 230px">Acciones</th>
-
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    <th class="text-center" style="border-radius: 3px; width: 230px">Acciones</th>
+}
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr style="background-color: azure">
                 <td class="text-left">
                     @Html.DisplayFor(modelItem => item.NombreArea)
                 </td>
@@ -47,12 +51,14 @@
                         <text>- - -</text>
                     }
                     
-                </td>
+                </td>@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+                {
                 <td style="width: 230px" class="text-center">
-                    @Html.ActionLink("Editar", "Edit", new { id = item.IdArea }, new { @class = "btn btn-primary btn-sm" })
+                   
+                    @Html.ActionLink("Editar", "Edit", new {id = item.IdArea}, new {@class = "btn btn-primary btn-sm"})
                     @*@Html.ActionLink("Details", "Details", new { id=item.IdArea }) |*@
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdArea }, new { @class = "btn btn-primary btn-sm" })
-                </td>
+                    @Html.ActionLink("Eliminar", "Delete", new {id = item.IdArea}, new {@class = "btn btn-primary btn-sm"})
+                </td>}
             </tr>
         }
     </tbody>

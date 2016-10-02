@@ -38,7 +38,7 @@
 
             </tr>
 
-            <tr>
+            <tr style="background-color: azure">
                 <td class="text-left">
                     @Html.DisplayFor(model => model.Legajo, new { htmlAttributes = new { @class = "form-control" } })
                     @*@Html.ValidationMessageFor(model => model.Legajo, "", new { @class = "text-danger" })*@
@@ -120,7 +120,7 @@
 
                
             </tr>
-            <tr>
+            <tr style="background-color: azure">
                 <td class="text-left">
                     @Html.DisplayFor(model => model.AñoIngreso, new { htmlAttributes = new { @class = "form-control" } })
                     @*@Html.ValidationMessageFor(model => model.AñoIngreso, "", new { @class = "text-danger" })*@
@@ -192,8 +192,9 @@
         <a href="@Url.Action("Index")" class="btn btn-default "><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
     }
 
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    @Html.ActionLink("Editar", "Edit", new {id = Model.IdAlumno}, new {@class = "btn btn-success"})
 
-    @Html.ActionLink("Editar", "Edit", new { id = Model.IdAlumno }, new {@class = "btn btn-success"  })
-    
-    
+}
 </p>

@@ -416,6 +416,9 @@
     <Content Include="Content\Images\background222.jpg" />
     <Content Include="Content\Images\configuracion.png" />
     <Content Include="Content\Images\logogodesa.png" />
+    <Content Include="Content\Images\LogoPixEditorMLN.png" />
+    <Content Include="Content\Images\LogoPixEditorMLNconbarritas.png" />
+    <Content Include="Content\Images\LogoPixEditorMLNcondoslineas.png" />
     <Content Include="Content\Images\logoUTN.png" />
     <Content Include="Content\Images\logoUTNDeptoISIPS.png" />
     <Content Include="Content\Images\logoUTNdeptosistemas.png" />

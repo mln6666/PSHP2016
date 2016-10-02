@@ -36,7 +36,7 @@
 
         @foreach (var item in Model)
         {
-            <tr>
+            <tr style="background-color: azure">
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -52,7 +52,7 @@
                     @* <a href="@Url.Action("Roles", "Users")" class="btn btn-primary btn-sm">Ver Permisos</a>*@
                     else
                     {
-                        @Html.ActionLink("Eliminar Usuario", "DeleteUser", new { id = item.UserID }, new { @class = "btn btn-danger btn-sm borrarusu" })}
+                        @Html.ActionLink("Eliminar Usuario", "DeleteUser", new { id = item.UserID },  new { @class = "btn btn-danger btn-sm borrarusu" ,@data_nombreusu = item.Name })}
 
 
                 </td>
@@ -75,8 +75,9 @@
         $(document).on("click", ".borrarusu", function (e) {
             // save the dom element
             var self = this;
+            var nombreusu = $(this).data('nombreusu');;
             // confirm
-            var mensaje = "¿Está seguro que desea eliminar el usuario?";
+            var mensaje = "¿Está seguro que desea eliminar el usuario: "+ nombreusu + " ?";
             bootbox.confirm(mensaje, function (result) {
                 //navigate on ok
                 if (result) {
