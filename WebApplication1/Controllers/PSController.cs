@@ -168,10 +168,11 @@ namespace WebApplication1.Controllers
             Alumno erroralumno = db.Alumnos.Find(pm.IdAlumno);
             if (erroralumno.PSs.Count() != 0)
             {
-                if (erroralumno.PSs.LastOrDefault().Estado!=Estado.PS_Cancelada || erroralumno.PSs.LastOrDefault().Estado!= Estado.PS_Vencida)
+                if (erroralumno.PSs.LastOrDefault().Estado!=Estado.PS_Cancelada & erroralumno.PSs.LastOrDefault().Estado!= Estado.PS_Vencida)
                 {
                     return RedirectToAction("Index", "Error", new { error = 2008 });
                 }
+
 
             }
 
