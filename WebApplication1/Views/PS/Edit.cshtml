@@ -1,4 +1,5 @@
-﻿@model WebApplication1.Models.PS
+﻿@using WebApplication1.Models
+@model WebApplication1.Models.PS
 
 @{
     Layout = null;
@@ -7,23 +8,22 @@
 
 
 <head>
-    <link href="@Url.Content("~/Content/Select2/select2.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Select2/select2.min.css")" rel="stylesheet"/>
 
     <script src="@Url.Content("~/Content/Select2/select2.min.js")"></script>
 
     <script>
         /////////////////Start:Select searchable////////////////
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".js-example-basic-single").select2();
             $(".js-example-basic-single1").select2();
 
         });
 
 
+////////////////End:Select searchable///////////////////
 
-        ////////////////End:Select searchable///////////////////
-
-        $('#editarps').submit(function (e) {
+        $('#editarps').submit(function(e) {
             var x = this;
             e.preventDefault();
             var isValidItem = true;
@@ -42,7 +42,7 @@
                 $('#spanciclolectivo').text("");
             }
             if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
-                bootbox.confirm("** Está por editar una presentación del plan, ¿Desea continuar?", function (result) {
+                bootbox.confirm("** Está por editar una presentación del plan, ¿Desea continuar?", function(result) {
                     if (result) {
                         x.submit();
                     }
@@ -54,7 +54,19 @@
     </script>
 
 </head>
-@using (Html.BeginForm("Edit", "PS", null, FormMethod.Post, new { id = "editarps" }))
+@if (Model.Estado == Estado.PS_Aprobada | Model.Estado == Estado.PS_Cancelada | Model.Estado == Estado.PS_Vencida)
+{
+    <h4 style="color: red">Acción no admitida!</h4>
+    <h5 style="color: red">No se permite la edición de una PS que ha sido Aprobada / Cancelada / Vencida. </h5>
+
+    <div class="text-center">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+    </div>
+}
+else { 
+using (Html.BeginForm("Edit", "PS", null, FormMethod.Post, new { id = "editarps" }))
 {
     @Html.AntiForgeryToken()
 
@@ -63,6 +75,13 @@
         @Html.HiddenFor(model => model.IdPS)
         @Html.HiddenFor(model => model.IdAlumno)
         @Html.HiddenFor(model => model.Estado)
+        @Html.HiddenFor(model => model.FechaFinalizacion)
+
+
+
+
+
+
 
 
 
@@ -163,7 +182,7 @@
             <div class="col-md-2"></div>
 
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <div class="col-md-2"></div>
             <div class="col-md-4">
                 @Html.LabelFor(model => model.FechaFinalizacion, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
@@ -174,14 +193,14 @@
             </div>
             <div class="col-md-2"></div>
 
-        </div>
+        </div>*@
         <div class="form-group">
             <div class="col-md-2"></div>
             <div class="col-md-4">
                 @Html.LabelFor(model => model.ObservacionesPS, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
             </div>
             <div class="col-md-4">
-                @Html.EditorFor(model => model.ObservacionesPS, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px", @onkeypress = "solonumeros()" } })
+                @Html.EditorFor(model => model.ObservacionesPS, new { htmlAttributes = new { @class = "form-control input-sm", @Style = "width: 200px" } })
                 @Html.ValidationMessageFor(model => model.ObservacionesPS, "", new { @class = "text-danger" })
             </div>
             <div class="col-md-2"></div>
@@ -308,7 +327,7 @@
     </div>
 
 }
-
+}
 
 
 

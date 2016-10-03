@@ -12,6 +12,8 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.IdPS)
+            @*@Html.HiddenFor(model => model.Estado)
+            @Html.HiddenFor(model => model.PresentacionesInforme)*@
 
             <div class="form-group">
                 <div class="col-md-2"></div>
@@ -112,7 +114,7 @@
 
 
 
-                $('#spanfechaestado').text("** La Fecha de Evaluacion no puede ser mayor que la Fecha de Finalización");
+                $('#spanfechaestado').text("** La Fecha de Evaluación no puede ser mayor que la Fecha de Finalización");
 
             }
 
