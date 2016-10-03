@@ -65,7 +65,7 @@ namespace WebApplication1.Controllers
             }
             if (prueba != null)
             {
-                ViewBag.organizacionexistente = "La organización ya se encontraba en la BD.";
+                ViewBag.organizacionexistente = "La organización ya existe en el sistema.";
                 Organizacion datosOrganizacion = db.Organizaciones.Find(prueba);
                 lista.Remove(datosOrganizacion);
                 ViewBag.organizaciones = lista;

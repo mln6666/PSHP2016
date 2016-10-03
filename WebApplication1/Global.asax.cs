@@ -49,13 +49,13 @@ namespace WebApplication1
                 TipoPS tipo4 = new TipoPS();
 
                 tipo1.NombreTipoPS = "Pasantía / Laboral";
-                tipo1.DescripcionTipoPS = "Una Relación Laboral o Pasantía rentada en empresas del medio.";
+                tipo1.DescripcionTipoPS = "Una relación laboral o pasantía rentada en empresas del medio.";
                 tipo2.NombreTipoPS = "Proyecto Final";
-                tipo2.DescripcionTipoPS = "Desarrollo de un Proyecto Final que haya sido acordado mediante un convenio específico con terceros, entes y/o empresas privadas o públicas, grupos de investigación y/o desarrollo tecnológico y de servicios.";
+                tipo2.DescripcionTipoPS = "Desarrollo de un proyecto final que haya sido acordado mediante un convenio específico con terceros, entes y/o empresas privadas o públicas, grupos de investigación y/o desarrollo tecnológico y de servicios.";
                 tipo3.NombreTipoPS = "Investigación / Desarrollo";
-                tipo3.DescripcionTipoPS = "Participación activa en Grupos de Investigación, Desarrollo y/o Aplicación Tecnológica y de Servicios a terceros realizados por Grupos de Investigación o desarrollo tecnológico y de servicios acreditados, perteneciente a instituciones de nivel académico reconocido.";
+                tipo3.DescripcionTipoPS = "Participación activa en prupos de investigación, desarrollo y/o aplicación tecnológica y de servicios a terceros realizados por grupos de investigación o desarrollo tecnológico y de servicios acreditados, perteneciente a instituciones de nivel académico reconocido.";
                 tipo4.NombreTipoPS = "ONG / Instituciones / Empresas";
-                tipo4.DescripcionTipoPS = "Desarrollar tareas de ingeniería en el ambito de ONG y/o Instituciones y/o Empresas Productivas o de Servicios públicas o privadas.";
+                tipo4.DescripcionTipoPS = "Desarrollar tareas de ingeniería en el ámbito de ONG y/o instituciones y/o empresas productivas o de servicios públicas o privadas.";
                 dc.TipoPSs.Add(tipo1);
                 dc.TipoPSs.Add(tipo2);
                 dc.TipoPSs.Add(tipo3);
