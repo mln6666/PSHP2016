@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<form id='your-range-form' action='@Url.Action("EstadosPlanes","Estadisticas")' method='post'>
+    <input id='from' type="date" name='fecha1' />
+    <input id='to' type="date" name='fecha2' />
+    <input type='submit' value='Ok' />
+</form>

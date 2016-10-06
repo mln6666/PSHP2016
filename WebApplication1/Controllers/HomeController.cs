@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Context;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        private ContextPS db = new ContextPS();
+       
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -17,11 +18,8 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Moderador,Invitado,Administrador")]
-        public ActionResult Vacio()
-        {
-            return View();
-        }
+        
+
 
 
 
