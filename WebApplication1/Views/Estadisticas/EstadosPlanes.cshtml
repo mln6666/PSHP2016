@@ -5,10 +5,10 @@
 </head>
 
 <h3>Gráfico Estados de Planes</h3>
-<h4>Desde: @ViewBag.fechadesde</h4>
-<h4>Desde: @ViewBag.fechahasta</h4>
+<h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
+<h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
 
-<div id="grafiquito2" style="width: 400px; display: inline-block">
+<div id="grafico2" style="width: 400px; display: inline-block">
 </div>
 
 
@@ -21,7 +21,7 @@
     $(document).ready(function () {
 
 
-        plot3 = jQuery.jqplot('grafiquito2',
+        plot3 = jQuery.jqplot('grafico2',
     [[['Planes Aprobados: '+@ViewBag.planesaprobados, @ViewBag.planesaprobados], ['Planes Desaprobados: '+@ViewBag.planesdesaprobados, @ViewBag.planesdesaprobados],['Planes Rechazados: '+@ViewBag.planesrechazados, @ViewBag.planesrechazados],['Planes Pendientes: '+@ViewBag.planespendientes, @ViewBag.planespendientes]]],
     {
         title: ' ',

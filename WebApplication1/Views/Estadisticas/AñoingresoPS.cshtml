@@ -1,0 +1,84 @@
+﻿@using WebApplication1.Models
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/smoothness/jquery-ui.css" />
+</head>
+
+
+
+<h3>Gráfico Año Ingreso PS</h3>
+<h4>Desde: @ViewBag.fechadesde</h4>
+<h4>Hasta: @ViewBag.fechahasta</h4>
+
+<div id="grafico2" style="width: 400px; display: inline-block">
+</div>
+<h4>Azulcito: cantidad de alumnos en el año.</h4>
+<h4>Naranjita: cantidad de PS en el año.</h4>
+
+
+@section Scripts {
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.cursor.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pointLabels.js"></script>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+
+            var listaaños = @Html.Raw(ViewBag.listaaños);
+            var cantidades = @Html.Raw(ViewBag.cantidades);
+            var cantidadesps = @Html.Raw(ViewBag.cantidadesps);
+
+
+            var s1 =[];
+            var s2 =[];
+
+            var ticks =[];
+            $.each( listaaños, function( index, value ){
+                s1.push(cantidades[index]);
+                s2.push(cantidadesps[index]);
+                ticks.push(value);
+
+            });
+
+
+            plot2 = $.jqplot('grafico2', [s1, s2], {
+                seriesDefaults: {
+                    renderer:$.jqplot.BarRenderer,
+                    pointLabels: { show: true }
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        ticks: ticks
+                    },
+                    yaxis: {
+                        tickOptions:{ 
+                            formatString:'%.0f' 
+                        } 
+            }
+                }
+            });
+     
+            $('#grafico2').bind('jqplotDataHighlight', 
+                function (ev, seriesIndex, pointIndex, data) {
+                    $('#info2').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+                }
+            );
+             
+            $('#grafico2').bind('jqplotDataUnhighlight', 
+                function (ev) {
+                    $('#info2').html('Nothing');
+                }
+            );
+
+        });
+    </script>
+}
+

@@ -753,6 +753,12 @@
     <Content Include="Views\Estadisticas\Pruebas.cshtml" />
     <Content Include="Views\Estadisticas\Index.cshtml" />
     <Content Include="Views\Estadisticas\EstadosPlanes.cshtml" />
+    <Content Include="Views\Estadisticas\EstadosInformes.cshtml" />
+    <Content Include="Views\Estadisticas\AreasPlanes.cshtml" />
+    <Content Include="Views\Estadisticas\AreasInformes.cshtml" />
+    <Content Include="Views\Estadisticas\TipospsPlanes.cshtml" />
+    <Content Include="Views\Estadisticas\TipospsInformes.cshtml" />
+    <Content Include="Views\Estadisticas\AñoingresoPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
