@@ -759,6 +759,13 @@
     <Content Include="Views\Estadisticas\TipospsPlanes.cshtml" />
     <Content Include="Views\Estadisticas\TipospsInformes.cshtml" />
     <Content Include="Views\Estadisticas\AñoingresoPS.cshtml" />
+    <Content Include="Views\Estadisticas\_GraficoEstadosPlanes.cshtml" />
+    <Content Include="Views\Estadisticas\_GraficoEstadosInformes.cshtml" />
+    <Content Include="Views\Estadisticas\_GraficoAreasPlanes.cshtml" />
+    <Content Include="Views\Estadisticas\_GraficoAreasInformes.cshtml" />
+    <Content Include="Views\Estadisticas\_GraficoTipospsPlanes.cshtml" />
+    <Content Include="Views\Estadisticas\_GraficoTipospsInformes.cshtml" />
+    <Content Include="Views\Estadisticas\_GraficoAñoIngresoPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

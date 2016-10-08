@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+
+<div id="ajaxBeginFormResult">
+    <h2>Gráficos</h2>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
+    </head>
+
+    <h3>Gráfico Estados de Planes</h3>
+    <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
+    <h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
+
+    <div id="grafico2" style="width: 400px; display: inline-block">
+    </div>
+
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+
+            plot3 = jQuery.jqplot('grafico2',
+        [[['Planes Aprobados: '+@ViewBag.planesaprobados, @ViewBag.planesaprobados], ['Planes Desaprobados: '+@ViewBag.planesdesaprobados, @ViewBag.planesdesaprobados],['Planes Rechazados: '+@ViewBag.planesrechazados, @ViewBag.planesrechazados],['Planes Pendientes: '+@ViewBag.planespendientes, @ViewBag.planespendientes]]],
+        {
+            title: ' ',
+            seriesDefaults: {
+                shadow: false,
+                renderer: jQuery.jqplot.PieRenderer,
+                rendererOptions: {
+                    startAngle: 180,
+                    sliceMargin: 4,
+                    showDataLabels: true
+                }
+            },
+            legend: { show: true, location: 'w' }
+        }
+      );
+
+
+        });
+    </script>
+
+</div>

@@ -1,45 +1,23 @@
 ﻿
-<h2>Gráficos</h2>
-<head>
-    <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
-</head>
 
-<h3>Gráfico Estados de Planes</h3>
-<h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
-<h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
+<br/>
+<br/>
 
-<div id="grafico2" style="width: 400px; display: inline-block">
-</div>
+@using (Ajax.BeginForm("_GraficoEstadosPlanes", "Estadisticas", new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "ajaxBeginFormResult",
+    OnSuccess = "OnSuccess"
+}))
+{
+    @Html.AntiForgeryToken()
+    <h2>Quiero rango</h2>
+    <div class="form-horizontal">
+        <input id='from' class="form-control"type="date" name='fecha1' />
+        <input id='to'class="form-control" type="date" name='fecha2' />
+        <input type='submit' value='Ok' />
 
-
-@section Scripts {
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
-    <script>
-    $(document).ready(function () {
-
-
-        plot3 = jQuery.jqplot('grafico2',
-    [[['Planes Aprobados: '+@ViewBag.planesaprobados, @ViewBag.planesaprobados], ['Planes Desaprobados: '+@ViewBag.planesdesaprobados, @ViewBag.planesdesaprobados],['Planes Rechazados: '+@ViewBag.planesrechazados, @ViewBag.planesrechazados],['Planes Pendientes: '+@ViewBag.planespendientes, @ViewBag.planespendientes]]],
-    {
-        title: ' ',
-        seriesDefaults: {
-            shadow: false,
-            renderer: jQuery.jqplot.PieRenderer,
-            rendererOptions: {
-                startAngle: 180,
-                sliceMargin: 4,
-                showDataLabels: true
-            }
-        },
-        legend: { show: true, location: 'w' }
-    }
-  );
-
-
-    });
-    </script>
+      
+    </div>
 }
-
+<div id="ajaxBeginFormResult"></div>

@@ -14,8 +14,50 @@ namespace WebApplication1.Controllers
         // GET: Estadisticas
         private ContextPS db = new ContextPS();
 
-        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult Index()
+        {
+
+            return View();
+        }
+
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult EstadosPlanes()
+        {
+
+            return View();
+        }
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult EstadosInformes()
+        {
+
+            return View();
+        }
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult AreasPlanes()
+        {
+
+            return View();
+        }
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult AreasInformes()
+        {
+
+            return View();
+        }
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult TipospsPlanes()
+        {
+
+            return View();
+        }
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult TipospsInformes()
+        {
+
+            return View();
+        }
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult AñoIngresoPS()
         {
 
             return View();
@@ -25,7 +67,7 @@ namespace WebApplication1.Controllers
 
         [Authorize(Roles = "Moderador,Administrador")]
         [HttpPost]
-        public ActionResult EstadosPlanes(DateTime? fecha1,DateTime? fecha2)
+        public ActionResult _GraficoEstadosPlanes(DateTime? fecha1,DateTime? fecha2)
         {
             //fecha1 = Convert.ToDateTime("01/02/0001").Date;
             
@@ -73,7 +115,7 @@ namespace WebApplication1.Controllers
         }
         [Authorize(Roles = "Moderador,Administrador")]
         [HttpPost]
-        public ActionResult EstadosInformes(DateTime? fecha1, DateTime? fecha2)
+        public ActionResult _GraficoEstadosInformes(DateTime? fecha1, DateTime? fecha2)
         {
             //fecha1 = Convert.ToDateTime("01/02/0001").Date;
 
@@ -118,7 +160,7 @@ namespace WebApplication1.Controllers
 
         [Authorize(Roles = "Moderador,Administrador")]
         [HttpPost]
-        public ActionResult AreasPlanes(DateTime? fecha1, DateTime? fecha2)
+        public ActionResult _GraficoAreasPlanes(DateTime? fecha1, DateTime? fecha2)
         {
             //fecha1 = Convert.ToDateTime("01/02/0001").Date;
 
@@ -162,7 +204,7 @@ namespace WebApplication1.Controllers
 
         [Authorize(Roles = "Moderador,Administrador")]
         [HttpPost]
-        public ActionResult AreasInformes(DateTime? fecha1, DateTime? fecha2)
+        public ActionResult _GraficoAreasInformes(DateTime? fecha1, DateTime? fecha2)
         {
             //fecha1 = Convert.ToDateTime("01/02/0001").Date;
 
@@ -207,7 +249,7 @@ namespace WebApplication1.Controllers
 
         [Authorize(Roles = "Moderador,Administrador")]
         [HttpPost]
-        public ActionResult TipospsPlanes(DateTime? fecha1, DateTime? fecha2)
+        public ActionResult _GraficoTipospsPlanes(DateTime? fecha1, DateTime? fecha2)
         {
             //fecha1 = Convert.ToDateTime("01/02/0001").Date;
 
@@ -251,7 +293,7 @@ namespace WebApplication1.Controllers
 
         [Authorize(Roles = "Moderador,Administrador")]
         [HttpPost]
-        public ActionResult TipospsInformes(DateTime? fecha1, DateTime? fecha2)
+        public ActionResult _GraficoTipospsInformes(DateTime? fecha1, DateTime? fecha2)
         {
             //fecha1 = Convert.ToDateTime("01/02/0001").Date;
 
@@ -295,7 +337,7 @@ namespace WebApplication1.Controllers
 
         [Authorize(Roles = "Moderador,Administrador")]
         //[HttpPost]
-        public ActionResult AñoingresoPS(int fecha1, int fecha2)
+        public ActionResult _GraficoAñoIngresoPS(int fecha1, int fecha2)
         {
             
 
