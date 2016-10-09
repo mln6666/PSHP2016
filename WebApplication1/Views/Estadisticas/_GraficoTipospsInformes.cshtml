@@ -19,6 +19,16 @@
 
     <div id="grafico2" style="width: 400px; display: inline-block">
     </div>
+    <p></p>
+    @for (var i = 0; i < ViewBag.tiposps; i++)
+    {
+        <div style="display: inline-block;border-style: double">
+            <h4>@ViewBag.mistiposps[i]</h4>
+            <h5>Informes Aprobados: @ViewBag.listaaprobados[i]</h5>
+            <h5>Informes Desaprobados: @ViewBag.listadesaprobados[i]</h5>
+            <h5>PlanesInformes Pendientes: @ViewBag.listapendientes[i]</h5>
+        </div>
+    }
 
 
    

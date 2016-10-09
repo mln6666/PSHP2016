@@ -234,7 +234,7 @@ namespace WebApplication1.Controllers
             ViewBag.cantidades = JsonConvert.SerializeObject(cantidades);
             ViewBag.areas = misareas.Count();
             ViewBag.misareas = misareas;
-            ViewBag.miscantidades =cantidades;
+            ViewBag.miscantidades =cantidades;//total de planes /informes segun el metodo (no se ocupa por ahora)
             ViewBag.listaaprobados = listaaprobados;
             ViewBag.listadesaprobados = listadesaprobados;
             ViewBag.listapendientes = listapendientes;
@@ -312,7 +312,7 @@ namespace WebApplication1.Controllers
             ViewBag.cantidades = JsonConvert.SerializeObject(cantidades);
             ViewBag.areas = misareas.Count();
             ViewBag.misareas = misareas;
-            ViewBag.miscantidades = cantidades;
+            ViewBag.miscantidades = cantidades;//total de planes /informes segun el metodo (no se ocupa por ahora)
             ViewBag.listaaprobados = listaaprobados;
             ViewBag.listadesaprobados = listadesaprobados;
             ViewBag.listapendientes = listapendientes;
@@ -333,12 +333,20 @@ namespace WebApplication1.Controllers
 
             List<string> mistiposps = new List<string>();
             List<int> cantidades = new List<int>();
+            List<int> listaaprobados = new List<int>();
+            List<int> listadesaprobados = new List<int>();
+            List<int> listapendientes = new List<int>();
+            List<int> listarechazados = new List<int>();
 
             foreach (var item in listatiposps)
             {
                 mistiposps.Add(item.NombreTipoPS);
             }
             int total = 0;
+            int planesaprobados = 0;
+            int planesdesaprobados = 0;
+            int planesrechazados = 0;
+            int planespendientes = 0;
 
             for (int i = 0; i < listatiposps.Count(); i++)
             {
@@ -349,18 +357,48 @@ namespace WebApplication1.Controllers
                         if (item.PS.TipoPS.NombreTipoPS == listatiposps.ElementAt(i).NombreTipoPS)
                         {
                             total++;
+                            if (item.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                            {
+                                planesaprobados++;
+                            }
+                            if (item.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
+                            {
+                                planesdesaprobados++;
+                            }
+                            if (item.EstadoEvaluacionPlan == Evaluacion.Rechazado)
+                            {
+                                planesrechazados++;
+                            }
+                            if (item.EstadoEvaluacionPlan == Evaluacion.Pendiente)
+                            {
+                                planespendientes++;
+                            }
                         }
 
                     }
                 }
                 cantidades.Add(total);
+                listaaprobados.Add(planesaprobados);
+                listadesaprobados.Add(planesdesaprobados);
+                listapendientes.Add(planespendientes);
+                listarechazados.Add(planesrechazados);
                 total = 0;
+                planesaprobados = 0;
+                planesdesaprobados = 0;
+                planespendientes = 0;
+                planesrechazados = 0;
             }
             ViewBag.fechadesde = fecha1;
             ViewBag.fechahasta = fecha2;
             ViewBag.listatiposps = JsonConvert.SerializeObject(mistiposps);
             ViewBag.cantidades = JsonConvert.SerializeObject(cantidades);
-
+            ViewBag.tiposps = mistiposps.Count();
+            ViewBag.mistiposps = mistiposps;
+            ViewBag.miscantidades = cantidades;//total de planes /informes segun el metodo (no se ocupa por ahora)
+            ViewBag.listaaprobados = listaaprobados;
+            ViewBag.listadesaprobados = listadesaprobados;
+            ViewBag.listapendientes = listapendientes;
+            ViewBag.listarechazados = listarechazados;
 
 
             return View();
@@ -377,12 +415,18 @@ namespace WebApplication1.Controllers
 
             List<string> mistiposps = new List<string>();
             List<int> cantidades = new List<int>();
+            List<int> listaaprobados = new List<int>();
+            List<int> listadesaprobados = new List<int>();
+            List<int> listapendientes = new List<int>();
 
             foreach (var item in listatiposps)
             {
                 mistiposps.Add(item.NombreTipoPS);
             }
             int total = 0;
+            int informesaprobados = 0;
+            int informesdesaprobados = 0;
+            int informespendientes = 0;
 
             for (int i = 0; i < listatiposps.Count(); i++)
             {
@@ -393,19 +437,42 @@ namespace WebApplication1.Controllers
                         if (item.PS.TipoPS.NombreTipoPS == listatiposps.ElementAt(i).NombreTipoPS)
                         {
                             total++;
+                            if (item.EstadoEvaluacionInforme == Evaluacion.Aprobado)
+                            {
+                                informesaprobados++;
+                            }
+                            if (item.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
+                            {
+                                informesdesaprobados++;
+                            }
+                            if (item.EstadoEvaluacionInforme == Evaluacion.Pendiente)
+                            {
+                                informespendientes++;
+                            }
+                           
                         }
 
                     }
                 }
                 cantidades.Add(total);
+                listaaprobados.Add(informesaprobados);
+                listadesaprobados.Add(informesdesaprobados);
+                listapendientes.Add(informespendientes);
                 total = 0;
+                informesaprobados = 0;
+                informesdesaprobados = 0;
+                informespendientes = 0;
             }
             ViewBag.fechadesde = fecha1;
             ViewBag.fechahasta = fecha2;
             ViewBag.listatiposps = JsonConvert.SerializeObject(mistiposps);
             ViewBag.cantidades = JsonConvert.SerializeObject(cantidades);
-
-
+            ViewBag.tiposps = mistiposps.Count();
+            ViewBag.mistiposps = mistiposps;
+            ViewBag.miscantidades = cantidades;//total de planes /informes segun el metodo (no se ocupa por ahora)
+            ViewBag.listaaprobados = listaaprobados;
+            ViewBag.listadesaprobados = listadesaprobados;
+            ViewBag.listapendientes = listapendientes;
 
             return View();
         }

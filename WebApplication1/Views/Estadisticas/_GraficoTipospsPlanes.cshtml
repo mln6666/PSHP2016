@@ -19,7 +19,17 @@
 
     <div id="grafico2" style="width: 400px; display: inline-block">
     </div>
-
+    <p></p>
+    @for (var i = 0; i < ViewBag.tiposps; i++)
+    {
+        <div style="display: inline-block;border-style: double">
+            <h4>@ViewBag.mistiposps[i]</h4>
+            <h5>Planes Aprobados: @ViewBag.listaaprobados[i]</h5>
+            <h5>Planes Desaprobados: @ViewBag.listadesaprobados[i]</h5>
+            <h5>Planes Pendientes: @ViewBag.listapendientes[i]</h5>
+            <h5>Planes Rechazados: @ViewBag.listarechazados[i]</h5>
+        </div>
+    }
 
 
     <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>

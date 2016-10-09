@@ -101,7 +101,7 @@
                         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
 
                             <li class="dropdown-submenu">
-                                <a tabindex="-1" href="#">Planes</a>
+                                <a tabindex="-1" href="#" @*onclick="event.stopPropagation()"*@>Planes</a>
                                 <ul class="dropdown-menu">
                                     <li>@Html.ActionLink("Estado", "EstadosPlanes", "Estadisticas")</li>
                                     <li>@Html.ActionLink("Áreas", "AreasPlanes", "Estadisticas")</li>
@@ -111,7 +111,7 @@
                             </li>
 
                             <li class="dropdown-submenu">
-                                <a tabindex="-1" href="#">Informes</a>
+                                <a tabindex="-1" href="#" @*onclick="event.stopPropagation()"*@>Informes</a>
                                 <ul class="dropdown-menu">
                                     <li>@Html.ActionLink("Estado", "EstadosInformes", "Estadisticas")</li>
                                     <li>@Html.ActionLink("Áreas", "AreasInformes", "Estadisticas")</li>
