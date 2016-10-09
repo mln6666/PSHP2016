@@ -19,7 +19,16 @@
 
     <div id="grafico2" style="width: 400px; display: inline-block">
     </div>
-
+    <p></p>
+    @for (var i = 0; i < ViewBag.areas; i++)
+    {
+        <div style="display: inline-block;border-style: double">
+            <h4>@ViewBag.misareas[i]</h4>
+            <h5>Informes Aprobados: @ViewBag.listaaprobados[i]</h5>
+            <h5>Informes Desaprobados: @ViewBag.listadesaprobados[i]</h5>
+            <h5>Informes Pendientes: @ViewBag.listapendientes[i]</h5>
+        </div>
+    }
 
   
         <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
