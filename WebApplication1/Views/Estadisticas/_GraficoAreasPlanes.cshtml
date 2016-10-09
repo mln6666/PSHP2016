@@ -23,12 +23,16 @@
  <p></p>
     @for (var i = 0; i < ViewBag.areas; i++)
     {
-        <div style="display: inline-block;border-style: double">
-            <h4>@ViewBag.misareas[i]</h4>
-            <h5>Planes Aprobados: @ViewBag.listaaprobados[i]</h5>
-            <h5>Planes Desaprobados: @ViewBag.listadesaprobados[i]</h5>
-            <h5>Planes Pendientes: @ViewBag.listapendientes[i]</h5>
-            <h5>Planes Rechazados: @ViewBag.listarechazados[i]</h5>
+        <div class="panel panel-info"style="display: inline-block">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">@ViewBag.misareas[i]</h3>
+            </div>
+            <div class="panel-body">
+                <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Aprobados: @ViewBag.listaaprobados[i]</h5>
+                <h5 style="font-family: cursive; font-size: medium"class="text-center">Planes Desaprobados: @ViewBag.listadesaprobados[i]</h5>
+                <h5 style="font-family: cursive; font-size: medium"class="text-center">Planes Pendientes: @ViewBag.listapendientes[i]</h5>
+                <h5 style="font-family: cursive; font-size: medium"class="text-center">Planes Rechazados: @ViewBag.listarechazados[i]</h5>
+            </div>
         </div>
     }
 
