@@ -1,7 +1,6 @@
 ﻿
-<hr />
-<h2>Año ingreso PS</h2>
-<hr />
+
+
 
 @using (Ajax.BeginForm("_GraficoAñoIngresoPS", "Estadisticas", new AjaxOptions
 {
@@ -11,16 +10,30 @@
 }))
 {
     @Html.AntiForgeryToken()
-    <h2>Quiero rango</h2>
-    <div class="form-horizontal">
-        <input id='from' type="number" name='fecha1' />
-        <input id='to' type="number" name='fecha2' />
-        <input type='submit' value='Ok' />
+    <br/>
+    <h2 class="text-center">Estadística de alumnos por año de ingreso a la facultad</h2>
+    <br />
+    <h3 style="margin-left: 186px">Ingrese años:</h3>
+    <br/>
+    <div class="form-horizontal text-center">
+        <label>Desde:</label>
+        <input id='from' type="number" name='fecha1' max="2999" min="1900" placeholder="aaaa"/>
+        <label>Hasta:</label>
+        <input id='to' type="number" name='fecha2' max="2999" min="1900" placeholder="aaaa"/>
+        &nbsp; &nbsp; 
+        <button type="submit" class="btn btn-info btn-xs glyphicon glyphicon-search" ></button>
 
 
     </div>
 }
-<div id="ajaxBeginFormResult" class="text-center"></div>
+<div id="ajaxBeginFormResult" class="text-center">
+    <h4>
+        <br/>
+        <br/>
+        <br />
+        <text style="font-style: italic">Aquí tendrá el gráfico y los detalles de su solicitud luego de haber ingresado los años "desde" y "hasta".</text>
+    </h4>
+</div>
 
 
 
