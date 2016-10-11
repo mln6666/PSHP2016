@@ -2,24 +2,25 @@
     Layout = null;
 }
 
-
+<hr />
 <div id="ajaxBeginFormResult">
-    <h2 class="text-center">Gráficos</h2>
+    
     <head class="no-print">
         <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
     </head>
 
     <div id="seleccion">
         <h3 class="text-center">Gráfico Estados de Planes</h3>
-        <hr />
+        <br />
         <div class="row">
+            <div class="col-lg-1"></div>
             <div class="col-lg-4">
                 <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
                 <br />
                 <h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
             </div>
 
-            <div id="grafico2" style="width: 400px; display: inline-block">
+            <div id="grafico2" style="width: 500px; display: inline-block">
             </div>
         </div>
 

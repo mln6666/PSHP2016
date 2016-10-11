@@ -1,5 +1,4 @@
-﻿<hr />
-<h2>Areas Planes</h2>
+﻿<h2 class="text-center">Estadística de Planes por Área</h2>
 <hr />
 
 @using (Ajax.BeginForm("_GraficoAreasPlanes", "Estadisticas", new AjaxOptions
@@ -10,12 +9,20 @@
 }))
 {
     @Html.AntiForgeryToken()
-    <h2 class="no-print">Quiero rango</h2>
-    <div class="form-horizontal no-print">
-        <input id='from' class="form-control" type="date" name='fecha1' />
-        <input id='to' class="form-control" type="date" name='fecha2' />
-        <input type='submit' value='Ok' />
-
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <h3 class="col-lg-4">Ingrese rango de fechas</h3>
+    </div>
+    <br />
+    <div class="row form-horizontal">
+        <div class="col-lg-1"></div>
+        <label class="col-lg-1">Desde:</label>
+        <input id='from' class="col-lg-1 form-control" type="date" name='fecha1' style="width:200px" />
+        <div class="col-lg-1"></div>
+        <label class="col-lg-1">Hasta:</label>
+        <input id='to' class="form-control col-lg-1" type="date" name='fecha2' style="width:200px"/>
+        <div class="col-lg-1"></div>
+        <input type='submit' value='Confirmar' class="btn btn-success col-lg-1"/>
 
     </div>
 }

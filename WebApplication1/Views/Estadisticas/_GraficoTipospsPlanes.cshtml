@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-
+<hr />
 <div id="ajaxBeginFormResult">
     <head class="no-print">
         <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
@@ -14,12 +14,20 @@
 
 
     <div id="seleccion">
-        <h3>Gráfico Tipos PS Planes</h3>
-        <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
-        <h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
-
-        <div id="grafico2" style="width: 400px; display: inline-block">
+        <h3 class="text-center">Gráfico Tipos PS Planes</h3>
+        <br />
+        <div  class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4">
+                <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
+                <br />
+                <h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
+            </div>
+            <div id="grafico2" style="width: 500px; display: inline-block">
+            </div>
         </div>
+
+        
         <p></p>
 
         @for (var i = 0; i < ViewBag.tiposps; i++)

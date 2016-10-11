@@ -1,5 +1,4 @@
-﻿<hr />
-<h2>Tipos PS Planes</h2>
+﻿<h2 class="text-center">Estadística de Planes por Tipo de PS</h2>
 <hr />
 
 @using (Ajax.BeginForm("_GraficoTipospsPlanes", "Estadisticas", new AjaxOptions
@@ -10,11 +9,20 @@
 }))
 {
     @Html.AntiForgeryToken()
-    <h2>Quiero rango</h2>
-    <div class="form-horizontal">
-        <input id='from' class="form-control" type="date" name='fecha1' />
-        <input id='to' class="form-control" type="date" name='fecha2' />
-        <input type='submit' value='Ok' />
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <h3 class="col-lg-4">Ingrese rango de fechas</h3>
+    </div>
+    <br />
+    <div class="form-horizontal row">
+        <div class="col-lg-1"></div>
+        <label class="col-lg-1">Desde:</label>
+        <input id='from' class="form-control col-lg-1" type="date" name='fecha1' style="width:200px"/>
+        <div class="col-lg-1"></div>
+        <label class="col-lg-1">Hasta:</label>
+        <input id='to' class="form-control col-lg-1" type="date" name='fecha2' style="width:200px"/>
+        <div class="col-lg-1"></div>
+        <input type='submit' value='Confirmar' class="col-lg-1 btn btn-success"/>
 
 
     </div>
