@@ -5,15 +5,24 @@
 
 <div id="ajaxBeginFormResult">
     <h2>Gráficos</h2>
-    <head>
+    <head class="no-print">
         <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
     </head>
 
-    <h3>Gráfico Estados de Informes</h3>
-    <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
-    <h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
+    <div id="seleccion">
+        <h3>Gráfico Estados de Informes</h3>
+        <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
+        <h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
 
-    <div id="grafico2" style="width: 400px; display: inline-block">
+        <div id="grafico2" style="width: 400px; display: inline-block">
+        </div>
+    </div>
+
+    <div class="no-print">
+        <a class="btn btn-primary text-center" onclick="window.print('#seleccion');">
+            Generar PDF
+            @*<span class="glyphicon glyphicon-print"></span>*@
+        </a>
     </div>
 
 
@@ -44,6 +53,14 @@
 
 
         });
+
+        function printData() {
+            var divToPrint = document.getElementById("seleccion");
+            newWin = window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            newWin.close();
+        }      
     </script>
 
 </div>

@@ -11,10 +11,14 @@
 }))
 {
     @Html.AntiForgeryToken()
-    <h2>Quiero rango</h2>
+    <h2 class="text-center">Ingrese rango de fechas</h2>
     <div class="form-horizontal">
-        <input id='from' class="form-control"type="date" name='fecha1' />
-        <input id='to'class="form-control" type="date" name='fecha2' />
+        <div class="form-horizontal text-center">
+            <label>Desde:</label>
+            <input id='from' class="form-control" type="date" name='fecha1' style="width:200px" />
+            <label>Hasta:</label>
+            <input id='to' class="form-control" type="date" name='fecha2' style="width:200px"/>
+        </div>
         <input type='submit' value='Ok' />
 
       

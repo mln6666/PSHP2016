@@ -6,35 +6,44 @@
 
 
 <div id="ajaxBeginFormResult">
-    <head>
+    <head class="no-print">
         <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
         <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/smoothness/jquery-ui.css" />
     </head>
 
 
 
-    <h3>Gráfico Tipos PS Planes</h3>
-    <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
-    <h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
+    <div id="seleccion">
+        <h3>Gráfico Tipos PS Planes</h3>
+        <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
+        <h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
 
-    <div id="grafico2" style="width: 400px; display: inline-block">
-    </div>
-    <p></p>
-
-    @for (var i = 0; i < ViewBag.tiposps; i++)
-    {
-        <div class="panel panel-info" style="display: inline-block">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">@ViewBag.mistiposps[i]</h3>
-            </div>
-            <div class="panel-body">
-                <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Aprobados: @ViewBag.listaaprobados[i]</h5>
-                <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Desaprobados: @ViewBag.listadesaprobados[i]</h5>
-                <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Pendientes: @ViewBag.listapendientes[i]</h5>
-                <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Rechazados: @ViewBag.listarechazados[i]</h5>
-            </div>
+        <div id="grafico2" style="width: 400px; display: inline-block">
         </div>
-    }
+        <p></p>
+
+        @for (var i = 0; i < ViewBag.tiposps; i++)
+        {
+            <div class="panel panel-info" style="display: inline-block">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">@ViewBag.mistiposps[i]</h3>
+                </div>
+                <div class="panel-body">
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Aprobados: @ViewBag.listaaprobados[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Desaprobados: @ViewBag.listadesaprobados[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Pendientes: @ViewBag.listapendientes[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Rechazados: @ViewBag.listarechazados[i]</h5>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="no-print">
+        <a class="btn btn-primary text-center" onclick="window.print('#seleccion');">
+            Generar PDF
+            @*<span class="glyphicon glyphicon-print"></span>*@
+        </a>
+    </div>
 
 
     <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
@@ -77,6 +86,14 @@
 
 
         });
+
+        function printData() {
+            var divToPrint = document.getElementById("seleccion");
+            newWin = window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            newWin.close();
+        }      
     </script>
 </div>
 

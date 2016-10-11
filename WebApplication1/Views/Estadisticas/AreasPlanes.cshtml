@@ -10,8 +10,8 @@
 }))
 {
     @Html.AntiForgeryToken()
-    <h2>Quiero rango</h2>
-    <div class="form-horizontal">
+    <h2 class="no-print">Quiero rango</h2>
+    <div class="form-horizontal no-print">
         <input id='from' class="form-control" type="date" name='fecha1' />
         <input id='to' class="form-control" type="date" name='fecha2' />
         <input type='submit' value='Ok' />
@@ -19,4 +19,9 @@
 
     </div>
 }
+
 <div id="ajaxBeginFormResult"></div>
+
+
+
+
