@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>@ViewBag.Title - Sistema PS 2016</title>
 	@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>*@
-	<script type="text/javascript" src='@Url.Content("../Scripts/jquery-1.12.4.min.js")'></script>
-	<script type="text/javascript" src='@Url.Content("../Scripts/bootstrap.min.js")'></script>
+	<script  src="~/Scripts/jquery-1.12.4.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
 
 	@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 	<style>
@@ -81,7 +81,7 @@
 @@media (min-width: 768px) {
   #page-wrapper5 {
 	margin-top: 0px;
-	margin-left: 250px;
+	margin-left: 220px;
 	min-height: 1000px;
   }
   .dashboard-nav {
@@ -270,7 +270,7 @@
 
 
 </body>
-<div id="dashboard-darkgreen" style="padding-top:10%" class="dashboard-nav no-print">
+<div id="dashboard-darkgreen" style="padding-top: 7%;" class="dashboard-nav no-print">
 	<ul class="nav navbar-nav" style="border-right :cadetblue; border-top:cadetblue ;  border-style:initial; border-bottom-style: initial;border-left-style:initial ; width:80%"  >
 
 		<div class="panel panel-primary">
@@ -280,17 +280,22 @@
 		</div>
 
 	    <br/>
-
+        <li>
+            <a href="http://www.frre.utn.edu.ar/">
+                <img style="height: 70px; width: 160px;" src='@Url.Content("~/Content/Images/UTNfrrenavbar.png")' />
+            </a>
+        </li>
 		<li>
 			<a href="http://frre.cvg.utn.edu.ar/">
-				<img style="height: 90px;  " src='@Url.Content("~/Content/Images/logocampus.png")'/>
+				<img style="height: 70px;width: 160px;  " src='@Url.Content("~/Content/Images/logocampus.png")'/>
 			</a>
 		</li>
-		<li>
-			<a href="http://www.frre.utn.edu.ar/">
-				<img style="height: 70px; width: 160px;" src='@Url.Content("~/Content/Images/UTNfrrenavbar.png")' />
-			</a>
-		</li>
+	   
+        <li>
+            <a href="http://sysacadweb.frre.utn.edu.ar/">
+                <img style="height: 70px; width: 160px;" src='@Url.Content("~/Content/Images/sisacadweb.png")' />
+            </a>
+        </li>
 
 
 
