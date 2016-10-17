@@ -12,15 +12,13 @@
     <div id="seleccion">
         <h3 class="text-center">Gráfico Estados de Planes</h3>
         <br />
-        <div class="row">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-4">
-                <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
-                <br />
-                <h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
-            </div>
+        <div class="text-center">
 
-            <div id="grafico2" style="width: 500px; display: inline-block">
+            <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")-Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
+            <br />
+            
+
+            <div id="grafico2" style="width: 800px; height:400px ; display: inline-block">
             </div>
         </div>
 
@@ -72,3 +70,9 @@
     </script>
 
 </div>
+
+<style>
+    .jqplot-table-legend {
+        font-size: large;
+    }
+</style>

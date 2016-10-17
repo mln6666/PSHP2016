@@ -416,6 +416,7 @@
     <Content Include="Content\Images\BACKGROUND-TOP.jpg" />
     <Content Include="Content\Images\background222.jpg" />
     <Content Include="Content\Images\configuracion.png" />
+    <Content Include="Content\Images\logocampus.png" />
     <Content Include="Content\Images\logogodesa.png" />
     <Content Include="Content\Images\LogoPixEditorMLN.png" />
     <Content Include="Content\Images\LogoPixEditorMLNconbarritas.png" />
@@ -424,6 +425,7 @@
     <Content Include="Content\Images\logoUTNDeptoISIPS.png" />
     <Content Include="Content\Images\logoUTNdeptosistemas.png" />
     <Content Include="Content\Images\logoUTNISI.png" />
+    <Content Include="Content\Images\UTNfrrenavbar.png" />
     <Content Include="Content\Images\w2background.jpg" />
     <Content Include="Content\Select2\select2.min.css" />
     <Content Include="Content\Select2\select2.min.js" />

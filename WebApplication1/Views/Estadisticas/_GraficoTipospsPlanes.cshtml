@@ -14,16 +14,15 @@
 
 
     <div id="seleccion">
-        <h3 class="text-center">Gráfico Tipos PS Planes</h3>
+      
         <br />
-        <div  class="row">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-4">
-                <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
-                <br />
-                <h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
-            </div>
-            <div id="grafico2" style="width: 500px; display: inline-block">
+        <div class="text-center">
+
+            <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")-Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
+            <br />
+            
+
+            <div id="grafico2" style="width: 800px; height:400px ; display: inline-block">
             </div>
         </div>
 
@@ -32,7 +31,7 @@
 
         @for (var i = 0; i < ViewBag.tiposps; i++)
         {
-            <div class="panel panel-info" style="display: inline-block">
+            <div class="panel panel-info text-center" style="display: inline-block">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center">@ViewBag.mistiposps[i]</h3>
                 </div>
@@ -105,3 +104,8 @@
     </script>
 </div>
 
+<style>
+    .jqplot-table-legend {
+        font-size: large;
+    }
+</style>

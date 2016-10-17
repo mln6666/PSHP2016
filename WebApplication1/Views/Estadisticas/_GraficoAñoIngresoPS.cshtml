@@ -12,23 +12,24 @@
     </head>
 
     <div id="seleccion">
-        <h3>Gráfico Año Ingreso PS</h3>
-        <h4>Desde: @ViewBag.fechadesde</h4>
-        <h4>Hasta: @ViewBag.fechahasta</h4>
+        <br />
+        <hr style="color: darkgrey" />
+        <h4>Desde: @ViewBag.fechadesde - Hasta: @ViewBag.fechahasta</h4>
+        
 
 
-
+        <code style="color: blue; font-style: italic; font-size: large">Azul: cantidad de alumnos en el año.</code>
+        <code style="color: orange; font-style: italic; font-size: large">Naranja: cantidad de PS en el año.</code>
         <div id="grafico2" style="width: 1200px;">
         </div>
 
-        <h4 style="color:blue">Azul: cantidad de alumnos en el año.</h4>
-        <h4 style="color:orange">Naranja: cantidad de PS en el año.</h4>
+
     </div>
 
     
 
     <div class="no-print">
-        <a class="btn btn-primary text-center" onclick="window.print('#seleccion');">
+        <a class="btn btn-primary" onclick="window.print('#seleccion');">
             Generar PDF
             @*<span class="glyphicon glyphicon-print"></span>*@
         </a>

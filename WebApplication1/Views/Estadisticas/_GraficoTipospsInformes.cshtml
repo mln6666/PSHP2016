@@ -7,25 +7,23 @@
 <hr />
 <div id="ajaxBeginFormResult">
     <head class="no-print">
-        <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
-        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/smoothness/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css"/>
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/smoothness/jquery-ui.css"/>
     </head>
 
 
 
     <div id="seleccion">
         <h3 class="text-center">Gráfico Tipos PS Informes</h3>
-        <br />
+        <br/>
 
-        <div class="row">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-4">                
-                <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")</h4>
-                <br />
-                <h4>Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
-            </div>
+        <div class="text-center">
 
-            <div id="grafico2" style="width: 500px; display: inline-block">
+            <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")-Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
+            <br />
+            
+
+            <div id="grafico2" style="width: 800px; height:400px ; display: inline-block">
             </div>
         </div>
         <p></p>
@@ -51,56 +49,62 @@
             @*<span class="glyphicon glyphicon-print"></span>*@
         </a>
     </div>
-   
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.cursor.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
 
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
-        <script>
-        $(document).ready(function () {
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.cursor.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function() {
 
 
             var listatiposps = @Html.Raw(ViewBag.listatiposps);
             var cantidades = @Html.Raw(ViewBag.cantidades);
 
-           var array =[];
-           $.each( listatiposps, function( index, value ){
-                array.push([value+" : "+cantidades[index], cantidades[index]]);
+            var array = [];
+            $.each(listatiposps, function(index, value) {
+                array.push([value + " : " + cantidades[index], cantidades[index]]);
             });
 
 
             plot3 = jQuery.jqplot('grafico2',
-     [array],
-     {
-         title: ' ',
-         seriesDefaults: {
-             shadow: false,
-             renderer: jQuery.jqplot.PieRenderer,
-             rendererOptions: {
-                 sliceMargin: 4,
-                 showDataLabels: true
-             }
-         },
-         legend: { show:true, location: 'e' }
-     }
-   );
+                [array],
+                {
+                    title: ' ',
+                    seriesDefaults: {
+                        shadow: false,
+                        renderer: jQuery.jqplot.PieRenderer,
+                        rendererOptions: {
+                            sliceMargin: 4,
+                            showDataLabels: true
+                        }
+                    },
+                    legend: { show: true, location: 'e' }
+                }
+            );
 
 
         });
 
-            function printData() {
-                var divToPrint = document.getElementById("seleccion");
-                newWin = window.open("");
-                newWin.document.write(divToPrint.outerHTML);
-                newWin.print();
-                newWin.close();
-            }      
-        </script>
-    
+        function printData() {
+            var divToPrint = document.getElementById("seleccion");
+            newWin = window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            newWin.close();
+        }
+    </script>
+
 
 </div>
+
+<style>
+    .jqplot-table-legend {
+        font-size: large;
+    }
+</style>
