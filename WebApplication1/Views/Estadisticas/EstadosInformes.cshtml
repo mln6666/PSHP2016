@@ -10,20 +10,23 @@
 }))
 {
     @Html.AntiForgeryToken()
-    <div class="row">
-        <div class="col-lg-1"></div>
-        <h3 class="col-lg-4">Ingrese rango de fechas</h3>
-    </div>
-    <br />
-    <div class="row form-horizontal">
-        <div class="col-lg-1"></div>
-        <label class="col-lg-1">Desde:</label>
-        <input id='from' class="form-control col-lg-1" type="date" name='fecha1' style="width:200px" />
-        <div class="col-lg-1"></div>
-        <label class="col-lg-1">Hasta:</label>
-        <input id='to' class="form-control col-lg-1" type="date" name='fecha2' style="width:200px" />
-        <div class="col-lg-1"></div>
-        <input type='submit' value='Confirmar' class="btn btn-success col-lg-1" />
+    <div class="hidden-print">
+
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <h3 class="col-lg-4">Ingrese rango de fechas</h3>
+        </div>
+        <br />
+        <div class="row form-horizontal">
+            <div class="col-lg-1"></div>
+            <label class="col-lg-1">Desde:</label>
+            <input id='from' class="form-control col-lg-1" type="date" name='fecha1' style="width: 200px" />
+            <div class="col-lg-1"></div>
+            <label class="col-lg-1">Hasta:</label>
+            <input id='to' class="form-control col-lg-1" type="date" name='fecha2' style="width: 200px" />
+            <div class="col-lg-1"></div>
+            <input type='submit' value='Confirmar' class="btn btn-success col-lg-1" />
+        </div>
     </div>
 }
-<div id="ajaxBeginFormResult"></div>
+        <div id="ajaxBeginFormResult"></div>

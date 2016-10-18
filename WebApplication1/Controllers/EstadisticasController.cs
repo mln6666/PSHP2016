@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -78,11 +79,15 @@ namespace WebApplication1.Controllers
             var planesaprobados = 0;
             var planesdesaprobados = 0;
             var planesrechazados = 0;
+            IList<PS> pss = new List<PS>();
+
 
             foreach (var item in db.PresentacionPlanes)
             {
                 if(item.FechaPresentacionPlan>= fecha1 & item.FechaPresentacionPlan<= fecha2)
                 { 
+                    pss.Add(item.PS);
+
                 if (item.EstadoEvaluacionPlan == Evaluacion.Aprobado)
                 {
                     planesaprobados++;
@@ -105,13 +110,16 @@ namespace WebApplication1.Controllers
 
 
             }
+            pss = pss.Distinct().ToList();
             ViewBag.fechadesde = fecha1;
             ViewBag.fechahasta = fecha2;
             ViewBag.planesaprobados = planesaprobados;
             ViewBag.planesdesaprobados = planesdesaprobados;
             ViewBag.planesrechazados = planesrechazados;
             ViewBag.planespendientes = planespendientes;
-            return View();
+
+
+            return View(pss);
         }
         [Authorize(Roles = "Moderador,Administrador")]
         [HttpPost]
@@ -173,6 +181,7 @@ namespace WebApplication1.Controllers
             List<int> listadesaprobados = new List<int>();
             List<int> listapendientes = new List<int>();
             List<int> listarechazados = new List<int>();
+            IList<PS> pss = new List<PS>();
 
             foreach (var item in listaareas)
             {
@@ -190,7 +199,8 @@ namespace WebApplication1.Controllers
             {
                 if (item.FechaPresentacionPlan >= fecha1 & item.FechaPresentacionPlan <= fecha2)
                 {
-                    if (item.PS.Area.NombreArea == listaareas.ElementAt(i).NombreArea)
+                        pss.Add(item.PS);
+                        if (item.PS.Area.NombreArea == listaareas.ElementAt(i).NombreArea)
                     {
                         total++;
 
@@ -228,6 +238,7 @@ namespace WebApplication1.Controllers
                 planespendientes = 0;
                 planesrechazados = 0;
             }
+            pss = pss.Distinct().ToList();
             ViewBag.fechadesde = fecha1;
             ViewBag.fechahasta = fecha2;
             ViewBag.listaareas = JsonConvert.SerializeObject(misareas);
@@ -242,7 +253,7 @@ namespace WebApplication1.Controllers
 
            
 
-            return View();
+            return View(pss);
         }
 
         [Authorize(Roles = "Moderador,Administrador")]
@@ -337,6 +348,7 @@ namespace WebApplication1.Controllers
             List<int> listadesaprobados = new List<int>();
             List<int> listapendientes = new List<int>();
             List<int> listarechazados = new List<int>();
+            IList<PS> pss = new List<PS>();
 
             foreach (var item in listatiposps)
             {
@@ -354,6 +366,7 @@ namespace WebApplication1.Controllers
                 {
                     if (item.FechaPresentacionPlan >= fecha1 & item.FechaPresentacionPlan <= fecha2)
                     {
+                        pss.Add(item.PS);
                         if (item.PS.TipoPS.NombreTipoPS == listatiposps.ElementAt(i).NombreTipoPS)
                         {
                             total++;
@@ -388,6 +401,7 @@ namespace WebApplication1.Controllers
                 planespendientes = 0;
                 planesrechazados = 0;
             }
+            pss = pss.Distinct().ToList();
             ViewBag.fechadesde = fecha1;
             ViewBag.fechahasta = fecha2;
             ViewBag.listatiposps = JsonConvert.SerializeObject(mistiposps);
@@ -401,7 +415,7 @@ namespace WebApplication1.Controllers
             ViewBag.listarechazados = listarechazados;
 
 
-            return View();
+            return View(pss);
         }
 
         [Authorize(Roles = "Moderador,Administrador")]
@@ -486,7 +500,7 @@ namespace WebApplication1.Controllers
             List<int> misaños = new List<int>();
             List<int> cantidades = new List<int>();
             List<int> cantidadesps = new List<int>();
-
+            IList<PS> pss= new List<PS>();
 
 
             int años = fecha2 - fecha1;
@@ -506,6 +520,12 @@ namespace WebApplication1.Controllers
                     {
                             total++;
                         total1 += item.PSs.Count();
+
+                        foreach (var mips in item.PSs)
+                        {
+                            pss.Add(mips);
+                        }
+
                     }
                 }
                 cantidades.Add(total);
@@ -522,7 +542,7 @@ namespace WebApplication1.Controllers
 
 
 
-            return View();
+            return View(pss);
         }
 
 

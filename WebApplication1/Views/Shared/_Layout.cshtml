@@ -191,7 +191,7 @@
 </head>
 
 <body class="full" background="~/Content/Images/BACKGROUND-TOP.jpg">
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar navbar-inverse navbar-fixed-top hidden-print">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -270,7 +270,7 @@
 
 
 </body>
-<div id="dashboard-darkgreen" style="padding-top: 7%;" class="dashboard-nav no-print">
+<div id="dashboard-darkgreen" style="padding-top: 7%;" class="dashboard-nav hidden-print">
 	<ul class="nav navbar-nav" style="border-right :cadetblue; border-top:cadetblue ;  border-style:initial; border-bottom-style: initial;border-left-style:initial ; width:80%"  >
 
 		<div class="panel panel-primary">
@@ -317,7 +317,7 @@
 
 <div class="navbar-xs navbar-inverse navbar-fixed-bottom" style="background: none; border: none;padding-bottom: 0px">
 	<div class="container text-center" style="height: 20px">
-		<p> - SiGePS &copy; @DateTime.Now.Year - Godesa Solutions ®  <a style="color:black ">@Html.ActionLink("Contacto", "Contact", "Home")</></a> - </p>
+		<p> - SiGePS &copy; @DateTime.Now.Year - Godesa Solutions ®  <a style="color:black ">@Html.ActionLink("Contacto", "Contact", "Home",null, new { @class = "hidden-print" })</a> - </p>
 	</div>
 </div>
 

@@ -4,9 +4,8 @@
     Layout = null;
 }
 
-<hr />
 <div id="ajaxBeginFormResult">
-    <head class="no-print">
+    <head>
         <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
         <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/smoothness/jquery-ui.css" />
     </head>
@@ -22,7 +21,7 @@
                 <br />
                
             
-            <div id="grafico2" style="width: 800px; height:400px ; display: inline-block">
+            <div id="grafico2" style="width: 500px; height:300px  ; display: inline-block">
             </div>
         </div>
 
@@ -44,12 +43,12 @@
         }
     </div>
 
-    @*<div class="no-print">
-            <a class="btn btn-primary" onclick="window.print('#seleccion');">
-                Generar PDF
+    <div class="hidden-print">
+            <a class="btn btn-primary " onclick="window.print('#seleccion');">
+                Imprimir
 
             </a>
-        </div>*@
+        </div>
 
         <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
         <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>

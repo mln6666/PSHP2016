@@ -1,12 +1,11 @@
 ﻿@using WebApplication1.Models
-
+@model IEnumerable<WebApplication1.Models.PS>
 @{
     Layout = null;
 }
 
-<hr />
 <div id="ajaxBeginFormResult">
-    <head class="no-print">
+    <head >
         <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
         <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/smoothness/jquery-ui.css" />
     </head>
@@ -22,7 +21,7 @@
             <br />
             
 
-            <div id="grafico2" style="width: 800px; height:400px ; display: inline-block">
+            <div id="grafico2" style="width: 500px; height:300px ; display: inline-block">
             </div>
         </div>
 
@@ -43,14 +42,97 @@
                 </div>
             </div>
         }
+        <hr style="color: grey; border-color: grey" />
+
+        <table id="mitabla" class="table table-striped table-bordered">
+            <thead>
+                <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+
+                    <th class="text-left" style="border-radius: 3px">
+                        @Html.DisplayNameFor(model => model.Alumno.Legajo)
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        Apellido y Nombre
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        @Html.DisplayNameFor(model => model.NroDisposicion)
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        @Html.DisplayNameFor(model => model.Area.NombreArea)
+                    </th>
+
+                    <th class="text-left" style="border-radius: 3px">
+                        @Html.DisplayNameFor(model => model.CicloLectivo)
+                    </th>
+
+                    <th class="text-left" style="border-radius: 3px">
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th class="text-center hidden-print" style="border-radius: 3px">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="background-color: azure">
+                        <td class="text-left">
+                            @Html.DisplayFor(modelItem => item.Alumno.Legajo)
+                        </td>
+                        <td class="text-left">
+                            @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(modelItem => item.NroDisposicion)
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(modelItem => item.Area.NombreArea)
+                        </td>
+
+                        <td class="text-left">
+                            @Html.DisplayFor(modelItem => item.CicloLectivo)
+                        </td>
+
+
+                        @if (item.Estado == Estado.PS_Aprobada & item.NroDisposicion != null)
+
+                        {
+                            <td class="text-left" style="font-weight: bolder; font-style: italic; color: forestgreen">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </td>}
+                        else
+                    if (item.Estado == Estado.PS_Cancelada)
+                        {
+                            <td class="text-left" style="font-weight: bold; font-style: italic;color: darkred">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </td>
+                        }
+                        else if (item.Estado == Estado.PS_Aprobada & item.NroDisposicion == null)
+                        {
+                            <td class="text-left" style="font-weight: bold; font-style: italic;color: midnightblue">
+                                @Html.DisplayFor(modelItem => item.Estado)<p style="color: midnightblue;font-size: smaller">[Sin Nro. Disposición]</p>
+                            </td> }
+                        else
+                        {
+                            <td class="text-left" style="font-weight: bold; font-style: italic;">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </td>}
+
+                        <td class="text-center hidden-print">
+                            @Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS, var = true }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                            @*@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 
-    @*<div class="no-print">
+    <div class="hidden-print">
             <a class="btn btn-primary" onclick="window.print('#seleccion');">
-                Generar PDF
+                Imprimir
 
             </a>
-        </div>*@
+        </div>
 
 
     <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
@@ -65,6 +147,10 @@
     <script>
         $(document).ready(function () {
 
+            $('#mitabla_length').addClass('hidden-print');
+            $('#mitabla_filter').addClass('hidden-print');
+            $('#mitabla_info').addClass('hidden-print');
+            $('#mitabla_paginate').addClass('hidden-print');
 
             var listatiposps = @Html.Raw(ViewBag.listatiposps);
             var cantidades = @Html.Raw(ViewBag.cantidades);
@@ -92,6 +178,12 @@
    );
 
 
+        });
+
+        $("#mitabla").DataTable({
+            "language": {
+                "url": "/Scripts/DataTables/spanish.json"
+            }
         });
 
         function printData() {
