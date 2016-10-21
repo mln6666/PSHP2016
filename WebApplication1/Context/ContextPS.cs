@@ -34,6 +34,8 @@ namespace WebApplication1.Context
         public System.Data.Entity.DbSet<WebApplication1.Models.PresentacionPlan> PresentacionPlanes { get; set; }
 
         public System.Data.Entity.DbSet<WebApplication1.Models.TipoPS> TipoPSs { get; set; }
+
         
+
     }
 }
