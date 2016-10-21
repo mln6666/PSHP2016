@@ -229,7 +229,28 @@ namespace WebApplication1.Controllers
             {
                 foreach (var item in db.PSs.ToList())
                 {
-                    if (item.PresentacionesPlanes.FirstOrDefault().FechaPresentacionPlan >= fecha1 & item.PresentacionesPlanes.FirstOrDefault().FechaPresentacionPlan <= fecha2)
+                    bool ok = false;
+                    foreach (var presentacion in item.PresentacionesPlanes)
+                    {
+                        if (presentacion.FechaPresentacionPlan >= fecha1 & presentacion.FechaPresentacionPlan <= fecha2)
+                        {
+                            ok = true;
+                        }
+                        
+                    }
+
+                    if (item.PresentacionesInforme != null)
+                    {
+                        foreach (var presentacion in item.PresentacionesInforme)
+                        {
+                            if (presentacion.FechaPresentacionInforme >= fecha1 & presentacion.FechaPresentacionInforme <= fecha2)
+                            {
+                                ok = true;
+                            }
+
+                        }
+                    }
+                    if (ok)
                     {
                         pss.Add(item);
                         
