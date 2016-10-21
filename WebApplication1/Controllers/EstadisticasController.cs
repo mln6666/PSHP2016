@@ -133,11 +133,12 @@ namespace WebApplication1.Controllers
             var informespendientes = 0;
             var informesaprobados = 0;
             var informesdesaprobados = 0;
-
+            IList<PS> pss = new List<PS>();
             foreach (var item in db.PresentacionInformes)
             {
                 if (item.FechaPresentacionInforme >= fecha1 & item.FechaPresentacionInforme <= fecha2)
                 {
+                    pss.Add(item.PS);
                     if (item.EstadoEvaluacionInforme == Evaluacion.Aprobado)
                     {
                         informesaprobados++;
@@ -157,12 +158,13 @@ namespace WebApplication1.Controllers
 
 
             }
+            pss = pss.Distinct().ToList();
             ViewBag.fechadesde = fecha1;
             ViewBag.fechahasta = fecha2;
             ViewBag.informesaprobados = informesaprobados;
             ViewBag.informesdesaprobados = informesdesaprobados;
             ViewBag.informespendientes = informespendientes;
-            return View();
+            return View(pss);
         }
 
 
@@ -270,6 +272,7 @@ namespace WebApplication1.Controllers
             List<int> listaaprobados = new List<int>();
             List<int> listadesaprobados = new List<int>();
             List<int> listapendientes = new List<int>();
+            IList<PS> pss = new List<PS>();
 
             foreach (var item in listaareas)
             {
@@ -286,6 +289,7 @@ namespace WebApplication1.Controllers
                 {
                     if (item.FechaPresentacionInforme >= fecha1 & item.FechaPresentacionInforme <= fecha2)
                     {
+                        pss.Add(item.PS);
                         if (item.PS.Area.NombreArea == listaareas.ElementAt(i).NombreArea)
                         {
                             total++;
@@ -317,6 +321,7 @@ namespace WebApplication1.Controllers
                 
                
             }
+            pss = pss.Distinct().ToList();
             ViewBag.fechadesde = fecha1;
             ViewBag.fechahasta = fecha2;
             ViewBag.listaareas = JsonConvert.SerializeObject(misareas);
@@ -329,7 +334,7 @@ namespace WebApplication1.Controllers
             ViewBag.listapendientes = listapendientes;
 
 
-            return View();
+            return View(pss);
         }
 
 
@@ -432,7 +437,7 @@ namespace WebApplication1.Controllers
             List<int> listaaprobados = new List<int>();
             List<int> listadesaprobados = new List<int>();
             List<int> listapendientes = new List<int>();
-
+            IList<PS> pss = new List<PS>();
             foreach (var item in listatiposps)
             {
                 mistiposps.Add(item.NombreTipoPS);
@@ -448,6 +453,7 @@ namespace WebApplication1.Controllers
                 {
                     if (item.FechaPresentacionInforme >= fecha1 & item.FechaPresentacionInforme <= fecha2)
                     {
+                        pss.Add(item.PS);
                         if (item.PS.TipoPS.NombreTipoPS == listatiposps.ElementAt(i).NombreTipoPS)
                         {
                             total++;
@@ -477,6 +483,7 @@ namespace WebApplication1.Controllers
                 informesdesaprobados = 0;
                 informespendientes = 0;
             }
+            pss = pss.Distinct().ToList();
             ViewBag.fechadesde = fecha1;
             ViewBag.fechahasta = fecha2;
             ViewBag.listatiposps = JsonConvert.SerializeObject(mistiposps);
@@ -488,7 +495,7 @@ namespace WebApplication1.Controllers
             ViewBag.listadesaprobados = listadesaprobados;
             ViewBag.listapendientes = listapendientes;
 
-            return View();
+            return View(pss);
         }
 
         [Authorize(Roles = "Moderador,Administrador")]
