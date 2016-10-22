@@ -37,6 +37,7 @@
             </div>
         }
         <hr style="color: grey; border-color: grey" />
+        <div class="text-center" style="color: green">[ Evaluaciones Planes: -- A: Aprobado -- D: Desaprobado -- P: Pendiente -- R: Rechazado ]</div>
 
         <table id="mitabla" class="table table-striped table-bordered">
             <thead>
@@ -62,7 +63,10 @@
                     <th class="text-left" style="border-radius: 3px">
                         @Html.DisplayNameFor(model => model.Estado)
                     </th>
-                    <th class="text-center" style="border-radius: 3px">Ev. Planes</th>
+                    <th class="text-center" style="border-radius: 3px">A</th>
+                    <th class="text-center" style="border-radius: 3px">D</th>
+                    <th class="text-center" style="border-radius: 3px">P</th>
+                    <th class="text-center" style="border-radius: 3px">R</th>
                     <th class="text-center hidden-print" style="border-radius: 3px">Acciones</th>
                 </tr>
             </thead>
@@ -118,32 +122,41 @@
                                 int pdesaprobado = 0;
                                 int prechazado = 0;
                             }
-@foreach (var dato in item.PresentacionesPlanes)
-{
-    if (dato.FechaPresentacionPlan >= ViewBag.fechadesde & dato.FechaPresentacionPlan <= ViewBag.fechahasta)
-    {
-        if (dato.EstadoEvaluacionPlan == Evaluacion.Aprobado)
-        {
-            paprobado++;
-        }
-        if (dato.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
-        {
-            pdesaprobado++;
-        }
-        if (dato.EstadoEvaluacionPlan == Evaluacion.Rechazado)
-        {
-            prechazado++;
-        }
-        if (dato.EstadoEvaluacionPlan == Evaluacion.Pendiente)
-        {
-            ppendiente++;
-        }
-    }
-}
-                            <span>Ap: @paprobado</span> 
-                            <span>De: @pdesaprobado</span> 
-                            <span>Re: @prechazado</span> 
-                            <span>Pe: @ppendiente</span> 
+                            @foreach (var dato in item.PresentacionesPlanes)
+                            {
+                                if (dato.FechaPresentacionPlan >= ViewBag.fechadesde & dato.FechaPresentacionPlan <= ViewBag.fechahasta)
+                                {
+                                    if (dato.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                                    {
+                                        paprobado++;
+                                    }
+                                    if (dato.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
+                                    {
+                                        pdesaprobado++;
+                                    }
+                                    if (dato.EstadoEvaluacionPlan == Evaluacion.Rechazado)
+                                    {
+                                        prechazado++;
+                                    }
+                                    if (dato.EstadoEvaluacionPlan == Evaluacion.Pendiente)
+                                    {
+                                        ppendiente++;
+                                    }
+                                }
+                            }
+                            <span>@paprobado</span>
+
+
+                        </td>
+                        <td class="text-left">
+                            <span>@pdesaprobado</span>
+                        </td>
+                        <td class="text-left">
+                            <span>@ppendiente</span>
+
+                        </td>
+                        <td class="text-left">
+                            <span>@prechazado</span>
                         </td>
 
                         <td class="text-center hidden-print">
