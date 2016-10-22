@@ -19,7 +19,7 @@
 
         <div class="text-center">
 
-            <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")-Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
+            <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")-Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")<button id="ocultargrafico" class="hidden-print">Ocultar gráfico</button></h4>
            
             
 
@@ -228,6 +228,9 @@
             newWin.print();
             newWin.close();
         }
+        $( "#ocultargrafico" ).click(function() {
+            $( "#grafico2" ).toggle( "slow" );
+        });
     </script>
 
 

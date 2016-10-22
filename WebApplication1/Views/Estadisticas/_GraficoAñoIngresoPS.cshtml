@@ -15,7 +15,7 @@
 
     <div id="seleccion">
         <hr class="hidden-print" style="color: darkgrey" />
-        <h4>Desde: @ViewBag.fechadesde - Hasta: @ViewBag.fechahasta</h4>
+        <h4>Desde: @ViewBag.fechadesde - Hasta: @ViewBag.fechahasta<button id="ocultargrafico" class="hidden-print">Ocultar gráfico</button></h4>
         
 
 
@@ -219,6 +219,9 @@
                 "language": {
                     "url": "/Scripts/DataTables/spanish.json"
                 }
+            });
+            $( "#ocultargrafico" ).click(function() {
+                $( "#grafico2" ).toggle( "slow" );
             });
         </script>
     

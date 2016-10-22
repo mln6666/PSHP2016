@@ -20,6 +20,12 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult EstadosPS()
+        {
+
+            return View();
+        }
 
         [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult EstadosPlanes()
@@ -77,6 +83,99 @@ namespace WebApplication1.Controllers
         }
 
 
+        [Authorize(Roles = "Moderador,Administrador")]
+        [HttpPost]
+        public ActionResult _GraficoEstadosPS(DateTime? fecha1, DateTime? fecha2)
+        {
+            //fecha1 = Convert.ToDateTime("01/02/0001").Date;
+
+            //fecha2 = Convert.ToDateTime("01/02/2200").Date;
+
+
+            List<string> estadosstring = new List<string>();
+            estadosstring.Add("Plan_Entregado");
+            estadosstring.Add("Plan_Aprobado");
+            estadosstring.Add("Plan_Desaprobado");
+            estadosstring.Add("Plan_Rechazado");
+            estadosstring.Add("Informe_Entregado");
+            estadosstring.Add("Informe_Aprobado");
+            estadosstring.Add("Informe_Desaprobado");
+            estadosstring.Add("PS_Aprobada");
+            estadosstring.Add("PS_Cancelada");
+            estadosstring.Add("PS_Vencida");
+            List<Estado> misestados = new List<Estado>();
+            misestados.Add(Estado.Plan_Entregado);
+            misestados.Add(Estado.Plan_Aprobado);
+            misestados.Add(Estado.Plan_Desaprobado);
+            misestados.Add(Estado.Plan_Rechazado);
+            misestados.Add(Estado.Informe_Entregado);
+            misestados.Add(Estado.Informe_Aprobado);
+            misestados.Add(Estado.Informe_Desaprobado);
+            misestados.Add(Estado.PS_Aprobada);
+            misestados.Add(Estado.PS_Cancelada);
+            misestados.Add(Estado.PS_Vencida);
+            var listaestados = misestados;
+            List<int> cantidades = new List<int>();
+           
+            IList<PS> pss = new List<PS>();
+
+           
+            int total = 0;
+            
+
+            for (int i = 0; i < listaestados.Count(); i++)
+            {
+                foreach (var item in db.PSs.ToList())
+                {
+                    bool ok = false;
+                    if (item.PresentacionesInforme == null | item.PresentacionesInforme.Count()==0)
+                    {
+                        if (item.PresentacionesPlanes.LastOrDefault().FechaPresentacionPlan >= fecha1 & item.PresentacionesPlanes.LastOrDefault().FechaPresentacionPlan <= fecha2)
+                        {
+                            ok = true;
+                        }
+
+
+                    }
+                    else
+                    {
+                        if (item.PresentacionesInforme.LastOrDefault().FechaPresentacionInforme >= fecha1 & item.PresentacionesInforme.LastOrDefault().FechaPresentacionInforme <= fecha2)
+                        {
+                            ok = true;
+                        }
+                    }
+                   
+
+                   
+                    if (ok)
+                    {
+                        pss.Add(item);
+
+                        if (item.Estado == listaestados.ElementAt(i))
+                        {
+                            total++;
+                        }
+
+                    }
+                }
+                cantidades.Add(total);
+
+              
+                total = 0;
+               
+
+            }
+            pss = pss.Distinct().ToList();
+            ViewBag.fechadesde = fecha1;
+            ViewBag.fechahasta = fecha2;
+            ViewBag.listaestados = JsonConvert.SerializeObject(estadosstring);
+            ViewBag.cantidades = JsonConvert.SerializeObject(cantidades);
+            ViewBag.estados = misestados.Count();
+            ViewBag.misestados = misestados;
+            ViewBag.miscantidades = cantidades;//total de planes /informes segun el metodo (no se ocupa por ahora)
+
+            return View(pss);
+        }
 
         [Authorize(Roles = "Moderador,Administrador")]
         [HttpPost]

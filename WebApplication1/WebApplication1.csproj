@@ -773,6 +773,8 @@
     <Content Include="Views\Estadisticas\_GraficoAreasPS.cshtml" />
     <Content Include="Views\Estadisticas\TipospsPS.cshtml" />
     <Content Include="Views\Estadisticas\_GraficoTipospsPS.cshtml" />
+    <Content Include="Views\Estadisticas\EstadosPS.cshtml" />
+    <Content Include="Views\Estadisticas\_GraficoEstadosPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

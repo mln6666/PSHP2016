@@ -16,33 +16,13 @@
     <div id="seleccion">
 
         <div class="text-center">
+            
             <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")-Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")<button id="ocultargrafico" class="hidden-print">Ocultar gráfico</button></h4>
 
-            <div id="grafico2" style="width:500px; height:300px ; display: inline-block">
+            <div id="grafico2" style="width: 1300px; height: 300px; display: inline-block">
             </div>
         </div>
-
-        @for (var i = 0; i < ViewBag.areas; i++)
-        {
-            <div class="panel panel-info" style="display: inline-block">
-                <div class="panel-heading">
-                    <h3 class="panel-title text-center">@ViewBag.misareas[i]</h3>
-                </div>
-                <div class="panel-body">
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Plan_Entregado: @ViewBag.listaplanesentregados[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Plan_Aprobado: @ViewBag.listaplanesaprobados[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Plan_Desaprobado: @ViewBag.listaplanesdesaprobados[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Plan_Rechazado: @ViewBag.listaplanesrechazados[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Informe_Entregado: @ViewBag.listainformesentregados[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Informe_Aprobado: @ViewBag.listainformesaprobados[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Informe_Desaprobado: @ViewBag.listainformesdesaprobados[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">PS_Aprobada: @ViewBag.listapssaprobadas[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">PS_Cancelada: @ViewBag.listapsscanceladas[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">PS_Vencida: @ViewBag.listapssvencidas[i]</h5>
-
-                </div>
-            </div>
-        }
+     
         <hr style="color: grey; border-color: grey" />
 
         <table id="mitabla" class="table table-striped table-bordered">
@@ -156,30 +136,40 @@
             $('#mitabla_info').addClass('hidden-print');
             $('#mitabla_paginate').addClass('hidden-print');
 
-            var listaareas = @Html.Raw(ViewBag.listaareas);
+            var listaestados = @Html.Raw(ViewBag.listaestados);
             var cantidades = @Html.Raw(ViewBag.cantidades);
 
             var array = [];
-            $.each(listaareas, function(index, value) {
+            $.each(listaestados, function(index, value) {
                 array.push([value + " : " + cantidades[index], cantidades[index]]);
             });
 
 
-            plot3 = jQuery.jqplot('grafico2',
-                [array],
-                {
-                    title: ' ',
-                    seriesDefaults: {
-                        shadow: false,
-                        renderer: jQuery.jqplot.PieRenderer,
-                        rendererOptions: {
-                            sliceMargin: 4,
-                            showDataLabels: true
-                        }
+
+            $('#grafico2').jqplot([array], {
+                seriesDefaults:{
+                    renderer:$.jqplot.BarRenderer,
+                    rendererOptions: {
+                        // Set the varyBarColor option to true to use different colors for each bar.
+                        // The default series colors are used.
+                        varyBarColor: true
+                    }
+                },
+                axes:{
+                    xaxis:{
+                        renderer: $.jqplot.CategoryAxisRenderer
                     },
-                    legend: { show: true, location: 'e' }
+                    yaxis: {
+                        min: 0,
+                        tickInterval: 1,
+                        tickOptions: {
+                            formatString: '%d'
+                        }
+                    }
                 }
-            );
+            });
+
+
 
 
         });
@@ -197,9 +187,11 @@
             newWin.print();
             newWin.close();
         }
-        $( "#ocultargrafico" ).click(function() {
-            $( "#grafico2" ).toggle( "slow" );
-        });
+        
+$( "#ocultargrafico" ).click(function() {
+  $( "#grafico2" ).toggle( "slow" );
+});
+  
     </script>
 
 
