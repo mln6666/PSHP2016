@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-<hr />
+
 <div id="ajaxBeginFormResult">
     
     <head >
@@ -169,7 +169,10 @@
     <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
     <script>
         $(document).ready(function () {
-
+            $('#mitabla_length').addClass('hidden-print');
+            $('#mitabla_filter').addClass('hidden-print');
+            $('#mitabla_info').addClass('hidden-print');
+            $('#mitabla_paginate').addClass('hidden-print');
 
             plot3 = jQuery.jqplot('grafico2',
         [[['Informes Aprobados: '+@ViewBag.informesaprobados, @ViewBag.informesaprobados], ['Informes Desaprobados: '+@ViewBag.informesdesaprobados, @ViewBag.informesdesaprobados],['Informes Pendientes: '+@ViewBag.informespendientes, @ViewBag.informespendientes]]],
@@ -190,7 +193,11 @@
 
 
         });
-
+        $("#mitabla").DataTable({
+            "language": {
+                "url": "/Scripts/DataTables/spanish.json"
+            }
+        });
         function printData() {
             var divToPrint = document.getElementById("seleccion");
             newWin = window.open("");
