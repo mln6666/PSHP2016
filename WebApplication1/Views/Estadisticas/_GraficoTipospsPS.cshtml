@@ -1,44 +1,45 @@
 ﻿@using WebApplication1.Models
 @model IEnumerable<WebApplication1.Models.PS>
+
 @{
     Layout = null;
 }
 
 <div id="ajaxBeginFormResult">
-    <head >
+
+    <head>
         <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
         <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css" />
     </head>
 
 
-
     <div id="seleccion">
-      
-        <br />
+
         <div class="text-center">
-
             <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")-Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")</h4>
-            <br />
-            
 
-            <div id="grafico2" style="width: 500px; height:300px ; display: inline-block">
+            <div id="grafico2" style="width:500px; height:300px ; display: inline-block">
             </div>
         </div>
 
-        
-        <p></p>
-
         @for (var i = 0; i < ViewBag.tiposps; i++)
         {
-            <div class="panel panel-info text-center" style="display: inline-block">
+            <div class="panel panel-info" style="display: inline-block">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center">@ViewBag.mistiposps[i]</h3>
                 </div>
                 <div class="panel-body">
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Aprobados: @ViewBag.listaaprobados[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Desaprobados: @ViewBag.listadesaprobados[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Pendientes: @ViewBag.listapendientes[i]</h5>
-                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Rechazados: @ViewBag.listarechazados[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Plan_Entregado: @ViewBag.listaplanesentregados[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Plan_Aprobado: @ViewBag.listaplanesaprobados[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Plan_Desaprobado: @ViewBag.listaplanesdesaprobados[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Plan_Rechazado: @ViewBag.listaplanesrechazados[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Informe_Entregado: @ViewBag.listainformesentregados[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Informe_Aprobado: @ViewBag.listainformesaprobados[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">Informe_Desaprobado: @ViewBag.listainformesdesaprobados[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">PS_Aprobada: @ViewBag.listapssaprobadas[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">PS_Cancelada: @ViewBag.listapsscanceladas[i]</h5>
+                    <h5 style="font-family: cursive; font-size: medium" class="text-center">PS_Vencida: @ViewBag.listapssvencidas[i]</h5>
+
                 </div>
             </div>
         }
@@ -68,7 +69,6 @@
                     <th class="text-left" style="border-radius: 3px">
                         @Html.DisplayNameFor(model => model.Estado)
                     </th>
-                    <th class="text-center " style="border-radius: 3px">Ev. Planes</th>
                     <th class="text-center hidden-print" style="border-radius: 3px">Acciones</th>
                 </tr>
             </thead>
@@ -117,40 +117,7 @@
                             <td class="text-left" style="font-weight: bold; font-style: italic;">
                                 @Html.DisplayFor(modelItem => item.Estado)
                             </td>}
-                        <td class="text-left">
-                            @{
-                                int ppendiente = 0;
-                                int paprobado = 0;
-                                int pdesaprobado = 0;
-                                int prechazado = 0;
-                            }
-                            @foreach (var dato in item.PresentacionesPlanes)
-                            {
-                                if (dato.FechaPresentacionPlan >= ViewBag.fechadesde & dato.FechaPresentacionPlan <= ViewBag.fechahasta)
-                                {
-                                    if (dato.EstadoEvaluacionPlan == Evaluacion.Aprobado)
-                                    {
-                                        paprobado++;
-                                    }
-                                    if (dato.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
-                                    {
-                                        pdesaprobado++;
-                                    }
-                                    if (dato.EstadoEvaluacionPlan == Evaluacion.Rechazado)
-                                    {
-                                        prechazado++;
-                                    }
-                                    if (dato.EstadoEvaluacionPlan == Evaluacion.Pendiente)
-                                    {
-                                        ppendiente++;
-                                    }
-                                }
-                            }
-                            <span>Ap: @paprobado</span>
-                            <span>De: @pdesaprobado</span>
-                            <span>Re: @prechazado</span>
-                            <span>Pe: @ppendiente</span>
-                        </td>
+
                         <td class="text-center hidden-print">
                             @Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS, var = true }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
                             @*@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
@@ -162,12 +129,11 @@
     </div>
 
     <div class="hidden-print">
-            <a class="btn btn-primary" onclick="window.print('#seleccion');">
-                Imprimir
+        <a class="btn btn-primary" onclick="window.print('#seleccion');">
+            Imprimir
 
-            </a>
-        </div>
-
+        </a>
+    </div>
 
     <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
     <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
@@ -176,7 +142,6 @@
     <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
     <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
     <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-
     <script language="javascript" type="text/javascript" src="~/Scripts/datatables/jquery.datatables.js"></script>
     <script language="javascript" type="text/javascript" src="~/Scripts/datatables/datatables.bootstrap.js"></script>
 
@@ -185,8 +150,7 @@
 
     <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-
+        $(document).ready(function() {
             $('#mitabla_length').addClass('hidden-print');
             $('#mitabla_filter').addClass('hidden-print');
             $('#mitabla_info').addClass('hidden-print');
@@ -195,27 +159,27 @@
             var listatiposps = @Html.Raw(ViewBag.listatiposps);
             var cantidades = @Html.Raw(ViewBag.cantidades);
 
-            var array =[];
-            $.each( listatiposps, function( index, value ){
-                array.push([value+" : "+cantidades[index], cantidades[index]]);
+            var array = [];
+            $.each(listatiposps, function(index, value) {
+                array.push([value + " : " + cantidades[index], cantidades[index]]);
             });
 
 
             plot3 = jQuery.jqplot('grafico2',
-     [array],
-     {
-         title: ' ',
-         seriesDefaults: {
-             shadow: false,
-             renderer: jQuery.jqplot.PieRenderer,
-             rendererOptions: {
-                 sliceMargin: 4,
-                 showDataLabels: true
-             }
-         },
-         legend: { show:true, location: 'e' }
-     }
-   );
+                [array],
+                {
+                    title: ' ',
+                    seriesDefaults: {
+                        shadow: false,
+                        renderer: jQuery.jqplot.PieRenderer,
+                        rendererOptions: {
+                            sliceMargin: 4,
+                            showDataLabels: true
+                        }
+                    },
+                    legend: { show: true, location: 'e' }
+                }
+            );
 
 
         });
@@ -232,8 +196,10 @@
             newWin.document.write(divToPrint.outerHTML);
             newWin.print();
             newWin.close();
-        }      
+        }
     </script>
+
+
 </div>
 
 <style>

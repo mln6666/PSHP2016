@@ -67,6 +67,8 @@
                     <th class="text-left" style="border-radius: 3px">
                         @Html.DisplayNameFor(model => model.Estado)
                     </th>
+                    <th class="text-center" style="border-radius: 3px">Ev. Informes</th>
+
                     <th class="text-center hidden-print" style="border-radius: 3px">Acciones</th>
                 </tr>
             </thead>
@@ -115,7 +117,37 @@
                             <td class="text-left" style="font-weight: bold; font-style: italic;">
                                 @Html.DisplayFor(modelItem => item.Estado)
                             </td>}
+                        <td class="text-left">
+                            @{
+                                int ipendiente = 0;
+                                int iaprobado = 0;
+                                int idesaprobado = 0;
+                               
+                            }
+                            @foreach (var dato in item.PresentacionesInforme)
+                            {
+                                if (dato.FechaPresentacionInforme >= ViewBag.fechadesde & dato.FechaPresentacionInforme <= ViewBag.fechahasta)
+                                {
+                                    if (dato.EstadoEvaluacionInforme == Evaluacion.Aprobado)
+                                    {
+                                        iaprobado++;
+                                    }
+                                    if (dato.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
+                                    {
+                                        idesaprobado++;
+                                    }
+                                    if (dato.EstadoEvaluacionInforme == Evaluacion.Pendiente)
+                                    {
+                                        ipendiente++;
+                                    }
 
+                                }
+                            }
+                            <span>Ap: @iaprobado</span>
+                            <span>De: @idesaprobado</span>
+                            <span>pe: @ipendiente</span>
+                           
+                        </td>
                         <td class="text-center hidden-print">
                             @Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS, var = true }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
                             @*@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
@@ -133,14 +165,13 @@
             </a>
         </div>
 
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.cursor.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.cursor.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
     <script language="javascript" type="text/javascript" src="~/Scripts/datatables/jquery.datatables.js"></script>
     <script language="javascript" type="text/javascript" src="~/Scripts/datatables/datatables.bootstrap.js"></script>
 
@@ -149,7 +180,10 @@
 
     <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.0.min.js"></script> <script>
         $(document).ready(function () {
-
+            $('#mitabla_length').addClass('hidden-print');
+            $('#mitabla_filter').addClass('hidden-print');
+            $('#mitabla_info').addClass('hidden-print');
+            $('#mitabla_paginate').addClass('hidden-print');
 
             var listaareas = @Html.Raw(ViewBag.listaareas);
             var cantidades = @Html.Raw(ViewBag.cantidades);
@@ -176,7 +210,11 @@
      }
    );
         });
-
+        $("#mitabla").DataTable({
+            "language": {
+                "url": "/Scripts/DataTables/spanish.json"
+            }
+        });
             function printData() {
                 var divToPrint = document.getElementById("seleccion");
                 newWin = window.open("");

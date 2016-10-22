@@ -771,6 +771,8 @@
     <Content Include="Views\Estadisticas\_GraficoAñoIngresoPS.cshtml" />
     <Content Include="Views\Estadisticas\AreasPS.cshtml" />
     <Content Include="Views\Estadisticas\_GraficoAreasPS.cshtml" />
+    <Content Include="Views\Estadisticas\TipospsPS.cshtml" />
+    <Content Include="Views\Estadisticas\_GraficoTipospsPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

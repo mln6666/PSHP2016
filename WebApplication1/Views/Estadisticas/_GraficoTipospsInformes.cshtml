@@ -67,6 +67,8 @@
                     <th class="text-left" style="border-radius: 3px">
                         @Html.DisplayNameFor(model => model.Estado)
                     </th>
+                    <th class="text-center" style="border-radius: 3px">Ev. Informes</th>
+
                     <th class="text-center hidden-print" style="border-radius: 3px">Acciones</th>
                 </tr>
             </thead>
@@ -115,6 +117,37 @@
                             <td class="text-left" style="font-weight: bold; font-style: italic;">
                                 @Html.DisplayFor(modelItem => item.Estado)
                             </td>}
+                        <td class="text-left">
+                            @{
+                                int ipendiente = 0;
+                                int iaprobado = 0;
+                                int idesaprobado = 0;
+
+                            }
+                            @foreach (var dato in item.PresentacionesInforme)
+                            {
+                                if (dato.FechaPresentacionInforme >= ViewBag.fechadesde & dato.FechaPresentacionInforme <= ViewBag.fechahasta)
+                                {
+                                    if (dato.EstadoEvaluacionInforme == Evaluacion.Aprobado)
+                                    {
+                                        iaprobado++;
+                                    }
+                                    if (dato.EstadoEvaluacionInforme == Evaluacion.Desaprobado)
+                                    {
+                                        idesaprobado++;
+                                    }
+                                    if (dato.EstadoEvaluacionInforme == Evaluacion.Pendiente)
+                                    {
+                                        ipendiente++;
+                                    }
+
+                                }
+                            }
+                            <span>Ap: @iaprobado</span>
+                            <span>De: @idesaprobado</span>
+                            <span>Pe: @ipendiente</span>
+
+                        </td>
 
                         <td class="text-center hidden-print">
                             @Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS, var = true }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
