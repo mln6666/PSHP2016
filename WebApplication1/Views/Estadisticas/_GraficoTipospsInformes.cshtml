@@ -36,7 +36,7 @@ else
         </div>
      
 
-        @for (var i = 0; i < ViewBag.tiposps; i++)
+        @*@for (var i = 0; i < ViewBag.tiposps; i++)
         {
             <div class="panel panel-info" style="display: inline-block">
                 <div class="panel-heading">
@@ -48,7 +48,52 @@ else
                     <h5 style="font-family: cursive; font-size: medium" class="text-center">Informes Pendientes: @ViewBag.listapendientes[i]</h5>
                 </div>
             </div>
-        }
+        }*@
+
+
+
+        <table id="mitabla1" class="table table-striped table-bordered">
+            <thead>
+                <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+
+                    <th class="text-left" style="border-radius: 3px">
+                        Tipo PS
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        Informes Aprobados
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        Informes Desaprobados
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        Informes Pendientes
+                    </th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @for (var i = 0; i < ViewBag.tiposps; i++)
+                {
+                    <tr style="background-color: azure">
+                        <td class="text-left">
+                            @ViewBag.mistiposps[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listaaprobados[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listadesaprobados[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listapendientes[i]
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
         <hr style="color: grey; border-color: grey" />
         <div class="text-center" style="color: green">[ Evaluaciones Informes: -- A: Aprobado -- D: Desaprobado -- P: Pendiente ]</div>
 
@@ -198,7 +243,14 @@ else
     <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
     <script>
         $(document).ready(function() {
-
+            $('#mitabla_length').addClass('hidden-print');
+            $('#mitabla_filter').addClass('hidden-print');
+            $('#mitabla_info').addClass('hidden-print');
+            $('#mitabla_paginate').addClass('hidden-print');
+            $('#mitabla1_length').addClass('hidden-print');
+            $('#mitabla1_filter').addClass('hidden-print');
+            $('#mitabla1_info').addClass('hidden-print');
+            $('#mitabla1_paginate').addClass('hidden-print');
 
             var listatiposps = @Html.Raw(ViewBag.listatiposps);
             var cantidades = @Html.Raw(ViewBag.cantidades);
@@ -227,7 +279,16 @@ else
 
 
         });
-
+        $("#mitabla").DataTable({
+            "language": {
+                "url": "/Scripts/DataTables/spanish.json"
+            }
+        });
+        $("#mitabla1").DataTable({
+            "language": {
+                "url": "/Scripts/DataTables/spanish.json"
+            }
+        });
         function printData() {
             var divToPrint = document.getElementById("seleccion");
             newWin = window.open("");

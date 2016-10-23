@@ -32,11 +32,7 @@ else
             <div id="grafico2" style="width: 500px; height:300px ; display: inline-block">
             </div>
         </div>
-
-        
-        <p></p>
-
-        @for (var i = 0; i < ViewBag.tiposps; i++)
+        @*@for (var i = 0; i < ViewBag.tiposps; i++)
         {
             <div class="panel panel-info text-center" style="display: inline-block">
                 <div class="panel-heading">
@@ -49,7 +45,55 @@ else
                     <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Rechazados: @ViewBag.listarechazados[i]</h5>
                 </div>
             </div>
-        }
+        }*@
+
+        <table id="mitabla1" class="table table-striped table-bordered">
+            <thead>
+                <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+
+                    <th class="text-left" style="border-radius: 3px">
+                        Tipo PS
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        Planes Aprobados
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        Planes Desaprobados
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        Planes Pendientes
+                    </th>
+
+                    <th class="text-left" style="border-radius: 3px">
+                        Planes Rechazados
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @for (var i = 0; i < ViewBag.tiposps; i++)
+                {
+                    <tr style="background-color: azure">
+                        <td class="text-left">
+                            @ViewBag.mistiposps[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listaaprobados[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listadesaprobados[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listapendientes[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listarechazados[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
         <hr style="color: grey; border-color: grey" />
         <div class="text-center" style="color: green">[ Evaluaciones Planes: -- A: Aprobado -- D: Desaprobado -- P: Pendiente -- R: Rechazado ]</div>
 
@@ -211,7 +255,10 @@ else
             $('#mitabla_filter').addClass('hidden-print');
             $('#mitabla_info').addClass('hidden-print');
             $('#mitabla_paginate').addClass('hidden-print');
-
+            $('#mitabla1_length').addClass('hidden-print');
+            $('#mitabla1_filter').addClass('hidden-print');
+            $('#mitabla1_info').addClass('hidden-print');
+            $('#mitabla1_paginate').addClass('hidden-print');
             var listatiposps = @Html.Raw(ViewBag.listatiposps);
             var cantidades = @Html.Raw(ViewBag.cantidades);
 
@@ -245,7 +292,11 @@ else
                 "url": "/Scripts/DataTables/spanish.json"
             }
         });
-
+        $("#mitabla1").DataTable({
+            "language": {
+                "url": "/Scripts/DataTables/spanish.json"
+            }
+        });
         function printData() {
             var divToPrint = document.getElementById("seleccion");
             newWin = window.open("");
