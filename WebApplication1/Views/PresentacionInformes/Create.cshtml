@@ -1,4 +1,5 @@
-﻿@model WebApplication1.Models.PresentacionInforme
+﻿@using System.Globalization
+@model WebApplication1.Models.PresentacionInforme
 @{
     Layout = null;
 }
@@ -9,7 +10,7 @@
     <script>
         /////////////////Start:Select searchable////////////////
 
-        $('#informe').submit(function (e) {
+        $('#informe').submit(function(e) {
             var x = this;
             e.preventDefault();
             var isValidItem = true;
@@ -18,9 +19,9 @@
             var fechaevaluacioninforme = true;
             var fechaestado = true;
             var observacion = true;
+            var fechaevaluacionplan = true;
 
-
-
+            var fechita = new Date($('#fechita').val());
             var fecha1 = new Date($('#FechaPresentacionInforme').val());
             var fecha2 = new Date($('#FechaEvaluacionInforme').val());
 
@@ -32,6 +33,13 @@
                 var fechaestado = false;
 
                 $('#spanfechaestado').text("** Una Fecha de Evaluación debe ser mayor a la Fecha de Presentación.");
+
+            }
+            if (fecha1 <= fechita) {
+                var isValidItem = false;
+                var fechaevaluacionplan = false;
+
+                $('#spanfechaevaluacionplan').text("** Una Fecha de Presentación de Informe debe ser mayor a la Fecha de Evaluación del Plan. ");
 
             }
             if ((fecha1 < minfecha) || (fecha1 > maxfecha)) {
@@ -94,6 +102,9 @@
             if (fechaestado) {
                 $('#spanfechaestado').text("");
             }
+            if (fechaevaluacionplan) {
+                $('#spanfechaevaluacionplan').text("");
+            }
             if (fechaevaluacioninforme) {
                 $('#spanfechaevaluacioninforme').text("");
             }
@@ -102,7 +113,7 @@
             }
 
             if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
-                bootbox.confirm("Está por agregar una presentación del informe, ¿Desea continuar?", function (result) {
+                bootbox.confirm("Está por agregar una presentación del informe, ¿Desea continuar?", function(result) {
                     if (result) {
                         x.submit();
                     }
@@ -115,6 +126,7 @@
 
     </script>
 </head>
+<input id="fechita" value="@ViewBag.fechita.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture)"/>
 @using (Html.BeginForm("Create", "PresentacionInformes", null, FormMethod.Post, new { id = "informe" }))
 {    @Html.HiddenFor(model => model.IdPS)
 
@@ -177,8 +189,9 @@
         </div>
         <p> <span id="spanfechaestado" style="color: red"></span></p>
         <p>
-            <span id="spanobservacionabajo" style="color:red"></span>
+            <span id="spanobservacionabajo" style="color: red"></span>
         </p>
+        <p> <span id="spanfechaevaluacionplan" style="color: red"></span></p>
 
         <div class="form-group row text-center">
             <div>

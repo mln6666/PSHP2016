@@ -93,6 +93,7 @@ namespace WebApplication1.Controllers
                        });
 
             ViewBag.SelectList = selectList;
+            ViewBag.fechita = ps.PresentacionesPlanes.LastOrDefault().FechaEvaluacionPlan;
             //ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor");
             return View(presentacioninforme);
         }
