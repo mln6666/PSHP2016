@@ -19,7 +19,7 @@
 
         <div class="form-horizontal text-center">
             <h4 style="font-size: xx-large">Ingrese años:</h4>
-           
+
             <label>Desde:</label>
             <input id='from' type="number" required name='fecha1' max="2999" min="1900" data-rule-menor="true" placeholder="aaaa"/>
             <label>Hasta:</label>
@@ -27,8 +27,11 @@
             &nbsp; &nbsp;
             <span id="spanfechamenor" style="color: red"></span>
 
-            <button type="submit" class="btn btn-info btn-xs glyphicon glyphicon-search"></button>
+            <button type="submit" onclick="ordenFechas()" class="btn btn-info btn-xs glyphicon glyphicon-search"></button>
 
+        </div>
+        <div class="text-center">
+            <span id="spanOrdenFechas" style="color: red"></span>
         </div>
     </div>
 }
