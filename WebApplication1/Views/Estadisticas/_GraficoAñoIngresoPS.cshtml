@@ -8,15 +8,22 @@
 
 
 <div id="ajaxBeginFormResult" class="text-center">
-    <head >
+    <head>
         <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
         <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css" />
     </head>
 
-    <div id="seleccion">
+    @if (Model.Count() == 0)
+    {
+        <hr style="color: darkgrey; border-color: darkgrey" />
+        <h3 style="color: red">-- No hay coincidencias para el rango ingresado. --</h3>
+        <hr style="color: darkgrey; border-color: darkgrey" />
+    }
+    else
+    {<div id="seleccion">
         <hr class="hidden-print" style="color: darkgrey" />
         <h4>Desde: @ViewBag.fechadesde - Hasta: @ViewBag.fechahasta<button id="ocultargrafico" class="hidden-print">Ocultar gráfico</button></h4>
-        
+
 
 
         <code style="color: blue; font-style: italic; font-size: large">Azul: cantidad de alumnos en el año.</code>
@@ -100,7 +107,7 @@
                             </td>}
 
                         <td class="text-center hidden-print">
-                            @Html.ActionLink("Detalles", "Details","PS", new { id = item.IdPS, var = true }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                            @Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS, var = true }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
                             @*@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
                         </td>
                     </tr>
@@ -115,38 +122,39 @@
 
     </div>
 
-    
+
 
     <div class="hidden-print">
         <a class="btn btn-primary" onclick="window.print('#seleccion');">
             Imprimir
-            
+
         </a>
-    </div>
+    </div> 
 
 
 
 
 
-  
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.cursor.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pointLabels.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.logAxisRenderer.js"></script>
-        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.meterGaugeRenderer.min.js"></script>
+
+
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.cursor.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pointLabels.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.logAxisRenderer.js"></script>
+    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.meterGaugeRenderer.min.js"></script>
     <script language="javascript" type="text/javascript" src="~/Scripts/datatables/jquery.datatables.js"></script>
     <script language="javascript" type="text/javascript" src="~/Scripts/datatables/datatables.bootstrap.js"></script>
 
 
 
 
-        <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
-        <script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
+    <script>
         $(document).ready(function () {
             $('#mitabla_length').addClass('hidden-print');
             $('#mitabla_filter').addClass('hidden-print');
@@ -181,12 +189,12 @@
                         ticks: ticks
                     },
                     yaxis: {
-                        min: 0,  
-                        tickInterval: 1, 
-                        tickOptions: { 
-                            formatString: '%d' 
-                        } 
-            }
+                        min: 0,
+                        tickInterval: 1,
+                        tickOptions: {
+                            formatString: '%d'
+                        }
+                    }
                 }
             });
 
@@ -207,23 +215,23 @@
 
         });
 
-            function printData() {
-                var divToPrint = document.getElementById("seleccion");
-                newWin = window.open("");
-                newWin.document.write(divToPrint.outerHTML);
-                newWin.print();
-                newWin.close();
-            }      
+        function printData() {
+            var divToPrint = document.getElementById("seleccion");
+            newWin = window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            newWin.close();
+        }
 
-            $("#mitabla").DataTable({
-                "language": {
-                    "url": "/Scripts/DataTables/spanish.json"
-                }
-            });
-            $( "#ocultargrafico" ).click(function() {
-                $( "#grafico2" ).toggle( "slow" );
-            });
-        </script>
-    
+        $("#mitabla").DataTable({
+            "language": {
+                "url": "/Scripts/DataTables/spanish.json"
+            }
+        });
+        $( "#ocultargrafico" ).click(function() {
+            $( "#grafico2" ).toggle( "slow" );
+        });
+    </script>
 
+    }
 </div>

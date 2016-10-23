@@ -11,6 +11,14 @@
         <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css" />
     </head>
 
+@if (Model.Count() == 0)
+{
+    <hr style="color: darkgrey; border-color: darkgrey" />
+        <h3 style="color: red">-- No hay coincidencias para el rango ingresado. --</h3>
+        <hr style="color: darkgrey; border-color: darkgrey" />
+}
+else
+{
 
 
     <div id="seleccion">
@@ -173,7 +181,6 @@
 
             </a>
         </div>
-
     <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
     <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
     <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
@@ -233,6 +240,7 @@
         });
     </script>
 
+                                }
 
 </div>
 
