@@ -30,7 +30,7 @@ else
             </div>
         </div>
 
-        @for (var i = 0; i < ViewBag.areas; i++)
+        @*@for (var i = 0; i < ViewBag.areas; i++)
         {
             <div class="panel panel-info" style="display: inline-block">
                 <div class="panel-heading">
@@ -50,7 +50,94 @@ else
 
                 </div>
             </div>
-        }
+        }*@
+        <table id="mitabla2" class="table table-striped table-bordered">
+            <thead>
+                <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+
+
+                    <th class="text-left" style="border-radius: 3px">
+                        Áreas
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        P.Ent.
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        P.Ap.
+                    </th>
+
+                    <th class="text-left" style="border-radius: 3px">
+                        P.Des.
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        P.Rech.
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        I.Ent.
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        I.Ap.
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        I.Des.
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        Ps.Ap.
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        Ps.Canc.
+                    </th>
+                    <th class="text-left" style="border-radius: 3px">
+                        Ps.Venc.
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < ViewBag.areas; i++)
+                {
+                    <tr style="background-color: azure">
+                        <td class="text-left">
+                            @ViewBag.misareas[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listaplanesentregados[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listaplanesaprobados[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listaplanesdesaprobados[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listaplanesrechazados[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listainformesentregados[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listainformesaprobados[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listainformesdesaprobados[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listapssaprobadas[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listapsscanceladas[i]
+                        </td>
+                        <td class="text-left">
+                            @ViewBag.listapssvencidas[i]
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
         <hr style="color: grey; border-color: grey" />
 
         <table id="mitabla" class="table table-striped table-bordered">
@@ -162,6 +249,10 @@ else
             $('#mitabla_filter').addClass('hidden-print');
             $('#mitabla_info').addClass('hidden-print');
             $('#mitabla_paginate').addClass('hidden-print');
+            $('#mitabla2_length').addClass('hidden-print');
+            $('#mitabla2_filter').addClass('hidden-print');
+            $('#mitabla2_info').addClass('hidden-print');
+            $('#mitabla2_paginate').addClass('hidden-print');
 
             var listaareas = @Html.Raw(ViewBag.listaareas);
             var cantidades = @Html.Raw(ViewBag.cantidades);
@@ -192,6 +283,11 @@ else
         });
 
         $("#mitabla").DataTable({
+            "language": {
+                "url": "/Scripts/DataTables/spanish.json"
+            }
+        });
+        $("#mitabla2").DataTable({
             "language": {
                 "url": "/Scripts/DataTables/spanish.json"
             }
