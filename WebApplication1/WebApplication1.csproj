@@ -775,6 +775,12 @@
     <Content Include="Views\Estadisticas\_GraficoTipospsPS.cshtml" />
     <Content Include="Views\Estadisticas\EstadosPS.cshtml" />
     <Content Include="Views\Estadisticas\_GraficoEstadosPS.cshtml" />
+    <Content Include="Views\Estadisticas\OrgPlanes.cshtml" />
+    <Content Include="Views\Estadisticas\OrgInformes.cshtml" />
+    <Content Include="Views\Estadisticas\OrgPs.cshtml" />
+    <Content Include="Views\Estadisticas\_OrgPlanes.cshtml" />
+    <Content Include="Views\Estadisticas\_OrgInformes.cshtml" />
+    <Content Include="Views\Estadisticas\_OrgPs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

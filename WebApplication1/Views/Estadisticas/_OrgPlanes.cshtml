@@ -1,0 +1,322 @@
+﻿
+@using WebApplication1.Models
+@model IEnumerable<WebApplication1.Models.PS>
+
+@{
+    Layout = null;
+}
+
+<div id="ajaxBeginFormResult">
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/Scripts/jqPlot/jquery.jqplot.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css" />
+    </head>
+
+    @if (Model.Count() == 0)
+    {
+        <hr style="color: darkgrey; border-color: darkgrey" />
+        <h3 style="color: red">-- No hay coincidencias para el rango ingresado. --</h3>
+        <hr style="color: darkgrey; border-color: darkgrey" />
+    }
+    else
+    {
+
+        <div id="seleccion">
+
+            <div class="text-center">
+                <h4>
+                    Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")-Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")
+                    @*<button id="ocultargrafico" class="hidden-print">Ocultar gráfico</button>*@
+                </h4>
+
+                @*<div id="grafico2" style="width:500px; height:300px ; display: inline-block">
+                </div>*@
+            </div>
+            <table id="mitabla2" class="table table-striped table-bordered">
+                <thead>
+                    <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+
+                       
+                        <th class="text-left" style="border-radius: 3px">
+                            Organización
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            Aprobados
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            Desaprobados
+                        </th>
+
+                        <th class="text-left" style="border-radius: 3px">
+                            Pendientes
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            Rechazados
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < ViewBag.areas; i++)
+                {
+                        <tr style="background-color: azure">
+                            <td class="text-left">
+                               @ViewBag.misareas[i]
+                            </td>
+                            <td class="text-left">
+                                @ViewBag.listaaprobados[i]
+                            </td>
+                            <td class="text-left">
+                                @ViewBag.listadesaprobados[i]
+                            </td>
+                            <td class="text-left">
+                                @ViewBag.listapendientes[i]
+                            </td>
+                            <td class="text-left">
+                                @ViewBag.listarechazados[i]
+                            </td>
+
+                            
+                        </tr>
+                                    }
+                </tbody>
+            </table>
+            @*@for (var i = 0; i < ViewBag.areas; i++)
+    {
+        <div class="panel panel-info" style="display: inline-block">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">@ViewBag.misareas[i]</h3>
+            </div>
+            <div class="panel-body">
+                <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Aprobados: @ViewBag.listaaprobados[i]</h5>
+                <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Desaprobados: @ViewBag.listaaprobados[i]</h5>
+                <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Pendientes: @ViewBag.listapendientes[i]</h5>
+                <h5 style="font-family: cursive; font-size: medium" class="text-center">Planes Rechazados: @ViewBag.listarechazados[i]</h5>
+            </div>
+        </div>
+    }*@
+            <hr style="color: grey; border-color: grey" />
+            <div class="text-center" style="color: green">[ Evaluaciones Planes: -- A: Aprobado -- D: Desaprobado -- P: Pendiente -- R: Rechazado ]</div>
+
+            <table id="mitabla" class="table table-striped table-bordered">
+                <thead>
+                    <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+
+                        <th class="text-left" style="border-radius: 3px">
+                            @Html.DisplayNameFor(model => model.Alumno.Legajo)
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            Apellido y Nombre
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            @Html.DisplayNameFor(model => model.NroDisposicion)
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            @Html.DisplayNameFor(model => model.Area.NombreArea)
+                        </th>
+
+                        <th class="text-left" style="border-radius: 3px">
+                            @Html.DisplayNameFor(model => model.CicloLectivo)
+                        </th>
+
+                        <th class="text-left" style="border-radius: 3px">
+                            @Html.DisplayNameFor(model => model.Estado)
+                        </th>
+                        <th class="text-center" style="border-radius: 3px">A</th>
+                        <th class="text-center" style="border-radius: 3px">D</th>
+                        <th class="text-center" style="border-radius: 3px">P</th>
+                        <th class="text-center" style="border-radius: 3px">R</th>
+                        <th class="text-center hidden-print" style="border-radius: 3px">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                {
+                        <tr style="background-color: azure">
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Alumno.Legajo)
+                            </td>
+                            <td class="text-left">
+                                @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.NroDisposicion)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Area.NombreArea)
+                            </td>
+
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.CicloLectivo)
+                            </td>
+
+
+                            @if (item.Estado == Estado.PS_Aprobada & item.NroDisposicion != null)
+
+                            {
+                                <td class="text-left" style="font-weight: bolder; font-style: italic; color: forestgreen">
+                                    @Html.DisplayFor(modelItem => item.Estado)
+                                </td>}
+                            else
+                    if (item.Estado == Estado.PS_Cancelada)
+                            {
+                                <td class="text-left" style="font-weight: bold; font-style: italic;color: darkred">
+                                    @Html.DisplayFor(modelItem => item.Estado)
+                                </td>
+                            }
+                            else if (item.Estado == Estado.PS_Aprobada & item.NroDisposicion == null)
+                            {
+                                <td class="text-left" style="font-weight: bold; font-style: italic;color: midnightblue">
+                                    @Html.DisplayFor(modelItem => item.Estado)<p style="color: midnightblue;font-size: smaller">[Sin Nro. Disposición]</p>
+                                </td> }
+                            else
+                            {
+                                <td class="text-left" style="font-weight: bold; font-style: italic;">
+                                    @Html.DisplayFor(modelItem => item.Estado)
+                                </td>}
+                            <td class="text-left">
+                                @{
+                                    int ppendiente = 0;
+                                    int paprobado = 0;
+                                    int pdesaprobado = 0;
+                                    int prechazado = 0;
+                                }
+                                @foreach (var dato in item.PresentacionesPlanes)
+                                {
+                                    if (dato.FechaPresentacionPlan >= ViewBag.fechadesde & dato.FechaPresentacionPlan <= ViewBag.fechahasta)
+                                    {
+                                        if (dato.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                                        {
+                                            paprobado++;
+                                        }
+                                        if (dato.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
+                                        {
+                                            pdesaprobado++;
+                                        }
+                                        if (dato.EstadoEvaluacionPlan == Evaluacion.Rechazado)
+                                        {
+                                            prechazado++;
+                                        }
+                                        if (dato.EstadoEvaluacionPlan == Evaluacion.Pendiente)
+                                        {
+                                            ppendiente++;
+                                        }
+                                    }
+                                }
+                                <span>@paprobado</span>
+
+
+                            </td>
+                            <td class="text-left">
+                                <span>@pdesaprobado</span>
+                            </td>
+                            <td class="text-left">
+                                <span>@ppendiente</span>
+
+                            </td>
+                            <td class="text-left">
+                                <span>@prechazado</span>
+                            </td>
+
+                            <td class="text-center hidden-print">
+                                @Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS, var = true }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                                @*@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+                            </td>
+                        </tr>
+                                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="hidden-print">
+            <a class="btn btn-primary" onclick="window.print('#seleccion');">
+                Imprimir
+
+            </a>
+        </div>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.cursor.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/datatables/jquery.datatables.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/datatables/datatables.bootstrap.js"></script>
+
+
+
+
+        <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $('#mitabla_length').addClass('hidden-print');
+            $('#mitabla_filter').addClass('hidden-print');
+            $('#mitabla_info').addClass('hidden-print');
+            $('#mitabla_paginate').addClass('hidden-print');
+            $('#mitabla2_length').addClass('hidden-print');
+            $('#mitabla2_filter').addClass('hidden-print');
+            $('#mitabla2_info').addClass('hidden-print');
+            $('#mitabla2_paginate').addClass('hidden-print');
+
+            var listaareas = @Html.Raw(ViewBag.listaareas);
+            var cantidades = @Html.Raw(ViewBag.cantidades);
+
+            var array = [];
+            $.each(listaareas, function(index, value) {
+                array.push([value + " : " + cantidades[index], cantidades[index]]);
+            });
+
+
+            plot3 = jQuery.jqplot('grafico2',
+                [array],
+                {
+                    title: ' ',
+                    seriesDefaults: {
+                        shadow: false,
+                        renderer: jQuery.jqplot.PieRenderer,
+                        rendererOptions: {
+                            sliceMargin: 4,
+                            showDataLabels: true
+                        }
+                    },
+                    legend: { show: true, location: 'e' }
+                }
+            );
+
+
+        });
+
+        $("#mitabla").DataTable({
+            "language": {
+                "url": "/Scripts/DataTables/spanish.json"
+            }
+        });
+        $("#mitabla2").DataTable({
+            "language": {
+                "url": "/Scripts/DataTables/spanish.json"
+            }
+        });
+
+        function printData() {
+            var divToPrint = document.getElementById("seleccion");
+            newWin = window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            newWin.close();
+        }
+        $( "#ocultargrafico" ).click(function() {
+            $( "#grafico2" ).toggle( "slow" );
+        });
+        </script>
+                                    }
+
+
+</div>
+
+<style>
+    .jqplot-table-legend {
+        font-size: large;
+    }
+</style>

@@ -213,13 +213,22 @@
 							Estadísticas <span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#" @*onclick="event.stopPropagation()"*@>PSs</a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Estados", "EstadosPS", "Estadisticas")</li>
+                                    <li>@Html.ActionLink("Áreas", "AreasPS", "Estadisticas")</li>
+                                    <li>@Html.ActionLink("Tipo PS", "TipospsPS", "Estadisticas")</li>
+                                    <li>@Html.ActionLink("Organizaciones", "OrgPs", "Estadisticas")</li>
+                                </ul>
+                            </li>
 							<li class="dropdown-submenu">
 								<a tabindex="-1" href="#" @*onclick="event.stopPropagation()"*@>Planes</a>
 								<ul class="dropdown-menu">
 									<li>@Html.ActionLink("Estado", "EstadosPlanes", "Estadisticas")</li>
 									<li>@Html.ActionLink("Áreas", "AreasPlanes", "Estadisticas")</li>
-									<li>@Html.ActionLink("Tipo PS", "TipospsPlanes", "Estadisticas")</li>
+								    <li>@Html.ActionLink("Tipo PS", "TipospsPlanes", "Estadisticas")</li>
+                                    <li>@Html.ActionLink("Organizaciones", "OrgPlanes", "Estadisticas")</li>
 									
 								</ul>
 							</li>
@@ -229,14 +238,13 @@
 								<ul class="dropdown-menu">
 									<li>@Html.ActionLink("Estado", "EstadosInformes", "Estadisticas")</li>
 									<li>@Html.ActionLink("Áreas", "AreasInformes", "Estadisticas")</li>
-									<li>@Html.ActionLink("Tipo PS", "TipospsInformes", "Estadisticas")</li>
+								    <li>@Html.ActionLink("Tipo PS", "TipospsInformes", "Estadisticas")</li>
+                                    <li>@Html.ActionLink("Organizaciones", "OrgInformes", "Estadisticas")</li>
 								</ul>
 							</li>
 							<li class="divider"></li>
 						    <li>@Html.ActionLink("Año Ingreso", "AñoIngresoPS", "Estadisticas")</li>
-                            <li>@Html.ActionLink("Estados PS", "EstadosPS", "Estadisticas")</li>
-						    <li>@Html.ActionLink("Areas PS", "AreasPS", "Estadisticas")</li>
-                            <li>@Html.ActionLink("TiposPS PS", "TipospsPS", "Estadisticas")</li>
+                            
 						</ul>
 					</li>
 					<li class="dropdown" style="left: auto">
