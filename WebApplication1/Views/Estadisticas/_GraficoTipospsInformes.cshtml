@@ -27,7 +27,7 @@ else
 
         <div class="text-center">
 
-            <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")-Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")<button id="ocultargrafico" class="hidden-print">Ocultar gráfico</button></h4>
+            <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")&nbsp;-&nbsp;Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;<button id="ocultargrafico" class="hidden-print btn btn-default btn-sm">Ocultar</button></h4>
            
             
 
@@ -297,6 +297,10 @@ else
             newWin.close();
         }
         $( "#ocultargrafico" ).click(function() {
+            $(this).text(function(i, text) {
+                return text === "Ocultar" ? "Mostrar" : "Ocultar";
+            });
+           
             $( "#grafico2" ).toggle( "slow" );
         });
     </script>
