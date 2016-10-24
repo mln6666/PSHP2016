@@ -168,7 +168,7 @@ else
 
 
     <div class="hidden-print">
-            <a class="btn btn-primary" onclick="window.print('#seleccion');">
+            <a class="btn btn-warning" onclick="window.print('#seleccion');">
                Imprimir
 
             </a>
@@ -194,7 +194,7 @@ else
             plot3 = jQuery.jqplot('grafico2',
         [[['Planes Aprobados: '+@ViewBag.planesaprobados, @ViewBag.planesaprobados], ['Planes Desaprobados: '+@ViewBag.planesdesaprobados, @ViewBag.planesdesaprobados],['Planes Rechazados: '+@ViewBag.planesrechazados, @ViewBag.planesrechazados],['Planes Pendientes: '+@ViewBag.planespendientes, @ViewBag.planespendientes]]],
         {
-            title: ' ',
+            title: 'Gráfico',
             seriesDefaults: {
                 shadow: false,
                 renderer: jQuery.jqplot.PieRenderer,

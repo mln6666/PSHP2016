@@ -159,7 +159,7 @@ else
         </table>
     </div>
         <div class="hidden-print" >
-            <a class="btn btn-primary" onclick="window.print('#seleccion');">
+            <a class="btn btn-warning" onclick="window.print('#seleccion');">
                 Imprimir
             </a>
         </div>
@@ -185,7 +185,7 @@ else
             plot3 = jQuery.jqplot('grafico2',
         [[['Informes Aprobados: '+@ViewBag.informesaprobados, @ViewBag.informesaprobados], ['Informes Desaprobados: '+@ViewBag.informesdesaprobados, @ViewBag.informesdesaprobados],['Informes Pendientes: '+@ViewBag.informespendientes, @ViewBag.informespendientes]]],
         {
-            title: ' ',
+            title: 'Gráfico',
             seriesDefaults: {
                 shadow: false,
                 renderer: jQuery.jqplot.PieRenderer,

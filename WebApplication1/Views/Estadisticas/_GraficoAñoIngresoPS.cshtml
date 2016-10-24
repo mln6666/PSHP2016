@@ -126,7 +126,7 @@
 
 
     <div class="hidden-print">
-        <a class="btn btn-primary" onclick="window.print('#seleccion');">
+        <a class="btn btn-warning" onclick="window.print('#seleccion');">
             Imprimir
 
         </a>
@@ -179,7 +179,7 @@
             });
 
 
-            plot2 = $.jqplot('grafico2', [s1, s2], {
+            plot2 = $.jqplot('grafico2', [s1, s2], { title: 'Gráfico',
                 seriesDefaults: {
                     renderer:$.jqplot.BarRenderer,
                     pointLabels: { show: true }
