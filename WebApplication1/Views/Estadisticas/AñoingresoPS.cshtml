@@ -11,24 +11,27 @@
     @Html.AntiForgeryToken()
    
     <div>
-        <h1 class="text-center ">Alumnos por año de ingreso</h1>
-        <hr style="color: grey; border-color: grey"/>
+        <h2 class="text-center ">Alumnos por año de ingreso</h2>
+        <hr style="color: grey; border-color: grey;margin-bottom: 0px" />
     </div>
     <div class="hidden-print">
 
-
-        <div class="form-horizontal text-center">
-            <h4 style="font-size: xx-large">Ingrese años:</h4>
-
-            <label>Desde:</label>
-            <input id='from' type="number" required name='fecha1' max="2999" min="1900" data-rule-menor="true" placeholder="aaaa"/>
-            <label>Hasta:</label>
-            <input id='to' type="number" required name='fecha2' max="2999" min="1900" placeholder="aaaa"/>
-            &nbsp; &nbsp;
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <h3 class="col-lg-4">Ingrese años:</h3>
+        </div>
+        <div class="row form-horizontal">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-1"></div>
+            <label class="col-lg-1 text-right">Desde:</label>
+            <input id='from' class="col-lg-1 form-control" style="width: 200px" type="number" required name='fecha1' max="2999" min="1900" data-rule-menor="true" placeholder="aaaa"/>
+            
+            <label class="col-lg-1 text-right">Hasta:</label>
+            <input id='to' type="number" class="col-lg-1 form-control" style="width: 200px" required name='fecha2' max="2999" min="1900" placeholder="aaaa"/>
+            <div class="col-lg-1">
+                <button type="submit" onclick="ordenFechas()" class="btn btn-info btn-xs glyphicon glyphicon-search text-left"></button>
+            </div>
             <span id="spanfechamenor" style="color: red"></span>
-
-            <button type="submit" onclick="ordenFechas()" class="btn btn-info btn-xs glyphicon glyphicon-search"></button>
-
         </div>
         <div class="text-center">
             <span id="spanOrdenFechas" style="color: red"></span>

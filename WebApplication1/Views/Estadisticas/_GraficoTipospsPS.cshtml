@@ -151,7 +151,7 @@ else
                     Apellido y Nombre
                 </th>
                 <th class="text-left" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.NroDisposicion)
+                    @Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
                 </th>
                 <th class="text-left" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.Area.NombreArea)
@@ -178,7 +178,7 @@ else
                         @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
                     </td>
                     <td class="text-left">
-                        @Html.DisplayFor(modelItem => item.NroDisposicion)
+                        @Html.DisplayFor(modelItem => item.TipoPS.NombreTipoPS)
                     </td>
                     <td class="text-left">
                         @Html.DisplayFor(modelItem => item.Area.NombreArea)
