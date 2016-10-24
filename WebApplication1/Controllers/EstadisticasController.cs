@@ -110,7 +110,17 @@ namespace WebApplication1.Controllers
 
             //fecha2 = Convert.ToDateTime("01/02/2200").Date;
 
-
+            List<string> estadosstring2 = new List<string>();
+            estadosstring2.Add("P.Ent.");
+            estadosstring2.Add("P.Ap.");
+            estadosstring2.Add("P.Des.");
+            estadosstring2.Add("P.Rech.");
+            estadosstring2.Add("I.Ent.");
+            estadosstring2.Add("I.Ap.");
+            estadosstring2.Add("I.Des.");
+            estadosstring2.Add("Ps.Ap.");
+            estadosstring2.Add("Ps.Canc.");
+            estadosstring2.Add("Ps.Venc.");
             List<string> estadosstring = new List<string>();
             estadosstring.Add("Plan_Entregado");
             estadosstring.Add("Plan_Aprobado");
@@ -134,6 +144,7 @@ namespace WebApplication1.Controllers
             misestados.Add(Estado.PS_Cancelada);
             misestados.Add(Estado.PS_Vencida);
             var listaestados = misestados;
+
             List<int> cantidades = new List<int>();
            
             IList<PS> pss = new List<PS>();
@@ -187,7 +198,7 @@ namespace WebApplication1.Controllers
             pss = pss.Distinct().ToList();
             ViewBag.fechadesde = fecha1;
             ViewBag.fechahasta = fecha2;
-            ViewBag.listaestados = JsonConvert.SerializeObject(estadosstring);
+            ViewBag.listaestados = JsonConvert.SerializeObject(estadosstring2);
             ViewBag.cantidades = JsonConvert.SerializeObject(cantidades);
             ViewBag.estados = misestados.Count();
             ViewBag.misestados = misestados;
