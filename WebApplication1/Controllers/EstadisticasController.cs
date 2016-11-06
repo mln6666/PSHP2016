@@ -100,7 +100,113 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+        // // // // // // /// Pruebas
 
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult _PopupAreasPlanes(string area,DateTime fecha1, DateTime fecha2)
+        {
+            //fecha1 = Convert.ToDateTime("01/02/0001").Date;
+
+            //fecha2 = Convert.ToDateTime("01/02/2200").Date;
+            var listaareas = db.Areas.ToList();
+
+            List<string> misareas = new List<string>();
+            List<int> cantidades = new List<int>();
+            List<int> listaaprobados = new List<int>();
+            List<int> listadesaprobados = new List<int>();
+            List<int> listapendientes = new List<int>();
+            List<int> listarechazados = new List<int>();
+            IList<PS> pss = new List<PS>();
+
+            foreach (var item in listaareas)
+            {
+                misareas.Add(item.NombreArea);
+            }
+            int total = 0;
+            int planesaprobados = 0;
+            int planesdesaprobados = 0;
+            int planesrechazados = 0;
+            int planespendientes = 0;
+
+            for (int i = 0; i < listaareas.Count(); i++)
+            {
+                foreach (var item in db.PresentacionPlanes)
+                {
+                    if (item.FechaPresentacionPlan >= fecha1 & item.FechaPresentacionPlan <= fecha2)
+                    {
+                        pss.Add(item.PS);
+                        if (item.PS.Area.NombreArea == listaareas.ElementAt(i).NombreArea)
+                        {
+                            total++;
+
+                            if (item.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                            {
+                                planesaprobados++;
+                            }
+                            if (item.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
+                            {
+                                planesdesaprobados++;
+                            }
+                            if (item.EstadoEvaluacionPlan == Evaluacion.Rechazado)
+                            {
+                                planesrechazados++;
+                            }
+                            if (item.EstadoEvaluacionPlan == Evaluacion.Pendiente)
+                            {
+                                planespendientes++;
+                            }
+
+
+
+                        }
+
+                    }
+                }
+                cantidades.Add(total);
+                listaaprobados.Add(planesaprobados);
+                listadesaprobados.Add(planesdesaprobados);
+                listapendientes.Add(planespendientes);
+                listarechazados.Add(planesrechazados);
+                total = 0;
+                planesaprobados = 0;
+                planesdesaprobados = 0;
+                planespendientes = 0;
+                planesrechazados = 0;
+            }
+          
+            ViewBag.fechadesde = fecha1;
+            ViewBag.fechahasta = fecha2;
+            ViewBag.listaareas = JsonConvert.SerializeObject(misareas);
+            ViewBag.cantidades = JsonConvert.SerializeObject(cantidades);
+            ViewBag.areas = misareas.Count();
+            ViewBag.misareas = misareas;
+            ViewBag.miscantidades = cantidades;//total de planes /informes segun el metodo (no se ocupa por ahora)
+            ViewBag.listaaprobados = listaaprobados;
+            ViewBag.listadesaprobados = listadesaprobados;
+            ViewBag.listapendientes = listapendientes;
+            ViewBag.listarechazados = listarechazados;
+
+            IList<PS> pss2 = new List<PS>();
+
+            foreach (var item in pss)
+            {
+
+                if (item.Area.NombreArea == area)
+                {
+                    pss2.Add(item);
+                }
+            }
+            pss = pss2;
+            pss = pss.Distinct().ToList();
+
+          
+                
+
+
+            return View(pss);
+        }
+
+        // // / // / // / /// // Fin pruebas
 
         [Authorize(Roles = "Moderador,Administrador")]
         [HttpPost]

@@ -2,7 +2,7 @@
 @model IEnumerable<WebApplication1.Models.PS>
 
 @{
-    Layout = null;    
+    Layout = null;
 }
 
 <div id="ajaxBeginFormResult">
@@ -12,55 +12,58 @@
         <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css" />
     </head>
 
-@if (Model.Count() == 0)
-{
-    <hr style="color: darkgrey; border-color: darkgrey" />
+    @if (Model.Count() == 0)
+    {
+        <hr style="color: darkgrey; border-color: darkgrey" />
         <h3 style="color: red">-- No hay coincidencias para el rango ingresado. --</h3>
         <hr style="color: darkgrey; border-color: darkgrey" />
-}
-else
-{
+    }
+    else
+    {
 
-    <div id="seleccion">
+        <div id="seleccion">
 
-    <div class="text-center">
-        
-        <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")&nbsp;-&nbsp;Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;<button id="ocultargrafico" class="hidden-print btn btn-default btn-sm">Ocultar</button></h4>
+            <div class="text-center">
 
-        <div id="grafico2" style="width: 500px; height: 300px; display: inline-block">
-        </div>
-    </div>
+                <h4>Desde: @ViewBag.fechadesde.ToString("dd/MM/yyyy")&nbsp;-&nbsp;Hasta: @ViewBag.fechahasta.ToString("dd/MM/yyyy")&nbsp;&nbsp;&nbsp;<button id="ocultargrafico" class="hidden-print btn btn-default btn-sm">Ocultar</button></h4>
+
+                <div id="grafico2" style="width: 500px; height: 300px; display: inline-block">
+                </div>
+            </div>
 
 
-        <table id="mitabla1" class="table table-striped table-bordered">
-            <thead>
-                <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+            <table id="mitabla1" class="table table-striped table-bordered">
+                <thead>
+                    <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
 
-                    <th class="text-left" style="border-radius: 3px">
-                        Área
-                    </th>
-                    <th class="text-left" style="border-radius: 3px">
-                        Planes Aprobados
-                    </th>
-                    <th class="text-left" style="border-radius: 3px">
-                       Planes Desaprobados
-                    </th>
-                    <th class="text-left" style="border-radius: 3px">
-                        Planes Pendientes
-                    </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            Área
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            Planes Aprobados
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            Planes Desaprobados
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            Planes Pendientes
+                        </th>
 
-                    <th class="text-left" style="border-radius: 3px">
-                        Planes Rechazados
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-               
+                        <th class="text-left" style="border-radius: 3px">
+                            Planes Rechazados
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
                     @for (var i = 0; i < ViewBag.areas; i++)
                     {
                         <tr style="background-color: azure">
                             <td class="text-left">
-                                @ViewBag.misareas[i]
+                               
+                                @Html.ActionLink((string)ViewBag.misareas[i], "_PopupAreasPlanes", new { area = ViewBag.misareas[i], fecha1 = ViewBag.fechadesde, fecha2 = ViewBag.fechahasta }, new { @class = "dialog-window2" })
+
+
                             </td>
                             <td class="text-left">
                                 @ViewBag.listaaprobados[i]
@@ -76,227 +79,237 @@ else
                             </td>
                         </tr>
                     }
-        </tbody>
-    </table>
-    <hr style="color: grey; border-color: grey" />
-    <h2 class="text-center">PSs incidentes en la estadística</h2>
-    <div class="text-center" style="color: green">[ Evaluaciones Planes: -- A: Aprobado -- D: Desaprobado -- P: Pendiente -- R: Rechazado ]</div>
+                </tbody>
+            </table>
+            <hr style="color: grey; border-color: grey" />
+            <h2 class="text-center">PSs incidentes en la estadística</h2>
+            <div class="text-center" style="color: green">[ Evaluaciones Planes: -- A: Aprobado -- D: Desaprobado -- P: Pendiente -- R: Rechazado ]</div>
 
-    <table id="mitabla" class="table table-striped table-bordered">
-        <thead>
-            <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+            <table id="mitabla" class="table table-striped table-bordered">
+                <thead>
+                    <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
 
-                <th class="text-left" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Alumno.Legajo)
-                </th>
-                <th class="text-left" style="border-radius: 3px">
-                    Apellido y Nombre
-                </th>
-                <th class="text-left" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
-                </th>
-                <th class="text-left" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Area.NombreArea)
-                </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            @Html.DisplayNameFor(model => model.Alumno.Legajo)
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            Apellido y Nombre
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            @Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
+                        </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            @Html.DisplayNameFor(model => model.Area.NombreArea)
+                        </th>
 
-                <th class="text-left" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.CicloLectivo)
-                </th>
+                        <th class="text-left" style="border-radius: 3px">
+                            @Html.DisplayNameFor(model => model.CicloLectivo)
+                        </th>
 
-                <th class="text-left" style="border-radius: 3px">
-                    @Html.DisplayNameFor(model => model.Estado)
-                </th>
-                <th class="text-center" style="border-radius: 3px">A</th>
-                <th class="text-center" style="border-radius: 3px">D</th>
-                <th class="text-center" style="border-radius: 3px">P</th>
-                <th class="text-center" style="border-radius: 3px">R</th>
-                <th class="text-center hidden-print" style="border-radius: 3px">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr style="background-color: azure">
-                    <td class="text-left">
-                        @Html.DisplayFor(modelItem => item.Alumno.Legajo)
-                    </td>
-                    <td class="text-left">
-                        @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
-                    </td>
-                    <td class="text-left">
-                        @Html.DisplayFor(modelItem => item.TipoPS.NombreTipoPS)
-                    </td>
-                    <td class="text-left">
-                        @Html.DisplayFor(modelItem => item.Area.NombreArea)
-                    </td>
+                        <th class="text-left" style="border-radius: 3px">
+                            @Html.DisplayNameFor(model => model.Estado)
+                        </th>
+                        <th class="text-center" style="border-radius: 3px">A</th>
+                        <th class="text-center" style="border-radius: 3px">D</th>
+                        <th class="text-center" style="border-radius: 3px">P</th>
+                        <th class="text-center" style="border-radius: 3px">R</th>
+                        <th class="text-center hidden-print" style="border-radius: 3px">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr style="background-color: azure">
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Alumno.Legajo)
+                            </td>
+                            <td class="text-left">
+                                @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.TipoPS.NombreTipoPS)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Area.NombreArea)
+                            </td>
 
-                    <td class="text-left">
-                        @Html.DisplayFor(modelItem => item.CicloLectivo)
-                    </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.CicloLectivo)
+                            </td>
 
 
-                    @if (item.Estado == Estado.PS_Aprobada & item.NroDisposicion != null)
+                            @if (item.Estado == Estado.PS_Aprobada & item.NroDisposicion != null)
 
                     {
-                        <td class="text-left" style="font-weight: bolder; font-style: italic; color: forestgreen">
-                            @Html.DisplayFor(modelItem => item.Estado)
-                        </td>}
+                                <td class="text-left" style="font-weight: bolder; font-style: italic; color: forestgreen">
+                                    @Html.DisplayFor(modelItem => item.Estado)
+                                </td>}
                     else
                 if (item.Estado == Estado.PS_Cancelada)
                     {
-                        <td class="text-left" style="font-weight: bold; font-style: italic;color: darkred">
-                            @Html.DisplayFor(modelItem => item.Estado)
-                        </td>
-                    }
-                    else if (item.Estado == Estado.PS_Aprobada & item.NroDisposicion == null)
-                    {
-                        <td class="text-left" style="font-weight: bold; font-style: italic;color: midnightblue">
-                            @Html.DisplayFor(modelItem => item.Estado)<p style="color: midnightblue;font-size: smaller">[Sin Nro. Disposición]</p>
-                        </td> }
+                                <td class="text-left" style="font-weight: bold; font-style: italic;color: darkred">
+                                    @Html.DisplayFor(modelItem => item.Estado)
+                                </td>
+                            }
+                            else if (item.Estado == Estado.PS_Aprobada & item.NroDisposicion == null)
+                            {
+                                <td class="text-left" style="font-weight: bold; font-style: italic;color: midnightblue">
+                                    @Html.DisplayFor(modelItem => item.Estado)<p style="color: midnightblue;font-size: smaller">[Sin Nro. Disposición]</p>
+                                </td> }
                     else
                     {
-                        <td class="text-left" style="font-weight: bold; font-style: italic;">
-                            @Html.DisplayFor(modelItem => item.Estado)
-                        </td>}
-                    <td class="text-left">
-                        @{
-                            int ppendiente = 0;
-                            int paprobado = 0;
-                            int pdesaprobado = 0;
-                            int prechazado = 0;
-                        }
-                        @foreach (var dato in item.PresentacionesPlanes)
-                        {
-                            if (dato.FechaPresentacionPlan >= ViewBag.fechadesde & dato.FechaPresentacionPlan <= ViewBag.fechahasta)
-                            {
-                                if (dato.EstadoEvaluacionPlan == Evaluacion.Aprobado)
-                                {
-                                    paprobado++;
+                                <td class="text-left" style="font-weight: bold; font-style: italic;">
+                                    @Html.DisplayFor(modelItem => item.Estado)
+                                </td>}
+                            <td class="text-left">
+                                @{
+                                    int ppendiente = 0;
+                                    int paprobado = 0;
+                                    int pdesaprobado = 0;
+                                    int prechazado = 0;
                                 }
-                                if (dato.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
+                                @foreach (var dato in item.PresentacionesPlanes)
                                 {
-                                    pdesaprobado++;
+                                    if (dato.FechaPresentacionPlan >= ViewBag.fechadesde & dato.FechaPresentacionPlan <= ViewBag.fechahasta)
+                                    {
+                                        if (dato.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                                        {
+                                            paprobado++;
+                                        }
+                                        if (dato.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
+                                        {
+                                            pdesaprobado++;
+                                        }
+                                        if (dato.EstadoEvaluacionPlan == Evaluacion.Rechazado)
+                                        {
+                                            prechazado++;
+                                        }
+                                        if (dato.EstadoEvaluacionPlan == Evaluacion.Pendiente)
+                                        {
+                                            ppendiente++;
+                                        }
+                                    }
                                 }
-                                if (dato.EstadoEvaluacionPlan == Evaluacion.Rechazado)
-                                {
-                                    prechazado++;
-                                }
-                                if (dato.EstadoEvaluacionPlan == Evaluacion.Pendiente)
-                                {
-                                    ppendiente++;
-                                }
-                            }
-                        }
-                        <span>@paprobado</span>
+                                <span>@paprobado</span>
 
 
-                    </td>
-                    <td class="text-left">
-                        <span>@pdesaprobado</span>
-                    </td>
-                    <td class="text-left">
-                        <span>@ppendiente</span>
+                            </td>
+                            <td class="text-left">
+                                <span>@pdesaprobado</span>
+                            </td>
+                            <td class="text-left">
+                                <span>@ppendiente</span>
 
-                    </td>
-                    <td class="text-left">
-                        <span>@prechazado</span>
-                    </td>
+                            </td>
+                            <td class="text-left">
+                                <span>@prechazado</span>
+                            </td>
 
-                    <td class="text-center hidden-print">
-                        @Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS, var = true }, new { target = "_blank", @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                        @*@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                            <td class="text-center hidden-print">
+                                @Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS, var = true }, new { target = "_blank", @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                                @*@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+                            </td>
+                        </tr>
+                                    }
+                </tbody>
+            </table>
+        </div>
 
-    <div class="hidden-print" >
+        <div class="hidden-print">
             <a class="btn btn-warning" onclick="window.print('#seleccion');">
                 Imprimir
 
             </a>
         </div>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.cursor.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/datatables/jquery.datatables.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/datatables/datatables.bootstrap.js"></script>
-    
+
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
 
-    <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.0.min.js"></script> <script>
-        $(document).ready(function() {
-            $('#mitabla_length').addClass('hidden-print');
-            $('#mitabla_filter').addClass('hidden-print');
-            $('#mitabla_info').addClass('hidden-print');
-            $('#mitabla_paginate').addClass('hidden-print');
-            $('#mitabla1_length').addClass('hidden-print');
-            $('#mitabla1_filter').addClass('hidden-print');
-            $('#mitabla1_info').addClass('hidden-print');
-            $('#mitabla1_paginate').addClass('hidden-print');
-
-            var listaareas = @Html.Raw(ViewBag.listaareas);
-            var cantidades = @Html.Raw(ViewBag.cantidades);
-
-            var array = [];
-            $.each(listaareas, function(index, value) {
-                array.push([value + " : " + cantidades[index], cantidades[index]]);
-            });
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.cursor.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/datatables/jquery.datatables.js"></script>
+        <script language="javascript" type="text/javascript" src="~/Scripts/datatables/datatables.bootstrap.js"></script>
 
 
-            plot3 = jQuery.jqplot('grafico2',
-                [array],
-                {
-                    title: 'Gráfico',
-                    seriesDefaults: {
-                        shadow: false,
-                        renderer: jQuery.jqplot.PieRenderer,
-                        rendererOptions: {
-                            sliceMargin: 4,
-                            showDataLabels: true
-                        }
-                    },
-                    legend: { show: true, location: 'e' }
-                }
-            );
 
 
-        });
+        <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
+        <script>
 
-        $("#mitabla").DataTable({
-            "language": {
-                "url": "/Scripts/DataTables/spanish.json"
-            }
-        });
-        $("#mitabla1").DataTable({
-            "language": {
-                "url": "/Scripts/DataTables/spanish.json"
-            }
-        });
+            $(document).ready(function() {
+                $('#mitabla_length').addClass('hidden-print');
+                $('#mitabla_filter').addClass('hidden-print');
+                $('#mitabla_info').addClass('hidden-print');
+                $('#mitabla_paginate').addClass('hidden-print');
+                $('#mitabla1_length').addClass('hidden-print');
+                $('#mitabla1_filter').addClass('hidden-print');
+                $('#mitabla1_info').addClass('hidden-print');
+                $('#mitabla1_paginate').addClass('hidden-print');
 
-        function printData() {
-            var divToPrint = document.getElementById("seleccion");
-            newWin = window.open("");
-            newWin.document.write(divToPrint.outerHTML);
-            newWin.print();
-            newWin.close();
-        }
-        $( "#ocultargrafico" ).click(function() {
-            $(this).text(function(i, text) {
-                return text === "Ocultar" ? "Mostrar" : "Ocultar";
-            });
-           
-            $( "#grafico2" ).toggle( "slow" );
-        });
-    </script>
-                                }
+                                        var listaareas = @Html.Raw(ViewBag.listaareas);
+                                        var cantidades = @Html.Raw(ViewBag.cantidades);
+
+                                        var array = [];
+                $.each(listaareas, function(index, value) {
+                                            array.push([value + " : " + cantidades[index], cantidades[index]]);
+                                        });
+
+
+                                        plot3 = jQuery.jqplot('grafico2',
+                        
+                                            [array],
+                    {
+                                            title: 'Gráfico',
+                        seriesDefaults: {
+                                                shadow: false,
+                            renderer: jQuery.jqplot.PieRenderer,
+                            rendererOptions: {
+                                                    sliceMargin: 4,
+                                showDataLabels: true
+                            }
+                                            },
+                        legend: { show: true, location: 'e' }
+                                        }
+                );
+
+
+                                    });
+
+            $("#mitabla").DataTable({
+                                        "language": {
+                                            "url": "/Scripts/DataTables/spanish.json"
+                                        }
+                                    });
+            $("#mitabla1").DataTable({
+                                        "language": {
+                                            "url": "/Scripts/DataTables/spanish.json"
+                                        }
+                                    });
+
+                                    function printData() {
+                                        var divToPrint = document.getElementById("seleccion");
+                                        newWin = window.open("");
+                                        newWin.document.write(divToPrint.outerHTML);
+                                        newWin.print();
+                                        newWin.close();
+                                    }
+            $( "#ocultargrafico" ).click(function() {
+                $(this).text(function(i, text) {
+                                            return text === "Ocultar" ? "Mostrar" : "Ocultar";
+                                        });
+
+                $( "#grafico2" ).toggle( "slow" );
+                                    });
+        </script>
+                                    }
 
 
 </div>

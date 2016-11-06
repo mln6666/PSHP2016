@@ -782,6 +782,7 @@
     <Content Include="Views\Estadisticas\_OrgPlanes.cshtml" />
     <Content Include="Views\Estadisticas\_OrgInformes.cshtml" />
     <Content Include="Views\Estadisticas\_OrgPs.cshtml" />
+    <Content Include="Views\Estadisticas\_PopupAreasPlanes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
