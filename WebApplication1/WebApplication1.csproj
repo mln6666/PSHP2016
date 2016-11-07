@@ -783,6 +783,11 @@
     <Content Include="Views\Estadisticas\_OrgInformes.cshtml" />
     <Content Include="Views\Estadisticas\_OrgPs.cshtml" />
     <Content Include="Views\Estadisticas\_PopupAreasPlanes.cshtml" />
+    <Content Include="Views\Estadisticas\_PopupOrgPlanes.cshtml" />
+    <Content Include="Views\Estadisticas\_PopupTipospsPlanes.cshtml" />
+    <Content Include="Views\Estadisticas\_PopupAreasInformes.cshtml" />
+    <Content Include="Views\Estadisticas\_PopupTipospsInformes.cshtml" />
+    <Content Include="Views\Estadisticas\_PopupOrgInformes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

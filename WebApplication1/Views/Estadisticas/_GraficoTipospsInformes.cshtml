@@ -75,7 +75,9 @@ else
                 {
                     <tr style="background-color: azure">
                         <td class="text-left">
-                            @ViewBag.mistiposps[i]
+                            @Html.ActionLink((string)ViewBag.mistiposps[i], "_PopupTipospsInformes", new { tipops = ViewBag.mistiposps[i], fecha1 = ViewBag.fechadesde, fecha2 = ViewBag.fechahasta }, new { @class = "dialog-window2" })
+
+
                         </td>
                         <td class="text-left">
                             @ViewBag.listaaprobados[i]

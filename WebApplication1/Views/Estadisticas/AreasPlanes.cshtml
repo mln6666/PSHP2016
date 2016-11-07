@@ -1,4 +1,5 @@
-﻿<h2 class="text-center">Estadística de Planes por Área</h2>
+﻿
+<h2 class="text-center">Estadística de Planes por Área</h2>
 <hr  style="color: grey; border-color: grey;margin-bottom: 0px" />
 
 @using (Ajax.BeginForm("_GraficoAreasPlanes", "Estadisticas", new AjaxOptions
@@ -54,14 +55,14 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <script>
     $(document).ready(function() {
-        
+      
+          
         $("body").on("click", "a.dialog-window2", null, function (e) {
             e.preventDefault();
-
+            jQuery.noConflict();
             var $link = $(this); // Reference to <a/> link
             var title = $link.text(); //this is title to fetch in htnl
             $('#myModal2 .modal-title').html(title);
