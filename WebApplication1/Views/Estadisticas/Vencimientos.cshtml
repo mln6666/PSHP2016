@@ -1,0 +1,114 @@
+﻿@using WebApplication1.Models
+@model IEnumerable<WebApplication1.Models.PS>
+
+@{
+    ViewBag.Title = "Vencimientos";
+}
+
+<div>
+    <h1 class="text-center ">Vencimientos PSs</h1>
+    <hr style="color:grey;border-color:grey" />
+</div>
+
+
+
+@*@if (Model.Count() == 0)
+{<br /><hr style="color:darkblue;border-color:darkblue" />
+    <div class="text-center">
+
+        <h2 style="color: chocolate">
+            No existen Prácticas en curso actualmente, puede acceder al historial completo haciendo click @Html.ActionLink("Aquí", "HistorialPS", "PS").
+        </h2>
+
+    </div>    <hr style="color:darkblue;border-color:darkblue" />}
+else*@
+
+
+    <table id="mitabla" class="table table-striped table-bordered">
+        <thead>
+        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Vencimiento)
+            </th>
+
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Alumno.Legajo)
+            </th>
+            <th class="text-left" width="18%" style="border-radius: 3px">
+                Apellido y Nombre
+            </th>
+
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.CicloLectivo)
+            </th>
+
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+
+            <th class="text-center" style="border-radius: 3px">Acciones
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="background-color: azure">
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.Vencimiento)
+                    </td>
+                    
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.Alumno.Legajo)
+                    </td>
+                    <td class="text-left">
+                        @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
+                    </td>
+
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.CicloLectivo)
+                    </td>
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+
+
+
+                    <td>@Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })</td>
+
+
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+
+@section scripts
+{
+
+    <script>
+
+        $(document).ready(function () {
+
+            ////Grilla automatica//
+            $("#mitabla").DataTable({
+                "language": {
+                    order: [[0, "asc"]],
+                    "url": "/Scripts/DataTables/spanish.json"
+                }
+            });
+           
+        });
+
+    </script>
+
+
+
+}
+
+

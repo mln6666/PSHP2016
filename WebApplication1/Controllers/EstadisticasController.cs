@@ -20,6 +20,12 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+
+       
+        
+
+
+
         [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult EstadosPS()
         {
@@ -100,7 +106,47 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+       
         // // // // // // /// Pruebas
+        
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult Vencimientos()
+        {
+            var listaPs = db.PSs.ToList();
+
+            listaPs.RemoveAll(o => o.Estado == Estado.PS_Aprobada);
+            listaPs.RemoveAll(o => o.Estado == Estado.PS_Cancelada);
+            listaPs.RemoveAll(o => o.Estado == Estado.PS_Vencida);
+            listaPs.RemoveAll(o => o.Estado == Estado.Plan_Rechazado);
+
+            //listaPs.OrderBy(e => e.Vencimiento);
+
+            //DateTime fechaComparacion = new DateTime(2000, 1, 1);
+
+            //foreach (var item in listaPs)
+            //{
+            //    if (item.Estado == Estado.Plan_Desaprobado || item.Estado == Estado.Plan_Entregado)
+            //    {
+            //        fechaComparacion = item.PresentacionesPlanes.FirstOrDefault().FechaPresentacionPlan;
+            //    }
+            //    if (item.Estado == Estado.Plan_Aprobado || item.Estado == Estado.Informe_Desaprobado
+            //        || item.Estado == Estado.Informe_Entregado || item.Estado == Estado.Informe_Aprobado)
+            //    {
+            //        fechaComparacion = item.PresentacionesPlanes.LastOrDefault().FechaEvaluacionPlan.Value;
+            //    }
+
+            //    fechaComparacion.AddYears(1);
+
+                
+
+            //}
+
+
+            
+            
+
+            return View(listaPs);
+        }
 
         [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult _PopupAreasPlanes(string area,DateTime fecha1, DateTime fecha2)

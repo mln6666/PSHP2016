@@ -20,6 +20,10 @@ namespace WebApplication1.Models
         [Display(Name = "Título Proyecto")]
         public string TituloProyecto { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = false)]
+        public DateTime? Vencimiento { get; set; }
+
         [Required]
         [Display(Name = "Ciclo Lectivo")]
         [Range(2000, 2999, ErrorMessage = "Ciclo Lectivo no válido")]

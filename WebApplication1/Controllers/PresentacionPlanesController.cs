@@ -213,9 +213,10 @@ namespace WebApplication1.Controllers
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
                     pS.Estado = Estado.Plan_Entregado;
 
-                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado) { 
                     pS.Estado = Estado.Plan_Aprobado;
-
+                    pS.Vencimiento = DateTime.Now.AddYears(1);
+                }
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
                     pS.Estado = Estado.Plan_Desaprobado;
 

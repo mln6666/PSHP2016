@@ -189,7 +189,7 @@ namespace WebApplication1.Controllers
             pS.CicloLectivo = pm.CicloLectivo;
             pS.Cuatrimestre = pm.Cuatrimestre;
             pS.ObservacionesPS = pm.ObservacionesPS;
-
+            pS.Vencimiento = pm.FechaPresentacionPlan.AddYears(1);
             pS.IdOrganizacion = pm.IdOrganizacion;
             //pS.Organizacion = pm.Organizacion;
 
@@ -225,8 +225,10 @@ namespace WebApplication1.Controllers
                 if (plan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
                     pu.Estado = Estado.Plan_Entregado;
 
-                if (plan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                if (plan.EstadoEvaluacionPlan == Evaluacion.Aprobado) { 
                     pu.Estado = Estado.Plan_Aprobado;
+                    pu.Vencimiento = pu.PresentacionesPlanes.LastOrDefault().FechaEvaluacionPlan.Value.AddYears(1);
+                }
 
                 if (plan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
                     pu.Estado = Estado.Plan_Desaprobado;
