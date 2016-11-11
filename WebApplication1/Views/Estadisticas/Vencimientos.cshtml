@@ -54,33 +54,98 @@ else*@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr style="background-color: azure">
-                    <td class="text-left">
-                        @Html.DisplayFor(modelItem => item.Vencimiento)
-                    </td>
-                    
-                    <td class="text-left">
-                        @Html.DisplayFor(modelItem => item.Alumno.Legajo)
-                    </td>
-                    <td class="text-left">
-                        @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
-                    </td>
+                if (item.Vencimiento < DateTime.Now) {
+                    <tr style="background-color: bisque;  ">
+                        <td class="text-left">
+                            @Html.DisplayFor(modelItem => item.Vencimiento)-Vencida
+                        </td>
 
-                    <td class="text-left">
-                        @Html.DisplayFor(modelItem => item.CicloLectivo)
-                    </td>
-                    <td class="text-left">
-                        @Html.DisplayFor(modelItem => item.Estado)
-                    </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(modelItem => item.Alumno.Legajo)
+                        </td>
+                        <td class="text-left">
+                            @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
+                        </td>
 
-
-
-                    <td>@Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })</td>
+                        <td class="text-left">
+                            @Html.DisplayFor(modelItem => item.CicloLectivo)
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
 
 
 
+                        <td>@Html.ActionLink("Detalles", "Details", "PS", new {id = item.IdPS}, new {@class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})</td>
 
-                </tr>
+
+
+
+                    </tr>
+                }
+                else {
+                    if (item.Vencimiento.Value.AddMonths(-2) < DateTime.Now)
+                    {
+                        <tr style="background-color: cornsilk">
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Vencimiento)-Próx. a vencer
+                            </td>
+
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Alumno.Legajo)
+                            </td>
+                            <td class="text-left">
+                                @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
+                            </td>
+
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.CicloLectivo)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </td>
+
+
+
+                            <td>@Html.ActionLink("Detalles", "Details", "PS", new {id = item.IdPS}, new {@class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})</td>
+
+
+
+
+                        </tr>
+
+                    }
+                    else
+                    {
+                        <tr style="background-color: white">
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Vencimiento)
+                            </td>
+
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Alumno.Legajo)
+                            </td>
+                            <td class="text-left">
+                                @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
+                            </td>
+
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.CicloLectivo)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </td>
+
+
+
+                            <td>@Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })</td>
+
+
+
+
+                        </tr>
+                    }
+                }
             }
         </tbody>
     </table>
