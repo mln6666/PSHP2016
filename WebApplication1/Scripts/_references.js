@@ -85,3 +85,4 @@
 /// <reference path="ordenfechas.js" />
 /// <reference path="respond.js" />
 /// <reference path="solonumeros.js" />
+/// <reference path="toastr.min.js" />

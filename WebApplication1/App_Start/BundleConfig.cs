@@ -20,7 +20,8 @@ namespace WebApplication1
                       "~/Scripts/datatables/datatables.bootstrap.js",
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.js",
-                      "~/Scripts/bootbox.js"));
+                      "~/Scripts/bootbox.js",
+                        "~/scripts/toastr.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/lib").Include(
             //          "~/Scripts/datatables/jquery.datatables.js",
@@ -43,6 +44,7 @@ namespace WebApplication1
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
+                      "~/content/toastr.css",
                       "~/Content/site.css"));
         }
     }

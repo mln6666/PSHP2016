@@ -87,6 +87,7 @@ namespace WebApplication1.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    TempData["prueba"] = "holi";
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

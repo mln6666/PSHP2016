@@ -1,21 +1,35 @@
 ﻿@using System.Collections.Specialized
+@using WebApplication1.Models
 
 @{
     ViewBag.Title = "Bienvenido";
 }
+
 <head>
     @*<style>.full {
-    background: url('http://placehold.it/1920x1080') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-    /*height:100%;*/
-}</style>*@
+            background: url('http://placehold.it/1920x1080') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+            /*height:100%;*/
+        }</style>*@
 </head>
 <div class="container-fluid">
     <h2 class="text-center">Bienvenido a SiGePS</h2>
     <h4 class="text-center">Para comenzar, puede seleccionar una de las siguientes opciones:</h4>
+    @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+    {
+        if (TempData["prueba"] != null)
+        {
+            {
+                <input id="prueba" style="display: none" value="@TempData["prueba"]" />
+                
+            }
+
+        }
+    }
+
 
     <hr style="color:grey;border-color:grey" /><br /><br /><br />
 
@@ -33,7 +47,7 @@
     <br /><br /><br />
 
     <div class="text-center">
-        @Ajax.ActionLink("Buscar PS", "BusquedaPS", "PS",null, new AjaxOptions
+        @Ajax.ActionLink("Buscar PS", "BusquedaPS", "PS", null, new AjaxOptions
    {
        InsertionMode = InsertionMode.Replace,
        UpdateTargetId = "busps",
@@ -45,9 +59,39 @@
     <br /><br /><br /><br /><br /><br />
 </div>
 <link href="@Url.Content("~/Content/Select2/select2.min.css")" rel="stylesheet" />
-    @section Scripts{
-<script src="@Url.Content("~/Content/Select2/select2.min.js")"></script>
+@section Scripts{
+    <script src="@Url.Content("~/Content/Select2/select2.min.js")"></script>
 
-    }
+    <script>
+        $(document).ready(function() {
+            if ($('#prueba').val() != null) {
+                var numero = $('#prueba').val();
+
+                var url = '<p>@Html.ActionLink("Ver listado", "Vencimientos","Estadisticas")</p>';
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "10000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["info"]("PS a vencer: " + numero + ". " + url)
+
+                
+                }
+        })
+    </script>
+
+}
 
 
