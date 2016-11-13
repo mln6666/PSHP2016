@@ -187,25 +187,12 @@
         </div>
     </div>
 
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <p class="form-control input-sm" style=" background-color: lightgray; font-weight: bold">Plan Pendiente</p>
-                @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.NroDisposicion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <p class="form-control input-sm" style=" background-color: lightgray; font-weight: bold">- - -</p>
-                @Html.ValidationMessageFor(model => model.NroDisposicion, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+   
 
     <div class="form-group">
         @Html.LabelFor(model => model.FechaPresentacionPlan, "Fecha de Presentación", htmlAttributes: new {@class = "control-label col-md-2"})
         <div class="col-md-10">
-            @Html.EditorFor(model => model.FechaPresentacionPlan, new {htmlAttributes = new {@class = "form-control input-sm"}})
+            @Html.EditorFor(model => model.FechaPresentacionPlan, new {htmlAttributes = new {@class = "form-control input-sm", @onchange = "fechaMayorAActual();" } })
             <span id="spanfechapresentacionplan" style="color: red"></span>
 
             @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new {@class = "text-danger"})
@@ -215,7 +202,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new {@class = "control-label col-md-2 "})
         <div class="col-md-10">
-            @Html.EditorFor(model => model.FechaEvaluacionPlan, new {htmlAttributes = new {@class = "form-control input-sm"}})
+            @Html.EditorFor(model => model.FechaEvaluacionPlan, new {htmlAttributes = new {@class = "form-control input-sm", @onchange = "fechaMayorAActual2();" } })
             <span id="spanfechaevaluacionplan" style="color: red"></span>
 
             @Html.ValidationMessageFor(model => model.FechaEvaluacionPlan, "", new {@class = "text-danger"})
@@ -383,6 +370,30 @@
 
         }
 
+        function fechaMayorAActual() {
+            
+            if ($('#FechaPresentacionPlan').val().trim() > new Date().toISOString().substring(0, 10)) {
+                $('#spanfechapresentacionplan').text("Ésta fecha no puede ser superior a la fecha actual.");
+                
+            } else {
+                $('#spanfechapresentacionplan').text("");
+               
+            }
+
+        }
+
+        function fechaMayorAActual2() {
+
+            if ($('#FechaEvaluacionPlan').val().trim() > new Date().toISOString().substring(0, 10)) {
+                $('#spanfechaevaluacionplan').text("Ésta fecha no puede ser superior a la fecha actual.");
+
+            } else {
+                $('#spanfechaevaluacionplan').text("");
+
+            }
+
+        }
+
         $('#agregarps').submit(function (e) {
             var permiso = this;
             e.preventDefault();
@@ -420,6 +431,17 @@
 
                 $('#spanfechapresentacionplan').text("Rango válido : 01/01/2000 - 01/01/2100");
             }
+
+            if ($('#FechaPresentacionPlan').val().trim() > new Date().toISOString().substring(0, 10)) {
+                var isValidItem = false;
+                var fechapresentacionplan = false;
+            }
+
+            if ($('#FechaEvaluacionPlan').val().trim() > new Date().toISOString().substring(0, 10)) {
+                var isValidItem = false;
+                var fechaevaluacionplan = false;
+            }
+
             if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
                 var isValidItem = false;
                 var fechaevaluacionplan = false;
@@ -441,6 +463,7 @@
                 $('#spanfechaestado').text("** Una Evaluación requiere una Fecha de Evaluación!");
             }
 
+            
             if ($('#FechaPresentacionPlan').val().trim() == '') {
                 var isValidItem = false;
                 var fechapresentacionplan = false;

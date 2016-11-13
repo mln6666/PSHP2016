@@ -648,21 +648,7 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Administrador,Cancelar PS")]
         public ActionResult VencerPS([Bind(Include = "IdPS,ObservacionesPS,FechaFinalizacion")] PS pS)
         {
-            //PS ps = db.PSs.Find(id);
-
-            //if (ModelState.IsValid)
-            //{
-            //    ps.Estado = Estado.PS_Cancelada;
-            //    db.Entry(ps).State = EntityState.Modified;
-            //    db.SaveChanges();
-            //}
-            //else
-            //{
-            //    ViewBag.Error = "Error: Los datos de la PS no son válidos";
-            //}
-
-            //return RedirectToAction("Details", "PS", new { id = ps.IdPS });
-
+            
             PS ps = new PS();
             ps = db.PSs.Find(pS.IdPS);
             if (pS.FechaFinalizacion == null || pS.ObservacionesPS == null)
