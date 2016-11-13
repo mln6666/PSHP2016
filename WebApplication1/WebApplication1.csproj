@@ -795,6 +795,7 @@
     <Content Include="Views\Estadisticas\_PopupTipospsInformes.cshtml" />
     <Content Include="Views\Estadisticas\_PopupOrgInformes.cshtml" />
     <Content Include="Views\Estadisticas\Vencimientos.cshtml" />
+    <Content Include="Views\PS\VencerPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

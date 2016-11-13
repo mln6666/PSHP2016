@@ -24,7 +24,7 @@ namespace WebApplication1.Controllers
         {
 
             var pSs = ( from p in db.PSs
-                        where p.Estado == Estado.PS_Aprobada  | p.Estado == Estado.PS_Cancelada | p.Estado == Estado.PS_Vencida 
+                        where p.Estado == Estado.PS_Aprobada  | p.Estado == Estado.PS_Cancelada | p.Estado == Estado.PS_Vencida |p.Estado==Estado.Plan_Rechazado
                         select p);
 
             var pos = db.PSs.ToList();
@@ -122,7 +122,7 @@ namespace WebApplication1.Controllers
                     idmax = item.PSs.Max(p => p.IdPS);
                     ps = db.PSs.Find(idmax);
 
-                    if (ps.Estado == Estado.PS_Cancelada | ps.Estado == Estado.PS_Vencida)
+                    if (ps.Estado == Estado.PS_Cancelada | ps.Estado == Estado.PS_Vencida | ps.Estado==Estado.Plan_Rechazado)
                     {
                         alumnos.Add(item);
                     }
@@ -163,15 +163,24 @@ namespace WebApplication1.Controllers
                 pm.Tutor == null | pm.Cuatrimestre == null | pm.CicloLectivo == null | pm.FechaPresentacionPlan == null)
             {  return RedirectToAction("Index", "Error", new { error = 2007 });}
 
-
+            int psvalidas = 0;
             //Mensaje de error en caso de que el ALumno no tenga PS-cancelada/PS-vencida/SinPS
             Alumno erroralumno = db.Alumnos.Find(pm.IdAlumno);
             if (erroralumno.PSs.Count() != 0)
             {
-                if (erroralumno.PSs.LastOrDefault().Estado!=Estado.PS_Cancelada & erroralumno.PSs.LastOrDefault().Estado!= Estado.PS_Vencida)
+                if (erroralumno.PSs.LastOrDefault().Estado!=Estado.PS_Cancelada & erroralumno.PSs.LastOrDefault().Estado!= Estado.PS_Vencida & erroralumno.PSs.LastOrDefault().Estado != Estado.Plan_Rechazado)
                 {
                     return RedirectToAction("Index", "Error", new { error = 2008 });
                 }
+                foreach (var mips in erroralumno.PSs)
+                {
+                    if (mips.Estado != Estado.PS_Cancelada & mips.Estado != Estado.PS_Vencida &
+                        mips.Estado != Estado.Plan_Rechazado)
+                    {
+                        psvalidas = psvalidas + 1;
+                    }
+                }
+                if(psvalidas > 0) { return RedirectToAction("Index", "Error", new { error = 2008 }); }
 
 
             }
@@ -395,6 +404,13 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
+            
+            if (pS.Estado == Estado.PS_Aprobada || pS.Estado == Estado.PS_Cancelada || pS.Estado == Estado.PS_Vencida || pS.Estado == Estado.Plan_Rechazado)
+                {
+                    return RedirectToAction("Index", "Error", new { error = 2011 });
+                }
+                
+
 
             var listareas = db.Areas.ToList();
             var listorganizaciones = db.Organizaciones.ToList();
@@ -437,9 +453,7 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Editar PS,Administrador")]
         public ActionResult Edit([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,ObservacionesPS,FechaFinalizacion")] PS pS)
         {
-            
-                
-            
+
             if (ModelState.IsValid )
             {
                 db.Entry(pS).State = EntityState.Modified;
@@ -614,6 +628,67 @@ namespace WebApplication1.Controllers
 
 
 
+        //GET
+        [Authorize(Roles = "Administrador,Cancelar PS")]
+        public ActionResult VencerPS(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PS ps = db.PSs.Find(id);
+            if (ps == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ps);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrador,Cancelar PS")]
+        public ActionResult VencerPS([Bind(Include = "IdPS,ObservacionesPS,FechaFinalizacion")] PS pS)
+        {
+            //PS ps = db.PSs.Find(id);
+
+            //if (ModelState.IsValid)
+            //{
+            //    ps.Estado = Estado.PS_Cancelada;
+            //    db.Entry(ps).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //}
+            //else
+            //{
+            //    ViewBag.Error = "Error: Los datos de la PS no son válidos";
+            //}
+
+            //return RedirectToAction("Details", "PS", new { id = ps.IdPS });
+
+            PS ps = new PS();
+            ps = db.PSs.Find(pS.IdPS);
+            if (pS.FechaFinalizacion == null || pS.ObservacionesPS == null)
+            {
+
+                return RedirectToAction("Index", "Error", new { error = 2009 });
+            }
+
+
+
+
+            ps.FechaFinalizacion = pS.FechaFinalizacion;
+
+
+            ps.ObservacionesPS = pS.ObservacionesPS;
+
+
+            ps.Estado = Estado.PS_Vencida;
+            db.Entry(ps).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+
+            return RedirectToAction("Details", "PS", new { id = ps.IdPS });
+
+        }
         //GET
         [Authorize(Roles = "Administrador,Cancelar PS")]
         public ActionResult CancelarPS(int? id)

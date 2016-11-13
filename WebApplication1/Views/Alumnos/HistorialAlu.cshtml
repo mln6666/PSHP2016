@@ -57,16 +57,13 @@
 
                     }
                     else
-                        if (item.PSs.LastOrDefault().Estado == Estado.PS_Cancelada || item.PSs.LastOrDefault().Estado == Estado.PS_Vencida)
+                        if (item.PSs.LastOrDefault().Estado == Estado.PS_Cancelada || item.PSs.LastOrDefault().Estado == Estado.PS_Vencida|| item.PSs.LastOrDefault().Estado == Estado.Plan_Rechazado)
                     {
                         <text> <a href="@Url.Action("Details", "PS", new {id = item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a> |<a href="@Url.Action("Create","PS",new { idalu = item.IdAlumno })">
                             <span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span>
                         </a></text>}
                     else
-                        if (item.PSs.LastOrDefault().Estado == Estado.Plan_Rechazado)
-                    { <text> <a href="@Url.Action("Details", "PS", new {id = item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>
-                    </text>}
-                    else
+                    
                     {                             <a href="@Url.Action("Details","PS", new { id=item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>if (
 item.PSs.LastOrDefault().Estado == Estado.PS_Aprobada & item.PSs.LastOrDefault().NroDisposicion == null)
                         {<p style="color: midnightblue;font-size: smaller">[Sin Nro. Disposición]</p> }

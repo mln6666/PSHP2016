@@ -54,11 +54,10 @@
     </script>
 
 </head>
-@if (Model.Estado == Estado.PS_Aprobada | Model.Estado == Estado.PS_Cancelada | Model.Estado == Estado.PS_Vencida)
+@if (Model.Estado == Estado.PS_Aprobada | Model.Estado == Estado.PS_Cancelada | Model.Estado == Estado.PS_Vencida | Model.Estado == Estado.Plan_Rechazado)
 {
-    <h4 style="color: red">Acción no admitida!</h4>
-    <h5 style="color: red">No se permite la edición de una PS que ha sido Aprobada / Cancelada / Vencida. </h5>
-
+    <h4 style="color: red">Acción no admitida! No se permite la edición de una PS:</h4>
+    <h5 style="color: red">a- Cuyo estado es Aprobada / Cancelada / Vencida / Plan_Rechazado. </h5>
     <div class="text-center">
 
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

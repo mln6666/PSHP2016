@@ -57,7 +57,7 @@ namespace ExpVMsape.Controllers
                     break;
                 case 2008:
                     ViewBag.Title = "Acción no permitida.";
-                    ViewBag.Description = "Solo se puede crear una PS si el alumno no posee PSs o su PS se encuenta Vencida o Cancelada.";
+                    ViewBag.Description = "Solo se puede crear una PS si el alumno no posee PSs o su PS se encuenta Vencida, Cancelada o con Plan Rechazado.";
                     break;
                 case 2009:
                     ViewBag.Title = "Acción no permitida.";
@@ -67,6 +67,11 @@ namespace ExpVMsape.Controllers
                     ViewBag.Title = "Sin autorización.";
                     ViewBag.Description = "Su usuario no cuenta con los permisos necesarios!";
                     break;
+                case 2011:
+                    ViewBag.Title = "Acción no permitida.";
+                    ViewBag.Description = "No se permite editar una PS que se encuenta Aprobada, Vencida, Cancelada o con Plan Rechazado.";
+                    break;
+
 
                 default:
                     ViewBag.Title = "Página no encontrada";
