@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using WebApplication1.Context;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -87,7 +88,24 @@ namespace WebApplication1.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    TempData["prueba"] = "holi";
+                    ContextPS db = new ContextPS();
+                    var pos = db.PSs.ToList();
+                    var vencer = 0;
+                    foreach (var item in pos)
+                    {
+                        if(item.Estado==Estado.Plan_Aprobado| item.Estado == Estado.Plan_Desaprobado
+                            | item.Estado == Estado.Plan_Entregado | item.Estado == Estado.Informe_Entregado
+                            | item.Estado == Estado.Informe_Desaprobado | item.Estado == Estado.Informe_Aprobado)
+                        {
+                            if (item.Vencimiento < DateTime.Now)
+                            {
+                                vencer++;
+                            }
+                        }
+
+                    }
+
+                    TempData["vencer"] = vencer;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

@@ -20,10 +20,10 @@
     <h4 class="text-center">Para comenzar, puede seleccionar una de las siguientes opciones:</h4>
     @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
     {
-        if (TempData["prueba"] != null)
+        if (TempData["vencer"] != null)
         {
             {
-                <input id="prueba" style="display: none" value="@TempData["prueba"]" />
+                <input id="vencer" style="display: none" value="@TempData["vencer"]" />
                 
             }
 
@@ -64,8 +64,8 @@
 
     <script>
         $(document).ready(function() {
-            if ($('#prueba').val() != null) {
-                var numero = $('#prueba').val();
+            if ($('#vencer').val() > 0) {
+                var numero = $('#vencer').val();
 
                 var url = '<p>@Html.ActionLink("Ver listado", "Vencimientos","Estadisticas")</p>';
                 toastr.options = {
@@ -85,7 +85,7 @@
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["info"]("PS a vencer: " + numero + ". " + url)
+                toastr["info"]("PSs a vencer: " + numero + ". " + url)
 
                 
                 }
