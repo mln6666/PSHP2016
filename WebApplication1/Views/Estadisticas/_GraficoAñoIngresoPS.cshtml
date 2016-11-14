@@ -49,15 +49,16 @@
                              Apellido y Nombre
                          </th>
                          <th class="text-left" style="border-radius: 3px">
+                             @Html.DisplayNameFor(model => model.Alumno.AñoIngreso)
+                         </th>
+                         <th class="text-left" style="border-radius: 3px">
                              @Html.DisplayNameFor(model => model.TipoPS.NombreTipoPS)
                          </th>
                          <th class="text-left" style="border-radius: 3px">
                              @Html.DisplayNameFor(model => model.Area.NombreArea)
                          </th>
 
-                         <th class="text-left" style="border-radius: 3px">
-                             @Html.DisplayNameFor(model => model.CicloLectivo)
-                         </th>
+                        
 
                          <th class="text-left" style="border-radius: 3px">
                              @Html.DisplayNameFor(model => model.Estado)
@@ -76,15 +77,16 @@
                                  @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
                              </td>
                              <td class="text-left">
+                                 @Html.DisplayFor(modelItem => item.Alumno.AñoIngreso)
+                             </td>
+                             <td class="text-left">
                                  @Html.DisplayFor(modelItem => item.TipoPS.NombreTipoPS)
                              </td>
                              <td class="text-left">
                                  @Html.DisplayFor(modelItem => item.Area.NombreArea)
                              </td>
 
-                             <td class="text-left">
-                                 @Html.DisplayFor(modelItem => item.CicloLectivo)
-                             </td>
+                         
 
 
                              @if (item.Estado == Estado.PS_Aprobada & item.NroDisposicion != null)

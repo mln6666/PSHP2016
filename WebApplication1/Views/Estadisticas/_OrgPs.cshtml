@@ -112,6 +112,10 @@
                     }
                 </tbody>
             </table>
+            @*<div class="text-center" style="color: green">[ Estados PS ]</div>
+            <div class="text-center" style="color: green">[-- P.Ent.: Plan_Entregado -- P.Ap.: Plan_Aprobado -- P.Des.: Plan_Desaprobado -- P.Rech.: Plan_Rechazado --] </div>
+            <div class="text-center" style="color: green">[-- I.Ent.: Informe_Entregado -- I.Ap.: Informe_Aprobado -- I.Des.: Informe_Desaprobado --]</div>
+            <div class="text-center" style="color: green">[-- Ps.Ap.: PS_Aprobado -- Ps.Canc.: PS_Cancelada -- Ps.Venc.: PS_Vencida --]</div>*@
 
 
 
@@ -157,7 +161,7 @@
                         </th>
 
                         <th class="text-left" style="border-radius: 3px">
-                            @Html.DisplayNameFor(model => model.CicloLectivo)
+                            @Html.DisplayNameFor(model => model.Organizacion)
                         </th>
 
                         <th class="text-left" style="border-radius: 3px">
@@ -184,7 +188,7 @@
                             </td>
 
                             <td class="text-left">
-                                @Html.DisplayFor(modelItem => item.CicloLectivo)
+                                @Html.DisplayFor(modelItem => item.Organizacion.DenominacionOrg)
                             </td>
 
 
