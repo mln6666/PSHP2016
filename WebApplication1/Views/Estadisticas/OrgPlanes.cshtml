@@ -11,6 +11,7 @@
 }
 <h2 class="text-center">Estadística de Planes por Organización</h2>
 <hr style="color: grey; border-color: grey;margin-bottom: 0px" />
+<div class="text-right">@Html.ActionLink("Ayuda", "_ReferenciasGenerales", new { a = "1" }, new { @class = "dialog-window4 hidden-print" })</div>
 
 @using (Ajax.BeginForm("_OrgPlanes", "Estadisticas", new AjaxOptions
 {
@@ -65,7 +66,26 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-left: -30%; margin-right: -30%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Historial Planes</h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+            @*<button type="submit" class="btn btn-primary">Save changes</button>*@
+            @*</div>*@
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 <script>
     $(document).ready(function() {
 
@@ -88,7 +108,23 @@
                 }).success(function () { $('input:text:visible:first').focus(); });
             }
         });
+        $("body").on("click", "a.dialog-window4", null, function (e) {
+            e.preventDefault();
+            var $link = $(this); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            $('#myModal4 .modal-title').html(title);
 
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#myModal4').modal('show');
+            }
+            else {
+                $.get(url, function (data) {
+                    $('#myModal4 .te').html(data);
+                    $('#myModal4').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        });
 
 
 

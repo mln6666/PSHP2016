@@ -26,6 +26,26 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+        public ActionResult _ReferenciasGenerales(string a)
+        {
+            if (a == "0")
+            {
+                ViewBag.mensaje = "Las estadísticas son calculadas teniendo en cuenta las PSs cuya Fecha de Presentación de Plan / Informe se encuentre dentro del rango específicado.";
+            }
+            if (a == "1")
+            {
+                ViewBag.mensaje = "Las estadísticas son calculadas teniendo en cuenta los Planes cuya Fecha de Presentación se encuentre dentro del rango específicado.";
+            }
+            if (a == "2")
+            {
+                ViewBag.mensaje = "Las estadísticas son calculadas teniendo en cuenta los Informes cuya Fecha de Presentación se encuentre dentro del rango específicado.";
+            }
+            if (a == "3")
+            {
+                ViewBag.mensaje = "Las estadísticas son calculadas teniendo en cuenta la cantidad de PSs presentadas por los alumnos segun el año de ingreso de los mismos.";
+            }
+            return View();
+        }
 
         [Authorize(Roles = "Moderador,Administrador")]
         public JsonResult GetVencimientos(string prueba)

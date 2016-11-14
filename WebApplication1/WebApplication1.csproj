@@ -801,6 +801,7 @@
     <Content Include="Views\Estadisticas\_PopupTipospsPS.cshtml" />
     <Content Include="Views\Estadisticas\_PopupOrgPs.cshtml" />
     <Content Include="Views\Estadisticas\_Referencias.cshtml" />
+    <Content Include="Views\Estadisticas\_ReferenciasGenerales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

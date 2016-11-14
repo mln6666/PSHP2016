@@ -253,7 +253,25 @@
 
         <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
         <script>
-        $(document).ready(function() {
+            $(document).ready(function() {
+                $("body").on("click", "a.dialog-window4", null, function (e) {
+                    e.preventDefault();
+                    jQuery.noConflict();
+                    var $link = $(this); // Reference to <a/> link
+                    var title = $link.text(); //this is title to fetch in htnl
+                    $('#myModal4 .modal-title').html(title);
+
+                    var url = $(this).attr('href');
+                    if (url.indexOf('#') == 0) {
+                        $('#myModal4').modal('show');
+                    }
+                    else {
+                        $.get(url, function (data) {
+                            $('#myModal4 .te').html(data);
+                            $('#myModal4').modal();
+                        }).success(function () { $('input:text:visible:first').focus(); });
+                    }
+                });
             $('#mitabla_length').addClass('hidden-print');
             $('#mitabla_filter').addClass('hidden-print');
             $('#mitabla_info').addClass('hidden-print');
