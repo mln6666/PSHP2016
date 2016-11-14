@@ -126,7 +126,7 @@
 
     </script>
 </head>
-<input id="fechita" value="@ViewBag.fechita.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture)"/>
+<input id="fechita" style="display: none" value="@ViewBag.fechita.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture)"/>
 @using (Html.BeginForm("Create", "PresentacionInformes", null, FormMethod.Post, new { id = "informe" }))
 {    @Html.HiddenFor(model => model.IdPS)
 
