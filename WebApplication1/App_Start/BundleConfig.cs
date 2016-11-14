@@ -14,6 +14,7 @@ namespace WebApplication1
                          "~/Scripts/jquery-ui-1.12.0.js",
                         "~/Scripts/jquery-ui-1.12.0.min.js",
                         "~/Scripts/solonumeros.js",
+                        "~/Scripts/vencimientos.js",
                         "~/Scripts/ordenFechas.js",
                         "~/Scripts/jquery.unobtrusive-ajax.js", "~/Scripts/bootstrap.js",
                         "~/Scripts/datatables/jquery.datatables.js",

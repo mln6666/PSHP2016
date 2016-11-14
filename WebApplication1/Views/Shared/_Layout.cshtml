@@ -328,11 +328,91 @@
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
 
-<div class="navbar-xs navbar-inverse navbar-fixed-bottom" style="background: none; border: none;padding-bottom: 0px">
-	<div class="container text-center" style="height: 20px">
-		<p> - SiGePS &copy; @DateTime.Now.Year - Godesa Solutions ®  <a style="color:black ">@Html.ActionLink("Contacto", "Contact", "Home",null, new { @class = "hidden-print" })</a> - </p>
-	</div>
+<div class="navbar-xs navbar-inverse navbar-fixed-bottom" style="background: none; border: none; padding-bottom: 0px">
+    <div class="container text-center" style="height: 20px">
+        <p> - SiGePS &copy; @DateTime.Now.Year - Godesa Solutions ® <a style="color: black">@Html.ActionLink("Contacto", "Contact", "Home", null, new {@class = "hidden-print"})</a> -
+        </p>
+    </div>
 </div>
+
+
 
 </html>
 
+<script>
+        $(document).ready(function() {
+            if ($('#vencer').val() > 0) {
+                var numero = $('#vencer').val();
+
+                var url = '<p>@Html.ActionLink("VER LISTADO", "Vencimientos", "Estadisticas")</p>';
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "10000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["info"]("PSs a vencer: " + numero + ". " + url);
+
+                $(window).load(function () {
+
+                    var options = {};
+                    options.url = "/Estadisticas/GetVencimientos";
+                    options.type = "GET";
+                    options.data = { "prueba": "0" };
+                    options.dataType = "json";
+                    options.success = function (data) {
+
+                    };
+                    $.ajax(options);
+                });
+
+            }else{
+
+            $(window).load(function() {
+
+                var options = {};
+                options.url = "/Estadisticas/GetVencimientos";
+                options.type = "GET";
+                options.data = { "prueba": "0" };
+                options.dataType = "json";
+                options.success = function(data) {
+                    if (data.CantVenc != data.CantVencAnt) {
+                        var url = '<p>@Html.ActionLink("VER LISTADO", "Vencimientos", "Estadisticas")</p>';
+                        toastr.options = {
+                            "closeButton": true,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-bottom-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "10000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                        toastr["info"]("Hay nuevas PSs por vencer: " + data.CantVenc+". " + url);
+
+                    }
+                };
+                $.ajax(options);
+            });
+            }
+
+        })
+</script>
