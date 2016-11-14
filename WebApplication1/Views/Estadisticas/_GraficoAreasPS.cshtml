@@ -98,7 +98,9 @@ else
                 {
                     <tr style="background-color: azure">
                         <td class="text-left">
-                            @ViewBag.misareas[i]
+                            @Html.ActionLink((string)ViewBag.misareas[i], "_PopupAreasPS", new { area = ViewBag.misareas[i], fecha1 = ViewBag.fechadesde, fecha2 = ViewBag.fechahasta }, new { @class = "dialog-window2" })
+
+
                         </td>
                         <td class="text-left">
                             @ViewBag.listaplanesentregados[i]

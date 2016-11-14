@@ -153,6 +153,542 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult _PopupTipospsPS(string tipops, DateTime fecha1, DateTime fecha2)
+        {
+            //fecha1 = Convert.ToDateTime("01/02/0001").Date;
+
+            //fecha2 = Convert.ToDateTime("01/02/2200").Date;
+
+            var listatiposps = db.TipoPSs.ToList();
+            List<string> mistiposps = new List<string>();
+            List<int> cantidades = new List<int>();
+            List<int> listaplanesentregados = new List<int>();
+            List<int> listaplanesaprobados = new List<int>();
+            List<int> listaplanesdesaprobados = new List<int>();
+            List<int> listaplanesrechazados = new List<int>();
+            List<int> listainformesentregados = new List<int>();
+            List<int> listainformesaprobados = new List<int>();
+            List<int> listainformesdesaprobados = new List<int>();
+            List<int> listapssaprobadas = new List<int>();
+            List<int> listapsscanceladas = new List<int>();
+            List<int> listapssvencidas = new List<int>();
+            IList<PS> pss = new List<PS>();
+
+            foreach (var item in listatiposps)
+            {
+                mistiposps.Add(item.NombreTipoPS);
+            }
+            int total = 0;
+            int planesentregados = 0;
+            int planesaprobados = 0;
+            int planesdesaprobados = 0;
+            int planesrechazados = 0;
+            int informesentregados = 0;
+            int informesaprobados = 0;
+            int informesdesaprobados = 0;
+            int pssaprobadas = 0;
+            int psscanceladas = 0;
+            int pssvencidas = 0;
+
+            for (int i = 0; i < listatiposps.Count(); i++)
+            {
+                foreach (var item in db.PSs.ToList())
+                {
+                    bool ok = false;
+                    foreach (var presentacion in item.PresentacionesPlanes)
+                    {
+                        if (presentacion.FechaPresentacionPlan >= fecha1 & presentacion.FechaPresentacionPlan <= fecha2)
+                        {
+                            ok = true;
+                        }
+
+                    }
+
+                    if (item.PresentacionesInforme != null)
+                    {
+                        foreach (var presentacion in item.PresentacionesInforme)
+                        {
+                            if (presentacion.FechaPresentacionInforme >= fecha1 & presentacion.FechaPresentacionInforme <= fecha2)
+                            {
+                                ok = true;
+                            }
+
+                        }
+                    }
+                    if (ok)
+                    {
+                        pss.Add(item);
+
+                        if (item.TipoPS.NombreTipoPS == listatiposps.ElementAt(i).NombreTipoPS)
+                        {
+                            total++;
+
+                            if (item.Estado == Estado.Plan_Entregado)
+                            {
+                                planesentregados++;
+                            }
+                            if (item.Estado == Estado.Plan_Aprobado)
+                            {
+                                planesaprobados++;
+                            }
+                            if (item.Estado == Estado.Plan_Desaprobado)
+                            {
+                                planesdesaprobados++;
+                            }
+                            if (item.Estado == Estado.Plan_Rechazado)
+                            {
+                                planesrechazados++;
+                            }
+                            if (item.Estado == Estado.Informe_Entregado)
+                            {
+                                informesentregados++;
+                            }
+                            if (item.Estado == Estado.Informe_Aprobado)
+                            {
+                                informesaprobados++;
+                            }
+                            if (item.Estado == Estado.Informe_Desaprobado)
+                            {
+                                informesdesaprobados++;
+                            }
+                            if (item.Estado == Estado.PS_Aprobada)
+                            {
+                                pssaprobadas++;
+                            }
+                            if (item.Estado == Estado.PS_Cancelada)
+                            {
+                                psscanceladas++;
+                            }
+                            if (item.Estado == Estado.PS_Vencida)
+                            {
+                                pssvencidas++;
+                            }
+
+
+
+                        }
+
+                    }
+                }
+                cantidades.Add(total);
+
+                listaplanesentregados.Add(planesentregados);
+                listaplanesaprobados.Add(planesaprobados);
+                listaplanesdesaprobados.Add(planesdesaprobados);
+                listaplanesrechazados.Add(planesrechazados);
+                listainformesentregados.Add(informesentregados);
+                listainformesaprobados.Add(informesaprobados);
+                listainformesdesaprobados.Add(informesdesaprobados);
+                listapssaprobadas.Add(pssaprobadas);
+                listapsscanceladas.Add(psscanceladas);
+                listapssvencidas.Add(pssvencidas);
+
+                total = 0;
+                planesentregados = 0;
+                planesaprobados = 0;
+                planesdesaprobados = 0;
+                planesrechazados = 0;
+                informesentregados = 0;
+                informesaprobados = 0;
+                informesdesaprobados = 0;
+                pssaprobadas = 0;
+                psscanceladas = 0;
+                pssvencidas = 0;
+
+            }
+            ViewBag.fechadesde = fecha1;
+            ViewBag.fechahasta = fecha2;
+            ViewBag.listatiposps = JsonConvert.SerializeObject(mistiposps);
+            ViewBag.cantidades = JsonConvert.SerializeObject(cantidades);
+            ViewBag.tiposps = mistiposps.Count();
+            ViewBag.mistiposps = mistiposps;
+            ViewBag.miscantidades = cantidades;//total de planes /informes segun el metodo (no se ocupa por ahora)
+            ViewBag.listaplanesentregados = listaplanesentregados;
+            ViewBag.listaplanesaprobados = listaplanesaprobados;
+            ViewBag.listaplanesdesaprobados = listaplanesdesaprobados;
+            ViewBag.listaplanesrechazados = listaplanesrechazados;
+            ViewBag.listainformesentregados = listainformesentregados;
+            ViewBag.listainformesaprobados = listainformesaprobados;
+            ViewBag.listainformesdesaprobados = listainformesdesaprobados;
+            ViewBag.listapssaprobadas = listapssaprobadas;
+            ViewBag.listapsscanceladas = listapsscanceladas;
+            ViewBag.listapssvencidas = listapssvencidas;
+
+            IList<PS> pss2 = new List<PS>();
+
+            foreach (var item in pss)
+            {
+
+                if (item.TipoPS.NombreTipoPS == tipops)
+                {
+                    pss2.Add(item);
+                }
+            }
+            pss = pss2;
+            pss = pss.Distinct().ToList();
+            return View(pss);
+
+
+        }
+
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult _PopupAreasPS(string area, DateTime fecha1, DateTime fecha2)
+        {
+            //fecha1 = Convert.ToDateTime("01/02/0001").Date;
+
+            //fecha2 = Convert.ToDateTime("01/02/2200").Date;
+
+            var listaareas = db.Areas.ToList();
+            List<string> misareas = new List<string>();
+            List<int> cantidades = new List<int>();
+            List<int> listaplanesentregados = new List<int>();
+            List<int> listaplanesaprobados = new List<int>();
+            List<int> listaplanesdesaprobados = new List<int>();
+            List<int> listaplanesrechazados = new List<int>();
+            List<int> listainformesentregados = new List<int>();
+            List<int> listainformesaprobados = new List<int>();
+            List<int> listainformesdesaprobados = new List<int>();
+            List<int> listapssaprobadas = new List<int>();
+            List<int> listapsscanceladas = new List<int>();
+            List<int> listapssvencidas = new List<int>();
+            IList<PS> pss = new List<PS>();
+
+            foreach (var item in listaareas)
+            {
+                misareas.Add(item.NombreArea);
+            }
+            int total = 0;
+            int planesentregados = 0;
+            int planesaprobados = 0;
+            int planesdesaprobados = 0;
+            int planesrechazados = 0;
+            int informesentregados = 0;
+            int informesaprobados = 0;
+            int informesdesaprobados = 0;
+            int pssaprobadas = 0;
+            int psscanceladas = 0;
+            int pssvencidas = 0;
+
+            for (int i = 0; i < listaareas.Count(); i++)
+            {
+                foreach (var item in db.PSs.ToList())
+                {
+                    bool ok = false;
+                    foreach (var presentacion in item.PresentacionesPlanes)
+                    {
+                        if (presentacion.FechaPresentacionPlan >= fecha1 & presentacion.FechaPresentacionPlan <= fecha2)
+                        {
+                            ok = true;
+                        }
+
+                    }
+
+                    if (item.PresentacionesInforme != null)
+                    {
+                        foreach (var presentacion in item.PresentacionesInforme)
+                        {
+                            if (presentacion.FechaPresentacionInforme >= fecha1 & presentacion.FechaPresentacionInforme <= fecha2)
+                            {
+                                ok = true;
+                            }
+
+                        }
+                    }
+                    if (ok)
+                    {
+                        pss.Add(item);
+
+                        if (item.Area.NombreArea == listaareas.ElementAt(i).NombreArea)
+                        {
+                            total++;
+
+                            if (item.Estado == Estado.Plan_Entregado)
+                            {
+                                planesentregados++;
+                            }
+                            if (item.Estado == Estado.Plan_Aprobado)
+                            {
+                                planesaprobados++;
+                            }
+                            if (item.Estado == Estado.Plan_Desaprobado)
+                            {
+                                planesdesaprobados++;
+                            }
+                            if (item.Estado == Estado.Plan_Rechazado)
+                            {
+                                planesrechazados++;
+                            }
+                            if (item.Estado == Estado.Informe_Entregado)
+                            {
+                                informesentregados++;
+                            }
+                            if (item.Estado == Estado.Informe_Aprobado)
+                            {
+                                informesaprobados++;
+                            }
+                            if (item.Estado == Estado.Informe_Desaprobado)
+                            {
+                                informesdesaprobados++;
+                            }
+                            if (item.Estado == Estado.PS_Aprobada)
+                            {
+                                pssaprobadas++;
+                            }
+                            if (item.Estado == Estado.PS_Cancelada)
+                            {
+                                psscanceladas++;
+                            }
+                            if (item.Estado == Estado.PS_Vencida)
+                            {
+                                pssvencidas++;
+                            }
+
+
+
+                        }
+
+                    }
+                }
+                cantidades.Add(total);
+
+                listaplanesentregados.Add(planesentregados);
+                listaplanesaprobados.Add(planesaprobados);
+                listaplanesdesaprobados.Add(planesdesaprobados);
+                listaplanesrechazados.Add(planesrechazados);
+                listainformesentregados.Add(informesentregados);
+                listainformesaprobados.Add(informesaprobados);
+                listainformesdesaprobados.Add(informesdesaprobados);
+                listapssaprobadas.Add(pssaprobadas);
+                listapsscanceladas.Add(psscanceladas);
+                listapssvencidas.Add(pssvencidas);
+
+                total = 0;
+                planesentregados = 0;
+                planesaprobados = 0;
+                planesdesaprobados = 0;
+                planesrechazados = 0;
+                informesentregados = 0;
+                informesaprobados = 0;
+                informesdesaprobados = 0;
+                pssaprobadas = 0;
+                psscanceladas = 0;
+                pssvencidas = 0;
+
+            }
+            ViewBag.fechadesde = fecha1;
+            ViewBag.fechahasta = fecha2;
+            ViewBag.listaareas = JsonConvert.SerializeObject(misareas);
+            ViewBag.cantidades = JsonConvert.SerializeObject(cantidades);
+            ViewBag.areas = misareas.Count();
+            ViewBag.misareas = misareas;
+            ViewBag.miscantidades = cantidades;//total de planes /informes segun el metodo (no se ocupa por ahora)
+            ViewBag.listaplanesentregados = listaplanesentregados;
+            ViewBag.listaplanesaprobados = listaplanesaprobados;
+            ViewBag.listaplanesdesaprobados = listaplanesdesaprobados;
+            ViewBag.listaplanesrechazados = listaplanesrechazados;
+            ViewBag.listainformesentregados = listainformesentregados;
+            ViewBag.listainformesaprobados = listainformesaprobados;
+            ViewBag.listainformesdesaprobados = listainformesdesaprobados;
+            ViewBag.listapssaprobadas = listapssaprobadas;
+            ViewBag.listapsscanceladas = listapsscanceladas;
+            ViewBag.listapssvencidas = listapssvencidas;
+
+            IList<PS> pss2 = new List<PS>();
+
+            foreach (var item in pss)
+            {
+
+                if (item.Area.NombreArea == area)
+                {
+                    pss2.Add(item);
+                }
+            }
+            pss = pss2;
+            pss = pss.Distinct().ToList();
+
+
+            return View(pss);
+        }
+
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult _PopupOrgPs(string area, DateTime fecha1, DateTime fecha2)
+        {
+
+
+            var listaareas = db.Organizaciones.ToList();
+            List<string> misareas = new List<string>();
+            List<int> cantidades = new List<int>();
+            List<int> listaplanesentregados = new List<int>();
+            List<int> listaplanesaprobados = new List<int>();
+            List<int> listaplanesdesaprobados = new List<int>();
+            List<int> listaplanesrechazados = new List<int>();
+            List<int> listainformesentregados = new List<int>();
+            List<int> listainformesaprobados = new List<int>();
+            List<int> listainformesdesaprobados = new List<int>();
+            List<int> listapssaprobadas = new List<int>();
+            List<int> listapsscanceladas = new List<int>();
+            List<int> listapssvencidas = new List<int>();
+            IList<PS> pss = new List<PS>();
+
+            foreach (var item in listaareas)
+            {
+                misareas.Add(item.DenominacionOrg);
+            }
+            int total = 0;
+            int planesentregados = 0;
+            int planesaprobados = 0;
+            int planesdesaprobados = 0;
+            int planesrechazados = 0;
+            int informesentregados = 0;
+            int informesaprobados = 0;
+            int informesdesaprobados = 0;
+            int pssaprobadas = 0;
+            int psscanceladas = 0;
+            int pssvencidas = 0;
+
+            for (int i = 0; i < listaareas.Count(); i++)
+            {
+                foreach (var item in db.PSs.ToList())
+                {
+                    bool ok = false;
+                    foreach (var presentacion in item.PresentacionesPlanes)
+                    {
+                        if (presentacion.FechaPresentacionPlan >= fecha1 & presentacion.FechaPresentacionPlan <= fecha2)
+                        {
+                            ok = true;
+                        }
+
+                    }
+
+                    if (item.PresentacionesInforme != null)
+                    {
+                        foreach (var presentacion in item.PresentacionesInforme)
+                        {
+                            if (presentacion.FechaPresentacionInforme >= fecha1 & presentacion.FechaPresentacionInforme <= fecha2)
+                            {
+                                ok = true;
+                            }
+
+                        }
+                    }
+                    if (ok)
+                    {
+                        pss.Add(item);
+
+                        if (item.Organizacion.DenominacionOrg == listaareas.ElementAt(i).DenominacionOrg)
+                        {
+                            total++;
+
+                            if (item.Estado == Estado.Plan_Entregado)
+                            {
+                                planesentregados++;
+                            }
+                            if (item.Estado == Estado.Plan_Aprobado)
+                            {
+                                planesaprobados++;
+                            }
+                            if (item.Estado == Estado.Plan_Desaprobado)
+                            {
+                                planesdesaprobados++;
+                            }
+                            if (item.Estado == Estado.Plan_Rechazado)
+                            {
+                                planesrechazados++;
+                            }
+                            if (item.Estado == Estado.Informe_Entregado)
+                            {
+                                informesentregados++;
+                            }
+                            if (item.Estado == Estado.Informe_Aprobado)
+                            {
+                                informesaprobados++;
+                            }
+                            if (item.Estado == Estado.Informe_Desaprobado)
+                            {
+                                informesdesaprobados++;
+                            }
+                            if (item.Estado == Estado.PS_Aprobada)
+                            {
+                                pssaprobadas++;
+                            }
+                            if (item.Estado == Estado.PS_Cancelada)
+                            {
+                                psscanceladas++;
+                            }
+                            if (item.Estado == Estado.PS_Vencida)
+                            {
+                                pssvencidas++;
+                            }
+
+
+
+                        }
+
+                    }
+                }
+                cantidades.Add(total);
+
+                listaplanesentregados.Add(planesentregados);
+                listaplanesaprobados.Add(planesaprobados);
+                listaplanesdesaprobados.Add(planesdesaprobados);
+                listaplanesrechazados.Add(planesrechazados);
+                listainformesentregados.Add(informesentregados);
+                listainformesaprobados.Add(informesaprobados);
+                listainformesdesaprobados.Add(informesdesaprobados);
+                listapssaprobadas.Add(pssaprobadas);
+                listapsscanceladas.Add(psscanceladas);
+                listapssvencidas.Add(pssvencidas);
+
+                total = 0;
+                planesentregados = 0;
+                planesaprobados = 0;
+                planesdesaprobados = 0;
+                planesrechazados = 0;
+                informesentregados = 0;
+                informesaprobados = 0;
+                informesdesaprobados = 0;
+                pssaprobadas = 0;
+                psscanceladas = 0;
+                pssvencidas = 0;
+
+            }
+            ViewBag.fechadesde = fecha1;
+            ViewBag.fechahasta = fecha2;
+            ViewBag.listaareas = JsonConvert.SerializeObject(misareas);
+            ViewBag.cantidades = JsonConvert.SerializeObject(cantidades);
+            ViewBag.areas = misareas.Count();
+            ViewBag.misareas = misareas;
+            ViewBag.miscantidades = cantidades;//total de planes /informes segun el metodo (no se ocupa por ahora)
+            ViewBag.listaplanesentregados = listaplanesentregados;
+            ViewBag.listaplanesaprobados = listaplanesaprobados;
+            ViewBag.listaplanesdesaprobados = listaplanesdesaprobados;
+            ViewBag.listaplanesrechazados = listaplanesrechazados;
+            ViewBag.listainformesentregados = listainformesentregados;
+            ViewBag.listainformesaprobados = listainformesaprobados;
+            ViewBag.listainformesdesaprobados = listainformesdesaprobados;
+            ViewBag.listapssaprobadas = listapssaprobadas;
+            ViewBag.listapsscanceladas = listapsscanceladas;
+            ViewBag.listapssvencidas = listapssvencidas;
+
+            IList<PS> pss2 = new List<PS>();
+
+            foreach (var item in pss)
+            {
+
+                if (item.Organizacion.DenominacionOrg == area)
+                {
+                    pss2.Add(item);
+                }
+            }
+            pss = pss2;
+            pss = pss.Distinct().ToList();
+
+
+
+            return View(pss);
+        }
+
+        [Authorize(Roles = "Moderador,Administrador")]
         public ActionResult _PopupAreasPlanes(string area,DateTime fecha1, DateTime fecha2)
         {
             //fecha1 = Convert.ToDateTime("01/02/0001").Date;
