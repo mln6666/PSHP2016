@@ -4,7 +4,17 @@
 @{
     ViewBag.Title = "Detalle";
 }
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
 
+        }
+
+    }
+}
 <h2 class="text-center">Detalles alumno: @Model.ApellidoAlu, @Model.NombreAlu</h2>
 
 <hr style="color:grey;border-color:grey"/>

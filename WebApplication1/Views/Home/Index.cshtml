@@ -15,21 +15,21 @@
             /*height:100%;*/
         }</style>*@
 </head>
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
+
+        }
+
+    }
+}
 <div class="container-fluid">
     <h2 class="text-center">Bienvenido a SiGePS</h2>
     <h4 class="text-center">Para comenzar, puede seleccionar una de las siguientes opciones:</h4>
-    @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
-    {
-        if (TempData["vencer"] != null)
-        {
-            {
-                <input id="vencer" style="display: none" value="@TempData["vencer"]" />
-                
-            }
-
-        }
-    }
-
+    
 
     <hr style="color:grey;border-color:grey" /><br /><br /><br />
 
@@ -67,7 +67,7 @@
             if ($('#vencer').val() > 0) {
                 var numero = $('#vencer').val();
 
-                var url = '<p>@Html.ActionLink("Ver listado", "Vencimientos","Estadisticas")</p>';
+                var url = '<p>@Html.ActionLink("Ver listado", "Vencimientos", "Estadisticas")</p>';
                 toastr.options = {
                     "closeButton": true,
                     "debug": false,
@@ -85,10 +85,58 @@
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["info"]("PSs a vencer: " + numero + ". " + url)
+                toastr["info"]("PSs a vencer: " + numero + ". " + url);
 
-                
-                }
+                $(window).load(function () {
+
+                    var options = {};
+                    options.url = "/Estadisticas/GetVencimientos";
+                    options.type = "GET";
+                    options.data = { "prueba": "0" };
+                    options.dataType = "json";
+                    options.success = function (data) {
+                      
+                    };
+                    $.ajax(options);
+                });
+
+            }else{
+
+            $(window).load(function() {
+
+                var options = {};
+                options.url = "/Estadisticas/GetVencimientos";
+                options.type = "GET";
+                options.data = { "prueba": "0" };
+                options.dataType = "json";
+                options.success = function(data) {
+                    if (data.CantVenc != data.CantVencAnt) {
+                        var url = '<p>@Html.ActionLink("Ver listado", "Vencimientos", "Estadisticas")</p>';
+                        toastr.options = {
+                            "closeButton": true,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-bottom-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "10000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                        toastr["info"]("Hay nuevas PSs por vencer: " + data.CantVenc+". " + url);
+
+                    }
+                };
+                $.ajax(options);
+            });
+            }
+
         })
     </script>
 

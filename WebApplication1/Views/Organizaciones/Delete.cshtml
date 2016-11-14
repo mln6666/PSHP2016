@@ -3,7 +3,17 @@
 @{
     ViewBag.Title = "Eliminar organizacion";
 }
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
 
+        }
+
+    }
+}
 <h2 class="text-center">Eliminar Organización</h2>
 <hr style="color:grey;border-color:grey"/>
 <h3>@Model.DenominacionOrg</h3>

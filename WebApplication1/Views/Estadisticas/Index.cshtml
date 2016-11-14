@@ -1,4 +1,14 @@
-﻿
+﻿@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
+
+        }
+
+    }
+}
 @{
     ViewBag.Title = "Index";
 }

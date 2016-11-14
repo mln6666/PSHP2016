@@ -5,7 +5,17 @@
 @{
     ViewBag.Title = "Usuarios";
 }
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
 
+        }
+
+    }
+}
 <div>
     <h1 class="text-center ">Gestión de usuarios</h1>
     <hr style="color: grey; border-color: grey"/>

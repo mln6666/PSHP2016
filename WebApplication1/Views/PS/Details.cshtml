@@ -15,7 +15,17 @@
 </style>
 <h1 class="text-center">Detalles Generales</h1>
 <hr style="color:grey;border-color:grey" />
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
 
+        }
+
+    }
+}
 <h4>@ViewBag.ErrorAprobarPS</h4>
 <div>
 

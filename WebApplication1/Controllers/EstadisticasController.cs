@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,8 +22,37 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-       
-        
+        [Authorize(Roles = "Moderador,Administrador")]
+        public JsonResult GetVencimientos(string prueba)
+        {
+           
+            ContextPS db = new ContextPS();
+          
+            ContadorVenc contadorvenc = db.ContadorVencs.ToList().FirstOrDefault();
+            var pos = db.PSs.ToList();
+            int vencer = 0;
+            foreach (var item in pos)
+            {
+                if (item.Estado == Estado.Plan_Aprobado | item.Estado == Estado.Plan_Desaprobado
+                    | item.Estado == Estado.Plan_Entregado | item.Estado == Estado.Informe_Entregado
+                    | item.Estado == Estado.Informe_Desaprobado | item.Estado == Estado.Informe_Aprobado)
+                {
+                    if (item.Vencimiento < DateTime.Now)
+                    {
+                        vencer++;
+                    }
+                }
+
+            }
+            contadorvenc.CantVencAnt = contadorvenc.CantVenc;
+            contadorvenc.CantVenc = vencer;
+
+            db.Entry(contadorvenc).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+            return Json(contadorvenc, JsonRequestBehavior.AllowGet);
+        }
 
 
 

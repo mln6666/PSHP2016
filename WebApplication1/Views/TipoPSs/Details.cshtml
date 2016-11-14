@@ -5,7 +5,17 @@
 }
 
 <h2>Details</h2>
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
 
+        }
+
+    }
+}
 <div>
     <h4>TipoPS</h4>
     <hr />

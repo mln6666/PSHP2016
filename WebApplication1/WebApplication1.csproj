@@ -244,9 +244,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611130625174_InitialCreate.cs" />
+    <Compile Include="Migrations\201611130625174_InitialCreate.Designer.cs">
+      <DependentUpon>201611130625174_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611140034106_uhuhuh.cs" />
+    <Compile Include="Migrations\201611140034106_uhuhuh.Designer.cs">
+      <DependentUpon>201611140034106_uhuhuh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Alumno.cs" />
     <Compile Include="Models\Area.cs" />
+    <Compile Include="Models\ContadorVenc.cs" />
     <Compile Include="Models\Estado.cs" />
     <Compile Include="Models\Evaluacion.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -807,6 +817,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611130625174_InitialCreate.resx">
+      <DependentUpon>201611130625174_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611140034106_uhuhuh.resx">
+      <DependentUpon>201611140034106_uhuhuh.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

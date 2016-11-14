@@ -1,6 +1,17 @@
 ﻿@{
     ViewBag.Title = "Contacto";
 }
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
+
+        }
+
+    }
+}
 <br/><br/>
 <div class="text-center">
     <img src="~/Content/Images/logogodesa.png">
