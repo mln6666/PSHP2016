@@ -21,6 +21,11 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+        public ActionResult _Referencias()
+        {
+
+            return View();
+        }
 
         [Authorize(Roles = "Moderador,Administrador")]
         public JsonResult GetVencimientos(string prueba)
