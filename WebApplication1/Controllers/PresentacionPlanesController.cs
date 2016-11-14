@@ -151,10 +151,17 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                PS pS = db.PSs.Find(presentacionPlan.IdPS);
+
+                if ((presentacionPlan.IdPresentacionPlan == pS.PresentacionesPlanes.FirstOrDefault().IdPresentacionPlan)&
+                    presentacionPlan.FechaPresentacionPlan != pS.PresentacionesPlanes.FirstOrDefault().FechaPresentacionPlan)
+                {
+                    pS.Vencimiento = presentacionPlan.FechaPresentacionPlan.AddYears(1);
+                }
                 db.Entry(presentacionPlan).State = EntityState.Modified;
                 db.SaveChanges();
 
-                PS pS = db.PSs.Find(presentacionPlan.IdPS);
+                
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
                     pS.Estado = Estado.Plan_Entregado;
 
@@ -206,10 +213,19 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid)
             {
+                PS pS = db.PSs.Find(presentacionPlan.IdPS);
+
+                if (((presentacionPlan.IdPresentacionPlan == pS.PresentacionesPlanes.LastOrDefault().IdPresentacionPlan) &
+                  presentacionPlan.FechaEvaluacionPlan != pS.PresentacionesPlanes.LastOrDefault().FechaEvaluacionPlan) &
+                  presentacionPlan.EstadoEvaluacionPlan== Evaluacion.Aprobado)
+                {
+                    pS.Vencimiento = presentacionPlan.FechaPresentacionPlan.AddYears(1);
+                }
+
                 db.Entry(presentacionPlan).State = EntityState.Modified;
                 db.SaveChanges();
 
-                PS pS = db.PSs.Find(presentacionPlan.IdPS);
+                
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
                     pS.Estado = Estado.Plan_Entregado;
 
