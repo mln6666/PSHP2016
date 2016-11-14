@@ -285,7 +285,7 @@
 
 
 
-                        @if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada)
+                        @if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada || Model.Estado == WebApplication1.Models.Estado.PS_Vencida)
                         {
                             <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
                         }
