@@ -205,6 +205,7 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.FechaPresentacionPlan, new {htmlAttributes = new {@class = "form-control input-sm", @onchange = "fechaMayorAActual();" } })
             <span id="spanfechapresentacionplan" style="color: red"></span>
+            <span id="spanfechapresentacionplan2" style="color: red"></span>
 
             @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new {@class = "text-danger"})
         </div>
@@ -382,6 +383,8 @@
         }
 
         function fechaMayorAActual() {
+            var anio = $('#FechaPresentacionPlan').val().split("-");
+            anio = anio[0];
             
             if ($('#FechaPresentacionPlan').val().trim() > new Date().toISOString().substring(0, 10)) {
                 $('#spanfechapresentacionplan').text("Ésta fecha no puede ser superior a la fecha actual.");
@@ -390,8 +393,15 @@
                 $('#spanfechapresentacionplan').text("");
                
             }
+            if (anio < $('#CicloLectivo').val() || anio - $('#CicloLectivo').val() > 1) {
+                $('#spanfechapresentacionplan2').text("El año debe ser igual o superior en 1 al ciclo lectivo.");
+                
+            } else {
+                $('#spanfechapresentacionplan2').text("");
+            }
 
         }
+
 
         function fechaMayorAActual2() {
 
@@ -444,6 +454,11 @@
             }
 
             if ($('#FechaPresentacionPlan').val().trim() > new Date().toISOString().substring(0, 10)) {
+                var isValidItem = false;
+                var fechapresentacionplan = false;
+            }
+
+            if ($('#FechaPresentacionPlan').val().split("-")[0] < $('#CicloLectivo').val() || $('#FechaPresentacionPlan').val().split("-")[0] - $('#CicloLectivo').val() > 1) {
                 var isValidItem = false;
                 var fechapresentacionplan = false;
             }

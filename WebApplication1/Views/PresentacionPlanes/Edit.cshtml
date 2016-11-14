@@ -56,6 +56,11 @@
                 $('#spanfechapresentacionplan').text("Campo requerido.");
 
             }
+            if ($('#FechaPresentacionPlan').val().split("-")[0] < $('#CicloLectivo').val() || $('#FechaPresentacionPlan').val().split("-")[0] - $('#CicloLectivo').val() > 1) {
+                var isValidItem = false;
+                var fechapresentacionplan = false;
+                $('#spanfechapresentacionplan2').text("El año debe ser igual o superior en 1 al ciclo lectivo.");
+            }
 
             if (($('#FechaEvaluacionPlan').val().trim() == '') & ($('#EstadoEvaluacionPlan').val().trim() != 0)) {
                 var isValidItem = false;
@@ -158,7 +163,7 @@ else if (Model.PS.PresentacionesInforme.Count() != 0)
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IdPresentacionPlan)
         @Html.HiddenFor(model => model.IdPS)
-
+        <input type="number" style="display: none" id="CicloLectivo" value="@ViewBag.ciclolectivo" />
 
         <div class="form-group">
             @Html.LabelFor(model => model.FechaPresentacionPlan, "Fecha de Presentación", htmlAttributes: new { @class = "control-label col-md-6", @Style = "text-align: center" })
@@ -166,6 +171,7 @@ else if (Model.PS.PresentacionesInforme.Count() != 0)
                 @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm" } })
                 @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new { @class = "text-danger" })
                 <span id="spanfechapresentacionplan" style="color:red"></span>
+                <span id="spanfechapresentacionplan2" style="color:red"></span>
 
             </div>
         </div>

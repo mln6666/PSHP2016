@@ -137,6 +137,8 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
+            PS ps = db.PSs.ToList().Find(p => p.IdPS == presentacionPlan.IdPS);
+            ViewBag.ciclolectivo = ps.CicloLectivo;
             ViewBag.IdPS = new SelectList(db.PSs, "IdPS", "Tutor", presentacionPlan.IdPS);
             return View(presentacionPlan);
         }
@@ -153,20 +155,22 @@ namespace WebApplication1.Controllers
             {
                 PS pS = db.PSs.Find(presentacionPlan.IdPS);
 
-                if ((presentacionPlan.IdPresentacionPlan == pS.PresentacionesPlanes.FirstOrDefault().IdPresentacionPlan)&
-                    presentacionPlan.FechaPresentacionPlan != pS.PresentacionesPlanes.FirstOrDefault().FechaPresentacionPlan)
-                {
-                    pS.Vencimiento = presentacionPlan.FechaPresentacionPlan.AddYears(1);
-                }
+                
                 db.Entry(presentacionPlan).State = EntityState.Modified;
                 db.SaveChanges();
 
-                
+                if ((presentacionPlan.IdPresentacionPlan == pS.PresentacionesPlanes.FirstOrDefault().IdPresentacionPlan))
+                {
+                    pS.Vencimiento = presentacionPlan.FechaPresentacionPlan.AddYears(1);
+                }
+
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
                     pS.Estado = Estado.Plan_Entregado;
 
-                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado) { 
                     pS.Estado = Estado.Plan_Aprobado;
+                    pS.Vencimiento = presentacionPlan.FechaEvaluacionPlan.Value.AddYears(1);
+                }
 
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
                     pS.Estado = Estado.Plan_Desaprobado;
@@ -215,17 +219,17 @@ namespace WebApplication1.Controllers
             {
                 PS pS = db.PSs.Find(presentacionPlan.IdPS);
 
-                if (((presentacionPlan.IdPresentacionPlan == pS.PresentacionesPlanes.LastOrDefault().IdPresentacionPlan) &
-                  presentacionPlan.FechaEvaluacionPlan != pS.PresentacionesPlanes.LastOrDefault().FechaEvaluacionPlan) &
-                  presentacionPlan.EstadoEvaluacionPlan== Evaluacion.Aprobado)
-                {
-                    pS.Vencimiento = presentacionPlan.FechaPresentacionPlan.AddYears(1);
-                }
+                
 
                 db.Entry(presentacionPlan).State = EntityState.Modified;
                 db.SaveChanges();
 
-                
+                if ((presentacionPlan.IdPresentacionPlan == pS.PresentacionesPlanes.LastOrDefault().IdPresentacionPlan) &
+                  presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado)
+                {
+                    pS.Vencimiento = presentacionPlan.FechaPresentacionPlan.AddYears(1);
+                }
+
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Pendiente)
                     pS.Estado = Estado.Plan_Entregado;
 
