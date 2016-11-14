@@ -5,7 +5,17 @@
 }
 
 <h2>Delete</h2>
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
 
+        }
+
+    }
+}
 <h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>TipoPS</h4>

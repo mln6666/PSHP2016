@@ -3,7 +3,17 @@
 @{
     ViewBag.Title = "Details";
 }
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
 
+        }
+
+    }
+}
 <h2>Detalle de Área</h2>
 
 <div>

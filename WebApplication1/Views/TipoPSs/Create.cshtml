@@ -5,7 +5,17 @@
 }
 
 <h2>Create</h2>
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
 
+        }
+
+    }
+}
 
 @using (Html.BeginForm()) 
 {

@@ -3,7 +3,17 @@
 @{
     ViewBag.Title = "Create";
 }
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
 
+        }
+
+    }
+}
 <h2 class="text-center">Nuevo Alumno</h2>
 <hr style="color:grey;border-color:grey"/>
 

@@ -3,7 +3,17 @@
 @{
     ViewBag.Title = "Delete";
 }
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
 
+        }
+
+    }
+}
 <h1 class="text-center">Eliminar alumno</h1>
 <hr style="color:grey;border-color:grey" />
 <h3> @Model.ApellidoAlu, @Model.NombreAlu</h3>

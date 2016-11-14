@@ -1,4 +1,15 @@
-﻿<h2 class="text-center">Estadística de Planes por Estado</h2>
+﻿@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
+
+        }
+
+    }
+}
+<h2 class="text-center">Estadística de Planes por Estado</h2>
 <hr style="color: grey; border-color: grey;margin-bottom: 0px"  />
 
 @using (Ajax.BeginForm("_GraficoEstadosPlanes", "Estadisticas", new AjaxOptions

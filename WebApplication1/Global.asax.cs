@@ -26,6 +26,31 @@ namespace WebApplication1
 
             ContextPS dc = new ContextPS();
             ApplicationDbContext db = new ApplicationDbContext();
+
+            if ( dc.ContadorVencs == null |dc.ContadorVencs.Count() == 0)
+            {
+                ContadorVenc cont = new ContadorVenc();
+                var pos = dc.PSs.ToList();
+                int vencer = 0;
+                foreach (var item in pos)
+                {
+                    if (item.Estado == Estado.Plan_Aprobado | item.Estado == Estado.Plan_Desaprobado
+                        | item.Estado == Estado.Plan_Entregado | item.Estado == Estado.Informe_Entregado
+                        | item.Estado == Estado.Informe_Desaprobado | item.Estado == Estado.Informe_Aprobado)
+                    {
+                        if (item.Vencimiento < DateTime.Now)
+                        {
+                            vencer++;
+                        }
+                    }
+
+                }
+                cont.CantVenc = vencer;
+                cont.CantVencAnt = vencer;
+                dc.ContadorVencs.Add(cont);
+                dc.SaveChanges();
+            }
+
             if (db.Users==null||db.Users.Count()==0 )
             {
                 CreateRoles(db);
