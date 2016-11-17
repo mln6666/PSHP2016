@@ -41,6 +41,9 @@ else*@
             <th class="text-left" style="border-radius: 3px">
                 @Html.DisplayNameFor(model => model.Vencimiento)
             </th>
+            <th class="text-left" style="border-radius: 3px">
+                Estado Vencimiento
+            </th>
 
             <th class="text-left" style="border-radius: 3px">
                 @Html.DisplayNameFor(model => model.Alumno.Legajo)
@@ -67,7 +70,10 @@ else*@
                 if (item.Vencimiento < DateTime.Now) {
                     <tr style="background-color: bisque;  ">
                         <td class="text-left">
-                            @Html.DisplayFor(modelItem => item.Vencimiento) - Vencida
+                            @Html.DisplayFor(modelItem => item.Vencimiento)
+                        </td>
+                        <td class="text-left">
+                            Habilitado
                         </td>
 
                         <td class="text-left">
@@ -98,7 +104,10 @@ else*@
                     {
                         <tr style="background-color: cornsilk">
                             <td class="text-left">
-                                @Html.DisplayFor(modelItem => item.Vencimiento) - Próx. a vencer
+                                @Html.DisplayFor(modelItem => item.Vencimiento)
+                            </td>
+                            <td class="text-left">
+                                Próximamente
                             </td>
 
                             <td class="text-left">
@@ -130,6 +139,9 @@ else*@
                         <tr style="background-color: white">
                             <td class="text-left">
                                 @Html.DisplayFor(modelItem => item.Vencimiento)
+                            </td>
+                            <td class="text-left">
+                                ---
                             </td>
 
                             <td class="text-left">
