@@ -134,39 +134,7 @@ else*@
                         </tr>
 
                     }
-                    else
-                    {
-                        <tr style="background-color: white">
-                            <td class="text-left">
-                                @Html.DisplayFor(modelItem => item.Vencimiento)
-                            </td>
-                            <td class="text-left">
-                                ---
-                            </td>
-
-                            <td class="text-left">
-                                @Html.DisplayFor(modelItem => item.Alumno.Legajo)
-                            </td>
-                            <td class="text-left">
-                                @item.Alumno.ApellidoAlu, @item.Alumno.NombreAlu
-                            </td>
-
-                            <td class="text-left">
-                                @Html.DisplayFor(modelItem => item.CicloLectivo)
-                            </td>
-                            <td class="text-left">
-                                @Html.DisplayFor(modelItem => item.Estado)
-                            </td>
-
-
-
-                            <td>@Html.ActionLink("Detalles", "Details", "PS", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })</td>
-
-
-
-
-                        </tr>
-                    }
+                  
                 }
             }
         </tbody>
