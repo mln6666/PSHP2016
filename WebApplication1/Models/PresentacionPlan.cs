@@ -25,6 +25,8 @@ namespace WebApplication1.Models
         [Display(Name = "Observaciones")]
         public string ObservacionesPlan { get; set; }
 
+        public string Archivo { get; set; }
+
         public int IdPS { get; set; }
 
         public virtual PS PS { get; set; }

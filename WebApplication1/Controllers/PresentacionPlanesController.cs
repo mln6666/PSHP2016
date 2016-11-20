@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Context;
+using WebApplication1.Migrations;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -94,11 +96,33 @@ namespace WebApplication1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Moderador,Administrador")]
-        public ActionResult Create([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")] PresentacionPlan presentacionPlan)
+        public ActionResult Create([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")] PresentacionPlan presentacionPlan, HttpPostedFileBase uploadFile, int idPS)
         {
             if (ModelState.IsValid)
             {
+                
+                if (uploadFile != null && uploadFile.ContentLength > 0) { 
+                    
+                    try
+                    {
+                        
+                        string path = Path.Combine(Server.MapPath("~/App_Data/Files/Planes/"),
+                                                   Path.GetFileName(uploadFile.FileName));
+                        uploadFile.SaveAs(path);
+                        presentacionPlan.Archivo = Path.GetFileName(uploadFile.FileName);
+                        
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    }
+                }
+                
+
                 db.PresentacionPlanes.Add(presentacionPlan);
+
+               
                 db.SaveChanges();
 
                 PS pS = db.PSs.Find(presentacionPlan.IdPS);
@@ -122,6 +146,32 @@ namespace WebApplication1.Controllers
             PresentacionPlan presentacionplan = new PresentacionPlan();
             presentacionplan.IdPS = id;
             return View(presentacionplan);
+        }
+
+        public FileResult Download(int id)
+        {
+            //var dir = new System.IO.DirectoryInfo(Server.MapPath("~/App_Data/Files/Planes/"));
+            //System.IO.FileInfo[] fileNames = dir.GetFiles("*.*");
+            //List<string> items = new List<string>();
+
+            //foreach (var file in fileNames)
+            //{
+
+            //    items.Add(file.Name);
+            //}
+
+            string archivo =
+                db.PresentacionPlanes.ToList().Find(p => p.IdPresentacionPlan == id).Archivo;
+            string ext = archivo.Split('.')[1];
+
+            
+            
+            
+            
+            return File("~/App_Data/Files/Planes/" + archivo, System.Net.Mime.MediaTypeNames.Application.Pdf);
+
+            
+
         }
 
         // GET: PresentacionPlanes/Edit/5
@@ -251,6 +301,36 @@ namespace WebApplication1.Controllers
             }
 
             return PartialView(presentacionPlan);
+        }
+
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase file, int idPS)
+        {
+            DateTime hoy = new DateTime();
+            hoy = DateTime.Today.Date;
+            string shoy = "";
+            shoy = Convert.ToString(hoy);
+            PS peese = db.PSs.Find(idPS);
+            Alumno alu = db.Alumnos.ToList().Find(a => a.IdAlumno == peese.IdAlumno);
+            string legajo = alu.Legajo.ToString();
+            if (file != null && file.ContentLength > 0)
+
+                try
+                {
+                    string path = Path.Combine(Server.MapPath("~/App_Data/Files/" + shoy +"/"+ legajo),
+                                               Path.GetFileName(file.FileName));
+                    file.SaveAs(path);
+                    ViewBag.Message = "File uploaded successfully";
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                }
+            else
+            {
+                ViewBag.Message = "You have not specified a file.";
+            }
+            return RedirectToAction("Details", "PS", new { id = idPS });
         }
 
 

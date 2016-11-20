@@ -9,6 +9,19 @@
 <head>
     <script>
         /////////////////Start:Select searchable////////////////
+        function Formato() {
+            console.log($('#uploadFile').val().split('.')[1]);
+            if ($('#uploadFile').val().split('.')[1] != "pdf"){
+                event.preventDefault();
+                $('#archivopdf').text("El formato de archivo debe ser PDF");
+            } else {
+                $('#archivopdf').text("");
+            } 
+            
+            
+
+        }
+
 
         $('#plan').submit(function (e) {
             var x = this;
@@ -66,6 +79,14 @@
                 $('#spanfechaestado').text("** Una Fecha de Evaluación requiere una Evaluación!");
             }
 
+            if ($('#uploadFile').val().trim() !== ""){
+            if ($('#uploadFile').val().split('.')[1] != "pdf") {
+                var isValidItem = false;
+                
+               
+            }
+            }
+
             if (($('#FechaEvaluacionPlan').val().trim() == '') & ($('#EstadoEvaluacionPlan').val().trim() != 0)) {
                 var isValidItem = false;
                 var fechaestado = false;
@@ -98,7 +119,7 @@
     </script>
 </head>
 
-@using (Html.BeginForm("Create", "PresentacionPlanes", null, FormMethod.Post, new { id = "plan" }))
+@using (Html.BeginForm("Create", "PresentacionPlanes", null , FormMethod.Post, new { id = "plan", enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(model => model.IdPS)
 
@@ -158,8 +179,25 @@
                 @Html.ValidationMessageFor(model => model.ObservacionesPlan, "", new { @class = "text-danger" })
             </div>            
         </div>
-        <span id="spanfechaestado" style="color:red"></span>
-
+        <span id="spanfechaestado" style="color: red"></span>
+        <input type="number" value="@Model.IdPS" style="display: none" name="idPS" id="idPS"/>
+        <label>Subir archivo:</label>
+        <input type="file" onchange="Formato()" name="uploadFile" id="uploadFile"/><br/>
+        <span id="archivopdf" style="color:red"></span>
+        @*///
+    @using (Html.BeginForm("Upload",
+                            "PresentacionPlanes",
+                            FormMethod.Post,
+                            new { enctype = "multipart/form-data" }))
+    {
+        <input type="number" value="@Model.IdPS" style="display: none" name="idPS" id="idPS" />
+                <label for="file">Subir archivo:</label>
+                <input type="file" name="file" id="file" /><br><br>
+                @*<input type="submit" value="Subir archivo" /> ViewBag.Message
+    } *@
+                    
+                   
+        <br />
         <div class="form-group row text-center">
             <div>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

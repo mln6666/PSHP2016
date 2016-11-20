@@ -244,6 +244,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611140136448_InitialCreate.cs" />
+    <Compile Include="Migrations\201611140136448_InitialCreate.Designer.cs">
+      <DependentUpon>201611140136448_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611192249164_agregadosArchivos.cs" />
+    <Compile Include="Migrations\201611192249164_agregadosArchivos.Designer.cs">
+      <DependentUpon>201611192249164_agregadosArchivos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611192321495_tipodedatodearchivomodificado.cs" />
+    <Compile Include="Migrations\201611192321495_tipodedatodearchivomodificado.Designer.cs">
+      <DependentUpon>201611192321495_tipodedatodearchivomodificado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Alumno.cs" />
     <Compile Include="Models\Area.cs" />
@@ -804,7 +817,7 @@
     <Content Include="Views\Estadisticas\_ReferenciasGenerales.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Files\" />
     <Folder Include="Repositorios\" />
   </ItemGroup>
   <ItemGroup>
@@ -813,6 +826,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611140136448_InitialCreate.resx">
+      <DependentUpon>201611140136448_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611192249164_agregadosArchivos.resx">
+      <DependentUpon>201611192249164_agregadosArchivos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611192321495_tipodedatodearchivomodificado.resx">
+      <DependentUpon>201611192321495_tipodedatodearchivomodificado.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

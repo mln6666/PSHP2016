@@ -17,14 +17,14 @@
 <hr style="color:grey;border-color:grey" />
 @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
 {
-    if (TempData["vencer"] != null)
-    {
-        {
-            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
+	if (TempData["vencer"] != null)
+	{
+		{
+			<input id="vencer" style="display: none" value="@TempData["vencer"]" />
 
-        }
+		}
 
-    }
+	}
 }
 <h4>@ViewBag.ErrorAprobarPS</h4>
 <div>
@@ -154,12 +154,12 @@
 			<th class="text-left"width="14%" style="border-radius: 3px">
 				@Html.DisplayNameFor(model => model.Area.NombreArea)
 			</th>
-		    <th class="text-left" width="15%"style="border-radius: 3px">
-		        @Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
-		    </th>
+			<th class="text-left" width="15%"style="border-radius: 3px">
+				@Html.DisplayNameFor(model => model.Organizacion.DenominacionOrg)
+			</th>
 @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
 {
-    <th class="text-center" style="border-radius: 3px">Acciones</th>
+	<th class="text-center" style="border-radius: 3px">Acciones</th>
 
 }
 
@@ -221,132 +221,131 @@
 
 @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
 {
-		    <td class="text-center">
-
+			<td class="text-center">
                
-                @if (Model.Estado == WebApplication1.Models.Estado.Plan_Pendiente || Model.Estado == WebApplication1.Models.Estado.Plan_Desaprobado)
-		        {
+				@if (Model.Estado == WebApplication1.Models.Estado.Plan_Pendiente || Model.Estado == WebApplication1.Models.Estado.Plan_Desaprobado)
+				{
 					@*@Html.ActionLink("Agregar plan", "Create", "PresentacionPlanes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm dialog-window5", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
 
-		            <a href="@Url.Action("Create", "PresentacionPlanes", new {id = Model.IdPS})" class="btn btn-primary btn-sm dialog-window5" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
+					<a href="@Url.Action("Create", "PresentacionPlanes", new {id = Model.IdPS})" class="btn btn-primary btn-sm dialog-window5" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
 
 
-		        }
-		        else
-		        {
+				}
+				else
+				{
 					@*@Html.ActionLink("Agregar plan", "Create", "PresentacionPlanes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
-		            <a href="@Url.Action("Create", "PresentacionPlanes", new {id = Model.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
+					<a href="@Url.Action("Create", "PresentacionPlanes", new {id = Model.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
 
-		        }
+				}
 
 
 
-		        @if (Model.Estado == WebApplication1.Models.Estado.Plan_Aprobado || Model.Estado == WebApplication1.Models.Estado.Informe_Desaprobado)
-		        {
+				@if (Model.Estado == WebApplication1.Models.Estado.Plan_Aprobado || Model.Estado == WebApplication1.Models.Estado.Informe_Desaprobado)
+				{
 
 					@*@Html.ActionLink("Agregar informe", "Create", "PresentacionInformes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm dialog-window6", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
 
-		            <a href="@Url.Action("Create", "PresentacionInformes", new {id = Model.IdPS})" class="btn btn-primary btn-sm dialog-window6" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
+					<a href="@Url.Action("Create", "PresentacionInformes", new {id = Model.IdPS})" class="btn btn-primary btn-sm dialog-window6" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
 
-		        }
-		        else
-		        {
+				}
+				else
+				{
 					@*@Html.ActionLink("Agregar informe", "Create", "PresentacionInformes", new { id = Model.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
 
-		            <a href="@Url.Action("Create", "PresentacionInformes", new {id = Model.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
+					<a href="@Url.Action("Create", "PresentacionInformes", new {id = Model.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
 
-		        }
-                
-
-
+				}
+				
 
 
 
-		        <div class="btn-group">
-		            <a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-		                Finalizar
-		                <span class="caret"></span>
-		            </a>
-                    <ul class="dropdown-menu">
-                        @if (User.IsInRole("Administrador") == false & User.IsInRole("Moderador") == false)
-                        {
-                            <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
-                        }
-
-                        else if (Model.Estado != WebApplication1.Models.Estado.Informe_Aprobado)
-                        {
-                            <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
-                        }
-
-                        else
-                        {
-                            <li>@Html.ActionLink("Aprobar PS", "AprobarPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window8" })</li>
-                        }
 
 
+				<div class="btn-group">
+					<a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+						Finalizar
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						@if (User.IsInRole("Administrador") == false & User.IsInRole("Moderador") == false)
+						{
+							<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
+						}
 
-                        @if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada || Model.Estado == WebApplication1.Models.Estado.PS_Vencida)
-                        {
-                            <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
-                        }
-                        else if (User.IsInRole("Administrador") == false & User.IsInRole("Cancelar PS") == false)
-                        {
-                            <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
-                        }
-                        else
-                        {
-                            <li>@Html.ActionLink("Cancelar PS", "CancelarPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window7" })</li>
-                        }
+						else if (Model.Estado != WebApplication1.Models.Estado.Informe_Aprobado)
+						{
+							<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Aprobar PS</a></li>
+						}
 
-                        @if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada)
-                        {
-                            <li>@Html.ActionLink("Disposición", "NumeroDisposicion", "PS", new { id = Model.IdPS }, new { @class = "dialog-window20" })</li>
-                        }
-                        else
-                        {
-                            <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Disposición</a></li>
-                        }
+						else
+						{
+							<li>@Html.ActionLink("Aprobar PS", "AprobarPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window8" })</li>
+						}
 
-                        @if (Model.Estado == WebApplication1.Models.Estado.Plan_Entregado
+
+
+						@if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada || Model.Estado == WebApplication1.Models.Estado.PS_Vencida)
+						{
+							<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
+						}
+						else if (User.IsInRole("Administrador") == false & User.IsInRole("Cancelar PS") == false)
+						{
+							<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
+						}
+						else
+						{
+							<li>@Html.ActionLink("Cancelar PS", "CancelarPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window7" })</li>
+						}
+
+						@if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada)
+						{
+							<li>@Html.ActionLink("Disposición", "NumeroDisposicion", "PS", new { id = Model.IdPS }, new { @class = "dialog-window20" })</li>
+						}
+						else
+						{
+							<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Disposición</a></li>
+						}
+
+						@if (Model.Estado == WebApplication1.Models.Estado.Plan_Entregado
 || Model.Estado == WebApplication1.Models.Estado.Plan_Desaprobado
 || Model.Estado == WebApplication1.Models.Estado.Plan_Aprobado
 || Model.Estado == WebApplication1.Models.Estado.Informe_Entregado
-                    || Model.Estado == WebApplication1.Models.Estado.Informe_Aprobado
-                    || Model.Estado == WebApplication1.Models.Estado.Informe_Desaprobado)
+					|| Model.Estado == WebApplication1.Models.Estado.Informe_Aprobado
+					|| Model.Estado == WebApplication1.Models.Estado.Informe_Desaprobado)
 
 
-                        {
-                            if (Model.Vencimiento < DateTime.Now)
-                            {
-                                <li> @Html.ActionLink("Vencer PS", "VencerPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window30" }) </li>
-                            }
-                            else
-                            {
-                                <li><a href="#" onclick="event.stopPropagation()" style="color: grey"> Vencer PS </a></li>
-                            }
-                        }
-                        else
-                        {
-                            <li><a href = "#" onclick = "event.stopPropagation()" style = "color: grey" > Vencer PS </a></li>
-                        }
+						{
+							if (Model.Vencimiento < DateTime.Now)
+							{
+								<li> @Html.ActionLink("Vencer PS", "VencerPS", "PS", new { id = Model.IdPS }, new { @class = "dialog-window30" }) </li>
+							}
+							else
+							{
+								<li><a href="#" onclick="event.stopPropagation()" style="color: grey"> Vencer PS </a></li>
+							}
+						}
+						else
+						{
+							<li><a href = "#" onclick = "event.stopPropagation()" style = "color: grey" > Vencer PS </a></li>
+						}
 
-                    </ul>
-
-
-
-		        </div>
-		        @if (User.IsInRole("Administrador") | User.IsInRole("Editar PS"))
-
-		        {
-		            @Html.ActionLink("Editar", "Edit", new {id = Model.IdPS}, new {@class = "dialog-window1 btn btn-primary btn-sm"})
-
-
-		        }
+					</ul>
 
 
 
+				</div>
+				@if (User.IsInRole("Administrador") | User.IsInRole("Editar PS"))
 
-		    </td>
+				{
+					@Html.ActionLink("Editar", "Edit", new {id = Model.IdPS}, new {@class = "dialog-window1 btn btn-primary btn-sm"})
+
+
+				}
+
+
+
+
+			</td>
 
 }
 
@@ -491,37 +490,37 @@
 
 </div>
 <div class="modal fade" id="myModal20" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title text-center">Cargar Nro. de Disposición</h3>
-            </div>
-            <div class="modal-body">
-                <div class="te">Espere...</div>
-            </div>
+	 aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3 class="modal-title text-center">Cargar Nro. de Disposición</h3>
+			</div>
+			<div class="modal-body">
+				<div class="te">Espere...</div>
+			</div>
 
-        </div>
+		</div>
 
-    </div>
+	</div>
 
 </div>
 <div class="modal fade" id="myModal30" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title text-center">Vencer PS</h3>
-            </div>
-            <div class="modal-body">
-                <div class="te">Espere...</div>
-            </div>
+	 aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3 class="modal-title text-center">Vencer PS</h3>
+			</div>
+			<div class="modal-body">
+				<div class="te">Espere...</div>
+			</div>
 
-        </div>
+		</div>
 
-    </div>
+	</div>
 
 </div>
 
@@ -665,22 +664,57 @@
 			}
 		});
 		$("body").on("click", "a.dialog-window30", null, function (e) {
-		    e.preventDefault();
+			e.preventDefault();
 
-		    var $link = $(this); // Reference to <a/> link
-		    var title = $link.text(); //this is title to fetch in htnl
-		    $('#myModal20.modal-title').html(title);
+			var $link = $(this); // Reference to <a/> link
+			var title = $link.text(); //this is title to fetch in htnl
+			$('#myModal20.modal-title').html(title);
 
-		    var url = $(this).attr('href');
-		    if (url.indexOf('#') == 0) {
-		        $('#myModal30').modal('show');
-		    }
-		    else {
-		        $.get(url, function (data) {
-		            $('#myModal30 .te').html(data);
-		            $('#myModal30').modal();
-		        }).success(function () { $('input:text:visible:first').focus(); });
-		    }
+			var url = $(this).attr('href');
+			if (url.indexOf('#') == 0) {
+				$('#myModal30').modal('show');
+			}
+			else {
+				$.get(url, function (data) {
+					$('#myModal30 .te').html(data);
+					$('#myModal30').modal();
+				}).success(function () { $('input:text:visible:first').focus(); });
+			}
 		});
+	});
+
+
+    /////////SCRIPT DE UPLOAD FILES
+
+	$('#txtUploadFile').on('change', function (e) {
+	    var files = e.target.files;
+	    var myID = 3; //uncomment this to make sure the ajax URL works
+	    if (files.length > 0) {
+	        if (window.FormData !== undefined) {
+	            var data = new FormData();
+	            for (var x = 0; x < files.length; x++) {
+	                data.append("file" + x, files[x]);
+	            }
+
+	            $.ajax({
+	                type: "POST",
+	                url: '/MyController/UploadFile?id=' + myID,
+	                contentType: false,
+	                processData: false,
+	                data: data,
+	                success: function (result) {
+	                    console.log(result);
+	                },
+	                error: function (xhr, status, p3, p4) {
+	                    var err = "Error " + " " + status + " " + p3 + " " + p4;
+	                    if (xhr.responseText && xhr.responseText[0] == "{")
+	                        err = JSON.parse(xhr.responseText).Message;
+	                    console.log(err);
+	                }
+	            });
+	        } else {
+	            alert("Este navegador no soporta la funcionalidad para subir archivos!");
+	        }
+	    }
 	});
 </script>

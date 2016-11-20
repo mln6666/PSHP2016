@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
@@ -157,7 +159,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Moderador,Administrador")]
-        public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,ObservacionesPS")] PrimerPlanVM pm)
+        public ActionResult Create([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,ObservacionesPS")] PrimerPlanVM pm, HttpPostedFileBase uploadFile)
         {
             if(pm.IdAlumno==null| pm.IdArea == null | pm.IdOrganizacion == null | pm.IdTipoPS == null | pm.TituloProyecto == null |
                 pm.Tutor == null | pm.Cuatrimestre == null | pm.CicloLectivo == null | pm.FechaPresentacionPlan == null)
@@ -219,7 +221,24 @@ namespace WebApplication1.Controllers
             plan.ObservacionesPlan = pm.ObservacionesPlan;
             plan.IdPS = pm.IdPS;
 
+            if (uploadFile != null && uploadFile.ContentLength > 0)
+            {
 
+                try
+                {
+
+                    string path = Path.Combine(Server.MapPath("~/App_Data/Files/Planes/"),
+                                               Path.GetFileName(uploadFile.FileName));
+                    uploadFile.SaveAs(path);
+                    plan.Archivo = Path.GetFileName(uploadFile.FileName);
+
+
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                }
+            }
 
             if (ModelState.IsValid)
             {
@@ -902,6 +921,8 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("Details", "PS", new { id = id });
         }
+
+        
 
 
         protected override void Dispose(bool disposing)
