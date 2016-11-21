@@ -745,7 +745,6 @@
     <Content Include="Views\PS\BusquedaPS.cshtml" />
     <Content Include="Views\PresentacionPlanes\HistorialPlanes.cshtml" />
     <Content Include="Views\PresentacionInformes\HistorialInformes.cshtml" />
-    <Content Include="Views\Home\Vacio.cshtml" />
     <Content Include="Views\PresentacionInformes\EditUltimoInf.cshtml" />
     <Content Include="Views\PresentacionPlanes\EvaluarPlan.cshtml" />
     <Content Include="Views\PresentacionInformes\EvaluarInforme.cshtml" />
