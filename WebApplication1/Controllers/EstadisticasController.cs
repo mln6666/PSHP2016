@@ -3,8 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using i18n.Helpers;
 using Newtonsoft.Json;
 using WebApplication1.Context;
 using WebApplication1.Models;
@@ -47,6 +51,8 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+
+
         [Authorize(Roles = "Moderador,Administrador")]
         public JsonResult GetVencimientos(string prueba)
         {
@@ -74,6 +80,55 @@ namespace WebApplication1.Controllers
 
             db.Entry(contadorvenc).State = EntityState.Modified;
             db.SaveChanges();
+
+            if (contadorvenc.CantVenc > contadorvenc.CantVencAnt)
+            {
+                var listaPs = db.PSs.ToList();
+
+                listaPs.RemoveAll(o => o.Estado == Estado.PS_Aprobada);
+                listaPs.RemoveAll(o => o.Estado == Estado.PS_Cancelada);
+                listaPs.RemoveAll(o => o.Estado == Estado.PS_Vencida);
+                listaPs.RemoveAll(o => o.Estado == Estado.Plan_Rechazado);
+                // // // // // // // // // //
+
+
+                int anterior = contadorvenc.CantVenc - contadorvenc.CantVencAnt;
+                SmtpClient client = new SmtpClient();
+                client.Host = "smtp.gmail.com";
+                client.Port = 587;
+                client.EnableSsl = true;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("sigeps.utnfrre@gmail.com", "Abc123..");
+                var holi = new StringBuilder();
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.IsBodyHtml = true;
+                mailMessage.From = new MailAddress("sigeps.utnfrre@gmail.com");
+                mailMessage.To.Add("sigeps.utnfrre@gmail.com");
+                mailMessage.Subject = "SiGePS Vencimientos ";
+                holi.Append("Hay "+anterior+ " PS nueva a vencer. "+"<p>Total PSs a vencer: "+contadorvenc.CantVenc+ ".</p><p><a href=\"http://localhost:61369/Estadisticas/Vencimientos\">VER LISTADO COMPLETO</a></p><p></p><p></p><p>Listado de PSs a vencer</p>");
+
+                // // // // // // // // // // //
+                // mailMessage.Body ="<table><tr><th>Fecha Vencimiento</th><th>Estado Vencimiento</th><th>Legajo</th><th>Apellido y Nombre</th><th>CicloLectivo</th><th>Estado</th></tr>" + 
+                holi.Append("<table style=\"border-collapse:collapse; text-align:center;\"><tr style =\"background-color:#6FA1D2; color:#ffffff;border-color:#000000; border-style:solid; border-width:thin; padding: 5px;\"><th style =\"background-color:#6FA1D2; color:#ffffff;border-color:#000000; border-style:solid; border-width:thin; padding: 5px;\">Fecha Vencimiento</th><th style =\"background-color:#6FA1D2; color:#ffffff;border-color:#000000; border-style:solid; border-width:thin; padding: 5px;\">Estado Vencimiento</th><th style =\"background-color:#6FA1D2; color:#ffffff;border-color:#000000; border-style:solid; border-width:thin; padding: 5px;\">Legajo</th><th style =\"background-color:#6FA1D2; color:#ffffff;border-color:#000000; border-style:solid; border-width:thin; padding: 5px;\">Apellido y Nombre</th><th style =\"background-color:#6FA1D2; color:#ffffff;border-color:#000000; border-style:solid; border-width:thin; padding: 5px;\">CicloLectivo</th><th style =\"background-color:#6FA1D2; color:#ffffff;border-color:#000000; border-style:solid; border-width:thin; padding: 5px;\">Estado</th></tr>");
+                listaPs = listaPs.OrderBy(t=>t.Vencimiento).ToList();
+                foreach (var item in listaPs)
+                {
+                    if (item.Vencimiento < DateTime.Now)
+                    {
+                        holi.Append("<tr style =\"color:#555555;\"><td style=\" border-color:#5c87b2; border-style:solid; border-width:thin; padding: 5px;\">");
+                        holi.Append(item.Vencimiento.Value.ToShortDateString());
+                        holi.Append("</td><td style=\" border-color:#5c87b2; border-style:solid; border-width:thin; padding: 5px;\">A vencer</td><td style=\" border-color:#5c87b2; border-style:solid; border-width:thin; padding: 5px;\">" + item.Alumno.Legajo + "</td><td style=\" border-color:#5c87b2; border-style:solid; border-width:thin; padding: 5px;\">" + item.Alumno.ApellidoAlu);
+                        holi.Append(", " + item.Alumno.NombreAlu + "</td><td style=\" border-color:#5c87b2; border-style:solid; border-width:thin; padding: 5px;\">" + item.CicloLectivo);
+                        holi.Append("</td><td style=\" border-color:#5c87b2; border-style:solid; border-width:thin; padding: 5px;\">" + item.Estado + "</td></tr>");
+
+                    }
+                    ;
+                }
+
+                mailMessage.Body = holi.ToString();
+                client.Send(mailMessage);
+            }
 
 
             return Json(contadorvenc, JsonRequestBehavior.AllowGet);

@@ -71,6 +71,10 @@ namespace ExpVMsape.Controllers
                     ViewBag.Title = "Acción no permitida.";
                     ViewBag.Description = "No se permite editar una PS que se encuenta Aprobada, Vencida, Cancelada o con Plan Rechazado.";
                     break;
+                case 2012:
+                    ViewBag.Title = "Acción no permitida.";
+                    ViewBag.Description = "Al Vencer una PS es obligatorio cargar una Observación y la Fecha de Finalización.";
+                    break;
 
 
                 default:

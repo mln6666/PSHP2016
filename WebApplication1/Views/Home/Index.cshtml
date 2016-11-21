@@ -15,6 +15,7 @@
             /*height:100%;*/
         }</style>*@
 </head>
+
 @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
 {
     if (TempData["vencer"] != null)
@@ -26,120 +27,210 @@
 
     }
 }
-<div class="container-fluid">
-    <h2 class="text-center">Bienvenido a SiGePS</h2>
-    <h4 class="text-center">Para comenzar, puede seleccionar una de las siguientes opciones:</h4>
-    
-
-    <hr style="color:grey;border-color:grey" /><br /><br /><br />
-
-    <div class="text-center">
-        <a class="btn btn-default text-center btn-lg btn-default" style="width: 300px; height: 50px;padding-top: 10px " href="@Url.Action("Index","Alumnos")">
-            Listado de alumnos
-        </a>
+<div></div>
+<div class="jumbotron">
+    <div class="container">
+        <center>
+            <h1>Bienvenido a SiGePS</h1>
+            <h2 style="color:azure">Sistema de Gestión de Práctica Supervisada</h2>
+        </center>
     </div>
-    <br /><br /><br />
-    <div class="text-center">
-        <a class="btn btn-default text-center btn-lg btn-default" style="width: 300px; height: 50px; padding-top: 10px" href="@Url.Action("Index", "PS")">
-            Listado de PS
-        </a>
-    </div>
-    <br /><br /><br />
-
-    <div class="text-center">
-        @Ajax.ActionLink("Buscar PS", "BusquedaPS", "PS", null, new AjaxOptions
-   {
-       InsertionMode = InsertionMode.Replace,
-       UpdateTargetId = "busps",
-
-   }, new { @class = "btn btn-default text-center btn-lg btn-default", @style = "width: 300px;height: 50px; padding-top: 10px ", @Href = @Url.Content("~/PS/BusquedaPS") }
-   )
-    </div>
-    <div id="busps"></div>
-    <br /><br /><br /><br /><br /><br />
 </div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <h4>Módulo de Administración de Alumnos</h4>
+        <br />
+        <p>
+            El Módulo de Administración de Alumnos mantendrá organizada información referente, tanto de alumnos que se encuentren cursando la materia como la de aquellos que hayan cursado años anteriores, brindando la posibilidad de acceder a ella rápidamente optimizando así el control que se llevará de cada integrante del curso.
+        </p>
+        <br />
+        <a href="@Url.Action("Index","Alumnos")" class="btn btn-primary">Alumnos en curso</a>
+    </div>
+    <div class="col-md-4">
+        <h4>Módulo de Administración de Informes de Práctica Supervisada</h4>
+        <br />
+        <p>El Módulo de Administración de Informes le facilitará la tarea de supervisión sobre las Prácticas Supervisadas pertenecientes de todos los alumnos que se encuentren cursando, o que hayan cursado la materia anteriormente, otorgando la posibilidad de mantener registros detallados de cada uno de los Planes e Informes que presenten.</p>
+        <a href="@Url.Action("Index","PS")" class="btn btn-primary">PSs en curso</a>
+    </div>
+    <div class="col-md-4">
+        <h4>Módulo de Reportes Estadísticos</h4>
+        <br />
+        <p>El Módulo de Reportes ofrece la posibilidad de obtener información cuantitativa referente a las presentaciones de Prácticas Supervisadas durante un determinado período, con la posibilidad de realizar filtrados discriminados por Planes o Informes, o por Organización, Área de trabajo, Estado o Tipo de PS.</p>
+        <br />
+        <div class="dropdown-pane">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Estadísticas
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu1">
+                <li class="dropdown-submenu">
+                    <a tabindex="1" href="#" @*onclick="event.stopPropagation()"*@>PSs</a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Estados", "EstadosPS", "Estadisticas")</li>
+                        <li>@Html.ActionLink("Áreas", "AreasPS", "Estadisticas")</li>
+                        <li>@Html.ActionLink("Tipo PS", "TipospsPS", "Estadisticas")</li>
+                        <li>@Html.ActionLink("Organizaciones", "OrgPs", "Estadisticas")</li>
+                    </ul>
+                </li>
+
+                <li class="dropdown-submenu">
+                    <a tabindex="-1" href="#" @*onclick="event.stopPropagation()"*@>Planes</a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Estado", "EstadosPlanes", "Estadisticas")</li>
+                        <li>@Html.ActionLink("Áreas", "AreasPlanes", "Estadisticas")</li>
+                        <li>@Html.ActionLink("Tipo PS", "TipospsPlanes", "Estadisticas")</li>
+                        <li>@Html.ActionLink("Organizaciones", "OrgPlanes", "Estadisticas")</li>
+
+                    </ul>
+                </li>
+
+                <li class="dropdown-submenu">
+                    <a tabindex="-1" href="#" @*onclick="event.stopPropagation()"*@>Informes</a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Estado", "EstadosInformes", "Estadisticas")</li>
+                        <li>@Html.ActionLink("Áreas", "AreasInformes", "Estadisticas")</li>
+                        <li>@Html.ActionLink("Tipo PS", "TipospsInformes", "Estadisticas")</li>
+                        <li>@Html.ActionLink("Organizaciones", "OrgInformes", "Estadisticas")</li>
+                    </ul>
+                </li>
+                <li class="divider"></li>
+                <li>@Html.ActionLink("Año Ingreso", "AñoIngresoPS", "Estadisticas")</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@*<div class="container-fluid">
+        <h2 class="text-center">Bienvenido a SiGePS</h2>
+        <h4 class="text-center">Para comenzar, puede seleccionar una de las siguientes opciones:</h4>
+
+
+        <hr style="color:grey;border-color:grey" /><br /><br /><br />
+
+        <div class="jumbotron">
+            <h1 class="text-center">SiGePS</h1>
+            <h3 class="lead text-center">Sistema de Gestión de Practica Supervisada</h3>
+
+        </div>
+
+        <div class="text-center">
+            <a class="btn btn-default text-center btn-lg btn-default" style="width: 300px; height: 50px;padding-top: 10px " href="@Url.Action("Index","Alumnos")">
+                Listado de alumnos
+            </a>
+        </div>
+        <br /><br /><br />
+        <div class="text-center">
+            <a class="btn btn-default text-center btn-lg btn-default" style="width: 300px; height: 50px; padding-top: 10px" href="@Url.Action("Index", "PS")">
+                Listado de PS
+            </a>
+        </div>
+        <br /><br /><br />
+
+        <div class="text-center">
+            @Ajax.ActionLink("Buscar PS", "BusquedaPS", "PS", null, new AjaxOptions
+       {
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "busps",
+
+       }, new { @class = "btn btn-default text-center btn-lg btn-default", @style = "width: 300px;height: 50px; padding-top: 10px ", @Href = @Url.Content("~/PS/BusquedaPS") }
+       )
+        </div>
+        <div id="busps"></div>
+        <br /><br /><br /><br /><br /><br />
+    </div>*@
 <link href="@Url.Content("~/Content/Select2/select2.min.css")" rel="stylesheet" />
 @section Scripts{
     <script src="@Url.Content("~/Content/Select2/select2.min.js")"></script>
 
+
     @*<script>
-        $(document).ready(function() {
-            if ($('#vencer').val() > 0) {
-                var numero = $('#vencer').val();
+            $(document).ready(function() {
+                if ($('#vencer').val() > 0) {
+                    var numero = $('#vencer').val();
 
-                var url = '<p>@Html.ActionLink("Ver listado", "Vencimientos", "Estadisticas")</p>';
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-bottom-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "10000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
-                toastr["info"]("PSs a vencer: " + numero + ". " + url);
+                    var url = '<p>@Html.ActionLink("Ver listado", "Vencimientos", "Estadisticas")</p>';
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "10000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                    toastr["info"]("PSs a vencer: " + numero + ". " + url);
 
-                $(window).load(function () {
+                    $(window).load(function () {
+
+                        var options = {};
+                        options.url = "/Estadisticas/GetVencimientos";
+                        options.type = "GET";
+                        options.data = { "prueba": "0" };
+                        options.dataType = "json";
+                        options.success = function (data) {
+
+                        };
+                        $.ajax(options);
+                    });
+
+                }else{
+
+                $(window).load(function() {
 
                     var options = {};
                     options.url = "/Estadisticas/GetVencimientos";
                     options.type = "GET";
                     options.data = { "prueba": "0" };
                     options.dataType = "json";
-                    options.success = function (data) {
-                      
+                    options.success = function(data) {
+                        if (data.CantVenc != data.CantVencAnt) {
+                            var url = '<p>@Html.ActionLink("Ver listado", "Vencimientos", "Estadisticas")</p>';
+                            toastr.options = {
+                                "closeButton": true,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-bottom-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "10000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                            toastr["info"]("Hay nuevas PSs por vencer: " + data.CantVenc+". " + url);
+
+                        }
                     };
                     $.ajax(options);
                 });
+                }
 
-            }else{
-
-            $(window).load(function() {
-
-                var options = {};
-                options.url = "/Estadisticas/GetVencimientos";
-                options.type = "GET";
-                options.data = { "prueba": "0" };
-                options.dataType = "json";
-                options.success = function(data) {
-                    if (data.CantVenc != data.CantVencAnt) {
-                        var url = '<p>@Html.ActionLink("Ver listado", "Vencimientos", "Estadisticas")</p>';
-                        toastr.options = {
-                            "closeButton": true,
-                            "debug": false,
-                            "newestOnTop": false,
-                            "progressBar": false,
-                            "positionClass": "toast-bottom-right",
-                            "preventDuplicates": false,
-                            "onclick": null,
-                            "showDuration": "300",
-                            "hideDuration": "1000",
-                            "timeOut": "10000",
-                            "extendedTimeOut": "1000",
-                            "showEasing": "swing",
-                            "hideEasing": "linear",
-                            "showMethod": "fadeIn",
-                            "hideMethod": "fadeOut"
-                        }
-                        toastr["info"]("Hay nuevas PSs por vencer: " + data.CantVenc+". " + url);
-
-                    }
-                };
-                $.ajax(options);
-            });
-            }
-
-        })
-    </script>*@
+            })
+        </script>*@
 
 }
-
-
+<style>
+    div.jumbotron {
+        background-image: url(https://fotos.subefotos.com/060e4edd3dd5ac0a348d609f77dade1ao.jpg);
+        background-position: 0% 25%;
+        background-size: 1400px 300px;
+        background-repeat: no-repeat;
+        color: white;
+        text-shadow: black 0.3em 0.3em 0.3em;
+    }
+</style>

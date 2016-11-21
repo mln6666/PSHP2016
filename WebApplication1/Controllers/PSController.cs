@@ -264,7 +264,12 @@ namespace WebApplication1.Controllers
                     pu.Estado = Estado.Plan_Desaprobado;
 
                 if (plan.EstadoEvaluacionPlan == Evaluacion.Rechazado)
-                    pu.Estado = Estado.Plan_Rechazado;
+                {
+                    pu.Estado = Estado.Plan_Rechazado; pu.FechaFinalizacion = plan.FechaEvaluacionPlan;
+                }
+                    
+
+
 
                 db.Entry(pu).State = EntityState.Modified;
                 db.SaveChanges();
@@ -426,10 +431,7 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
             
-            if (pS.Estado == Estado.PS_Aprobada || pS.Estado == Estado.PS_Cancelada || pS.Estado == Estado.PS_Vencida || pS.Estado == Estado.Plan_Rechazado)
-                {
-                    return RedirectToAction("Index", "Error", new { error = 2011 });
-                }
+           
                 
 
 
@@ -474,6 +476,11 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Editar PS,Administrador")]
         public ActionResult Edit([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,ObservacionesPS,FechaFinalizacion")] PS pS)
         {
+            PS pp = db.PSs.Find(pS.IdPS);
+            if (pp.Estado == Estado.PS_Aprobada || pp.Estado == Estado.PS_Cancelada || pp.Estado == Estado.PS_Vencida || pp.Estado == Estado.Plan_Rechazado)
+            {
+                return RedirectToAction("Index", "Error", new { error = 2011 });
+            }
 
             if (ModelState.IsValid )
             {
@@ -675,7 +682,7 @@ namespace WebApplication1.Controllers
             if (pS.FechaFinalizacion == null || pS.ObservacionesPS == null)
             {
 
-                return RedirectToAction("Index", "Error", new { error = 2009 });
+                return RedirectToAction("Index", "Error", new { error = 2012 });
             }
 
 
