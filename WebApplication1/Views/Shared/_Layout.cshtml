@@ -297,16 +297,21 @@
 
 
 </body>
-<div id="dashboard-darkgreen" style="padding-top: 7%;" class="dashboard-nav hidden-print">
+<div id="dashboard-darkgreen" style="padding-top: 2%;" class="dashboard-nav hidden-print">
 	<ul class="nav navbar-nav" style="border-right :cadetblue; border-top:cadetblue ;  border-style:initial; border-bottom-style: initial;border-left-style:initial ; width:80%"  >
-
+        @Html.Action("BusquedaPS", "PS")
+	    <br/>
+	    <br/>
+        <br />
 		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title" style="font-style: italic" width="70%">Enlaces</h3>
-			</div>
+		    <div class="panel-heading">
+               
+		        <h3 class="panel-title" style="font-style: italic" width="70%">Enlaces</h3>
+		    </div>
 		</div>
 
 	    <br/>
+      
         <li>
             <a href="http://www.frre.utn.edu.ar/">
                 <img style="height: 60px; width: 150px;" src='@Url.Content("~/Content/Images/UTNfrrenavbar.png")' />
@@ -317,12 +322,13 @@
 				<img style="height: 60px;width: 150px;  " src='@Url.Content("~/Content/Images/logocampus.png")'/>
 			</a>
 		</li>
-	   
-        <li>
-            <a href="http://sysacadweb.frre.utn.edu.ar/">
-                <img style="height: 60px; width: 150px;" src='@Url.Content("~/Content/Images/sisacadweb.png")' />
-            </a>
-        </li>
+
+	    <li>
+	        <a href="http://sysacadweb.frre.utn.edu.ar/">
+	            <img style="height: 60px; width: 150px;" src='@Url.Content("~/Content/Images/sisacadweb.png")'/>
+	        </a>
+	    </li>
+      
 
 
 
@@ -352,7 +358,9 @@
 
 
 </html>
+<link href="@Url.Content("~/Content/Select2/select2.min.css")" rel="stylesheet" />
 
+    <script src="@Url.Content("~/Content/Select2/select2.min.js")"></script>
 <script>
         $(document).ready(function() {
             if ($('#vencer').val() > 0) {
