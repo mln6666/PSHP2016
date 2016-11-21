@@ -75,7 +75,7 @@ namespace ExpVMsape.Controllers
 
                 default:
                     ViewBag.Title = "Página no encontrada";
-                    ViewBag.Description = "Algo salio muy mal :( ..";
+                    ViewBag.Description = "El sitio al que usted quiere acceder es inexistente.";
                     break;
             }
 

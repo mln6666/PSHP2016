@@ -78,6 +78,8 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
             ViewBag.vuelta = var;
+            var errMsg = TempData["ErrorMessage"] as string;
+            ViewBag.archivoinexistente = errMsg;
             return View(pS);
         }
         

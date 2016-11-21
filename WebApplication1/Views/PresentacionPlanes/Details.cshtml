@@ -19,10 +19,10 @@
 		<th class="text-left"width="8%"style="border-radius: 3px">
 			@*@Html.DisplayNameFor(model => model.EstadoEvaluacionPlan)*@Evaluación
 		</th>
-	    <th class="text-left"width="29%" style="border-radius: 3px">
-	        @*@Html.DisplayNameFor(model => model.ObservacionesPlan)*@Observaciones
-	    </th>
-        <th class="text-center" style="border-radius: 3px">Acciones</th>
+		<th class="text-left"width="29%" style="border-radius: 3px">
+			@*@Html.DisplayNameFor(model => model.ObservacionesPlan)*@Observaciones
+		</th>
+		<th class="text-center" style="border-radius: 3px">Acciones</th>
 	</tr>
 	<tr style="background-color: azure">
 		@*<td class="text-left">
@@ -38,61 +38,148 @@
 			@Html.DisplayFor(model => model.EstadoEvaluacionPlan)
 		</td>
 		<td class="text-left">
-            @if (Model.ObservacionesPlan != null)
-            {
-                @Html.DisplayFor(model => model.ObservacionesPlan)
-            }
-            else
-            {
-                <text>- - -</text>
-            }
+			@if (Model.ObservacionesPlan != null)
+			{
+				@Html.DisplayFor(model => model.ObservacionesPlan)
+			}
+			else
+			{
+				<text>- - -</text>
+			}
 			
 		</td>
-	    <td class="text-center">
-	        @*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
-            @Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
-	        @*@Html.ActionLink("Ver Historial Planes...", "HistorialPlanes", new { id = Model.IdPS })*@
-	        @Html.ActionLink("Historial Planes", "HistorialPlanes", new {id = Model.IdPS}, new {@class = "dialog-window2 btn btn-primary btn-sm"})
+		<td class="text-center">
+	@*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
+		@Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
+		@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@
+	@*@Html.ActionLink("Ver Historial Planes...", "HistorialPlanes", new { id = Model.IdPS })*@
+	@Html.ActionLink("Historial Planes", "HistorialPlanes", new { id = Model.IdPS }, new { @class = "dialog-window2 btn btn-primary btn-sm" })
 
 
-	        @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
-	        {
+	@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+	{
 
-	            if (Model.EstadoEvaluacionPlan != Evaluacion.Pendiente)
-	            {
-	                <span>
-                        @Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm disabled"})
-                </span>}
-	            else
-	            {
-	                <span>
-                        @Html.ActionLink("Evaluar Plan", "EvaluarPlan", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm"})
-                </span>}
+		if (Model.EstadoEvaluacionPlan != Evaluacion.Pendiente)
+		{
+			<span>
+				@Html.ActionLink("Evaluar Plan", "EvaluarPlan", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-primary btn-sm disabled" })
+			</span>}
+		else
+		{
+			<span>
+				@Html.ActionLink("Evaluar Plan", "EvaluarPlan", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-primary btn-sm" })
+			</span>}
 
 
-	            if (User.IsInRole("Administrador") | User.IsInRole("Editar Plan/Informe"))
-	            {
-	                <span>
-                        @Html.ActionLink("Editar Plan", "Edit", new {id = Model.IdPresentacionPlan}, new {@class = "dialog-window btn btn-primary btn-sm"})
-                </span>}
-	        }
-	    </td>
-	    <td>
-            @Html.ActionLink("Descargar", "Download", new { id = Model.IdPresentacionPlan }, new { @class = "btn btn-primary btn-sm" })
-	    </td>
+		if (User.IsInRole("Administrador") | User.IsInRole("Editar Plan/Informe"))
+		{
+			<span>
+				@Html.ActionLink("Editar Plan", "Edit", new { id = Model.IdPresentacionPlan }, new { @class = "dialog-window btn btn-primary btn-sm" })
+			</span>}
+		
+			<div class="btn-group">
+				<a aria-expanded="false" href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+					Archivo
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					@if (User.IsInRole("Administrador") == false & User.IsInRole("Moderador") == false)
+					{
+						<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Adjuntar</a></li>
+					}
+
+					else if (Model.Archivo != null )
+					{
+						<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Adjuntar</a></li>
+					}
+
+					else
+					{
+						<li>@Html.ActionLink("Adjuntar", "Upload", "PresentacionPlanes", new { idPresentacionPlan = Model.IdPresentacionPlan }, new { @class = "dialog-window357" })</li>
+					}
+					@if (Model.Archivo != null) {
+						<li>
+							@Html.ActionLink("Descargar", "Download", new { id = Model.IdPresentacionPlan})
+						</li>
+					}
+					else
+					{
+						
+						<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Descargar</a></li>                        
+					}
+                    @if (User.IsInRole("Administrador") & (Model.Archivo != null)) { 
+					<li>
+						@Html.ActionLink("Eliminar", "EliminarArchivo", new { idPresentacionPlan = Model.IdPresentacionPlan }, new { @class = "dialog-window358" })
+					</li>
+                    }
+                    else
+                    {
+                        <li><a href="#" onclick="event.stopPropagation()" style="color: grey">Eliminar</a></li>
+
+                    }
+
+				</ul>
+
+
+
+			</div>
+
+    }
+		</td>
+		
 </tr>
 
 </table>
 @*@Html.Action("EvaluarPlan", new { id = Model.IdPresentacionPlan })*@
 <div id="histoplan"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title text-center">Evaluar Plan</h4>
+			</div>
+			<div class="modal-body">
+				<div class="te">Espere...</div>
+			</div>
+			@*<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+			@*<button type="submit" class="btn btn-primary">Save changes</button>*@
+			@*</div>*@
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="margin-left: -30%; margin-right: -30%">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title text-center">Historial Planes</h4>
+			</div>
+			<div class="modal-body">
+				<div class="te">Espere...</div>
+			</div>
+			@*<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+			@*<button type="submit" class="btn btn-primary">Save changes</button>*@
+			@*</div>*@
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="myModal357" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" style="margin-left: -30%; margin-right: -30%">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title text-center">Evaluar Plan</h4>
+                <h4 class="modal-title text-center">Adjuntar archivo</h4>
             </div>
             <div class="modal-body">
                 <div class="te">Espere...</div>
@@ -106,13 +193,14 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+
+<div class="modal fade" id="myModal358" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" style="margin-left: -30%;margin-right: -30%">
+        <div class="modal-content" style="margin-left: -1%;margin-right: -1%">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title text-center">Historial Planes</h4>
+                <h4 class="modal-title text-center">Eliminar archivo</h4>
             </div>
             <div class="modal-body">
                 <div class="te">Espere...</div>
@@ -126,6 +214,8 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+
 
 
 <script>
@@ -152,20 +242,58 @@
 
 
 		$("body").on("click", "a.dialog-window2", null, function (e) {
+			e.preventDefault();
+
+			var $link = $(this); // Reference to <a/> link
+			var title = $link.text(); //this is title to fetch in htnl
+			$('#myModal2 .modal-title').html(title);
+
+			var url = $(this).attr('href');
+			if (url.indexOf('#') == 0) {
+				$('#myModal2').modal('show');
+			}
+			else {
+				$.get(url, function (data) {
+					$('#myModal2 .te').html(data);
+					$('#myModal2').modal();
+				}).success(function () { $('input:text:visible:first').focus(); });
+			}
+		});
+
+		$("body").on("click", "a.dialog-window357", null, function (e) {
+			e.preventDefault();
+
+			var $link = $(this); // Reference to <a/> link
+			var title = $link.text(); //this is title to fetch in htnl
+			$('#myModal357 .modal-title').html(title);
+
+			var url = $(this).attr('href');
+			if (url.indexOf('#') == 0) {
+				$('#myModal357').modal('show');
+			}
+			else {
+				$.get(url, function (data) {
+					$('#myModal357 .te').html(data);
+					$('#myModal357').modal();
+				}).success(function () { $('input:text:visible:first').focus(); });
+			}
+		});
+
+		$("body").on("click", "a.dialog-window358", null, function (e) {
 		    e.preventDefault();
 
 		    var $link = $(this); // Reference to <a/> link
 		    var title = $link.text(); //this is title to fetch in htnl
-		    $('#myModal2 .modal-title').html(title);
+		    $('#myModal358 .modal-title').html(title);
 
 		    var url = $(this).attr('href');
 		    if (url.indexOf('#') == 0) {
-		        $('#myModal2').modal('show');
+		        $('#myModal358').modal('show');
 		    }
 		    else {
 		        $.get(url, function (data) {
-		            $('#myModal2 .te').html(data);
-		            $('#myModal2').modal();
+		            $('#myModal358 .te').html(data);
+		            $('#myModal358').modal();
 		        }).success(function () { $('input:text:visible:first').focus(); });
 		    }
 		});

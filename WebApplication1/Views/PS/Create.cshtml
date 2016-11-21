@@ -249,10 +249,12 @@
     <p>
         <span id="spanobservacionabajo" style="color: red"></span>
     </p>
-
-        <label style="text-align: center">Subir archivo:</label>
-        <input type="file" onchange="Formato()" name="uploadFile" id="uploadFile" /><br />
-        <span id="archivopdf" style="color:red"></span>
+    <div class="form-group">
+        
+        <label class="control-label col-md-2">Adjuntar documento</label>
+        <input type="file" onchange="Formato()" name="uploadFile" id="uploadFile"/><br/>
+        <span id="archivopdf" style="color: red"></span>
+    </div>
 
 
 
@@ -389,13 +391,17 @@
         }
 
         function Formato() {
-            console.log($('#uploadFile').val().split('.')[1]);
+            //console.log($('#uploadFile').val().split('.')[1]);
             if ($('#uploadFile').val().split('.')[1] != "pdf") {
                 event.preventDefault();
                 $('#archivopdf').text("El formato de archivo debe ser PDF");
             } else {
                 $('#archivopdf').text("");
             }
+            //console.log((isNaN($('#FechaPresentacionPlan').val())));
+            //if (!(isNaN($('#FechaPresentacionPlan').val()))) {
+            //    $('#archivopdf').text($('#archivopdf').val() + "La fecha de presentación no puede estar vacía.");
+            //}
 
 
 
@@ -482,6 +488,7 @@
                 var fechapresentacionplan = false;
             }
 
+            
             if ($('#FechaEvaluacionPlan').val().trim() > new Date().toISOString().substring(0, 10)) {
                 var isValidItem = false;
                 var fechaevaluacionplan = false;

@@ -7,7 +7,7 @@
     ViewBag.Title = "HistorialPlanes";
 }*@
 <style>
-   .resaltar tbody tr td {
+    .resaltar tbody tr td {
         background-color: whitesmoke;
     }
 
@@ -18,29 +18,103 @@
 
 
 </style>
+<head>
+    <script>
+        $(document).ready(function () {
+            $("body").on("click", "a.dialog-window357", null, function (e) {
+                e.preventDefault();
+
+                var $link = $(this); // Reference to <a/> link
+                var title = $link.text(); //this is title to fetch in htnl
+                $('#myModal357 .modal-title').html(title);
+
+                var url = $(this).attr('href');
+                if (url.indexOf('#') == 0) {
+                    $('#myModal357').modal('show');
+                }
+                else {
+                    $.get(url, function (data) {
+                        $('#myModal357 .te').html(data);
+                        $('#myModal357').modal();
+                    }).success(function () { $('input:text:visible:first').focus(); });
+                }
+            });
+
+            $("body").on("click", "a.dialog-window358", null, function (e) {
+                e.preventDefault();
+
+                var $link = $(this); // Reference to <a/> link
+                var title = $link.text(); //this is title to fetch in htnl
+                $('#myModal358 .modal-title').html(title);
+
+                var url = $(this).attr('href');
+                if (url.indexOf('#') == 0) {
+                    $('#myModal358').modal('show');
+                }
+                else {
+                    $.get(url, function (data) {
+                        $('#myModal358 .te').html(data);
+                        $('#myModal358').modal();
+                    }).success(function () { $('input:text:visible:first').focus(); });
+                }
+            });
+
+            //$('#eliminarplan').submit(function (e) {
+            //    plan = this;
+            //    e.preventDefault();
+
+                
+            //        bootbox.confirm({
+            //            message: mensaje,
+            //            buttons: {
+            //                confirm: {
+            //                    label: 'Confirmar',
+            //                    className: 'btn-success'
+            //                },
+            //                cancel: {
+            //                    label: 'Cancelar',
+            //                    className: 'btn-danger'
+            //                }
+            //            },
+            //            callback: function (result) {
+            //                if (result) {
+            //                    alumno.submit();
+            //                }
+            //            }
+            //        });
+                
+
+            //});
+
+        });
+    </script>
+</head>
 <div id="cerrar">
     <table class="table table-striped table-bordered table-condensed resaltar">
         <thead>
-            <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
 
-                <th class="text-left" style="border-radius: 3px">
-                    @*@Html.DisplayNameFor(model => model.PresentacionesPlanes.FechaPresentacionPlan)*@
-                    Fecha Presentación
-                </th>
-                <th class="text-left" style="border-radius: 3px">
-                    @*@Html.DisplayNameFor(model => model.FechaEvaluacionPlan)*@
-                    Fecha Evaluación
-                </th>
-                <th class="text-left" style="border-radius: 3px">
-                    @*@Html.DisplayNameFor(model => model.EstadoEvaluacionPlan)*@
-                    Evaluación
-                </th>
-                <th class="text-left" style="border-radius: 3px; width: 500px">
-                    @*@Html.DisplayNameFor(model => model.ObservacionesPlan)*@
-                    Observaciones
-                </th>
+            <th class="text-left" style="border-radius: 3px">
+                @*@Html.DisplayNameFor(model => model.PresentacionesPlanes.FechaPresentacionPlan)*@
+                Fecha Presentación
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @*@Html.DisplayNameFor(model => model.FechaEvaluacionPlan)*@
+                Fecha Evaluación
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @*@Html.DisplayNameFor(model => model.EstadoEvaluacionPlan)*@
+                Evaluación
+            </th>
+            <th colspan="2" class="text-left" style="border-radius: 3px">
+                Archivo
+            </th>
+            <th class="text-left" style="border-radius: 3px; width: 500px">
+                @*@Html.DisplayNameFor(model => model.ObservacionesPlan)*@
+                Observaciones
+            </th>
 
-            </tr>
+        </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.PresentacionesPlanes)
@@ -55,6 +129,20 @@
                     <td class="text-left">
                         @Html.DisplayFor(modelItem => item.EstadoEvaluacionPlan)
                     </td>
+                    @if ((item.Archivo != null) & (User.IsInRole("Administrador")))
+                    {
+
+                        <td><a href="@Url.Action("Download", "PresentacionPlanes", new {id = item.IdPresentacionPlan})" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-download-alt"></span></a></td>
+                        <td><a href="@Url.Action("EliminarArchivo", "PresentacionPlanes", new {idPresentacionPlan = item.IdPresentacionPlan})" class="btn btn-primary btn-xs btn-danger dialog-window358"><span class="glyphicon glyphicon-trash"></span></a></td>
+
+
+                    }
+                    else
+                    {
+                        <td><a href="@Url.Action("Upload", "PresentacionPlanes", new {idPresentacionPlan = item.IdPresentacionPlan})" class="btn btn-primary btn-xs btn-success dialog-window357"><span class="glyphicon glyphicon-plus"></span></a></td>
+                        <td><a href="@Url.Action("EliminarArchivo", "PresentacionPlanes", new {idPresentacionPlan = item.IdPresentacionPlan})" class="btn btn-primary btn-xs btn-danger disabled dialog-window358"><span class="glyphicon glyphicon-trash"></span></a></td>
+
+                    }
                     <td class="text-left">
                         @Html.DisplayFor(modelItem => item.ObservacionesPlan)
                     </td>
@@ -63,10 +151,11 @@
                         @Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })
                     </td>*@
-                </tr>
+                    </tr>
             }
         </tbody>
-</table>
+
+    </table>
     @*@Ajax.ActionLink("Cerrar historial planes...", "Vacio","Home", new AjaxOptions
 {
     InsertionMode = InsertionMode.Replace,
@@ -77,6 +166,48 @@
     <div class="row text-center">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
     </div>
-    
 
+
+</div>
+
+<div class="modal fade" id="myModal357" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-left: 0%; margin-right: 0%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Adjuntar archivo</h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+            @*<button type="submit" class="btn btn-primary">Save changes</button>*@
+            @*</div>*@
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="myModal358" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-left: 0%;margin-right: 0%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Eliminar documento</h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+            @*<button type="submit" class="btn btn-primary">Save changes</button>*@
+            @*</div>*@
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>

@@ -6,9 +6,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using WebApplication1.Context;
-using WebApplication1.Migrations;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -148,7 +149,7 @@ namespace WebApplication1.Controllers
             return View(presentacionplan);
         }
 
-        public FileResult Download(int id)
+        public ActionResult Download(int id)
         {
             //var dir = new System.IO.DirectoryInfo(Server.MapPath("~/App_Data/Files/Planes/"));
             //System.IO.FileInfo[] fileNames = dir.GetFiles("*.*");
@@ -160,17 +161,19 @@ namespace WebApplication1.Controllers
             //    items.Add(file.Name);
             //}
 
+            
             string archivo =
                 db.PresentacionPlanes.ToList().Find(p => p.IdPresentacionPlan == id).Archivo;
             string ext = archivo.Split('.')[1];
 
             
-            
-            
-            
-            return File("~/App_Data/Files/Planes/" + archivo, System.Net.Mime.MediaTypeNames.Application.Pdf);
 
             
+            var file = File("~/App_Data/Files/Planes/" + archivo, System.Net.Mime.MediaTypeNames.Application.Pdf);
+
+            
+
+            return (file);
 
         }
 
@@ -303,34 +306,72 @@ namespace WebApplication1.Controllers
             return PartialView(presentacionPlan);
         }
 
-        [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase file, int idPS)
+        //GET
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult EliminarArchivo(int idPresentacionPlan)
         {
-            DateTime hoy = new DateTime();
-            hoy = DateTime.Today.Date;
-            string shoy = "";
-            shoy = Convert.ToString(hoy);
-            PS peese = db.PSs.Find(idPS);
-            Alumno alu = db.Alumnos.ToList().Find(a => a.IdAlumno == peese.IdAlumno);
-            string legajo = alu.Legajo.ToString();
-            if (file != null && file.ContentLength > 0)
+            PresentacionPlan plan = db.PresentacionPlanes.Find(idPresentacionPlan);
+            return View(plan);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult EliminarArchivo([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")]PresentacionPlan planEnt)
+        {
+            PresentacionPlan plan = db.PresentacionPlanes.Find(planEnt.IdPresentacionPlan);
+            string path = Path.Combine(Server.MapPath("~/App_Data/Files/Planes/"),
+                                               Path.GetFileName(plan.Archivo));
+
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
+            
+
+            plan.Archivo = null;
+
+            db.Entry(plan).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Details", "PS", new { id = plan.IdPS });
+        }
+
+
+        // GET
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult Upload(int idPresentacionPlan)
+        {
+            PresentacionPlan plan = db.PresentacionPlanes.Find(idPresentacionPlan);
+            return View(plan);
+        }
+
+        [HttpPost]
+        public ActionResult Upload([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS" )]PresentacionPlan plan, HttpPostedFileBase uploadFile)
+        {
+
+            PresentacionPlan presentacionPlan = db.PresentacionPlanes.Find(plan.IdPresentacionPlan);
+
+            if (uploadFile != null && uploadFile.ContentLength > 0)
+            {
 
                 try
                 {
-                    string path = Path.Combine(Server.MapPath("~/App_Data/Files/" + shoy +"/"+ legajo),
-                                               Path.GetFileName(file.FileName));
-                    file.SaveAs(path);
-                    ViewBag.Message = "File uploaded successfully";
+
+                    string path = Path.Combine(Server.MapPath("~/App_Data/Files/Planes/"),
+                                               Path.GetFileName(uploadFile.FileName));
+                    uploadFile.SaveAs(path);
+                    presentacionPlan.Archivo = Path.GetFileName(uploadFile.FileName);
+                    db.Entry(presentacionPlan).State = EntityState.Modified;
+                    db.SaveChanges();
+
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = "ERROR:" + ex.Message.ToString();
                 }
-            else
-            {
-                ViewBag.Message = "You have not specified a file.";
             }
-            return RedirectToAction("Details", "PS", new { id = idPS });
+            return RedirectToAction("Details", "PS", new { id = plan.IdPS });
         }
 
 

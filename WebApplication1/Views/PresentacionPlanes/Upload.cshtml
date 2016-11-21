@@ -1,0 +1,60 @@
+﻿@using System.Web.UI.WebControls
+@model WebApplication1.Models.PresentacionPlan
+@{
+    Layout = null;
+}
+
+<head>
+
+    <script>
+        function Formato() {
+
+                if ($('#uploadFile').val().split('.')[1] != "pdf") {
+                    event.preventDefault();
+                    $('#archivopdf').text("El formato de archivo debe ser PDF");
+                } else {
+                    $('#archivopdf').text("");
+                }
+
+
+
+
+        }
+    </script>
+
+</head>
+
+@using (Html.BeginForm("Upload", "PresentacionPlanes", null, FormMethod.Post, new {enctype = "multipart/form-data" }))
+{
+
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.FechaEvaluacionPlan)
+    @Html.HiddenFor(model => model.EstadoEvaluacionPlan)
+    @Html.HiddenFor(model => model.FechaPresentacionPlan)
+    @Html.HiddenFor(model => model.PS)
+    @Html.HiddenFor(model => model.IdPS)
+    @Html.HiddenFor(model => model.IdPresentacionPlan)
+    @Html.HiddenFor(model => model.ObservacionesPlan)
+
+
+    <div>
+
+        <div class="form-group">
+            <input type="number" value="@Model.IdPresentacionPlan" name="idPresentacionPlan" style="display: none" />
+            <input type="number" value="@Model.IdPS" name="idPS" style="display: none" />
+            <input type="file" onchange="Formato()" name="uploadFile" id="uploadFile"/><br/>
+            <span id="archivopdf" style="color: red"></span>
+        </div>
+
+    </div>
+    <div class="form-group text-center">
+        
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <input type="submit" value="Guardar" class="btn btn-success">
+            
+        
+    </div>
+}
+
+
