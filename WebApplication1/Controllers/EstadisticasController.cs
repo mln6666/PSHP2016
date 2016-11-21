@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
@@ -47,6 +49,8 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+
+
         [Authorize(Roles = "Moderador,Administrador")]
         public JsonResult GetVencimientos(string prueba)
         {
@@ -74,6 +78,26 @@ namespace WebApplication1.Controllers
 
             db.Entry(contadorvenc).State = EntityState.Modified;
             db.SaveChanges();
+
+            if (contadorvenc.CantVenc > contadorvenc.CantVencAnt)
+            {
+                int anterior = contadorvenc.CantVenc - contadorvenc.CantVencAnt;
+                SmtpClient client = new SmtpClient();
+                client.Host = "smtp.gmail.com";
+                client.Port = 587;
+                client.EnableSsl = true;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("sigeps2016utnfrre@gmail.com", "Abc123..");
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("sigeps2016utnfrre@gmail.com");
+                mailMessage.To.Add("poncemarioleo@gmail.com");
+                mailMessage.Subject = "SiGePS Vencimientos ";
+                mailMessage.Body ="Hay "+anterior+ " PS nueva a vencer. "+"Total PSs a vencer: "+contadorvenc.CantVenc+".";
+
+                client.Send(mailMessage);
+            }
 
 
             return Json(contadorvenc, JsonRequestBehavior.AllowGet);

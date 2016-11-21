@@ -401,7 +401,7 @@
                 options.data = { "prueba": "0" };
                 options.dataType = "json";
                 options.success = function(data) {
-                    if (data.CantVenc != data.CantVencAnt) {
+                    if (data.CantVenc > data.CantVencAnt) {
                         var url = '<p>@Html.ActionLink("VER LISTADO", "Vencimientos", "Estadisticas")</p>';
                         toastr.options = {
                             "closeButton": true,

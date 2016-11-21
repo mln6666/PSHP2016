@@ -8,7 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Context;
-using WebApplication1.Migrations;
+
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
