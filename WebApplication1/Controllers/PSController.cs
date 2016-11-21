@@ -262,7 +262,12 @@ namespace WebApplication1.Controllers
                     pu.Estado = Estado.Plan_Desaprobado;
 
                 if (plan.EstadoEvaluacionPlan == Evaluacion.Rechazado)
-                    pu.Estado = Estado.Plan_Rechazado;
+                {
+                    pu.Estado = Estado.Plan_Rechazado; pu.FechaFinalizacion = plan.FechaEvaluacionPlan;
+                }
+                    
+
+
 
                 db.Entry(pu).State = EntityState.Modified;
                 db.SaveChanges();
@@ -675,7 +680,7 @@ namespace WebApplication1.Controllers
             if (pS.FechaFinalizacion == null || pS.ObservacionesPS == null)
             {
 
-                return RedirectToAction("Index", "Error", new { error = 2009 });
+                return RedirectToAction("Index", "Error", new { error = 2012 });
             }
 
 
