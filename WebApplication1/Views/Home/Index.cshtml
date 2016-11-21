@@ -28,6 +28,7 @@
     }
 }
 <div></div>
+<br />
 <div class="jumbotron">
     <div class="container">
         <center>
@@ -39,7 +40,7 @@
 
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="background-color: azure; border-radius: 10px; padding-bottom: 10px;border-style: ridge">
         <h4>Módulo de Administración de Alumnos</h4>
         <br />
         <p>
@@ -48,13 +49,14 @@
         <br />
         <a href="@Url.Action("Index","Alumnos")" class="btn btn-primary">Alumnos en curso</a>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" style="background-color: azure; border-radius: 10px;padding-bottom: 10px;border-style: ridge">
         <h4>Módulo de Administración de Informes de Práctica Supervisada</h4>
-        <br />
+
         <p>El Módulo de Administración de Informes le facilitará la tarea de supervisión sobre las Prácticas Supervisadas pertenecientes de todos los alumnos que se encuentren cursando, o que hayan cursado la materia anteriormente, otorgando la posibilidad de mantener registros detallados de cada uno de los Planes e Informes que presenten.</p>
+        <br />
         <a href="@Url.Action("Index","PS")" class="btn btn-primary">PSs en curso</a>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" style="background-color: azure; border-radius: 10px;padding-bottom: 10px;border-style: ridge">
         <h4>Módulo de Reportes Estadísticos</h4>
         <br />
         <p>El Módulo de Reportes ofrece la posibilidad de obtener información cuantitativa referente a las presentaciones de Prácticas Supervisadas durante un determinado período, con la posibilidad de realizar filtrados discriminados por Planes o Informes, o por Organización, Área de trabajo, Estado o Tipo de PS.</p>
@@ -230,6 +232,7 @@
         background-position: 0% 25%;
         background-size: 1400px 300px;
         background-repeat: no-repeat;
+        opacity: .9;
         color: white;
         text-shadow: black 0.3em 0.3em 0.3em;
     }
