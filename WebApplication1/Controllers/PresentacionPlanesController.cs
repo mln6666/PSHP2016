@@ -290,7 +290,7 @@ namespace WebApplication1.Controllers
 
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Aprobado) { 
                     pS.Estado = Estado.Plan_Aprobado;
-                    pS.Vencimiento = DateTime.Now.AddYears(1);
+                    pS.Vencimiento = presentacionPlan.FechaEvaluacionPlan.Value.AddYears(1);
                 }
                 if (presentacionPlan.EstadoEvaluacionPlan == Evaluacion.Desaprobado)
                     pS.Estado = Estado.Plan_Desaprobado;
