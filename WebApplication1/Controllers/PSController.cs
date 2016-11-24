@@ -476,8 +476,8 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Editar PS,Administrador")]
         public ActionResult Edit([Bind(Include = "IdPS,NroDisposicion,Tutor,TituloProyecto,CicloLectivo,Cuatrimestre,IdOrganizacion,IdArea,IdTipoPS,IdAlumno,Estado,ObservacionesPS,FechaFinalizacion")] PS pS)
         {
-            PS pp = db.PSs.Find(pS.IdPS);
-            if (pp.Estado == Estado.PS_Aprobada || pp.Estado == Estado.PS_Cancelada || pp.Estado == Estado.PS_Vencida || pp.Estado == Estado.Plan_Rechazado)
+            
+            if (pS.Estado == Estado.PS_Aprobada || pS.Estado == Estado.PS_Cancelada || pS.Estado == Estado.PS_Vencida || pS.Estado == Estado.Plan_Rechazado)
             {
                 return RedirectToAction("Index", "Error", new { error = 2011 });
             }
