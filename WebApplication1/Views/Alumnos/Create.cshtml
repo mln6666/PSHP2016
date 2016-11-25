@@ -28,6 +28,8 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Legajo, new { htmlAttributes = new { @class = "form-control input-sm", @onkeypress = "solonumeros()" } })
                 @Html.ValidationMessageFor(model => model.Legajo, "", new { @class = "text-danger" })
+                <span id="spanlegajoexistente" style="color:red"></span>
+
             </div>
         </div>
 
@@ -152,26 +154,45 @@
             alumno = this;
             e.preventDefault();
             
-            if ($(this).valid()) {
-                bootbox.confirm({
-                    message: mensaje,
-                    buttons: {
-                        confirm: {
-                            label: 'Confirmar',
-                            className: 'btn-success'
-                        },
-                        cancel: {
-                            label: 'Cancelar',
-                            className: 'btn-danger'
-                        }
-                    },
-                    callback: function(result) {
-                        if (result) {
-                            alumno.submit();
+                var options = {};
+                options.url = "/Alumnos/GetLegajo";
+                options.type = "GET";
+                options.data = { "mileg": $("#Legajo").val() };
+                options.dataType = "json";
+                options.success = function (data) {
+                    if (data > 0) {
+                        $('#spanlegajoexistente').text("Legajo existente.");
+                        
+                    } else {
+                        $('#spanlegajoexistente').text("");
+                        if ($(alumno).valid()) {
+                            bootbox.confirm({
+                                message: mensaje,
+                                buttons: {
+                                    confirm: {
+                                        label: 'Confirmar',
+                                        className: 'btn-success'
+                                    },
+                                    cancel: {
+                                        label: 'Cancelar',
+                                        className: 'btn-danger'
+                                    }
+                                },
+                                callback: function (result) {
+                                    if (result) {
+                                        alumno.submit();
+                                    }
+                                }
+                            });
                         }
                     }
-                });
-            }
+                    
+
+                };
+                $.ajax(options);
+            
+          
+            
 
         });
 
