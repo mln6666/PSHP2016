@@ -917,18 +917,10 @@ namespace WebApplication1.Controllers
         {
             int legajo = Int32.Parse(alumno); ;
             ContextPS db = new ContextPS();
-            IEnumerable<int> query = (from c in db.PSs
-                                      where c.Alumno.Legajo == legajo
-                                      select c.IdPS);
+            Alumno mialu = db.Alumnos.ToList().Find(a => a.Legajo == legajo);
+            PS pS = mialu.PSs.LastOrDefault();
 
-            if (query.Count() == 0)
-            {
-                return HttpNotFound();
-            }
-            int id = query.ElementAt(0);
-            PS datosps = db.PSs.Find(id);
-
-            return RedirectToAction("Details", "PS", new { id = id });
+            return RedirectToAction("Details", "PS", new { id = pS.IdPS });
         }
 
         

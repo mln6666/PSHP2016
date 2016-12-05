@@ -75,15 +75,7 @@ using (Html.BeginForm("Edit", "PS", null, FormMethod.Post, new { id = "editarps"
         @Html.HiddenFor(model => model.IdAlumno)
         @Html.HiddenFor(model => model.Estado)
         @Html.HiddenFor(model => model.FechaFinalizacion)
-
-
-
-
-
-
-
-
-
+        @Html.HiddenFor(model => model.NroDisposicion)
 
         <div class="form-group">
             <div class="col-md-2"></div>
@@ -169,7 +161,7 @@ using (Html.BeginForm("Edit", "PS", null, FormMethod.Post, new { id = "editarps"
 
 
 
-        <div class="form-group">
+        @*<div class="form-group">
             <div class="col-md-2"></div>
             <div class="col-md-4">
                 @Html.LabelFor(model => model.NroDisposicion, htmlAttributes: new { @class = "control-label", @Style = "text-align: left" })
@@ -180,7 +172,7 @@ using (Html.BeginForm("Edit", "PS", null, FormMethod.Post, new { id = "editarps"
             </div>
             <div class="col-md-2"></div>
 
-        </div>
+        </div>*@
         @*<div class="form-group">
             <div class="col-md-2"></div>
             <div class="col-md-4">
