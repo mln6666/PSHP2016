@@ -1,0 +1,40 @@
+﻿
+
+@using System.Web.UI.WebControls
+@model WebApplication1.Models.PresentacionInforme
+@{
+    Layout = null;
+}
+
+
+
+@using (Html.BeginForm("EliminarArchivo", "PresentacionInformes", null, FormMethod.Post))
+{
+
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.FechaEvaluacionInforme)
+    @Html.HiddenFor(model => model.EstadoEvaluacionInforme)
+    @Html.HiddenFor(model => model.FechaPresentacionInforme)
+    @Html.HiddenFor(model => model.PS)
+    @Html.HiddenFor(model => model.IdPS)
+    @Html.HiddenFor(model => model.IdPresentacionInforme)
+    @Html.HiddenFor(model => model.ObservacionesInforme)
+
+
+    <div>
+
+        <h3 class="text-center">Está seguro que desea borrar el documento?</h3>
+        <h4 class="text-center">Esta acción no se podrá deshacer.</h4>
+        <input type="number" style="display: none" value="@Model.IdPresentacionInforme" name="idPresentacionInforme" />
+    </div>
+    <div class="form-group text-center">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <input type="submit" value="Eliminar" class="btn btn-danger">
+
+
+    </div>
+}
+
+

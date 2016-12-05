@@ -8,6 +8,19 @@
 }
 <head>
     <script>
+        
+        function Formato() {
+            console.log($('#uploadFile').val().split('.')[1]);
+            if ($('#uploadFile').val().split('.')[1] != "pdf") {
+                event.preventDefault();
+                $('#archivopdf').text("El formato de archivo debe ser PDF");
+            } else {
+                $('#archivopdf').text("");
+            }
+
+
+
+        }
         /////////////////Start:Select searchable////////////////
 
         $('#informe').submit(function(e) {
@@ -55,6 +68,15 @@
                 $('#spanfechaevaluacioninforme').text("Rango válido: 01/01/2000 - 01/01/2100");
 
             }
+
+            if ($('#uploadFile').val().trim() !== "") {
+                if ($('#uploadFile').val().split('.')[1] != "pdf") {
+                    var isValidItem = false;
+
+
+                }
+            }
+
             if ($('#FechaPresentacionInforme').val().trim() == '') {
                 var isValidItem = false;
                 var fechapresentacioninforme = false;
@@ -127,7 +149,7 @@
     </script>
 </head>
 <input id="fechita" style="display: none" value="@ViewBag.fechita.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture)"/>
-@using (Html.BeginForm("Create", "PresentacionInformes", null, FormMethod.Post, new { id = "informe" }))
+@using (Html.BeginForm("Create", "PresentacionInformes", null, FormMethod.Post, new { id = "informe", enctype = "multipart/form-data" }))
 {    @Html.HiddenFor(model => model.IdPS)
 
     @Html.AntiForgeryToken()
@@ -181,10 +203,18 @@
                 @Html.LabelFor(model => model.ObservacionesInforme, "Observaciones", htmlAttributes: new { @class = "control-label col-md-10" })
             </div>
             <div class="col-md-4">
-                @Html.EditorFor(model => model.ObservacionesInforme, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ObservacionesInforme, "", new { @class = "text-danger" })
-                <span id="spanobservacion" style="color:red"></span>
+                @Html.EditorFor(model => model.ObservacionesInforme, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.ObservacionesInforme, "", new {@class = "text-danger"})
+                <span id="spanobservacion" style="color: red"></span>
 
+            </div>
+            <div class="form-group" style="padding-left: 90px">
+
+                <input type="number" value="@Model.IdPS" style="display: none" name="idPS" id="idPS" />
+                <label class="text-right">Adjuntar documento</label>
+                <input type="file" onchange="Formato()" name="uploadFile" id="uploadFile" /><br />
+                <span id="archivopdf" style="color: red"></span><br />
+                <span id="spanfechaestado" style="color: red"></span>
             </div>
         </div>
         <p> <span id="spanfechaestado" style="color: red"></span></p>

@@ -803,6 +803,8 @@
     <Content Include="Views\Estadisticas\_ReferenciasGenerales.cshtml" />
     <Content Include="Views\PresentacionPlanes\Upload.cshtml" />
     <Content Include="Views\PresentacionPlanes\EliminarArchivo.cshtml" />
+    <Content Include="Views\PresentacionInformes\Upload.cshtml" />
+    <Content Include="Views\PresentacionInformes\EliminarArchivo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Files\" />

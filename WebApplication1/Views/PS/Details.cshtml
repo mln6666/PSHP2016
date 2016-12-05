@@ -285,7 +285,7 @@
 
 
 						@if (Model.Estado == WebApplication1.Models.Estado.PS_Aprobada || Model.Estado == WebApplication1.Models.Estado.PS_Cancelada || Model.Estado == WebApplication1.Models.Estado.PS_Vencida || Model.Estado == WebApplication1.Models.Estado.Plan_Rechazado)
-                        {
+						{
 							<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Cancelar PS</a></li>
 						}
 						else if (User.IsInRole("Administrador") == false & User.IsInRole("Cancelar PS") == false)
@@ -417,7 +417,7 @@
 
 </div>
 <div class="modal fade" id="myModal5" role="dialog"
-	 aria-labelledby="myModalLabel" aria-hidden="true">
+	 aria-labelledby="myModalLabel" aria-hidden="true" >
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">

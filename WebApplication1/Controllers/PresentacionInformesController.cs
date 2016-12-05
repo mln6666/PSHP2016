@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -315,6 +316,89 @@ namespace WebApplication1.Controllers
             return View(presentacionInforme);
         }
 
+        // GET
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult Upload(int idPresentacionInforme)
+        {
+            PresentacionInforme informe = db.PresentacionInformes.Find(idPresentacionInforme);
+            return View(informe);
+        }
+
+        [HttpPost]
+        public ActionResult Upload([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")]PresentacionInforme informe, HttpPostedFileBase uploadFile)
+        {
+
+            PresentacionInforme presentacionInforme = db.PresentacionInformes.Find(informe.IdPresentacionInforme);
+
+            if (uploadFile != null && uploadFile.ContentLength > 0)
+            {
+
+                try
+                {
+
+                    string path = Path.Combine(Server.MapPath("~/App_Data/Files/Informes/"),
+                                               Path.GetFileName(uploadFile.FileName));
+                    uploadFile.SaveAs(path);
+                    presentacionInforme.Archivo = Path.GetFileName(uploadFile.FileName);
+                    db.Entry(presentacionInforme).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                }
+            }
+            return RedirectToAction("Details", "PS", new { id = informe.IdPS });
+        }
+
+        public ActionResult Download(int id)
+        {
+            
+            string archivo =
+                db.PresentacionInformes.ToList().Find(p => p.IdPresentacionInforme == id).Archivo;
+            string ext = archivo.Split('.')[1];
+
+
+
+
+            var file = File("~/App_Data/Files/Informes/" + archivo, System.Net.Mime.MediaTypeNames.Application.Pdf);
+
+
+
+            return (file);
+
+        }
+        //GET
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult EliminarArchivo(int idPresentacionInforme)
+        {
+            PresentacionInforme informe = db.PresentacionInformes.Find(idPresentacionInforme);
+            return View(informe);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Moderador,Administrador")]
+        public ActionResult EliminarArchivo([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")]PresentacionInforme informeEnt)
+        {
+            PresentacionInforme informe = db.PresentacionInformes.Find(informeEnt.IdPresentacionInforme);
+            string path = Path.Combine(Server.MapPath("~/App_Data/Files/Informes/"),
+                                               Path.GetFileName(informe.Archivo));
+
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
+
+
+            informe.Archivo = null;
+
+            db.Entry(informe).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Details", "PS", new { id = informe.IdPS });
+        }
         // POST: PresentacionInformes/Delete/5
 
         [HttpPost, ActionName("Delete")]
