@@ -4,6 +4,15 @@
 @{
     ViewBag.Title = "Create";
 }
+<style>
+    .hr5 {
+        margin-top: 3px;
+        margin-bottom: 15px;
+        border: 0;
+        border-top: 1px solid #eeeeee;
+    }
+</style>
+
 @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
 {
     if (TempData["vencer"] != null)
@@ -21,6 +30,8 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "agregaralumno" }))
 {
     @Html.AntiForgeryToken()
+    <h3 style="padding-left: ">Datos Académicos</h3>
+    <hr align="left" class="hr5" style="color: grey; border-color: lightgray; width: 550px;" />
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -56,6 +67,9 @@
                 @Html.ValidationMessageFor(model => model.AñoIngreso, "", new {@class = "text-danger"})
             </div>
         </div>
+        <h3 style="padding-left: ">Datos Personales</h3>
+        <hr align="left" class="hr5" style="color: grey; border-color: lightgray; width: 550px;" />
+
         <div class="form-group">
             @Html.LabelFor(model => model.CorreoAlu, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -95,7 +109,7 @@
 
 
         <div class="form-group">
-            <p><sup>(*)</sup>Campo obligatorio.</p>
+            <p><sup>(*)</sup>  Campo obligatorio.</p>
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Guardar y Crear PS" id="guardarycrear" class="btn btn-success dos"/>
                 <input type="submit" value="Guardar" id="guardar" class="btn btn-success uno"/>

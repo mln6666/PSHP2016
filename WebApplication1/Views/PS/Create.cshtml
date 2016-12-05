@@ -52,17 +52,19 @@
         @if (ViewBag.band)
         {
             <div class="form-group">
-                @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Alumno <sup>(*)</sup></label>
+
                 <div class="col-md-10">
                     <p class="form-control input-sm" style="width: 280px; background-color: lightgray; font-weight: bold">Sin alumnos habilitados</p>
-                    @Html.ValidationMessageFor(model => model.IdAlumno, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.IdAlumno, "", new {@class = "text-danger"})
                 </div>
             </div>
         }
         else
         {
             <div class="form-group">
-                @Html.LabelFor(model => model.IdAlumno, "Alumno", htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Alumno <sup>(*)</sup></label>
+
                 <div class="col-md-10">
                     <select class="js-example-basic-single form-control input-sm" id="IdAlumno" name="IdAlumno" style="font: small-caption; width: 280px; background-color: beige; padding-top: 30px">
 
@@ -85,34 +87,36 @@
         }
 
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CicloLectivo, htmlAttributes: new { @class = "control-label col-md-2", @onkeypress = "solonumeros()" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CicloLectivo, new { htmlAttributes = new { @class = "form-control input-sm", Value = @DateTime.Now.Year, @Min = 2000 } })
-                @Html.ValidationMessageFor(model => model.CicloLectivo, "", new { @class = "text-danger" })
-                <span id="spanciclolectivo" style="color: red"></span>
+    <div class="form-group">
+        <label class="control-label col-md-2">Ciclo Lectivo <sup>(*)</sup></label>
 
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CicloLectivo, new {htmlAttributes = new {@class = "form-control input-sm", Value = @DateTime.Now.Year, @Min = 2000}})
+            @Html.ValidationMessageFor(model => model.CicloLectivo, "", new {@class = "text-danger"})
+            <span id="spanciclolectivo" style="color: red"></span>
+
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Cuatrimestre <sup>(*)</sup></label>
+
+        <div class="col-lg-10">
+            <div class="radio">
+                <label>
+                    <input name="Cuatrimestre" id="optionsRadios1" value="1" checked="" type="radio">
+                    1º
+                </label>
+                <label> </label>
+                <label>
+                    <input name="Cuatrimestre" id="optionsRadios2" value="2" type="radio">
+                    2º
+                </label>
             </div>
         </div>
-
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cuatrimestre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-lg-10">
-                <div class="radio">
-                    <label>
-                        <input name="Cuatrimestre" id="optionsRadios1" value="1" checked="" type="radio">
-                        1º
-                    </label>
-                    <label> </label>
-                    <label>
-                        <input name="Cuatrimestre" id="optionsRadios2" value="2" type="radio">
-                        2º
-                    </label>
-                </div>
-            </div>
-        </div>
+    </div>
 
 
         <div class="form-group">
@@ -132,56 +136,61 @@
         <h3 style="padding-left: ">Datos del Plan</h3>
         <hr align="left" class="hr5" style="color: grey; border-color: lightgray; width: 550px;" />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tutor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tutor, new { htmlAttributes = new { @class = "form-control input-sm" } })
-                @Html.ValidationMessageFor(model => model.Tutor, "", new { @class = "text-danger" })
-                <span id="spantutor" style="color: red"></span>
+    <div class="form-group">
+        <label class="control-label col-md-2">Tutor <sup>(*)</sup></label>
 
-            </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Tutor, new {htmlAttributes = new {@class = "form-control input-sm"}})
+            @Html.ValidationMessageFor(model => model.Tutor, "", new {@class = "text-danger"})
+            <span id="spantutor" style="color: red"></span>
+
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TituloProyecto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TituloProyecto, new { htmlAttributes = new { @class = "form-control input-sm" } })
-                @Html.ValidationMessageFor(model => model.TituloProyecto, "", new { @class = "text-danger" })
-                <span id="spantituloproyecto" style="color: red"></span>
+    <div class="form-group">
+        <label class="control-label col-md-2">Título Proyecto <sup>(*)</sup></label>
+
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TituloProyecto, new {htmlAttributes = new {@class = "form-control input-sm"}})
+            @Html.ValidationMessageFor(model => model.TituloProyecto, "", new {@class = "text-danger"})
+            <span id="spantituloproyecto" style="color: red"></span>
 
 
-            </div>
         </div>
+    </div>
 
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdTipoPS, "Tipo de PS", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdTipoPS", null, "Seleccione un Tipo de PS...", htmlAttributes: new { @class = "form-control input-sm" })
-                @Html.ValidationMessageFor(model => model.IdTipoPS, "", new { @class = "text-danger" })
-                <span id="spantipops" style="color: red"></span>
+    <div class="form-group">
+        <label class="control-label col-md-2">Tipo de PS <sup>(*)</sup></label>
 
-            </div>
+        <div class="col-md-10">
+            @Html.DropDownList("IdTipoPS", null, "Seleccione un Tipo de PS...", htmlAttributes: new {@class = "form-control input-sm"})
+            @Html.ValidationMessageFor(model => model.IdTipoPS, "", new {@class = "text-danger"})
+            <span id="spantipops" style="color: red"></span>
+
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdArea, "Área", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select class="js-example-basic-single form-control input-sm" id="IdArea" name="IdArea" style="font: small-caption; background-color: beige; padding-top: 30px">
-                    <option value="">Buscar área...</option>
-                    @foreach (var item in ViewBag.areas)
+    <div class="form-group">
+        <label class="control-label col-md-2">Área <sup>(*)</sup></label>
+
+        <div class="col-md-10">
+            <select class="js-example-basic-single form-control input-sm" id="IdArea" name="IdArea" style="font: small-caption; background-color: beige; padding-top: 30px">
+                <option value="">Buscar área...</option>
+                @foreach (var item in ViewBag.areas)
                 {
-                        <option value="@item.IdArea">@item.NombreArea</option>
-                    }
-                </select>
-
-            </div>
-            <span id="spanarea" style="color: red"></span>
+                    <option value="@item.IdArea">@item.NombreArea</option>
+                }
+            </select>
 
         </div>
+        <span id="spanarea" style="color: red"></span>
+
+    </div>
         <div id="ajaxBeginFormResult">
             <div class="form-group">
-                @Html.LabelFor(model => model.IdOrganizacion, "Organización", htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Organización <sup>(*)</sup></label>
+
 
                 <div class="col-md-10">
                     <select class="js-example-basic-single form-control input-sm" id="IdOrganizacion" name="IdOrganizacion" style="font: small-caption; background-color: beige; padding-top: 30px; display: inline-block">
@@ -202,17 +211,18 @@
 
 
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FechaPresentacionPlan, "Fecha de Presentación", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaPresentacionPlan, new { htmlAttributes = new { @class = "form-control input-sm", @onchange = "fechaMayorAActual();" } })
-                <span id="spanfechapresentacionplan" style="color: red"></span>
-                <span id="spanfechapresentacionplan2" style="color: red"></span>
+    <div class="form-group">
+        <label class="control-label col-md-2">Fecha de Presentación <sup>(*)</sup></label>
 
-                @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new { @class = "text-danger" })
-            </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FechaPresentacionPlan, new {htmlAttributes = new {@class = "form-control input-sm", @onchange = "fechaMayorAActual();"}})
+            <span id="spanfechapresentacionplan" style="color: red"></span>
+            <span id="spanfechapresentacionplan2" style="color: red"></span>
 
+            @Html.ValidationMessageFor(model => model.FechaPresentacionPlan, "", new {@class = "text-danger"})
         </div>
+
+    </div>
         <div class="form-group">
             @Html.LabelFor(model => model.FechaEvaluacionPlan, "Fecha de Evaluación", htmlAttributes: new { @class = "control-label col-md-2 " })
             <div class="col-md-10">
@@ -263,18 +273,21 @@
 
 
     <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                @if (ViewBag.band)
-                {<input value="Guardar" class="btn btn-success btn-md disabled" style="padding-left: initial; padding-right: initial" />
-                }
-                else
-                {
-                    <input type="submit" value="Guardar" class="btn btn-success" />}
+        <p><sup>(*)</sup>  Campo obligatorio.</p>
+        <div class="col-md-offset-2 col-md-10">
+
+
+            @if (ViewBag.band)
+            {<input value="Guardar" class="btn btn-success btn-md disabled" style="padding-left: initial; padding-right: initial"/>
+            }
+            else
+            {
+                <input type="submit" value="Guardar" class="btn btn-success"/>}
 
 
 
-            </div>
         </div>
+    </div>
     </div>
 }
 
