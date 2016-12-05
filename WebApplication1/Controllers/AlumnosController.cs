@@ -27,7 +27,7 @@ namespace WebApplication1.Controllers
 
             return Json(user, JsonRequestBehavior.AllowGet);
         }
-
+        
         // GET: Alumnos
         [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Index()
