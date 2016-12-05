@@ -15,6 +15,19 @@ namespace WebApplication1.Controllers
     {
         private ContextPS db = new ContextPS();
 
+
+        [Authorize(Roles = "Moderador,Administrador")]
+        public JsonResult GetLegajo(int mileg)
+        {
+            int user = 0;
+            user = db.Alumnos.Count(u => u.Legajo == mileg);
+
+
+
+
+            return Json(user, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Alumnos
         [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult Index()
@@ -102,6 +115,7 @@ namespace WebApplication1.Controllers
 
                 if (query.Count() != 0)
                 {
+                   
                     ViewBag.alumnoexistente = "Acción no permitida!. Legajo existente.";
                     return View(alumno);
 

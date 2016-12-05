@@ -299,7 +299,16 @@
 </body>
 <div id="dashboard-darkgreen" style="padding-top: 2%;" class="dashboard-nav hidden-print">
 	<ul class="nav navbar-nav" style="border-right :cadetblue; border-top:cadetblue ;  border-style:initial; border-bottom-style: initial;border-left-style:initial ; width:80%"  >
-        @Html.Action("BusquedaPS", "PS")
+        <div class="text-left">
+            @Ajax.ActionLink("Buscar PS", "BusquedaPS", "PS", null, new AjaxOptions
+       {
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "busps",
+
+       }, new { @class = "btn btn-default text-left btn-md btn-warning", @style = "width: 170px;height: 25px; padding-top: 0px ", @Href = @Url.Content("~/PS/BusquedaPS") }
+       )
+        </div>
+        <div id="busps"></div>
 	    <br/>
 	    <br/>
         <br />
@@ -402,7 +411,7 @@
             }else{
 
             $(window).load(function() {
-
+              
                 var options = {};
                 options.url = "/Estadisticas/GetVencimientos";
                 options.type = "GET";
