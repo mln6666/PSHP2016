@@ -29,7 +29,7 @@
         <table class="table table-striped table-bordered ">
             <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
                 <th class="text-left" style="border-radius: 5px">
-                    @Html.DisplayNameFor(model => model.DenominacionOrg)
+                    Organización <sup>(*)</sup>
                 </th>
                 <th class="text-center" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.DireccionOrg)
@@ -64,9 +64,11 @@
             </tr>
         </table>
     </div>
+    <p><sup>(*)</sup>  Campo obligatorio.</p>
 
     <div class="text-center">
-        <input type="submit" value="Guardar cambios" class="btn btn-success" />
+        
+        <input type="submit" value="Guardar cambios" class="btn btn-success"/>
     </div>
 
 <div>

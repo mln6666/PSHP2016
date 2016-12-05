@@ -28,7 +28,7 @@
         @Html.HiddenFor(model => model.IdArea)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NombreArea, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Área <sup>(*)</sup></label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NombreArea, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NombreArea, "", new { @class = "text-danger" })
@@ -44,8 +44,10 @@
         </div>
 
         <div class="form-group">
+            <p><sup>(*)</sup>  Campo obligatorio.</p>
+
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar cambios" class="btn btn-success" />
+                <input type="submit" value="Guardar cambios" class="btn btn-success"/>
             </div>
         </div>
     </div>
