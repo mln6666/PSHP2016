@@ -14,8 +14,10 @@
             if ($('#uploadFile').val().split('.')[1] != "pdf") {
                 event.preventDefault();
                 $('#archivopdf').text("El formato de archivo debe ser PDF");
+                $("#botonGuardar").prop("disabled", true);
             } else {
                 $('#archivopdf').text("");
+                $("#botonGuardar").prop("disabled", false);
             }
 
 
@@ -118,6 +120,12 @@
             if (observacion) {
                 $('#spanobservacion').text("");
                 $('#spanobservacionabajo').text("");
+            }
+            if ($('#uploadFile').val().trim() !== "") {
+                if ($('#uploadFile').val().split('.')[1] != "pdf") {
+                    var isValidItem = false;
+
+                }
             }
 
 
@@ -225,7 +233,7 @@
 
         <div class="form-group row text-center">
             <div>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-default" id="botonGuardar" data-dismiss="modal">Cerrar</button>
                 <input type="submit" value="Guardar" class="btn btn-success" />
             </div>
         </div>
