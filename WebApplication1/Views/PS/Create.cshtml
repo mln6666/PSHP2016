@@ -414,7 +414,7 @@
                     $("#botonGuardar").prop("disabled", true);
                 } else {
                     var options = {};
-                    options.url = "/PresentacionPlanes/ArchivoPlanExistente";
+                    options.url = '@Url.Action("ArchivoPlanExistente", "PresentacionPlanes")';
                     options.type = "GET";
                     options.data = { "nombreArchivo": $("#uploadFile").val().split("\\").pop() };
                     options.dataType = "json";
