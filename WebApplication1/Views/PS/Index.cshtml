@@ -1,6 +1,24 @@
 ﻿@using WebApplication1.Models
 @model IEnumerable<WebApplication1.Models.PS>
+<style>
+    @@media print {
+        .dataTables_length {
+            display: none !important;
+        }
 
+        .dataTables_filter {
+            display: none !important;
+        }
+
+        .dataTables_paginate {
+            display: none !important;
+        }
+
+        .paging_simple_numbers {
+            display: none !important;
+        }
+    }
+</style>
 @{
     ViewBag.Title = "PSs";
 }
@@ -14,50 +32,52 @@
         }
 
     }
-}
-<div>
-    <h1 class="text-center ">Prácticas Supervisadas en curso</h1>
-    <hr style="color:grey;border-color:grey" />
-</div>
-
-<p>
-    <div class="row">
-
-        <div class="col-lg-6">@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
-                              {
-                                  @Html.ActionLink("Nueva PS", "Create", "PS", null, new {@class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
-
-                              }
-        </div>
-
-        <div class="col-lg-6 text-right">
-            @Html.ActionLink("Historial", "HistorialPS", "PS", null, new { @class = "btn btn-default btn-md text-right", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-
-        </div>
+}<div id="seleccion">
+    <div>
+        <h1 class="text-center ">Prácticas Supervisadas en curso</h1>
+        <hr style="color: grey; border-color: grey"/>
     </div>
 
-</p>
+    <p>
+        <div class="row">
 
-@if (Model.Count() == 0)
-{<br /><hr style="color:darkblue;border-color:darkblue" />
-    <div class="text-center">
+            <div class="col-lg-6 hidden-print">
+                @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+                {
+                    @Html.ActionLink("Nueva PS", "Create", "PS", null, new {@class = "btn btn-success btn-md text-left", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
 
-        <h2 style="color: chocolate">
-            No existen Prácticas en curso actualmente, puede acceder al historial completo haciendo click @Html.ActionLink("Aquí", "HistorialPS", "PS").
-        </h2>
+                }
+            </div>
 
-    </div>    <hr style="color:darkblue;border-color:darkblue" />}
-else
-{
+            <div class="col-lg-6 text-right hidden-print">
+                @Html.ActionLink("Historial", "HistorialPS", "PS", null, new {@class = "btn btn-default btn-md text-right", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
 
-    <table id="mitabla" class="table table-striped table-bordered">
-        <thead>
+            </div>
+        </div>
+
+    </p>
+
+    @if (Model.Count() == 0)
+    {<br/><hr style="color: darkblue; border-color: darkblue"/>
+        <div class="text-center">
+
+            <h2 style="color: chocolate">
+                No existen Prácticas en curso actualmente, puede acceder al historial completo haciendo click @Html.ActionLink("Aquí", "HistorialPS", "PS").
+            </h2>
+
+        </div>
+        <hr style="color: darkblue; border-color: darkblue"/>}
+    else
+    {
+
+        <table id="mitabla" class="table table-striped table-bordered">
+            <thead>
             <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
 
                 <th class="text-left" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.Alumno.Legajo)
                 </th>
-                <th class="text-left"  width="18%" style="border-radius: 3px">
+                <th class="text-left" width="18%" style="border-radius: 3px">
                     Apellido y Nombre
                 </th>
                 <th class="text-left" style="border-radius: 3px">
@@ -74,10 +94,10 @@ else
                 <th class="text-left" style="border-radius: 3px">
                     @Html.DisplayNameFor(model => model.Estado)
                 </th>
-                <th class="text-center" style="border-radius: 3px">Acciones</th>
+                <th class="text-center hidden-print" style="border-radius: 3px">Acciones</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             @foreach (var item in Model)
             {
                 <tr style="background-color: azure">
@@ -89,7 +109,7 @@ else
                     </td>
                     <td class="text-left">
                         @if (item.NroDisposicion != null)
-                    {
+                        {
                             @Html.DisplayFor(modelItem => item.NroDisposicion)
                         }
                         else
@@ -99,7 +119,7 @@ else
                     <td class="text-left">
                         @*@Html.DisplayFor(modelItem => item.Area.NombreArea)*@
                         @if (item.Area != null)
-                    {
+                        {
                             @Html.DisplayFor(modelItem => item.Area.NombreArea)
                         }
                         else
@@ -125,59 +145,67 @@ else
                             @Html.DisplayFor(modelItem => item.Estado)
                         </td>
                     }
-                    <td class="text-center">
+                    <td class="text-center hidden-print">
 
-@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
-{
+                        @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+                        {
 
-    if (item.Estado == Estado.Plan_Pendiente || item.Estado == Estado.Plan_Desaprobado)
-     {
+                            if (item.Estado == Estado.Plan_Pendiente || item.Estado == Estado.Plan_Desaprobado)
+                            {
 
-                            @*@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "dialog-window2 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+                                    @*@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "dialog-window2 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
 
-         <a href="@Url.Action("Create", "PresentacionPlanes", new {id = item.IdPS})" class="btn btn-primary btn-sm dialog-window2" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
+                                <a href="@Url.Action("Create", "PresentacionPlanes", new {id = item.IdPS})" class="btn btn-primary btn-sm dialog-window2" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
 
-     }
-     else
-     {
+                            }
+                            else
+                            {
 
-                            @*@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+                                    @*@Html.ActionLink("Plan +", "Create", "PresentacionPlanes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
 
-         <a href="@Url.Action("Create", "PresentacionPlanes", new {id = item.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
+                                <a href="@Url.Action("Create", "PresentacionPlanes", new {id = item.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Plan <span class="glyphicon glyphicon-plus"></span></a>
 
-     }
+                            }
 
-    if (item.Estado == Estado.Plan_Aprobado || item.Estado == Estado.Informe_Desaprobado)
-     {
+                            if (item.Estado == Estado.Plan_Aprobado || item.Estado == Estado.Informe_Desaprobado)
+                            {
 
-                            @*@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "dialog-window3 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+                                    @*@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "dialog-window3 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
 
-         <a href="@Url.Action("Create", "PresentacionInformes", new {id = item.IdPS})" c class="btn btn-primary btn-sm dialog-window3" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
+                                <a href="@Url.Action("Create", "PresentacionInformes", new {id = item.IdPS})" c class="btn btn-primary btn-sm dialog-window3" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
 
-     }
+                            }
 
-     else
-     {
+                            else
+                            {
 
-                            @*@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+                                    @*@Html.ActionLink("Informe +", "Create", "PresentacionInformes", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm disabled", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
 
-         <a href="@Url.Action("Create", "PresentacionInformes", new {id = item.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
+                                <a href="@Url.Action("Create", "PresentacionInformes", new {id = item.IdPS})" class="btn btn-primary btn-sm disabled" style="color: white; font-size: 13px; line-height: inherit; border-radius: 5px; font-weight: 500">Informe <span class="glyphicon glyphicon-plus"></span></a>
 
-     }
-}
+                            }
+                        }
 
 
-                        @Html.ActionLink("Detalles", "Details", new { id = item.IdPS }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                        @if (User.IsInRole("Administrador") | User.IsInRole("Eliminar PS")) {
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPS }, new { @class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                        @Html.ActionLink("Detalles", "Details", new {id = item.IdPS}, new {@class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
+                        @if (User.IsInRole("Administrador") | User.IsInRole("Eliminar PS"))
+                        {
+                            @Html.ActionLink("Eliminar", "Delete", new {id = item.IdPS}, new {@class = "dialog-window1 btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
                         }
 
                     </td>
 
                 </tr>
             }
-        </tbody>
-    </table>}
+            </tbody>
+        </table>}
+</div>
+<div class="hidden-print text-center" style="padding-bottom: 0px">
+    <a class="btn btn-sm btn-warning hidden-print" onclick="window.print('#seleccion');">
+        Imprimir
+
+    </a>
+</div>
 <div class="modal fade" id="myModal10" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -258,7 +286,7 @@ else
 
         $(document).ready(function () {
 
-          
+
 
             ////Grilla automatica//
             $("#mitabla").DataTable({
@@ -350,7 +378,14 @@ else
                 }
             });
         });
+        function printData() {
 
+            var divToPrint = document.getElementById("seleccion");
+            newWin = window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            newWin.close();
+        }
     </script>
 
 

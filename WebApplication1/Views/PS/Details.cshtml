@@ -695,7 +695,13 @@
 		});
 	});
 
-
+	function printData() {
+	    var divToPrint = document.getElementById("seleccion");
+	    newWin = window.open("");
+	    newWin.document.write(divToPrint.outerHTML);
+	    newWin.print();
+	    newWin.close();
+	}
 	/////////SCRIPT DE UPLOAD FILES
 
 	$('#txtUploadFile').on('change', function (e) {
