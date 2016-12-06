@@ -169,16 +169,16 @@
         $('#agregaralumno').submit(function(e) {
             alumno = this;
             e.preventDefault();
-            
-                var options = {};
-                )'></script> = "/Alumnos/GetLegajo";
+
+            var options = {};
+            options.url = '@Url.Action("GetLegajo", "Alumnos")';
                 options.type = "GET";
                 options.data = { "mileg": $("#Legajo").val() };
                 options.dataType = "json";
                 options.success = function (data) {
                     if (data > 0) {
                         $('#spanlegajoexistente').text("Legajo existente.");
-                        
+
                     } else {
                         $('#spanlegajoexistente').text("");
                         if ($(alumno).valid()) {
@@ -202,13 +202,13 @@
                             });
                         }
                     }
-                    
+
 
                 };
                 $.ajax(options);
-            
-          
-            
+
+
+
 
         });
 

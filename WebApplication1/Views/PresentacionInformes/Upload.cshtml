@@ -30,7 +30,6 @@
 
             var options = {};
             options.url = '@Url.Action("ArchivoInformeExistente","PresentacionInformes")';
-         
             options.type = "GET";
             options.data = { "nombreArchivo": $("#uploadFile").val().split("\\").pop() };
             options.dataType = "json";

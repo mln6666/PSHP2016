@@ -20,11 +20,7 @@ namespace WebApplication1.Controllers
         // GET: Estadisticas
         private ContextPS db = new ContextPS();
 
-        public ActionResult Index()
-        {
-
-            return View();
-        }
+        
         public ActionResult _Referencias()
         {
 
@@ -106,7 +102,7 @@ namespace WebApplication1.Controllers
                 mailMessage.From = new MailAddress("sigeps.utnfrre@gmail.com");
                 mailMessage.To.Add("sigeps.utnfrre@gmail.com");
                 mailMessage.Subject = "SiGePS Vencimientos ";
-                holi.Append("Hay "+anterior+ " PS nueva a vencer. "+"<p>Total PSs a vencer: "+contadorvenc.CantVenc+ ".</p><p><a href=\"http://localhost:61369/Estadisticas/Vencimientos\">VER LISTADO COMPLETO</a></p><p></p><p></p><p>Listado de PSs a vencer</p>");
+                holi.Append("Hay "+anterior+ " PS nueva a vencer. "+"<p>Total PSs a vencer: "+contadorvenc.CantVenc+ ".</p><p><a href=\"http://localhost:80/Estadisticas/Vencimientos\">VER LISTADO COMPLETO</a></p><p></p><p></p><p>Listado de PSs a vencer</p>");
 
                 // // // // // // // // // // //
                 // mailMessage.Body ="<table><tr><th>Fecha Vencimiento</th><th>Estado Vencimiento</th><th>Legajo</th><th>Apellido y Nombre</th><th>CicloLectivo</th><th>Estado</th></tr>" + 
@@ -2608,34 +2604,6 @@ namespace WebApplication1.Controllers
         }
 
 
-        [Authorize(Roles = "Moderador,Invitado,Administrador")]
-        public ActionResult Pruebas()
-        {
-            var planesaprobados = 0;
-            var planesdesaprobados = 0;
-            var planesrechazados = 0;
-
-            foreach (var item in db.PSs)
-            {
-                if (item.Estado == Estado.Plan_Aprobado)
-                {
-                    planesaprobados++;
-                }
-                if (item.Estado == Estado.Plan_Desaprobado)
-                {
-                    planesdesaprobados++;
-                }
-                if (item.Estado == Estado.Plan_Rechazado)
-                {
-                    planesrechazados++;
-                }
-
-
-            }
-            ViewBag.planesaprobados = planesaprobados;
-            ViewBag.planesdesaprobados = planesdesaprobados;
-            ViewBag.planesrechazados = planesrechazados;
-            return View();
-        }
+       
     }
 }
