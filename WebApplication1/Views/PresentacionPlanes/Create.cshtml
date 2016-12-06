@@ -18,7 +18,7 @@
                 $("#botonGuardar").addClass("disabled");
             } else {
                 var options = {};
-                options.url = "/PresentacionPlanes/ArchivoPlanExistente";
+                options.url = '@Url.Action("ArchivoPlanExistente", "PresentacionPlanes")';
                 options.type = "GET";
                 options.data = { "nombreArchivo": $("#uploadFile").val().split("\\").pop() };
                 options.dataType = "json";
@@ -43,7 +43,7 @@
             }
 
             }
-            
+
 
         }
 
@@ -107,8 +107,8 @@
             if ($('#uploadFile').val().trim() !== ""){
             if ($('#uploadFile').val().split('.').pop() != "pdf") {
                 var isValidItem = false;
-                
-               
+
+
             }
             }
 

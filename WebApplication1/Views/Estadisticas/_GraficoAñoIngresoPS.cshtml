@@ -144,23 +144,23 @@
 
 
 
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.cursor.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.pointLabels.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.logAxisRenderer.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/jqPlot/plugins/jqplot.meterGaugeRenderer.min.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/datatables/jquery.datatables.js"></script>
-    <script language="javascript" type="text/javascript" src="~/Scripts/datatables/datatables.bootstrap.js"></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/jqPlot/jquery.js")'></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/jqPlot/jquery.jqplot.js")'></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/jqPlot/jquery.jqplot.min.js")'></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/jqPlot/plugins/jqplot.cursor.js")'></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/jqPlot/plugins/jqplot.pieRenderer.min.js")'></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/jqPlot/plugins/jqplot.barRenderer.min.js")'></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js")'></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/jqPlot/plugins/jqplot.pointLabels.js")'></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/jqPlot/plugins/jqplot.logAxisRenderer.js")'></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/jqPlot/plugins/jqplot.meterGaugeRenderer.min.js")'></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/datatables/jquery.datatables.js")'></script>
+    <script language="javascript" type="text/javascript" src='@Url.Content("/Scripts/datatables/datatables.bootstrap.js")'></script>
 
 
 
 
-    <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
+    <script type="text/javascript" src='@Url.Content("/Scripts/jquery-ui-1.12.0.min.js")'></script>
     <script>
         $(document).ready(function () {
             $("body").on("click", "a.dialog-window4", null, function (e) {
@@ -250,7 +250,7 @@
 
         $("#mitabla").DataTable({
             "language": {
-                "url": "/Scripts/DataTables/spanish.json"
+                "url": '@Url.Content("../Scripts/DataTables/spanish.json")'
             }
         });
         $( "#ocultargrafico" ).click(function() {

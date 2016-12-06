@@ -18,164 +18,164 @@
             } else {
 
                 var options = {};
-                options.url = "/PresentacionInformes/ArchivoInformeExistente";
+                options.url = '@Url.Action("ArchivoInformeExistente","PresentacionInformes")';
                 options.type = "GET";
-                options.data = { "nombreArchivo": $("#uploadFile").val().split("\\").pop() };
-                options.dataType = "json";
-                options.success = function (data) {
-                    if (data) {
+                            options.data = { "nombreArchivo": $("#uploadFile").val().split("\\").pop() };
+                            options.dataType = "json";
+                            options.success = function (data) {
+                                if (data) {
                         $('#spanArchivoExistente').text("Ya existe un documento con ese nombre, inténtelo nuevamente.");
                         $("#botonGuardar").prop("disabled", true);
-                    } else {
+                                } else {
                         $('#spanArchivoExistente').text("");
 
                         $('#archivopdf').text("");
                         //$("#botonGuardar").removeAttr("disabled");
                         $("#botonGuardar").prop("disabled", false);
 
-                        
-
-                    };
 
 
-                };
+                                };
+
+
+                            };
                 $.ajax(options);
-                
-            }
+
+                        }
 
 
-            }
+                    }
 
 
-        }
+                }
         /////////////////Start:Select searchable////////////////
 
         $('#informe').submit(function(e) {
-            var x = this;
-            e.preventDefault();
-            var isValidItem = true;
+                    var x = this;
+                    e.preventDefault();
+                    var isValidItem = true;
 
-            var fechapresentacioninforme = true;
-            var fechaevaluacioninforme = true;
-            var fechaestado = true;
-            var observacion = true;
-            var fechaevaluacionplan = true;
+                    var fechapresentacioninforme = true;
+                    var fechaevaluacioninforme = true;
+                    var fechaestado = true;
+                    var observacion = true;
+                    var fechaevaluacionplan = true;
 
-            var fechita = new Date($('#fechita').val());
-            var fecha1 = new Date($('#FechaPresentacionInforme').val());
-            var fecha2 = new Date($('#FechaEvaluacionInforme').val());
+                    var fechita = new Date($('#fechita').val());
+                    var fecha1 = new Date($('#FechaPresentacionInforme').val());
+                    var fecha2 = new Date($('#FechaEvaluacionInforme').val());
 
-            var minfecha = new Date("01/01/2000");
-            var maxfecha = new Date("01/01/2100");
+                    var minfecha = new Date("01/01/2000");
+                    var maxfecha = new Date("01/01/2100");
 
-            if (fecha2 < fecha1) {
-                var isValidItem = false;
-                var fechaestado = false;
+                    if (fecha2 < fecha1) {
+                        var isValidItem = false;
+                        var fechaestado = false;
 
                 $('#spanfechaestado').text("** Una Fecha de Evaluación debe ser mayor a la Fecha de Presentación.");
 
-            }
-            if (fecha1 <= fechita) {
-                var isValidItem = false;
-                var fechaevaluacionplan = false;
+                    }
+                    if (fecha1 <= fechita) {
+                        var isValidItem = false;
+                        var fechaevaluacionplan = false;
 
                 $('#spanfechaevaluacionplan').text("** Una Fecha de Presentación de Informe debe ser mayor a la Fecha de Evaluación del Plan. ");
 
-            }
-            if ((fecha1 < minfecha) || (fecha1 > maxfecha)) {
-                var isValidItem = false;
-                var fechapresentacioninforme = false;
+                    }
+                    if ((fecha1 < minfecha) || (fecha1 > maxfecha)) {
+                        var isValidItem = false;
+                        var fechapresentacioninforme = false;
 
                 $('#spanfechapresentacioninforme').text("Rango válido: 01/01/2000 - 01/01/2100");
-            }
-            if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
-                var isValidItem = false;
-                var fechaevaluacioninforme = false;
+                    }
+                    if ((fecha2 < minfecha) || (fecha2 > maxfecha)) {
+                        var isValidItem = false;
+                        var fechaevaluacioninforme = false;
 
                 $('#spanfechaevaluacioninforme').text("Rango válido: 01/01/2000 - 01/01/2100");
 
-            }
+                    }
 
-            if ($('#uploadFile').val().trim() !== "") {
-                if ($('#uploadFile').val().split('.').pop() != "pdf") {
-                    var isValidItem = false;
+                    if ($('#uploadFile').val().trim() !== "") {
+                        if ($('#uploadFile').val().split('.').pop() != "pdf") {
+                            var isValidItem = false;
 
 
-                }
-            }
+                        }
+                    }
 
-            if ($('#FechaPresentacionInforme').val().trim() == '') {
-                var isValidItem = false;
-                var fechapresentacioninforme = false;
+                    if ($('#FechaPresentacionInforme').val().trim() == '') {
+                        var isValidItem = false;
+                        var fechapresentacioninforme = false;
 
                 $('#spanfechapresentacioninforme').text("Campo requerido.");
 
-            }
+                    }
 
-            if (($('#FechaEvaluacionInforme').val().trim() == '') & ($('#EstadoEvaluacionInforme').val().trim() != 0)) {
-                var isValidItem = false;
-                var fechaevaluacioninforme = false;
+                    if (($('#FechaEvaluacionInforme').val().trim() == '') & ($('#EstadoEvaluacionInforme').val().trim() != 0)) {
+                        var isValidItem = false;
+                        var fechaevaluacioninforme = false;
 
                 $('#spanfechaevaluacioninforme').text("Campo requerido.");
 
-            }
+                    }
 
-            if (($('#FechaEvaluacionInforme').val().trim() != '') & ($('#EstadoEvaluacionInforme').val().trim() == 0)) {
-                var isValidItem = false;
-                var fechaestado = false;
+                    if (($('#FechaEvaluacionInforme').val().trim() != '') & ($('#EstadoEvaluacionInforme').val().trim() == 0)) {
+                        var isValidItem = false;
+                        var fechaestado = false;
 
                 $('#spanfechaestado').text("** Una Fecha de Evaluación requiere una Evaluación!");
-            }
+                    }
 
-            if (($('#FechaEvaluacionInforme').val().trim() == '') & ($('#EstadoEvaluacionInforme').val().trim() != 0)) {
-                var isValidItem = false;
-                var fechaestado = false;
+                    if (($('#FechaEvaluacionInforme').val().trim() == '') & ($('#EstadoEvaluacionInforme').val().trim() != 0)) {
+                        var isValidItem = false;
+                        var fechaestado = false;
 
                 $('#spanfechaestado').text("** Una Evaluación requiere una Fecha de Evaluación!");
-            }
+                    }
 
-            if (($('#EstadoEvaluacionInforme').val().trim() == 2) & ($('#ObservacionesInforme').val().trim() == '')) {
-                var isValidItem = false;
-                var observacion = false;
+                    if (($('#EstadoEvaluacionInforme').val().trim() == 2) & ($('#ObservacionesInforme').val().trim() == '')) {
+                        var isValidItem = false;
+                        var observacion = false;
 
                 $('#spanobservacion').text("Campo requerido.");
                 $('#spanobservacionabajo').text("** El Estado de Evaluación -Desaprobado- requiere una Observación !");
-            }
+                    }
 
-            if (observacion) {
+                    if (observacion) {
                 $('#spanobservacion').text("");
                 $('#spanobservacionabajo').text("");
-            }
-            if ($('#uploadFile').val().trim() !== "") {
-                if ($('#uploadFile').val().split('.').pop() != "pdf") {
-                    var isValidItem = false;
-
-                }
-            }
-
-
-            if (fechaestado) {
-                $('#spanfechaestado').text("");
-            }
-            if (fechaevaluacionplan) {
-                $('#spanfechaevaluacionplan').text("");
-            }
-            if (fechaevaluacioninforme) {
-                $('#spanfechaevaluacioninforme').text("");
-            }
-            if (fechapresentacioninforme) {
-                $('#spanfechapresentacioninforme').text("");
-            }
-
-            if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
-                bootbox.confirm("Está por agregar una presentación del informe, ¿Desea continuar?", function(result) {
-                    if (result) {
-                        x.submit();
                     }
-                });
-            }
+                    if ($('#uploadFile').val().trim() !== "") {
+                        if ($('#uploadFile').val().split('.').pop() != "pdf") {
+                            var isValidItem = false;
 
-        });
+                        }
+                    }
+
+
+                    if (fechaestado) {
+                $('#spanfechaestado').text("");
+                    }
+                    if (fechaevaluacionplan) {
+                $('#spanfechaevaluacionplan').text("");
+                    }
+                    if (fechaevaluacioninforme) {
+                $('#spanfechaevaluacioninforme').text("");
+                    }
+                    if (fechapresentacioninforme) {
+                $('#spanfechapresentacioninforme').text("");
+                    }
+
+                    if (isValidItem) { //var x=document.getElementById("RoleID").innerText;
+                        bootbox.confirm("Está por agregar una presentación del informe, ¿Desea continuar?", function(result) {
+                            if (result) {
+                                x.submit();
+                            }
+                        });
+                    }
+
+                });
 
         ////////////////End:Select searchable///////////////////
 
