@@ -107,7 +107,7 @@ namespace WebApplication1.Controllers
 					try
 					{
 						
-						string path = Path.Combine(Server.MapPath("~/App_Data/Files/Planes/"),
+						string path = Path.Combine(Server.MapPath("~/Content/Files/Planes/"),
 												   Path.GetFileName(uploadFile.FileName));
 						uploadFile.SaveAs(path);
 						presentacionPlan.Archivo = Path.GetFileName(uploadFile.FileName);
@@ -169,7 +169,7 @@ namespace WebApplication1.Controllers
 			
 
 			
-			var file = File("~/App_Data/Files/Planes/" + archivo, System.Net.Mime.MediaTypeNames.Application.Pdf);
+			var file = File("~/Content/Files/Planes/" + archivo, System.Net.Mime.MediaTypeNames.Application.Pdf);
 
 			
 
@@ -326,7 +326,7 @@ namespace WebApplication1.Controllers
 		public ActionResult EliminarArchivo([Bind(Include = "IdPresentacionPlan,FechaPresentacionPlan,FechaEvaluacionPlan,EstadoEvaluacionPlan,ObservacionesPlan,IdPS")]PresentacionPlan planEnt)
 		{
 			PresentacionPlan plan = db.PresentacionPlanes.Find(planEnt.IdPresentacionPlan);
-			string path = Path.Combine(Server.MapPath("~/App_Data/Files/Planes/"),
+			string path = Path.Combine(Server.MapPath("~/Content/Files/Planes/"),
 											   Path.GetFileName(plan.Archivo));
 
 			if (System.IO.File.Exists(path))
@@ -375,7 +375,7 @@ namespace WebApplication1.Controllers
 				try
 				{
 
-					string path = Path.Combine(Server.MapPath("~/App_Data/Files/Planes/"),
+					string path = Path.Combine(Server.MapPath("~/Content/Files/Planes/"),
 											   Path.GetFileName(uploadFile.FileName));
 					uploadFile.SaveAs(path);
 					presentacionPlan.Archivo = Path.GetFileName(uploadFile.FileName);
