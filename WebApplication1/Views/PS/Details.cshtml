@@ -28,12 +28,7 @@
 	}
 }
 <h4>@ViewBag.ErrorAprobarPS</h4>
-    <div class="hidden-print text-right" style="padding-bottom: 10px">
-        <a class="btn btn-sm btn-warning hidden-print" onclick="window.print('#seleccion');">
-            Imprimir
-
-        </a>
-    </div>
+   
     <div>
 
         <table class="table table-striped table-bordered sinmargenabajo ">
@@ -378,7 +373,12 @@
     </div>
 </div>
 
+<div class="hidden-print text-center">
+    <a class="btn btn-sm btn-warning hidden-print" onclick="window.print('#seleccion');">
+        Imprimir
 
+    </a>
+</div>
 <p>
 	@if (ViewBag.vuelta!=null)
 	{
@@ -695,7 +695,13 @@
 		});
 	});
 
-
+	function printData() {
+	    var divToPrint = document.getElementById("seleccion");
+	    newWin = window.open("");
+	    newWin.document.write(divToPrint.outerHTML);
+	    newWin.print();
+	    newWin.close();
+	}
 	/////////SCRIPT DE UPLOAD FILES
 
 	$('#txtUploadFile').on('change', function (e) {

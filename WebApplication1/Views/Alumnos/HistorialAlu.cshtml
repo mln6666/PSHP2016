@@ -3,6 +3,27 @@
 @{
     ViewBag.Title = "Historial alumnos";
 }
+<style>
+    @@media print {
+        .dataTables_length {
+            display: none !important;
+        }
+
+        .dataTables_filter {
+            display: none !important;
+        }
+
+        
+
+        .dataTables_paginate {
+            display: none !important;
+        }
+
+        .paging_simple_numbers {
+            display: none !important;
+        }
+    }
+</style>
 @if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
 {
     if (TempData["vencer"] != null)
@@ -14,14 +35,15 @@
 
     }
 }
-<div>
-    <h1 class="text-center ">Historial alumnos de práctica supervisada</h1>
-    <hr style="color:grey;border-color:grey" />
-</div>
+<div id="seleccion">
+    <div>
+        <h1 class="text-center ">Historial alumnos de práctica supervisada</h1>
+        <hr style="color: grey; border-color: grey"/>
+    </div>
 
 
-<table id="mitabla" class="table table-striped table-bordered ">
-    <thead>
+    <table id="mitabla" class="table table-striped table-bordered ">
+        <thead>
 
         <tr class="text-left" style="color: #2c3e50; background-color: lightblue">
             <th class="text-left" width="7%" style="border-radius: 3px">
@@ -36,17 +58,17 @@
             <th class="text-left" style="border-radius: 3px">
                 @Html.DisplayNameFor(model => model.CorreoAlu)
             </th>
-            <th class="text-center" width="30%" style="border-radius: 3px">
+            <th class="text-center hidden-print" width="30%" style="border-radius: 3px">
                 Acciones
             </th>
             @*<th style="background-color: whitesmoke"></th>*@
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
 
 
         @foreach (var item in Model)
-            {
+        {
             <tr style="background-color: azure">
                 <td class="text-left">
                     @Html.DisplayFor(modelItem => item.Legajo)
@@ -60,46 +82,47 @@
                     @if (item.PSs.Count() == 0)
                     {
                         <text>
-                            Sin PS    <a href="@Url.Action("Create","PS",new { idalu = item.IdAlumno })"><span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span></a>
+                            Sin PS <a href="@Url.Action("Create", "PS", new {idalu = item.IdAlumno})"><span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px; border-radius: 3px">+</span></a>
                         </text>
 
 
 
                     }
-                    else
-                        if (item.PSs.LastOrDefault().Estado == Estado.PS_Cancelada || item.PSs.LastOrDefault().Estado == Estado.PS_Vencida|| item.PSs.LastOrDefault().Estado == Estado.Plan_Rechazado)
+                    else if (item.PSs.LastOrDefault().Estado == Estado.PS_Cancelada || item.PSs.LastOrDefault().Estado == Estado.PS_Vencida || item.PSs.LastOrDefault().Estado == Estado.Plan_Rechazado)
                     {
-                        <text> <a href="@Url.Action("Details", "PS", new {id = item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a> |<a href="@Url.Action("Create","PS",new { idalu = item.IdAlumno })">
-                            <span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span>
+                        <text> <a href="@Url.Action("Details", "PS", new {id = item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a> |<a href="@Url.Action("Create", "PS", new {idalu = item.IdAlumno})">
+                            <span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px; border-radius: 3px">+</span>
                         </a></text>}
                     else
-                    
-                    {                             <a href="@Url.Action("Details","PS", new { id=item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>if (
-item.PSs.LastOrDefault().Estado == Estado.PS_Aprobada & item.PSs.LastOrDefault().NroDisposicion == null)
-                        {<p style="color: midnightblue;font-size: smaller">[Sin Nro. Disposición]</p> }
+
+                    {
+                        <a href="@Url.Action("Details", "PS", new {id = item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>if (
+                                                                                                                                                                               item.PSs.LastOrDefault().Estado == Estado.PS_Aprobada & item.PSs.LastOrDefault().NroDisposicion == null)
+                                                                                                                                                                           {<p style="color: midnightblue; font-size: smaller">[Sin Nro. Disposición]</p>
+                                                                                                                                                                           }
                     }
-                    
+
 
 
                 </td>
 
 
                 @*<td class="text-left" style="font-weight: bold; font-style: italic">
-                                            @if (item.PSs.Count() == 0)
-                                            {                        <a href="@Url.Action("Details","PS", new { id=item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>
-                                            }
-                                            else
-                                            if (item.PSs.LastOrDefault().Estado == Estado.Plan_Rechazado | item.PSs.LastOrDefault().Estado == Estado.PS_Cancelada)
-                                            {
-                                                <text> <a href="@Url.Action("Details", "PS", new {id = item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>-<a href="@Url.Action("Create","PS",new { idalu = item.IdAlumno })">
-                        <span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span>
-                    </a></text>}else
-                                            {<text>
-                        Sin PS    <a href="@Url.Action("Create","PS",new { idalu = item.IdAlumno })"><span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span></a>
-                    </text>}
+                                                @if (item.PSs.Count() == 0)
+                                                {                        <a href="@Url.Action("Details","PS", new { id=item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>
+                                                }
+                                                else
+                                                if (item.PSs.LastOrDefault().Estado == Estado.Plan_Rechazado | item.PSs.LastOrDefault().Estado == Estado.PS_Cancelada)
+                                                {
+                                                    <text> <a href="@Url.Action("Details", "PS", new {id = item.PSs.LastOrDefault().IdPS})">@Html.DisplayFor(modelItem => item.PSs.LastOrDefault().Estado)</a>-<a href="@Url.Action("Create","PS",new { idalu = item.IdAlumno })">
+                            <span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span>
+                        </a></text>}else
+                                                {<text>
+                            Sin PS    <a href="@Url.Action("Create","PS",new { idalu = item.IdAlumno })"><span class="btn-success" style="padding-right: 4px; padding-left: 4px; padding-top: 0px; padding-bottom: 0px;border-radius: 3px">+</span></a>
+                        </text>}
 
 
-                    </td>*@
+                        </td>*@
                 <td class="text-left">
                     @if (item.CorreoAlu != null)
                     {
@@ -112,47 +135,63 @@ item.PSs.LastOrDefault().Estado == Estado.PS_Aprobada & item.PSs.LastOrDefault()
                     }
 
                 </td>
-                <td class="text-center">
-                    @Html.ActionLink("Detalles", "Details", new { id = item.IdAlumno }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
+                <td class="text-center hidden-print">
+                    @Html.ActionLink("Detalles", "Details", new {id = item.IdAlumno}, new {@class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500"})
                     @*@Html.ActionLink("Editar", "Edit", new { id = item.IdAlumno }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdAlumno }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdAlumno }, new { @class = "btn btn-primary btn-sm", @style = "color:white;font-size:13px;line-height:inherit;border-radius:5px;font-weight: 500" })*@
                 </td>
             </tr>
         }
-    </tbody>
+        </tbody>
 
-</table>
+    </table>
+</div>
+<div class="hidden-print text-center" style="padding-bottom: 10px">
+    <a class="btn btn-sm btn-warning hidden-print" onclick="window.print('#seleccion');">
+        Imprimir
 
-<div class="modal fade" id="myModal1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title">¿Está seguro que desea eliminar al siguiente alumno?</h3>
-            </div>
-            <div class="modal-body">
-                <div class="te">Espere...</div>
+    </a>
+</div>
+    <div class="modal fade" id="myModal1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">¿Está seguro que desea eliminar al siguiente alumno?</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="te">Espere...</div>
+                </div>
+
             </div>
 
         </div>
 
     </div>
+    <a href="@Url.Action("Index")" class="btn btn-default hidden-print"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
 
-</div>
-<a href="@Url.Action("Index")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
-
-@section scripts{
-    <script>
+    @section scripts{
+        <script>
             $(document).ready(function () {
                 $("#mitabla").DataTable({
                     "language": {
                         "url": "/Scripts/DataTables/spanish.json"
                     }
                 });
-
+                $('#mitabla_length').addClass('hidden-print');
+                $('#mitabla_filter').addClass('hidden-print');
+                $('#mitabla_info').addClass('hidden-print');
+                $('#mitabla_paginate').addClass('hidden-print');
             });
-    </script>
-}
+            function printData() {
+                var divToPrint = document.getElementById("seleccion");
+                newWin = window.open("");
+                newWin.document.write(divToPrint.outerHTML);
+                newWin.print();
+                newWin.close();
+            }
+        </script>
+    }
 
 
