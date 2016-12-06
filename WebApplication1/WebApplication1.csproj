@@ -761,8 +761,6 @@
     <Content Include="Views\PS\CreateOriginal.cshtml" />
     <Content Include="Views\Users\VerPermisos.cshtml" />
     <Content Include="Views\Users\MisPermisos.cshtml" />
-    <Content Include="Views\Estadisticas\Pruebas.cshtml" />
-    <Content Include="Views\Estadisticas\Index.cshtml" />
     <Content Include="Views\Estadisticas\EstadosPlanes.cshtml" />
     <Content Include="Views\Estadisticas\EstadosInformes.cshtml" />
     <Content Include="Views\Estadisticas\AreasPlanes.cshtml" />
