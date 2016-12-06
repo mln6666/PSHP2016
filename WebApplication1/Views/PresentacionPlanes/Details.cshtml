@@ -22,7 +22,7 @@
 		<th class="text-left"width="29%" style="border-radius: 3px">
 			@*@Html.DisplayNameFor(model => model.ObservacionesPlan)*@Observaciones
 		</th>
-		<th class="text-center" style="border-radius: 3px">Acciones</th>
+		<th class="text-center hidden-print" style="border-radius: 3px">Acciones</th>
 	</tr>
 	<tr style="background-color: azure">
 		@*<td class="text-left">
@@ -48,7 +48,7 @@
 			}
 			
 		</td>
-		<td class="text-center">
+		<td class="text-center hidden-print">
 	@*@Html.ActionLink("Editar", "Edit", new { id = item.IdPresentacionPlan }) |
 		@Html.ActionLink("Detalles", "Details", new { id = item.IdPresentacionPlan }) |
 		@Html.ActionLink("Eliminar", "Delete", new { id = item.IdPresentacionPlan })*@

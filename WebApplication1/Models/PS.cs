@@ -13,7 +13,7 @@ namespace WebApplication1.Models
 
         
         [Display(Name = "Disposición")]
-        public int? NroDisposicion { get; set; }
+        public string NroDisposicion { get; set; }
 
         public string Tutor { get; set; }
 
