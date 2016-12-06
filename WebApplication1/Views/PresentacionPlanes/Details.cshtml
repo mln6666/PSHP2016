@@ -88,7 +88,7 @@
 						<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Adjuntar</a></li>
 					}
 
-					else if (Model.Archivo != null )
+					else if (Model.Archivo != null)
 					{
 						<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Adjuntar</a></li>
 					}
@@ -97,20 +97,22 @@
 					{
 						<li>@Html.ActionLink("Adjuntar", "Upload", "PresentacionPlanes", new { idPresentacionPlan = Model.IdPresentacionPlan }, new { @class = "dialog-window357" })</li>
 					}
-					@if (Model.Archivo != null) {
+					@if (Model.Archivo != null)
+					{
 						<li>
-							@Html.ActionLink("Descargar", "Download", new { id = Model.IdPresentacionPlan})
+							@Html.ActionLink("Descargar", "Download", new { id = Model.IdPresentacionPlan },
+						   new {target = "_blank"})
 						</li>
 					}
 					else
 					{
-						
-						<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Descargar</a></li>                        
-					}
-					@if (User.IsInRole("Administrador") & (Model.Archivo != null)) { 
-					<li>
-						@Html.ActionLink("Eliminar", "EliminarArchivo", new { idPresentacionPlan = Model.IdPresentacionPlan }, new { @class = "dialog-window358" })
-					</li>
+
+						<li><a href="#" onclick="event.stopPropagation()" style="color: grey">Descargar</a></li>           }
+					@if (User.IsInRole("Administrador") & (Model.Archivo != null))
+					{
+						<li>
+							@Html.ActionLink("Eliminar", "EliminarArchivo", new { idPresentacionPlan = Model.IdPresentacionPlan }, new { @class = "dialog-window358" })
+						</li>
 					}
 					else
 					{

@@ -72,11 +72,11 @@ namespace WebApplication1.Controllers
             ViewBag.deliminaralumno = "Permite al Moderador Eliminar un Alumno.";
             ViewBag.deditarplaninforme = "Permite al Moderador Modificar un Plan/Informe perteneciente a la PS de un Alumno.";
             ViewBag.deditarps = "Permite al Moderador Modificar los datos generales de una Práctica Supervisada.";
-            ViewBag.dinvitado = "Permite al usuario Visualizar los detalles de Alumnos, Practicas Supervisadas, Planes, Informes, Áreas, Organizaciones y Tipo de PS.";
+            ViewBag.dinvitado = "Permite al usuario Visualizar los detalles de Alumnos, Prácticas Supervisadas, Planes, Informes, Áreas, Organizaciones y Tipo de PS.";
             ViewBag.deliminarps = "Permite al Moderador Eliminar una Práctica Supervisada perteneciente a un Alumno.";
             ViewBag.deditaralumno = "Permite al Moderador Modificar un Alumno.";
             ViewBag.dmoderador = "Permite al usuario: ** Ver PS, Alumnos, Planes, Informes, Áreas, Organizaciones y Tipos de PS. ** Crear PS, Alumnos, Planes, Informes, Áreas y Organizaciones. ** Evaluar Planes e Informes";
-            ViewBag.deditarareaorganizacion = "Permite al Moderador Eliminar un/a Área/Organización.";
+            ViewBag.deditarareaorganizacion = "Permite al Moderador Eliminar un Área/Organización.";
             ViewBag.dcancelarps = "Permite al Moderador Cancelar una PS.";
 
 

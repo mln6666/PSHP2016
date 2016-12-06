@@ -132,7 +132,7 @@
                     @if ((item.Archivo != null) & (User.IsInRole("Administrador")))
                     {
 
-                        <td><a href="@Url.Action("Download", "PresentacionPlanes", new {id = item.IdPresentacionPlan})" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-download-alt"></span></a></td>
+                        <td><a href="@Url.Action("Download", "PresentacionPlanes",  new {id = item.IdPresentacionPlan})" target="_blank" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-download-alt"></span></a></td>
                         <td><a href="@Url.Action("EliminarArchivo", "PresentacionPlanes", new {idPresentacionPlan = item.IdPresentacionPlan})" class="btn btn-primary btn-xs btn-danger dialog-window358"><span class="glyphicon glyphicon-trash"></span></a></td>
 
 

@@ -336,7 +336,7 @@ namespace WebApplication1.Controllers
                 try
                 {
 
-                    string path = Path.Combine(Server.MapPath("~/App_Data/Files/Informes/"),
+                    string path = Path.Combine(Server.MapPath("~/Content/Files/Informes/"),
                                                Path.GetFileName(uploadFile.FileName));
                     uploadFile.SaveAs(path);
                     presentacionInforme.Archivo = Path.GetFileName(uploadFile.FileName);
@@ -362,7 +362,7 @@ namespace WebApplication1.Controllers
 
 
 
-            var file = File("~/App_Data/Files/Informes/" + archivo, System.Net.Mime.MediaTypeNames.Application.Pdf);
+            var file = File("~/Content/Files/Informes/" + archivo, System.Net.Mime.MediaTypeNames.Application.Pdf);
 
 
 
@@ -382,7 +382,7 @@ namespace WebApplication1.Controllers
         public ActionResult EliminarArchivo([Bind(Include = "IdPresentacionInforme,FechaPresentacionInforme,FechaEvaluacionInforme,EstadoEvaluacionInforme,ObservacionesInforme,IdPS")]PresentacionInforme informeEnt)
         {
             PresentacionInforme informe = db.PresentacionInformes.Find(informeEnt.IdPresentacionInforme);
-            string path = Path.Combine(Server.MapPath("~/App_Data/Files/Informes/"),
+            string path = Path.Combine(Server.MapPath("~/Content/Files/Informes/"),
                                                Path.GetFileName(informe.Archivo));
 
             if (System.IO.File.Exists(path))

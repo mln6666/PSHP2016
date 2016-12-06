@@ -808,6 +808,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Files\" />
+    <Folder Include="Content\Files\Informes\" />
+    <Folder Include="Content\Files\Planes\" />
     <Folder Include="Repositorios\" />
   </ItemGroup>
   <ItemGroup>

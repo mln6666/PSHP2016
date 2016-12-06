@@ -110,7 +110,8 @@
 						@if (Model.Archivo != null)
 						{
 							<li>
-								@Html.ActionLink("Descargar", "Download", new { id = Model.IdPresentacionInforme })
+								@Html.ActionLink("Descargar", "Download", new { id = Model.IdPresentacionInforme },
+                           new { target = "_blank" })
 							</li>
 						}
 						else
