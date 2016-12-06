@@ -11,8 +11,8 @@
             $("#botonGuardar").prop("disabled", true);
         });
         function Formato() {
-
-            if ($('#uploadFile').val().split('.')[1] != "pdf") {
+            if ($('#uploadFile').val() != ""){
+            if ($('#uploadFile').val().split('.').pop() != "pdf") {
                 event.preventDefault();
                     
                 $('#archivopdf').text("El formato de archivo debe ser PDF");
@@ -21,16 +21,43 @@
                 $('#archivopdf').text("");
                 $("#botonGuardar").prop("disabled", false);
             }
-
-
-
-
+            }
         }
+
+        $('#existeArchivo').submit(function (e) {
+            archivo = this;
+            e.preventDefault();
+
+            var options = {};
+            options.url = "/PresentacionPlanes/ArchivoPlanExistente";
+            options.type = "GET";
+            options.data = { "nombreArchivo": $("#uploadFile").val().split("\\").pop() };
+            options.dataType = "json";
+            options.success = function (data) {
+                if (data) {
+                    $('#spanArchivoExistente').text("Ya existe un documento con ese nombre. Seleccione otro o intente cambiando el nombre.");
+
+                } else {
+                    $('#spanArchivoExistente').text("");
+                   
+                            
+                        archivo.submit();
+                                
+                            };
+                        
+
+            };
+            $.ajax(options);
+
+
+
+
+        });
     </script>
 
 </head>
 
-@using (Html.BeginForm("Upload", "PresentacionPlanes", null, FormMethod.Post, new {enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Upload", "PresentacionPlanes", null, FormMethod.Post, new {enctype = "multipart/form-data", id = "existeArchivo" }))
 {
 
 
@@ -51,6 +78,7 @@
             <input type="number" value="@Model.IdPS" name="idPS" style="display: none" />
             <input type="file" onchange="Formato()" name="uploadFile" id="uploadFile"/><br/>
             <span id="archivopdf" style="color: red"></span>
+            <span id="spanArchivoExistente" style="color: red"></span>
         </div>
 
     </div>

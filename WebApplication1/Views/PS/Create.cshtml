@@ -264,6 +264,7 @@
         <label class="control-label col-md-2">Adjuntar documento</label>
         <input type="file" onchange="Formato()" name="uploadFile" id="uploadFile"/><br/>
         <span id="archivopdf" style="color: red"></span>
+        <span id="spanArchivoExistente" style="color: red"></span>
     </div>
 
 
@@ -282,7 +283,7 @@
             }
             else
             {
-                <input type="submit" value="Guardar" class="btn btn-success"/>}
+                <input type="submit" value="Guardar" id="botonGuardar" class="btn btn-success"/>}
 
 
 
@@ -387,10 +388,11 @@
 
     <script>
         /////////////////Start:Select searchable////////////////
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".js-example-basic-single").select2();
         });
-        ////////////////End:Select searchable///////////////////
+
+////////////////End:Select searchable///////////////////
         function OnSuccess() {
             $("#myModal .close").click();
             $('.modal-backdrop').remove();
@@ -405,17 +407,37 @@
 
         function Formato() {
             //console.log($('#uploadFile').val().split('.')[1]);
-            if ($('#uploadFile').val().split('.')[1] != "pdf") {
-                event.preventDefault();
-                $('#archivopdf').text("El formato de archivo debe ser PDF");
-            } else {
-                $('#archivopdf').text("");
-            }
-            //console.log((isNaN($('#FechaPresentacionPlan').val())));
-            //if (!(isNaN($('#FechaPresentacionPlan').val()))) {
-            //    $('#archivopdf').text($('#archivopdf').val() + "La fecha de presentación no puede estar vacía.");
-            //}
+            if ($('#uploadFile').val() != "") {
+                if ($('#uploadFile').val().split('.').pop() != "pdf") {
+                    event.preventDefault();
+                    $('#archivopdf').text("El formato de archivo debe ser PDF");
+                    $("#botonGuardar").prop("disabled", true);
+                } else {
+                    var options = {};
+                    options.url = "/PresentacionPlanes/ArchivoPlanExistente";
+                    options.type = "GET";
+                    options.data = { "nombreArchivo": $("#uploadFile").val().split("\\").pop() };
+                    options.dataType = "json";
+                    options.success = function(data) {
+                        if (data) {
+                            $('#spanArchivoExistente').text("Ya existe un documento con ese nombre, inténtelo nuevamente.");
+                            $("#botonGuardar").prop("disabled", true);
+                        } else {
+                            $('#spanArchivoExistente').text("");
 
+                            $('#archivopdf').text("");
+                            //$("#botonGuardar").removeAttr("disabled");
+                            //$("#botonGuardar").removeClass("disabled");
+                            $("#botonGuardar").prop("disabled", false);
+
+
+                        };
+
+
+                    };
+                    $.ajax(options);
+                }
+            }
 
 
         }
@@ -453,7 +475,7 @@
 
         }
 
-        $('#agregarps').submit(function (e) {
+        $('#agregarps').submit(function(e) {
             var permiso = this;
             e.preventDefault();
 
@@ -501,7 +523,7 @@
                 var fechapresentacionplan = false;
             }
 
-            
+
             if ($('#FechaEvaluacionPlan').val().trim() > new Date().toISOString().substring(0, 10)) {
                 var isValidItem = false;
                 var fechaevaluacionplan = false;
@@ -569,7 +591,8 @@
                 $('#spanarea').text("Campo requerido.");
             }
             if ($('#IdOrganizacion').val().trim() == '') {
-                var isValidItem = false; var organizacion = false;
+                var isValidItem = false;
+                var organizacion = false;
 
                 $('#spanorganizacion').text("Campo requerido.");
             }
@@ -604,7 +627,7 @@
             }
 
             if ($('#uploadFile').val().trim() !== "") {
-                if ($('#uploadFile').val().split('.')[1] != "pdf") {
+                if ($('#uploadFile').val().split('.').pop() != "pdf") {
                     var isValidItem = false;
 
                 }
@@ -626,7 +649,8 @@
             if (tituloproyecto) {
                 $('#spantituloproyecto').text("");
 
-            } if (alumno) {
+            }
+            if (alumno) {
                 $('#spanalumno').text("");
             }
             if (fechaestado) {
@@ -651,7 +675,7 @@
             if (isValidItem) {
 
                 //var x=document.getElementById("RoleID").innerText;
-                bootbox.confirm("¿ Está seguro que desea agregar una nueva PS ?", function (result) {
+                bootbox.confirm("¿ Está seguro que desea agregar una nueva PS ?", function(result) {
                     if (result) {
                         permiso.submit();
                     }

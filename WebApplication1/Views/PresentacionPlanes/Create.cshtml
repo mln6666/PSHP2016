@@ -10,16 +10,39 @@
     <script>
         /////////////////Start:Select searchable////////////////
         function Formato() {
-            console.log($('#uploadFile').val().split('.')[1]);
-            if ($('#uploadFile').val().split('.')[1] != "pdf"){
+            if ($('#uploadFile').val() != ""){
+            if ($('#uploadFile').val().split('.').pop() != "pdf") {
                 event.preventDefault();
                 $('#archivopdf').text("El formato de archivo debe ser PDF");
-                $("#botonGuardar").prop("disabled", true);
+                //$("#botonGuardar").prop("disabled", true);
+                $("#botonGuardar").addClass("disabled");
             } else {
-                $('#archivopdf').text("");
-                $("#botonGuardar").prop("disabled", false);
-            } 
-            
+                var options = {};
+                options.url = "/PresentacionPlanes/ArchivoPlanExistente";
+                options.type = "GET";
+                options.data = { "nombreArchivo": $("#uploadFile").val().split("\\").pop() };
+                options.dataType = "json";
+                options.success = function (data) {
+                    if (data) {
+                        $('#spanArchivoExistente').text("Ya existe un documento con ese nombre, inténtelo nuevamente.");
+                        $("#botonGuardar").prop("disabled", true);
+                    } else {
+                        $('#spanArchivoExistente').text("");
+
+                        $('#archivopdf').text("");
+                        //$("#botonGuardar").removeAttr("disabled");
+                        //$("#botonGuardar").removeClass("disabled");
+                        $("#botonGuardar").prop("disabled", false);
+
+
+                    };
+
+
+                };
+                $.ajax(options);
+            }
+
+            }
             
 
         }
@@ -82,7 +105,7 @@
             }
 
             if ($('#uploadFile').val().trim() !== ""){
-            if ($('#uploadFile').val().split('.')[1] != "pdf") {
+            if ($('#uploadFile').val().split('.').pop() != "pdf") {
                 var isValidItem = false;
                 
                
@@ -186,7 +209,8 @@
             <input type="number" value="@Model.IdPS" style="display: none" name="idPS" id="idPS" />
             <label class="text-right">Adjuntar documento</label>
             <input type="file" onchange="Formato()" name="uploadFile" id="uploadFile" /><br />
-            <span id="archivopdf" style="color: red"></span><br />
+            <span id="archivopdf" style="color: red"></span><br/>
+            <span id="spanArchivoExistente" style="color: red"></span><br />
             <span id="spanfechaestado" style="color: red"></span>
         </div>
        

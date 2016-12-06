@@ -24,6 +24,16 @@ namespace WebApplication1.Controllers
             return View(presentacionInformes.ToList());
         }
 
+        [Authorize(Roles = "Moderador,Administrador")]
+        public JsonResult ArchivoInformeExistente(string nombreArchivo)
+        {
+
+            var existe = db.PresentacionInformes.ToList().Exists(a => a.Archivo == nombreArchivo);
+
+            
+            return Json(existe, JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Moderador,Invitado,Administrador")]
         public ActionResult HistorialInformes(int id)
         {

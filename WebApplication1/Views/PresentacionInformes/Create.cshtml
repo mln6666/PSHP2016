@@ -10,16 +10,41 @@
     <script>
         
         function Formato() {
-            console.log($('#uploadFile').val().split('.')[1]);
-            if ($('#uploadFile').val().split('.')[1] != "pdf") {
+            if ($('#uploadFile').val() != ""){
+            if ($('#uploadFile').val().split('.').pop() != "pdf") {
                 event.preventDefault();
                 $('#archivopdf').text("El formato de archivo debe ser PDF");
                 $("#botonGuardar").prop("disabled", true);
             } else {
-                $('#archivopdf').text("");
-                $("#botonGuardar").prop("disabled", false);
+
+                var options = {};
+                options.url = "/PresentacionInformes/ArchivoInformeExistente";
+                options.type = "GET";
+                options.data = { "nombreArchivo": $("#uploadFile").val().split("\\").pop() };
+                options.dataType = "json";
+                options.success = function (data) {
+                    if (data) {
+                        $('#spanArchivoExistente').text("Ya existe un documento con ese nombre, inténtelo nuevamente.");
+                        $("#botonGuardar").prop("disabled", true);
+                    } else {
+                        $('#spanArchivoExistente').text("");
+
+                        $('#archivopdf').text("");
+                        //$("#botonGuardar").removeAttr("disabled");
+                        $("#botonGuardar").prop("disabled", false);
+
+                        
+
+                    };
+
+
+                };
+                $.ajax(options);
+                
             }
 
+
+            }
 
 
         }
@@ -72,7 +97,7 @@
             }
 
             if ($('#uploadFile').val().trim() !== "") {
-                if ($('#uploadFile').val().split('.')[1] != "pdf") {
+                if ($('#uploadFile').val().split('.').pop() != "pdf") {
                     var isValidItem = false;
 
 
@@ -122,7 +147,7 @@
                 $('#spanobservacionabajo').text("");
             }
             if ($('#uploadFile').val().trim() !== "") {
-                if ($('#uploadFile').val().split('.')[1] != "pdf") {
+                if ($('#uploadFile').val().split('.').pop() != "pdf") {
                     var isValidItem = false;
 
                 }
@@ -222,6 +247,7 @@
                 <label class="text-right">Adjuntar documento</label>
                 <input type="file" onchange="Formato()" name="uploadFile" id="uploadFile" /><br />
                 <span id="archivopdf" style="color: red"></span><br />
+                <span id="spanArchivoExistente" style="color: red"></span><br />
                 <span id="spanfechaestado" style="color: red"></span>
             </div>
         </div>

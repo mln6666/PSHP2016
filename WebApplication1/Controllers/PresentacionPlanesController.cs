@@ -26,9 +26,18 @@ namespace WebApplication1.Controllers
 			return View(presentacionPlans.ToList());
 		}
 
+        [Authorize(Roles = "Moderador,Administrador")]
+        public JsonResult ArchivoPlanExistente(string nombreArchivo)
+        {
+
+            var existe = db.PresentacionPlanes.ToList().Exists(a => a.Archivo == nombreArchivo);
+            
+
+            return Json(existe, JsonRequestBehavior.AllowGet);
+        }
 
 
-		[Authorize(Roles = "Moderador,Invitado,Administrador")]
+        [Authorize(Roles = "Moderador,Invitado,Administrador")]
 		public ActionResult HistorialPlanes(int id)
 		{
 			var historial = db.PSs.Include(m => m.PresentacionesPlanes).SingleOrDefault(m => m.IdPS == id);
