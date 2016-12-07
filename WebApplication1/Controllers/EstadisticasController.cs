@@ -102,7 +102,7 @@ namespace WebApplication1.Controllers
                 mailMessage.From = new MailAddress("sigeps.utnfrre@gmail.com");
                 mailMessage.To.Add("sigeps.utnfrre@gmail.com");
                 mailMessage.Subject = "SiGePS Vencimientos ";
-                holi.Append("Hay "+anterior+ " PS nueva a vencer. "+"<p>Total PSs a vencer: "+contadorvenc.CantVenc+ ".</p><p><a href=\"http://localhost:80/Estadisticas/Vencimientos\">VER LISTADO COMPLETO</a></p><p></p><p></p><p>Listado de PSs a vencer</p>");
+                holi.Append("Hay "+anterior+ " PS nueva a vencer. "+"<p>Total PSs a vencer: "+contadorvenc.CantVenc+ ".</p><p><a href=\"http://localhost:80/sigeps/Estadisticas/Vencimientos\">VER LISTADO COMPLETO</a></p><p></p><p></p><p>Listado de PSs a vencer</p>");
 
                 // // // // // // // // // // //
                 // mailMessage.Body ="<table><tr><th>Fecha Vencimiento</th><th>Estado Vencimiento</th><th>Legajo</th><th>Apellido y Nombre</th><th>CicloLectivo</th><th>Estado</th></tr>" + 
