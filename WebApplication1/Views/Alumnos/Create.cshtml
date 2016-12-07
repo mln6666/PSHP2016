@@ -156,13 +156,13 @@
         $(".dos").click(function() {
             mensaje = "Esta por agregar un nuevo Alumno y Crear su PS, ¿Desea continuar?";
 
-            $("form").attr("action", "/Alumnos/Createalups");
+            $("form").attr("action", '@Url.Action("Createalups", "Alumnos")');
         });
 
         $(".uno").click(function() {
             mensaje = "Esta por agregar un nuevo Alumno, ¿Desea continuar?";
 
-            $("form").attr("action", "/Alumnos/Create");
+            $("form").attr("action", '@Url.Action("Create", "Alumnos")');
         });
 
 
