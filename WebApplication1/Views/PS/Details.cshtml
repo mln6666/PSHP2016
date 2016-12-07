@@ -6,6 +6,22 @@
 }
 
 
+
+@*<script type="text/javascript" language="javascript" src='@Url.Content("~/Scripts/jquery-1.12.4.min.js")'></script>*@
+<script type="text/javascript" language="javascript" src='@Url.Content("~/Scripts/bootstrap.min.js")'></script>
+
+@*<script type="text/javascript" language="javascript" src='@Url.Content("/Scripts/jquery-1.12.4.min.js")'></script>
+<script type="text/javascript" language="javascript" src='@Url.Content("/Scripts/bootstrap.min.js")'></script>
+
+<script type="text/javascript" language="javascript" src='@Url.Content("/../Scripts/jquery-1.12.4.min.js")'></script>
+<script type="text/javascript" language="javascript" src='@Url.Content("/../Scripts/bootstrap.min.js")'></script>
+
+<script type="text/javascript" language="javascript" src='@Url.Content("../Scripts/jquery-1.12.4.min.js")'></script>
+<script type="text/javascript" language="javascript" src='@Url.Content("../Scripts/bootstrap.min.js")'></script>*@
+
+<script type="text/javascript" language="javascript" src='@Url.Content("/sigeps12/Scripts/jquery-1.12.4.min.js")'></script>
+@*<script type="text/javascript" language="javascript" src='@Url.Content("/sigeps12/Scripts/bootstrap.min.js")'></script>*@
+
 <style>
     .sinmargenabajo {
         width: 100%;
@@ -533,206 +549,208 @@
 
 </div>
 
-
+@*<script type="text/javascript" src="http://localhost:8080/sigeps12/Scripts/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="http://localhost:8080/sigeps12/Scripts/bootstrap.min.js"></script>*@
 <script>
-	$(document).ready(function () {
-		$("body").on("click", "a.dialog-window1", null, function (e){
-			e.preventDefault();
+    
+    $(document).ready(function () {
+        $("body").on("click", "a.dialog-window1", null, function (e){
+            e.preventDefault();
 
-			var $link = $(this); // Reference to <a/> link
-			var title = $link.text(); //this is title to fetch in htnl
-			$('#myModal1.modal-title').html(title);
+            var $link = $(this); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            $('#myModal1.modal-title').html(title);
 
-			var url = $(this).attr('href');
-			if (url.indexOf('#') == 0) {
-				$('#myModal1').modal('show');
-			}
-			else
-			{
-				$.get(url, function (data) {
-					$('#myModal1 .te').html(data);
-					$('#myModal1').modal();
-				}).success(function () { $('input:text:visible:first').focus(); });
-			}
-		});
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#myModal1').modal('show');
+            }
+            else
+            {
+                $.get(url, function (data) {
+                    $('#myModal1 .te').html(data);
+                    $('#myModal1').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        });
 
 
-		$("body").on("click", "a.dialog-window5", null, function (e) {
-			e.preventDefault();
+        $("body").on("click", "a.dialog-window5", null, function (e) {
+            e.preventDefault();
 
-			var $link = $(this); // Reference to <a/> link
-			var title = $link.text(); //this is title to fetch in htnl
-			$('#myModal5.modal-title').html(title);
+            var $link = $(this); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            $('#myModal5.modal-title').html(title);
 
-			var url = $(this).attr('href');
-			if (url.indexOf('#') == 0) {
-				$('#myModal5').modal('show');
-			}
-			else {
-				$.get(url, function (data) {
-					$('#myModal5 .te').html(data);
-					$('#myModal5').modal();
-				}).success(function () { $('input:text:visible:first').focus(); });
-			}
-		});
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#myModal5').modal('show');
+            }
+            else {
+                $.get(url, function (data) {
+                    $('#myModal5 .te').html(data);
+                    $('#myModal5').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        });
 	
 
-	$("body").on("click", "a.dialog-window6", null, function (e) {
-		e.preventDefault();
+        $("body").on("click", "a.dialog-window6", null, function (e) {
+            e.preventDefault();
 
-		var $link = $(this); // Reference to <a/> link
-		var title = $link.text(); //this is title to fetch in htnl
-		$('#myModal6.modal-title').html(title);
+            var $link = $(this); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            $('#myModal6.modal-title').html(title);
 
-		var url = $(this).attr('href');
-		if (url.indexOf('#') == 0) {
-			$('#myModal6').modal('show');
-		}
-		else {
-			$.get(url, function (data) {
-				$('#myModal6 .te').html(data);
-				$('#myModal6').modal();
-			}).success(function () { $('input:text:visible:first').focus(); });
-		}
-	});
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#myModal6').modal('show');
+            }
+            else {
+                $.get(url, function (data) {
+                    $('#myModal6 .te').html(data);
+                    $('#myModal6').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        });
 
 	
-		$("body").on("click", "a.dialog-window7", null, function (e){
-			e.preventDefault();
+        $("body").on("click", "a.dialog-window7", null, function (e){
+            e.preventDefault();
 
-			var $link = $(this); // Reference to <a/> link
-			var title = $link.text(); //this is title to fetch in htnl
-			$('#myModal7.modal-title').html(title);
+            var $link = $(this); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            $('#myModal7.modal-title').html(title);
 
-			var url = $(this).attr('href');
-			if (url.indexOf('#') == 0) {
-				$('#myModal7').modal('show');
-			}
-			else
-			{
-				$.get(url, function (data) {
-					$('#myModal7 .te').html(data);
-					$('#myModal7').modal();
-				}).success(function () { $('input:text:visible:first').focus(); });
-			}
-		});
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#myModal7').modal('show');
+            }
+            else
+            {
+                $.get(url, function (data) {
+                    $('#myModal7 .te').html(data);
+                    $('#myModal7').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        });
 
 		
 
-		$("body").on("click", "a.dialog-window8", null, function (e) {
-			e.preventDefault();
+        $("body").on("click", "a.dialog-window8", null, function (e) {
+            e.preventDefault();
 
-			var $link = $(this); // Reference to <a/> link
-			var title = $link.text(); //this is title to fetch in htnl
-			$('#myModal8.modal-title').html(title);
+            var $link = $(this); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            $('#myModal8.modal-title').html(title);
 
-			var url = $(this).attr('href');
-			if (url.indexOf('#') == 0) {
-				$('#myModal8').modal('show');
-			}
-			else {
-				$.get(url, function (data) {
-					$('#myModal8 .te').html(data);
-					$('#myModal8').modal();
-				}).success(function () { $('input:text:visible:first').focus(); });
-			}
-		});
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#myModal8').modal('show');
+            }
+            else {
+                $.get(url, function (data) {
+                    $('#myModal8 .te').html(data);
+                    $('#myModal8').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        });
 
-		$("body").on("click", "a.dialog-window10", null, function (e) {
-			e.preventDefault();
+        $("body").on("click", "a.dialog-window10", null, function (e) {
+            e.preventDefault();
 
-			var $link = $(this); // Reference to <a/> link
-			var title = $link.text(); //this is title to fetch in htnl
-			$('#myModal10.modal-title').html(title);
+            var $link = $(this); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            $('#myModal10.modal-title').html(title);
 
-			var url = $(this).attr('href');
-			if (url.indexOf('#') == 0) {
-				$('#myModal10').modal('show');
-			}
-			else {
-				$.get(url, function (data) {
-					$('#myModal10 .te').html(data);
-					$('#myModal10').modal();
-				}).success(function () { $('input:text:visible:first').focus(); });
-			}
-		});
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#myModal10').modal('show');
+            }
+            else {
+                $.get(url, function (data) {
+                    $('#myModal10 .te').html(data);
+                    $('#myModal10').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        });
 
-		$("body").on("click", "a.dialog-window20", null, function (e) {
-			e.preventDefault();
+        $("body").on("click", "a.dialog-window20", null, function (e) {
+            e.preventDefault();
 
-			var $link = $(this); // Reference to <a/> link
-			var title = $link.text(); //this is title to fetch in htnl
-			$('#myModal20.modal-title').html(title);
+            var $link = $(this); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            $('#myModal20.modal-title').html(title);
 
-			var url = $(this).attr('href');
-			if (url.indexOf('#') == 0) {
-				$('#myModal10').modal('show');
-			}
-			else {
-				$.get(url, function (data) {
-					$('#myModal20 .te').html(data);
-					$('#myModal20').modal();
-				}).success(function () { $('input:text:visible:first').focus(); });
-			}
-		});
-		$("body").on("click", "a.dialog-window30", null, function (e) {
-			e.preventDefault();
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#myModal10').modal('show');
+            }
+            else {
+                $.get(url, function (data) {
+                    $('#myModal20 .te').html(data);
+                    $('#myModal20').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        });
+        $("body").on("click", "a.dialog-window30", null, function (e) {
+            e.preventDefault();
 
-			var $link = $(this); // Reference to <a/> link
-			var title = $link.text(); //this is title to fetch in htnl
-			$('#myModal20.modal-title').html(title);
+            var $link = $(this); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            $('#myModal20.modal-title').html(title);
 
-			var url = $(this).attr('href');
-			if (url.indexOf('#') == 0) {
-				$('#myModal30').modal('show');
-			}
-			else {
-				$.get(url, function (data) {
-					$('#myModal30 .te').html(data);
-					$('#myModal30').modal();
-				}).success(function () { $('input:text:visible:first').focus(); });
-			}
-		});
-	});
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#myModal30').modal('show');
+            }
+            else {
+                $.get(url, function (data) {
+                    $('#myModal30 .te').html(data);
+                    $('#myModal30').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        });
+    });
 
-	function printData() {
-	    var divToPrint = document.getElementById("seleccion");
-	    newWin = window.open("");
-	    newWin.document.write(divToPrint.outerHTML);
-	    newWin.print();
-	    newWin.close();
-	}
-	/////////SCRIPT DE UPLOAD FILES
+    function printData() {
+        var divToPrint = document.getElementById("seleccion");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+    }
+    /////////SCRIPT DE UPLOAD FILES
 
-	$('#txtUploadFile').on('change', function (e) {
-		var files = e.target.files;
-		var myID = 3; //uncomment this to make sure the ajax URL works
-		if (files.length > 0) {
-			if (window.FormData !== undefined) {
-				var data = new FormData();
-				for (var x = 0; x < files.length; x++) {
-					data.append("file" + x, files[x]);
-				}
+    $('#txtUploadFile').on('change', function (e) {
+        var files = e.target.files;
+        var myID = 3; //uncomment this to make sure the ajax URL works
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
 
-				$.ajax({
-					type: "POST",
-					url: '/MyController/UploadFile?id=' + myID,
-					contentType: false,
-					processData: false,
-					data: data,
-					success: function (result) {
-						console.log(result);
-					},
-					error: function (xhr, status, p3, p4) {
-						var err = "Error " + " " + status + " " + p3 + " " + p4;
-						if (xhr.responseText && xhr.responseText[0] == "{")
-							err = JSON.parse(xhr.responseText).Message;
-						console.log(err);
-					}
-				});
-			} else {
-				alert("Este navegador no soporta la funcionalidad para subir archivos!");
-			}
-		}
-	});
+                $.ajax({
+                    type: "POST",
+                    url: '/MyController/UploadFile?id=' + myID,
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        console.log(result);
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        var err = "Error " + " " + status + " " + p3 + " " + p4;
+                        if (xhr.responseText && xhr.responseText[0] == "{")
+                            err = JSON.parse(xhr.responseText).Message;
+                        console.log(err);
+                    }
+                });
+            } else {
+                alert("Este navegador no soporta la funcionalidad para subir archivos!");
+            }
+        }
+    });
 </script>

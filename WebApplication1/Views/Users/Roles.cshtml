@@ -178,6 +178,7 @@ else
 
 
 
+
 @section scripts
 {
     <script>
@@ -188,7 +189,7 @@ else
                 bootbox.confirm("¿Está seguro que desea quitar el permiso: " + button.attr("nombrepermiso") + "?", function (result) {
                     if (result) {
                         $.ajax({
-                            url: "/Users/Delete/",
+                            url: '@Url.Action("Delete", "Users")',
                             type: 'post',
                             data: {
                                 userID: button.attr("userID"),
@@ -202,7 +203,7 @@ else
                 });
             });
         });
-      
+
 
         $("body").on("click", "a.dialog-window10", null, function (e) {
             e.preventDefault();

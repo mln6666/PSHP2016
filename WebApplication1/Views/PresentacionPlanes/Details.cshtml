@@ -95,7 +95,7 @@
 
 					else
 					{
-						<li>@Html.ActionLink("Adjuntar", "Upload", "PresentacionPlanes", new { idPresentacionPlan = Model.IdPresentacionPlan }, new { @class = "dialog-window357" })</li>
+						<li>@Html.ActionLink("Adjuntar", "Upload", "PresentacionPlanes", new { idPresentacionPlan = Model.IdPresentacionPlan }, new { @class = "dialog-window9852" })</li>
 					}
 					@if (Model.Archivo != null)
 					{
@@ -111,7 +111,7 @@
 					@if (User.IsInRole("Administrador") & (Model.Archivo != null))
 					{
 						<li>
-							@Html.ActionLink("Eliminar", "EliminarArchivo", new { idPresentacionPlan = Model.IdPresentacionPlan }, new { @class = "dialog-window358" })
+							@Html.ActionLink("Eliminar", "EliminarArchivo", new { idPresentacionPlan = Model.IdPresentacionPlan }, new { @class = "dialog-window7468" })
 						</li>
 					}
 					else
@@ -135,25 +135,46 @@
 @*@Html.Action("EvaluarPlan", new { id = Model.IdPresentacionPlan })*@
 <div id="histoplan"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-	 aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title text-center">Evaluar Plan</h4>
-			</div>
-			<div class="modal-body">
-				<div class="te">Espere...</div>
-			</div>
-			@*<div class="modal-footer">
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Evaluar Plan</h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+            @*<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
-			@*<button type="submit" class="btn btn-primary">Save changes</button>*@
-			@*</div>*@
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
+            @*<button type="submit" class="btn btn-primary">Save changes</button>*@
+            @*</div>*@
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
+<div class="modal fade" id="myModal7468" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-left: -1%;margin-right: -1%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Eliminar archivo</h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">Espere...</div>
+            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+            @*<button type="submit" class="btn btn-primary">Save changes</button>*@
+            @*</div>*@
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
 	 aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -175,7 +196,7 @@
 	<!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="myModal357" tabindex="-1" role="dialog"
+<div class="modal fade" id="myModal9852" tabindex="-1" role="dialog"
 	 aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content" style="margin-left: -30%; margin-right: -30%">
@@ -196,26 +217,6 @@
 	<!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="myModal358" tabindex="-1" role="dialog"
-	 aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content" style="margin-left: -1%;margin-right: -1%">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title text-center">Eliminar archivo</h4>
-			</div>
-			<div class="modal-body">
-				<div class="te">Espere...</div>
-			</div>
-			@*<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
-			@*<button type="submit" class="btn btn-primary">Save changes</button>*@
-			@*</div>*@
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
 
 
 
@@ -241,7 +242,24 @@
 				}).success(function () { $('input:text:visible:first').focus(); });
 			}
 		});
+		$("body").on("click", "a.dialog-window7468", null, function (e) {
+		    e.preventDefault();
 
+		    var $link = $(this); // Reference to <a/> link
+		    var title = $link.text(); //this is title to fetch in htnl
+		    $('#myModal7468 .modal-title').html(title);
+
+		    var url = $(this).attr('href');
+		    if (url.indexOf('#') == 0) {
+		        $('#myModal7468').modal('show');
+		    }
+		    else {
+		        $.get(url, function (data) {
+		            $('#myModal7468 .te').html(data);
+		            $('#myModal7468').modal();
+		        }).success(function () { $('input:text:visible:first').focus(); });
+		    }
+		});
 
 		$("body").on("click", "a.dialog-window2", null, function (e) {
 			e.preventDefault();
@@ -262,43 +280,26 @@
 			}
 		});
 
-		$("body").on("click", "a.dialog-window357", null, function (e) {
+		$("body").on("click", "a.dialog-window9852", null, function (e) {
 			e.preventDefault();
 
 			var $link = $(this); // Reference to <a/> link
 			var title = $link.text(); //this is title to fetch in htnl
-			$('#myModal357 .modal-title').html(title);
+			$('#myModal9852 .modal-title').html(title);
 
 			var url = $(this).attr('href');
 			if (url.indexOf('#') == 0) {
-				$('#myModal357').modal('show');
+				$('#myModal9852').modal('show');
 			}
 			else {
 				$.get(url, function (data) {
-					$('#myModal357 .te').html(data);
-					$('#myModal357').modal();
+					$('#myModal9852 .te').html(data);
+					$('#myModal9852').modal();
 				}).success(function () { $('input:text:visible:first').focus(); });
 			}
 		});
 
-		$("body").on("click", "a.dialog-window358", null, function (e) {
-			e.preventDefault();
-
-			var $link = $(this); // Reference to <a/> link
-			var title = $link.text(); //this is title to fetch in htnl
-			$('#myModal358 .modal-title').html(title);
-
-			var url = $(this).attr('href');
-			if (url.indexOf('#') == 0) {
-				$('#myModal358').modal('show');
-			}
-			else {
-				$.get(url, function (data) {
-					$('#myModal358 .te').html(data);
-					$('#myModal358').modal();
-				}).success(function () { $('input:text:visible:first').focus(); });
-			}
-		});
+		
 	});
 </script>
 

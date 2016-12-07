@@ -1,16 +1,18 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>@ViewBag.Title - Sistema PS 2016</title>
-	@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>*@
-	
-    <script type="text/javascript" src='@Url.Content("/Scripts/jquery-1.12.4.min.js")'></script>
-    <script type="text/javascript" src='@Url.Content("/Scripts/bootstrap.min.js")'></script>
-
-	@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Sistema PS 2016</title>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>*@
+    
+    @*<script type="text/javascript" src='@Url.Content("~/Scripts/jquery-1.12.4.min.js")'></script>
+    <script type="text/javascript" src='@Url.Content("~/Scripts/bootstrap.min.js")'></script>*@
+    <script type="text/javascript" src='@Url.Content("/../Scripts/jquery-1.12.4.min.js")'></script>
+    <script type="text/javascript" src='@Url.Content("/../Scripts/bootstrap.min.js")'></script>
+  
+    @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
     <style>
         @@media print {
   a[href]:after {
@@ -76,142 +78,142 @@
             border-radius: 6px 0 6px 6px;
         }
     </style>
-	<style>/* CSS used here will be applied after bootstrap.css */
+    <style>/* CSS used here will be applied after bootstrap.css */
 /*
  * dashboard (add to your bootstrap)
  */
 
-	    .sidebar-form {
-	        padding: 7px 15px 13px 15px;
-	    }
-	    @@media (min-width: 768px) {
-	        #page-wrapper5 {
-	            margin-top: 0px;
-	            margin-left: 220px;
-	            min-height: 1000px;
-	        }
-	        .dashboard-nav {
-	            left: 0;
-	            list-style: none;
-	            height: 100%;
-	            margin: 0;
-	            overflow-y: auto;
-	            padding: 0;
-	            padding-top: 10px;
-	            position: fixed;
-	            top: 50px;
-	            width: 250px;
-	            z-index: 1;
-	        } 
-	        .dashboard-nav .navbar-collapse {
-	            padding: 0;
-	            max-height: none;
-	        }
-	        .dashboard-nav ul {
-	            float: none;
-	            width: 100%;
-	        }
-	        .dashboard-nav ul:not {
-	            display: block;
-	        }
-	        .dashboard-nav li {
-	            float: none;
-	            display: block;
-	        }
-	        .dashboard-nav li a {
-	            padding-top: 12px;
-	            padding-bottom: 12px;
-	        }
-	        .dashboard-nav .open .dropdown-menu {
-	            position: static;
-	            float: none;
-	            width: auto;
-	            margin: 0;
-	            padding: 5px 0;
-	            background-color: transparent;
-	            border: 0;
-	            -webkit-box-shadow: none;
-	            box-shadow: none;
-	        }
-	        .dashboard-nav .open .dropdown-menu > li > a {
-	            padding: 5px 15px 5px 25px;
-	        }
-	        .dashboard-nav .open > a > b.caret {
-	            border-top: none;
-	            border-bottom: 4px solid;
-	        }
-	    }
+        .sidebar-form {
+            padding: 7px 15px 13px 15px;
+        }
+        @@media (min-width: 768px) {
+            #page-wrapper5 {
+                margin-top: 0px;
+                margin-left: 220px;
+                min-height: 1000px;
+            }
+            .dashboard-nav {
+                left: 0;
+                list-style: none;
+                height: 100%;
+                margin: 0;
+                overflow-y: auto;
+                padding: 0;
+                padding-top: 10px;
+                position: fixed;
+                top: 50px;
+                width: 250px;
+                z-index: 1;
+            } 
+            .dashboard-nav .navbar-collapse {
+                padding: 0;
+                max-height: none;
+            }
+            .dashboard-nav ul {
+                float: none;
+                width: 100%;
+            }
+            .dashboard-nav ul:not {
+                display: block;
+            }
+            .dashboard-nav li {
+                float: none;
+                display: block;
+            }
+            .dashboard-nav li a {
+                padding-top: 12px;
+                padding-bottom: 12px;
+            }
+            .dashboard-nav .open .dropdown-menu {
+                position: static;
+                float: none;
+                width: auto;
+                margin: 0;
+                padding: 5px 0;
+                background-color: transparent;
+                border: 0;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+            .dashboard-nav .open .dropdown-menu > li > a {
+                padding: 5px 15px 5px 25px;
+            }
+            .dashboard-nav .open > a > b.caret {
+                border-top: none;
+                border-bottom: 4px solid;
+            }
+        }
 
-	    /*
+        /*
  * Darkgreen navbar style
  */
-	    #navbar-darkgreen.navbar-default { /* #006633 - #009933 */
-	        font-size: 14px;
-	        background-color: rgba(0, 102, 51, 1);
-	        background: -webkit-linear-gradient(top, rgba(0, 153, 51, 1) 0%, rgba(0, 102, 51, 1) 100%);
-	        background: linear-gradient(to bottom, rgba(0, 153, 51, 1) 0%, rgba(0, 102, 51, 1) 100%);
-	        border: 0px;
-	        border-radius: 0;
-	    }
-	    #navbar-darkgreen.navbar-default .navbar-nav>li>a:hover,
-	    #navbar-darkgreen.navbar-default .navbar-nav>li>a:focus,
-	    #navbar-darkgreen.navbar-default .navbar-nav>li>ul>li>a:hover, 
-	    #navbar-darkgreen.navbar-default .navbar-nav>li>ul>li>a:focus, 
-	    #navbar-darkgreen.navbar-default .navbar-nav>.active>a,
-	    #navbar-darkgreen.navbar-default .navbar-nav>.active>a:hover,
-	    #navbar-darkgreen.navbar-default .navbar-nav>.active>a:focus {  
-	        color: rgba(51, 51, 51, 1);
-	        background-color: rgba(255, 255, 255, 1);
-	        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
-	        background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
-	    }
-	    #sidebar-darkgreen, #column-darkgreen {
-	        background-color: #006633;
-	    }
-	    #navbar-darkgreen.navbar-default .navbar-toggle {
-	        border-color: #006633;
-	    }
-	    #navbar-darkgreen.navbar-default .navbar-toggle:hover,
-	    #navbar-darkgreen.navbar-default .navbar-toggle:focus {
-	        background-color: #009933;
-	    }
-	    #navbar-darkgreen.navbar-default .navbar-nav>li>a,
-	    #navbar-darkgreen.navbar-default .navbar-nav>li>ul>li>a, 
-	    #navbar-darkgreen.navbar-default .navbar-brand {
-	        color: #999999; 
-	    }
-	    #navbar-darkgreen.navbar-default .navbar-toggle .icon-bar,
-	    #navbar-darkgreen.navbar-default .navbar-toggle:hover .icon-bar,
-	    #navbar-darkgreen.navbar-default .navbar-toggle:focus .icon-bar {
-	        background-color: #ffffff; 
-	    }
-	    @@media (min-width: 768px) {
-	        #dashboard-darkgreen {
-	            background-color: initial;
-	        }
-	    }</style>
-	@Styles.Render("~/Content/css")
-	@Scripts.Render("~/bundles/modernizr")
+        #navbar-darkgreen.navbar-default { /* #006633 - #009933 */
+            font-size: 14px;
+            background-color: rgba(0, 102, 51, 1);
+            background: -webkit-linear-gradient(top, rgba(0, 153, 51, 1) 0%, rgba(0, 102, 51, 1) 100%);
+            background: linear-gradient(to bottom, rgba(0, 153, 51, 1) 0%, rgba(0, 102, 51, 1) 100%);
+            border: 0px;
+            border-radius: 0;
+        }
+        #navbar-darkgreen.navbar-default .navbar-nav>li>a:hover,
+        #navbar-darkgreen.navbar-default .navbar-nav>li>a:focus,
+        #navbar-darkgreen.navbar-default .navbar-nav>li>ul>li>a:hover, 
+        #navbar-darkgreen.navbar-default .navbar-nav>li>ul>li>a:focus, 
+        #navbar-darkgreen.navbar-default .navbar-nav>.active>a,
+        #navbar-darkgreen.navbar-default .navbar-nav>.active>a:hover,
+        #navbar-darkgreen.navbar-default .navbar-nav>.active>a:focus {  
+            color: rgba(51, 51, 51, 1);
+            background-color: rgba(255, 255, 255, 1);
+            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+        #sidebar-darkgreen, #column-darkgreen {
+            background-color: #006633;
+        }
+        #navbar-darkgreen.navbar-default .navbar-toggle {
+            border-color: #006633;
+        }
+        #navbar-darkgreen.navbar-default .navbar-toggle:hover,
+        #navbar-darkgreen.navbar-default .navbar-toggle:focus {
+            background-color: #009933;
+        }
+        #navbar-darkgreen.navbar-default .navbar-nav>li>a,
+        #navbar-darkgreen.navbar-default .navbar-nav>li>ul>li>a, 
+        #navbar-darkgreen.navbar-default .navbar-brand {
+            color: #999999; 
+        }
+        #navbar-darkgreen.navbar-default .navbar-toggle .icon-bar,
+        #navbar-darkgreen.navbar-default .navbar-toggle:hover .icon-bar,
+        #navbar-darkgreen.navbar-default .navbar-toggle:focus .icon-bar {
+            background-color: #ffffff; 
+        }
+        @@media (min-width: 768px) {
+            #dashboard-darkgreen {
+                background-color: initial;
+            }
+        }</style>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 
 
 </head>
 
 <body class="full" background='@Url.Content("~/Content/Images/BACKGROUND-TOP.jpg")'>
-	<div class="navbar navbar-inverse navbar-fixed-top hidden-print">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href='@Url.Action("Index", "Home")'>
-					<img style="height: 60px" src='@Url.Content("~/Content/Images/LogoPixEditorMLNcondoslineas.png")' />
-				</a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li style="font-weight: bold;">@Html.ActionLink("Inicio", "Index", "Home")</li>
+    <div class="navbar navbar-inverse navbar-fixed-top hidden-print">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href='@Url.Action("Index", "Home")'>
+                    <img style="height: 60px" src='@Url.Content("~/Content/Images/LogoPixEditorMLNcondoslineas.png")' />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li style="font-weight: bold;">@Html.ActionLink("Inicio", "Index", "Home")</li>
                     <li style="font-weight: bold;">@Html.ActionLink("Alumnos", "Index", "Alumnos")
                     <li class="dropdown" style="left: auto">
                         <a style="font-weight: bold" class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Prácticas Supervisadas<span class="caret"></span></a>
@@ -222,11 +224,11 @@
                             
                         </ul>
                     </li>
-					
-					<li class="dropdown">
-						<a id="dLabel"  data-toggle="dropdown" style="font-weight: bold" class="" data-target="#" href="/page.html">
-							Estadísticas <span class="caret"></span>
-						</a>
+                    
+                    <li class="dropdown">
+                        <a id="dLabel"  data-toggle="dropdown" style="font-weight: bold" class="" data-target="#" href="/page.html">
+                            Estadísticas <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                             <li class="dropdown-submenu">
                                 <a tabindex="-1" href="#" @*onclick="event.stopPropagation()"*@>PSs</a>
@@ -263,27 +265,27 @@
                             
 
                         </ul>
-					</li>
-					<li class="dropdown" style="left: auto">
-						<a style="font-weight: bold" class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Preferencias<span class="caret"></span></a>
-						<ul class="dropdown-menu" aria-labelledby="download">
+                    </li>
+                    <li class="dropdown" style="left: auto">
+                        <a style="font-weight: bold" class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Preferencias<span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="download">
 
-							<li>@Html.ActionLink("Organizaciones", "Index", "Organizaciones")</li>
-							<li>@Html.ActionLink("Áreas", "Index", "Areas")</li>
-							<li>@Html.ActionLink("Tipos de PS", "Index", "TipoPSs")</li>
-							<li class="divider"></li>
-							<li>@Html.ActionLink("Usuarios", "Index", "Users")</li>
+                            <li>@Html.ActionLink("Organizaciones", "Index", "Organizaciones")</li>
+                            <li>@Html.ActionLink("Áreas", "Index", "Areas")</li>
+                            <li>@Html.ActionLink("Tipos de PS", "Index", "TipoPSs")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Usuarios", "Index", "Users")</li>
 
-						</ul>
-					</li>
+                        </ul>
+                    </li>
 
 
-				</ul>
+                </ul>
 
-				@Html.Partial("_LoginPartial")
-			</div>
-		</div>
-	</div>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
 
 
 
@@ -299,58 +301,58 @@
 
 </body>
 <div id="dashboard-darkgreen" style="padding-top: 2%;" class="dashboard-nav hidden-print">
-	<ul class="nav navbar-nav" style="border-right :cadetblue; border-top:cadetblue ;  border-style:initial; border-bottom-style: initial;border-left-style:initial ; width:80%"  >
-	    <div class="text-left">
-	        @Ajax.ActionLink("Buscar PS", "BusquedaPS", "PS", null, new AjaxOptions
-	        {
-	            InsertionMode = InsertionMode.Replace,
-	            UpdateTargetId = "busps",
+    <ul class="nav navbar-nav" style="border-right :cadetblue; border-top:cadetblue ;  border-style:initial; border-bottom-style: initial;border-left-style:initial ; width:80%"  >
+        <div class="text-left">
+            @Ajax.ActionLink("Buscar PS", "BusquedaPS", "PS", null, new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "busps",
 
-	        }, new {@class = "btn btn-default text-left btn-md btn-warning alumno", @style = "width: 170px;height: 25px; padding-top: 0px;display: none ", @Href = @Url.Content("~/PS/BusquedaPS")}
-	            )
-	    </div>
-	    <div id="busps"></div>
+            }, new {@class = "btn btn-default text-left btn-md btn-warning alumno", @style = "width: 170px;height: 25px; padding-top: 0px;display: none ", @Href = @Url.Content("~/PS/BusquedaPS")}
+                )
+        </div>
+        <div id="busps"></div>
      
-	    <br/>
-	    <br/>
+        <br/>
+        <br/>
         <br />
-		<div class="panel panel-primary">
-		    <div class="panel-heading">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
                
-		        <h3 class="panel-title" style="font-style: italic" width="70%">Enlaces</h3>
-		    </div>
-		</div>
+                <h3 class="panel-title" style="font-style: italic" width="70%">Enlaces</h3>
+            </div>
+        </div>
 
-	    <br/>
+        <br/>
       
         <li>
             <a href="http://www.frre.utn.edu.ar/">
                 <img style="height: 60px; width: 150px;" src='@Url.Content("~/Content/Images/UTNfrrenavbar.png")' />
             </a>
         </li>
-		<li>
-			<a href="http://frre.cvg.utn.edu.ar/">
-				<img style="height: 60px;width: 150px;  " src='@Url.Content("~/Content/Images/logocampus.png")'/>
-			</a>
-		</li>
+        <li>
+            <a href="http://frre.cvg.utn.edu.ar/">
+                <img style="height: 60px;width: 150px;  " src='@Url.Content("~/Content/Images/logocampus.png")'/>
+            </a>
+        </li>
 
-	    <li>
-	        <a href="http://sysacadweb.frre.utn.edu.ar/">
-	            <img style="height: 60px; width: 150px;" src='@Url.Content("~/Content/Images/sisacadweb.png")'/>
-	        </a>
-	    </li>
+        <li>
+            <a href="http://sysacadweb.frre.utn.edu.ar/">
+                <img style="height: 60px; width: 150px;" src='@Url.Content("~/Content/Images/sisacadweb.png")'/>
+            </a>
+        </li>
       
 
 
 
 
 
-	</ul>
+    </ul>
 </div>
 <main id="page-wrapper5">
-	<div class="container-fluid">
-		@RenderBody()
-	</div>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
 </main>
 
 
