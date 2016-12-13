@@ -203,14 +203,14 @@
             $(document).ready(function () {
                 $("#mitabla").DataTable({
                     "language": {
-                        "url": '@Url.Content("../Scripts/DataTables/spanish.json")'
+                    "url": '@Url.Content("~/Scripts/DataTables/spanish.json")'
                     }
                 });
-                
+
             });
 
             function printData() {
-               
+
                 var divToPrint = document.getElementById("seleccion");
                 newWin = window.open("");
                 newWin.document.write(divToPrint.outerHTML);
